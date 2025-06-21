@@ -1,0 +1,2 @@
+_Start::
+	jp Init
