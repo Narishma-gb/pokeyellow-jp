@@ -45,12 +45,12 @@ INCLUDE "constants/hide_show_constants.asm"
 INCLUDE "constants/sprite_set_constants.asm"
 INCLUDE "constants/credits_constants.asm"
 INCLUDE "constants/audio_constants.asm"
-INCLUDE "constants/music_constants.asm"
+;INCLUDE "constants/music_constants.asm"
 INCLUDE "constants/tileset_constants.asm"
 INCLUDE "constants/event_constants.asm"
 INCLUDE "constants/text_constants.asm"
 INCLUDE "constants/menu_constants.asm"
 
-IF DEF(_BLUE_VC)
+IF DEF(_YELLOW_VC)
 	INCLUDE "vc/vc_constants.asm"
 ENDC

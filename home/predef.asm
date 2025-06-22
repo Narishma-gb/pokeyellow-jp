@@ -19,8 +19,7 @@ Predef::
 	call GetPredefPointer
 
 	ld a, [wPredefBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 
 	ld de, .done
 	push de
@@ -28,8 +27,7 @@ Predef::
 .done
 
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	ret
 
 GetPredefRegisters::

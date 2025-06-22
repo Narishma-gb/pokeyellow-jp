@@ -49,7 +49,7 @@ SECTION "vblank", ROM0[$0040]
 	ds $48 - @, 0 ; unused
 
 SECTION "lcd", ROM0[$0048]
-	rst $38
+	jp LCDC
 
 	ds $50 - @, 0 ; unused
 

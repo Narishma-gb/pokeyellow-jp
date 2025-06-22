@@ -1821,7 +1821,84 @@ wWarpEntries:: ds 32 * 4 ; Y, X, warp ID, map ID
 ; if $ff, the player's coordinates are not updated when entering the map
 wDestinationWarpID:: db
 
-	ds 128
+wPikachuOverworldStateFlags:: db
+wPikachuSpawnState:: db
+wd431:: db
+wd432:: db
+wd433:: db
+wd434:: db
+wd435:: db
+wPikachuFollowCommandBufferSize:: db
+wPikachuFollowCommandBuffer:: ds 16
+
+wExpressionNumber:: db
+wPikaPicAnimNumber:: db
+
+wPikachuMovementScriptBank:: db
+wPikachuMovementScriptAddress:: dw
+; bit 6 - spawn shadow
+; bit 7 - signal end of command
+wPikachuMovementFlags:: db
+
+UNION
+wCurPikaMovementData::
+wCurPikaMovementParam1:: db
+wCurPikaMovementFunc1:: db
+wCurPikaMovementParam2:: db
+wCurPikaMovementFunc2:: db
+wd451:: db
+wCurPikaMovementSpriteImageIdx:: db
+wPikaSpriteX:: db
+wPikaSpriteY:: db
+wPikachuMovementXOffset:: db
+wPikachuMovementYOffset:: db
+wPikachuStepTimer:: db
+wPikachuStepSubtimer:: db
+	ds 5
+wCurPikaMovementDataEnd::
+
+NEXTU
+wPikaPicAnimPointer:: dw
+wPikaPicAnimPointerSetupFinished:: db
+wPikaPicAnimCurGraphicID:: db
+wPikaPicAnimTimer:: dw
+wPikaPicAnimDelay:: db
+wPikaPicPikaDrawStartX:: db
+wPikaPicPikaDrawStartY:: db
+
+wCurPikaPicAnimObject::
+wCurPikaPicAnimObjectVTileOffset:: db
+wCurPikaPicAnimObjectXOffset:: db
+wCurPikaPicAnimObjectYOffset:: db
+wCurPikaPicAnimObjectScriptIdx:: db
+wCurPikaPicAnimObjectFrameIdx:: db
+wCurPikaPicAnimObjectFrameTimer:: db
+	ds 1
+wCurPikaPicAnimObjectEnd::
+
+	ds 18
+ENDU
+
+wPikachuHappiness:: db
+wPikachuMood:: db
+wd471:: db
+wd472:: db
+	ds 1
+wd474:: db
+	ds 4
+wd479:: db
+	ds 24
+wd492:: db
+	ds 1
+wSurfingMinigameHiScore:: dw ; little-endian BCD
+	ds 1
+wPrinterSettings:: db
+wUnknownSerialFlag_d499:: db
+wPrinterConnectionOpen:: db
+wPrinterOpcode:: db
+wd49b:: db
+
+	ds 19
 
 ; number of signs in the current map (up to 16)
 wNumSigns:: db
