@@ -1,24 +1,29 @@
-roms := \
-	pokeyellow.gbc \
-	pokeyellow_debug.gbc
-patches := \
-	pokeyellow.patch
+roms    := \
+	pokeyellow.gb \
+	pokeyellow11.gb \
+	pokeyellow12.gb \
+	pokeyellow13.gb
+patches := pokeyellow13.patch
 
-rom_obj := \
-	audio.o \
+rom_obj := wip.o \
+	garbage.o \
 	home.o \
-	main.o \
-	maps.o \
-	ram.o \
-	text.o \
-	gfx/pics.o \
-	gfx/pikachu.o \
-	gfx/sprites.o \
-	gfx/tilesets.o
+	ram.o
+#	audio.o \
+#	garbage.o \
+#	home.o \
+#	main.o \
+#	maps.o \
+#	ram.o \
+#	gfx/pics.o \
+#	gfx/sprites.o \
+#	gfx/tilesets.o
 
-pokeyellow_obj       := $(rom_obj)
-pokeyellow_debug_obj := $(rom_obj:.o=_debug.o)
-pokeyellow_vc_obj    := $(rom_obj:.o=_vc.o)
+pokeyellow_obj      := $(rom_obj:.o=_yellow.o)
+pokeyellow11_obj    := $(rom_obj:.o=_yellow11.o)
+pokeyellow12_obj    := $(rom_obj:.o=_yellow12.o)
+pokeyellow13_obj    := $(rom_obj:.o=_yellow13.o)
+pokeyellow13_vc_obj := $(rom_obj:.o=_yellow13_vc.o)
 
 
 ### Build tools
@@ -42,12 +47,11 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all yellow yellow_debug clean tidy compare tools
+.PHONY: all yellow clean tidy compare tools
 
 all: $(roms)
-yellow:       pokeyellow.gbc
-yellow_debug: pokeyellow_debug.gbc
-yellow_vc:    pokeyellow.patch
+yellow:    pokeyellow.gb
+yellow_vc: pokeyellow.patch
 
 clean: tidy
 	find gfx \
@@ -61,20 +65,22 @@ clean: tidy
 
 tidy:
 	$(RM) $(roms) \
-	      $(roms:.gbc=.sym) \
-	      $(roms:.gbc=.map) \
+	      $(roms:.gb=.sym) \
+	      $(roms:.gb=.map) \
 	      $(patches) \
-	      $(patches:.patch=_vc.gbc) \
+	      $(patches:.patch=_vc.gb) \
 	      $(patches:.patch=_vc.sym) \
 	      $(patches:.patch=_vc.map) \
 	      $(patches:%.patch=vc/%.constants.sym) \
 	      $(pokeyellow_obj) \
-	      $(pokeyellow_vc_obj) \
-	      $(pokeyellow_debug_obj) \
+	      $(pokeyellow11_obj) \
+	      $(pokeyellow12_obj) \
+	      $(pokeyellow13_obj) \
+	      $(pokeyellow13_vc_obj) \
 	      rgbdscheck.o
 	$(MAKE) clean -C tools/
 
-compare: $(roms) $(patches)
+compare: $(roms)
 	@$(SHA1) -c roms.sha1
 
 tools:
@@ -87,10 +93,13 @@ ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
 endif
 
-$(pokeyellow_debug_obj): RGBASMFLAGS += -D _DEBUG
-$(pokeyellow_vc_obj):    RGBASMFLAGS += -D _YELLOW_VC
+$(pokeyellow_obj):      RGBASMFLAGS += -D _REV0
+$(pokeyellow11_obj):    RGBASMFLAGS += -D _REV1
+$(pokeyellow12_obj):    RGBASMFLAGS += -D _REV2
+$(pokeyellow13_obj):    RGBASMFLAGS += -D _REV3
+$(pokeyellow13_vc_obj): RGBASMFLAGS += -D _REV3 -D _YELLOW_VC 
 
-%.patch: %_vc.gbc %.gbc vc/%.patch.template
+%.patch: %_vc.gb %.gb vc/%.patch.template
 	tools/make_patch $*_vc.sym $^ $@
 
 rgbdscheck.o: rgbdscheck.asm
@@ -111,10 +120,12 @@ $1: $2 $$(shell tools/scan_includes $2) $(preinclude_deps) | rgbdscheck.o
 	$$(RGBASM) $$(RGBASMFLAGS) -o $$@ $$<
 endef
 
-# Dependencies for objects
-$(foreach obj, $(pokeyellow_obj), $(eval $(call DEP,$(obj),$(obj:.o=.asm))))
-$(foreach obj, $(pokeyellow_debug_obj), $(eval $(call DEP,$(obj),$(obj:_debug.o=.asm))))
-$(foreach obj, $(pokeyellow_vc_obj), $(eval $(call DEP,$(obj),$(obj:_vc.o=.asm))))
+# Dependencies for objects (drop _yellow from asm file basenames)
+$(foreach obj, $(pokeyellow_obj), $(eval $(call DEP,$(obj),$(obj:_yellow.o=.asm))))
+$(foreach obj, $(pokeyellow11_obj), $(eval $(call DEP,$(obj),$(obj:_yellow11.o=.asm))))
+$(foreach obj, $(pokeyellow12_obj), $(eval $(call DEP,$(obj),$(obj:_yellow12.o=.asm))))
+$(foreach obj, $(pokeyellow13_obj), $(eval $(call DEP,$(obj),$(obj:_yellow13.o=.asm))))
+$(foreach obj, $(pokeyellow13_vc_obj), $(eval $(call DEP,$(obj),$(obj:_yellow13_vc.o=.asm))))
 
 endif
 
@@ -122,15 +133,21 @@ endif
 %.asm: ;
 
 
-pokeyellow_pad       = 0x00
-pokeyellow_debug_pad = 0xff
-pokeyellow_vc_pad    = 0x00
+pokeyellow_pad      = 0x00
+pokeyellow11_pad    = 0x00
+pokeyellow12_pad    = 0x00
+pokeyellow13_pad    = 0x00
+pokeyellow13_vc_pad = 0x00
 
-opts = -cjsv -k 01 -l 0x33 -m MBC5+RAM+BATTERY -p 0 -r 03 -t "POKEMON YELLOW"
+pokeyellow_opt      = -sv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON YELLOW"
+pokeyellow11_opt    = -sv -n 1 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON YELLOW"
+pokeyellow12_opt    = -sv -n 2 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON YELLOW"
+pokeyellow13_opt    = -sv -n 3 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON YELLOW"
+pokeyellow13_vc_opt = -sv -n 3 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON YELLOW"
 
-%.gbc: $$(%_obj) layout.link
-	$(RGBLINK) -p $($*_pad) -w -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
-	$(RGBFIX) -p $($*_pad) $(opts) $@
+%.gb: $$(%_obj) layout.link
+	$(RGBLINK) -p $($*_pad) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
+	$(RGBFIX) -p $($*_pad) $($*_opt) $@
 
 
 ### Misc file-specific graphics rules

@@ -1,5 +1,8 @@
+; Unused
+	ret
+
 PlayPikachuPCM::
-	vc_hook Unknown_PlayPikachuPCM
+;	vc_hook Unknown_PlayPikachuPCM
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, b
@@ -45,3 +48,6 @@ PlaySoundClipSample::
 	dec a
 	jr nz, .loop
 	ret
+
+; unused?
+	jp _Start

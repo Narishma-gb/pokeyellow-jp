@@ -273,68 +273,6 @@ wOverworldMapEnd::
 
 NEXTU
 wTempPic:: ds 7 * 7 tiles
-
-NEXTU
-wPrinterData::
-wPrinterSendState:: db
-wPrinterRowIndex:: db
-
-; Printer data header
-wPrinterDataHeader::
-wc6ea:: db
-wc6eb:: db
-wc6ec:: db
-wc6ed:: db
-wPrinterChecksum:: dw
-
-UNION
-wPrinterSerialReceived:: db
-; bit 7: set if error 1 (battery low)
-; bit 6: set if error 4 (too hot or cold)
-; bit 5: set if error 3 (paper jammed or empty)
-; if this and the previous byte are both $ff: error 2 (connection error)
-wPrinterStatusReceived:: db
-
-wc6f2:: db
-wc6f3:: db
-	ds 12
-wLYOverrides:: ds $100
-wLYOverridesEnd::
-wLYOverridesBuffer:: ds $100
-wLYOverridesBufferEnd::
-
-NEXTU
-wPrinterSendDataSource1:: ds 20 tiles
-wPrinterSendDataSource2:: ds 20 tiles
-ENDU
-
-wPrinterSendDataSource1End::
-
-wPrinterHandshake:: db
-wPrinterStatusFlags:: db
-wHandshakeFrameDelay:: db
-wPrinterSerialFrameDelay:: db
-wPrinterSendByteOffset:: dw
-wPrinterDataSize:: dw
-wPrinterTileBuffer:: ds SCREEN_HEIGHT * SCREEN_WIDTH
-wPrinterStatusIndicator:: dw
-wcae2:: db
-wPrinterSettingsTempCopy:: db
-	ds 16
-wPrinterQueueLength:: db
-wPrinterDataEnd::
-
-wPrinterPokedexEntryTextPointer:: dw
-	ds 2
-wPrinterPokedexMonIsOwned:: db
-	ds 226
-UNION
-wcbdc:: ds 1 tiles
-NEXTU
-	ds 14
-wcbea:: dw
-ENDU
-wcbec:: ds 1 tiles
 ENDU
 
 
@@ -661,32 +599,6 @@ ENDU
 
 	ds 8
 wMiscBattleDataEnd::
-NEXTU
-	ds 2
-wTrainerCardBadgeAttributes:: ds 6 * 9 + 1
-
-NEXTU
-wPikaPicUsedGFXCount:: db
-
-wPikaPicUsedGFX:: ds 8 * 2
-wPikaPicUsedGFXEnd::
-
-	ds 43
-
-wPikaPicAnimObjectDataBufferSize:: db
-
-wPikaPicAnimObjectDataBuffer::
-; 4 structs each of length 8
-;     0: buffer index
-;     1: script index
-;     2: frame index
-;     3: frame timer
-;     4: vtile offset
-;     5: x offset
-;     6: y offset
-;     7: unused
-	ds 4 * 8
-wPikaPicAnimObjectDataBufferEnd::
 ENDU
 
 ; This union spans 39 bytes.
@@ -798,8 +710,6 @@ NEXTU
 ; the current mon's field moves
 wFieldMoves:: ds NUM_MOVES
 wNumFieldMoves:: db
-wFieldMovesLeftmostXCoord:: db
-wLastFieldMoveID:: db ; unused
 
 NEXTU
 wBoxNumString:: ds 3
@@ -967,7 +877,7 @@ wBadgeOrFaceTiles:: ds NUM_BADGES + 1
 wTempObtainedBadgesBooleans:: ds NUM_BADGES
 
 NEXTU
-wUnusedCreditsByte:: db
+wCreditsScreenIndex:: db
 ; the number of credits mons that have been displayed so far
 wNumCreditsMonsDisplayed:: db
 
@@ -1014,12 +924,7 @@ wSwappedMenuItem::
 ; 1 = bite
 ; 2 = no fish on map
 wRodResponse::
-wOptionsCursorLocation::
 	db
-
-NEXTU
-wTitleScreenScene:: db
-wTitleScreenTimer:: db
 ENDU
 
 ; 0 = neither
@@ -1030,6 +935,8 @@ wOAMBaseTile::
 wGymTrashCanIndex:: db
 
 wSymmetricSpriteOAMAttributes:: db
+
+	ds 5
 
 wMonPartySpriteSpecies:: db
 
@@ -1246,17 +1153,17 @@ NEXTU
 ; the total amount of exp a mon gained
 wExpAmountGained:: dw
 wGainBoostedExp:: db
-
-NEXTU
-	ds 9
-wPartyHPBarAttributes:: ds PARTY_LENGTH
 ENDU
 
-wGymCityName:: ds 17
+wGymCityName:: ds 5
 
+UNION
 wGymLeaderName:: ds NAME_LENGTH
 
+NEXTU
+	ds 4
 wItemList:: ds 16
+ENDU
 
 wListPointer:: dw
 
@@ -1361,6 +1268,7 @@ wEnemyMonSpecies2:: db
 wBattleMonSpecies2:: db
 
 wEnemyMonNick:: ds NAME_LENGTH
+	ds 5
 
 wEnemyMon:: battle_struct wEnemyMon
 
@@ -1369,6 +1277,7 @@ wEnemyMonActualCatchRate:: db
 wEnemyMonBaseExp:: db
 
 wBattleMonNick:: ds NAME_LENGTH
+	ds 5
 wBattleMon:: battle_struct wBattleMon
 
 
@@ -1381,14 +1290,12 @@ wTrainerPicPointer:: dw
 	ds 1
 
 UNION
-wTempMoveNameBuffer:: ds 14
+wTempMoveNameBuffer:: ds 8
 
 NEXTU
 ; The name of the mon that is learning a move.
 wLearnMoveMonName:: ds NAME_LENGTH
 ENDU
-
-	ds 2
 
 ; money received after battle = base money × level of last enemy mon
 wTrainerBaseMoney:: dw ; BCD
@@ -1400,7 +1307,7 @@ wMissableObjectCounter:: db
 ; 13 bytes for the letters of the opposing trainer
 ; the name is terminated with $50 with possible
 ; unused trailing letters
-wTrainerName:: ds 13
+wTrainerName:: ds 11
 
 ; lost battle, this is -1
 ; no battle, this is 0
@@ -1523,11 +1430,7 @@ wPartyMenuTypeOrMessageID::
 ; temporary storage for the number of tiles in a tileset
 wTempTilesetNumTiles:: db
 
-; used by the pokemart code to save the existing value of wListScrollOffset
-; so that it can be restored when the player is done with the pokemart NPC
-wSavedListScrollOffset:: db
-
-	ds 2
+	ds 3
 
 ; base coordinates of frame block
 wBaseCoordX:: db
@@ -1729,7 +1632,7 @@ wMoves:: ds NUM_MOVES
 
 wMoveNum:: db
 
-wMovesString:: ds 56
+wMovesString:: ds 32
 
 wUnusedCurMapTilesetCopy:: db
 
@@ -1778,7 +1681,7 @@ wEvolutionOccurred:: db
 
 wVBlankSavedROMBank:: db
 
-wFarCopyDataSavedROMBank:: db
+	ds 1
 
 wIsKeyItem:: db
 
@@ -2179,7 +2082,7 @@ wViridianCityCurScript:: db
 wPewterCityCurScript:: db
 wRoute3CurScript:: db
 wRoute4CurScript:: db
-wPokemonFanClubCurScript:: db
+	ds 1
 wViridianGymCurScript:: db
 wPewterGymCurScript:: db
 wCeruleanGymCurScript:: db
@@ -2244,7 +2147,7 @@ wPokemonMansion3FCurScript:: db
 wPokemonMansionB1FCurScript:: db
 wVictoryRoad2FCurScript:: db
 wVictoryRoad3FCurScript:: db
-wCeladonCityCurScript:: db
+	ds 1
 wFightingDojoCurScript:: db
 wSilphCo2FCurScript:: db
 wSilphCo3FCurScript:: db
@@ -2318,12 +2221,7 @@ wPlayerJumpingYScreenCoordsIndex:: db
 
 wRivalStarter:: db
 
-IF DEF(_DEBUG)
-; this byte gets set to NUM_POKEMON by DebugStart
-wUnknownDebugByte:: db
-ELSE
 	ds 1
-ENDC
 
 wPlayerStarter:: db
 
@@ -2404,7 +2302,7 @@ NEXTU
 ; linked game's trainer name
 wLinkEnemyTrainerName:: ds NAME_LENGTH
 
-	ds 1
+	ds 6
 
 wSerialEnemyDataBlock:: ; ds $1a8
 
@@ -2446,7 +2344,6 @@ wOpponentAfterWrongAnswer:: db
 ; mostly copied from map-specific map script pointer and written back later
 wCurMapScript:: db
 
-	ds 7
 
 wPlayTimeHours:: db
 wPlayTimeMaxed:: db
@@ -2500,21 +2397,10 @@ wBoxMonNicksEnd::
 wBoxDataEnd::
 
 
-SECTION "CGB Palette Data", WRAM0
-
-wCGBBasePalPointers:: ds NUM_ACTIVE_PALS * 2
-wCGBPal:: ds PALETTE_SIZE
-wLastBGP:: db
-wLastOBP0:: db
-wLastOBP1:: db
-wdef4:: db
-wBGPPalsBuffer:: ds NUM_ACTIVE_PALS * PALETTE_SIZE
-
-
 SECTION "Stack", WRAM0
 
 ; the stack grows downward
-	ds $eb - 1
+	ds $e7
 wStack:: db
 
 ENDSECTION

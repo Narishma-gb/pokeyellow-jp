@@ -170,7 +170,7 @@ OverworldLoopLessDelay::
 	jr z, .noDirectionButtonsPressed
 	ld a, 1
 	ld [wSpritePlayerStateData1XStepVector], a
-	ld a, 1
+	ld a, PLAYER_DIR_RIGHT
 
 .handleDirectionButtonPress
 	ld [wPlayerDirection], a ; new direction
@@ -187,7 +187,7 @@ OverworldLoopLessDelay::
 	jr z, .noDirectionChange
 	ld a, $8
 	ld [wd434], a
-; unlike in red/blue, yellow does not have the 180 degrees odd code
+; unlike in red/green/blue, yellow does not have the 180 degrees odd code
 	ld hl, wMiscFlags
 	set BIT_TURNING, [hl]
 	xor a
@@ -410,7 +410,6 @@ CheckWarpsNoCollisionRetry1::
 CheckWarpsNoCollisionRetry2::
 	inc hl
 	inc hl
-ContinueCheckWarpsNoCollisionLoop::
 	inc b ; increment warp number
 	dec c ; decrement number of warps
 	jp nz, CheckWarpsNoCollisionLoop
@@ -464,7 +463,7 @@ WarpFound2::
 	ld a, [wCurMap]
 	ld [wLastMap], a
 	ld a, [wCurMapWidth]
-	ld [wUnusedLastMapWidth], a
+	ld [wUnusedLastMapWidth], a ; not read
 	ldh a, [hWarpDestinationMap]
 	ld [wCurMap], a
 	cp ROCK_TUNNEL_1F
@@ -518,7 +517,7 @@ WarpFound2::
 
 ; if no matching warp was found
 CheckMapConnections::
-.checkWestMap
+; checkWestMap
 	ld a, [wXCoord]
 	cp $ff
 	jr nz, .checkEastMap
@@ -874,7 +873,7 @@ LoadTileBlockMap::
 ; fill wOverworldMap-wOverworldMapEnd with the background tile
 	ld hl, wOverworldMap
 	ld bc, wOverworldMapEnd - wOverworldMap
-	ld a, [wMapBackgroundTile] ; background tile number
+	ld a, [wMapBackgroundTile]
 	call FillMemory
 ; load tile map of current map (made of tile block IDs)
 ; a 3-byte border at the edges of the map is kept so that there is space for map connections
@@ -917,7 +916,7 @@ LoadTileBlockMap::
 .noCarry
 	dec b
 	jr nz, .rowLoop
-.northConnection
+; .northConnection
 	ld a, [wNorthConnectedMap]
 	cp $ff
 	jr z, .southConnection
@@ -1086,7 +1085,7 @@ IsSpriteInFrontOfPlayer::
 IsSpriteInFrontOfPlayer2::
 	lb bc, $3c, $40 ; Y and X position of player sprite
 	ld a, [wSpritePlayerStateData1FacingDirection]
-.checkIfPlayerFacingUp
+; .checkIfPlayerFacingUp
 	cp SPRITE_FACING_UP
 	jr nz, .checkIfPlayerFacingDown
 ; facing up
@@ -1192,7 +1191,7 @@ SignLoop::
 	ld a, [hli] ; sign X
 	cp e
 	jr nz, .retry
-.xCoordMatched
+; .xCoordMatched
 ; found sign
 	push hl
 	push bc
@@ -1243,7 +1242,7 @@ CollisionCheckOnLand::
 	call CheckPikachuFollowingPlayer
 	jr nz, .collision
 	ldh a, [hJoyHeld]
-	and $2
+	and B_BUTTON
 	jr nz, .asm_0a5c
 	ld hl, wd434
 	ld a, [hl]
@@ -1318,7 +1317,7 @@ CheckForTilePairCollisions::
 	inc hl
 	jr .tilePairCollisionLoop
 .tilesetMatches
-	ld a, [wTilePlayerStandingOn] ; tile the player is on
+	ld a, [wTilePlayerStandingOn]
 	ld b, a
 	ld a, [hl]
 	cp b
@@ -1403,7 +1402,7 @@ LoadCurrentMapView::
 	jr nz, .rowLoop
 	ld hl, wSurroundingTiles
 	ld bc, 0
-.adjustForYCoordWithinTileBlock
+; .adjustForYCoordWithinTileBlock
 	ld a, [wYBlockCoord]
 	and a
 	jr z, .adjustForXCoordWithinTileBlock
@@ -1659,10 +1658,9 @@ GetSimulatedInput::
 	and a
 	ret
 
-
 ; function to check the tile ahead to determine if the character should get on land or keep surfing
 ; sets carry if there is a collision and clears carry otherwise
-; This function had a bug in Red/Blue, but it was fixed in Yellow.
+; This function had a bug in Red/Green/Blue, but it was fixed in Yellow.
 CollisionCheckOnWater::
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_MOVEMENT_STATE, a
@@ -1678,7 +1676,7 @@ CollisionCheckOnWater::
 	predef GetTileAndCoordsInFrontOfPlayer ; get tile in front of player (puts it in c and [wTileInFrontOfPlayer])
 	callfar IsNextTileShoreOrWater
 	jr c, .noCollision
-	ld a, [wTileInFrontOfPlayer] ; tile in front of player
+	ld a, [wTileInFrontOfPlayer]
 	ld c, a
 	call IsTilePassable
 	jr nc, .stopSurfing
@@ -1691,7 +1689,7 @@ CollisionCheckOnWater::
 .setCarry
 	scf
 	jr .done
-.checkIfVermilionDockTileset
+; .checkIfVermilionDockTileset
 	ld a, [wCurMapTileset]
 	cp SHIP_PORT ; Vermilion Dock tileset
 	jr nz, .noCollision ; keep surfing if it's not the boarding platform tile
@@ -1830,7 +1828,7 @@ asm_0dbd:
 ; copy connection data (if any) to WRAM
 	ld a, [wCurMapConnections]
 	ld b, a
-.checkNorth
+; checkNorth
 	bit NORTH_F, b
 	jr z, .checkSouth
 	ld de, wNorthConnectionHeader
@@ -1863,7 +1861,7 @@ asm_0dbd:
 	ld de, wMapBackgroundTile
 	ld a, [hli]
 	ld [de], a
-.loadWarpData
+; loadWarpData
 	ld a, [hli]
 	ld [wNumberOfWarps], a
 	and a
@@ -1888,7 +1886,7 @@ asm_0dbd:
 	call CopySignData
 .loadSpriteData
 	ld a, [wStatusFlags4]
-	bit BIT_BATTLE_OVER_OR_BLACKOUT, a
+	bit BIT_BATTLE_OVER_OR_BLACKOUT, a ; did a battle happen immediately before this?
 	jr nz, .finishUp ; if so, skip this because battles don't destroy this data
 	call InitSprites
 .finishUp
@@ -1974,13 +1972,13 @@ LoadMapData::
 	call RunPaletteCommand
 	call LoadPlayerSpriteGraphics
 	ld a, [wStatusFlags6]
-	and 1 << BIT_DUNGEON_WARP | 1 << BIT_FLY_WARP
+	and (1 << BIT_FLY_WARP) | (1 << BIT_DUNGEON_WARP)
 	jr nz, .restoreRomBank
 	ld a, [wStatusFlags7]
 	bit BIT_NO_MAP_MUSIC, a
 	jr nz, .restoreRomBank
-	call UpdateMusic6Times ; music related
-	call PlayDefaultMusicFadeOutCurrent ; music related
+	call UpdateMusic6Times
+	call PlayDefaultMusicFadeOutCurrent
 .restoreRomBank
 	pop af
 	call BankswitchCommon
@@ -2288,11 +2286,7 @@ CheckForUserInterruption::
 	jr z, .input
 
 	ldh a, [hJoy5]
-IF DEF(_DEBUG)
-	and START | SELECT | A_BUTTON
-ELSE
 	and START | A_BUTTON
-ENDC
 	jr nz, .input
 
 	dec c

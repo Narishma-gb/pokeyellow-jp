@@ -26,12 +26,8 @@ MACRO prompt
 	db "<PROMPT>" ; Prompt the player to end a text box (initiating some other event)
 ENDM
 
-MACRO page
-	db "<PAGE>", \# ; Start a new Pokédex page
-ENDM
-
 MACRO dex
-	db "<DEXEND>@" ; End a Pokédex entry
+	db "<DEXEND>" ; End a Pokédex entry
 ENDM
 
 
@@ -166,13 +162,6 @@ ENDM
 MACRO sound_cry_dewgong
 	db TX_SOUND_CRY_DEWGONG
 ENDM
-
-	const TX_FAR ; $17
-MACRO text_far
-	db TX_FAR
-	dab \1 ; address of text commands
-ENDM
-
 
 	const_next $50
 
