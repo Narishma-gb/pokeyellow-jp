@@ -19,7 +19,7 @@ GetRowColAddressBgMap::
 ; clears a VRAM background map with blank space tiles
 ; INPUT: h - high byte of background tile map address in VRAM
 ClearBgMap::
-	ld a, " "
+	ld a, "　"
 	jr .next
 	ld a, l
 .next
@@ -348,10 +348,6 @@ UpdateMovingBgTiles::
 	ldh a, [hTileAnimations]
 	and a
 	ret z
-
-	ldh a, [rLY]
-	cp $90 ; check if not in vblank period??? (maybe if vblank is too long)
-	ret c
 
 	ldh a, [hMovingBGTilesCounter1]
 	inc a

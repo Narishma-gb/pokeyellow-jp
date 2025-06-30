@@ -26,9 +26,6 @@ GBPalNormal::
 	ldh [rBGP], a
 	ld a, %11010000 ; 3100
 	ldh [rOBP0], a
-	call UpdateCGBPal_BGP
-	call UpdateCGBPal_OBP0
-	call UpdateCGBPal_OBP1
 	ret
 
 GBPalWhiteOut::
@@ -37,9 +34,6 @@ GBPalWhiteOut::
 	ldh [rBGP], a
 	ldh [rOBP0], a
 	ldh [rOBP1], a
-	call UpdateCGBPal_BGP
-	call UpdateCGBPal_OBP0
-	call UpdateCGBPal_OBP1
 	ret
 
 RunDefaultPaletteCommand::

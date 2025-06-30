@@ -273,6 +273,68 @@ wOverworldMapEnd::
 
 NEXTU
 wTempPic:: ds 7 * 7 tiles
+
+NEXTU
+wPrinterData::
+wPrinterSendState:: db
+wPrinterRowIndex:: db
+
+; Printer data header
+wPrinterDataHeader::
+wc6ea:: db
+wc6eb:: db
+wc6ec:: db
+wc6ed:: db
+wPrinterChecksum:: dw
+
+UNION
+wPrinterSerialReceived:: db
+; bit 7: set if error 1 (battery low)
+; bit 6: set if error 4 (too hot or cold)
+; bit 5: set if error 3 (paper jammed or empty)
+; if this and the previous byte are both $ff: error 2 (connection error)
+wPrinterStatusReceived:: db
+
+wc6f2:: db
+wc6f3:: db
+	ds 12
+wLYOverrides:: ds $100
+wLYOverridesEnd::
+wLYOverridesBuffer:: ds $100
+wLYOverridesBufferEnd::
+
+NEXTU
+wPrinterSendDataSource1:: ds 20 tiles
+wPrinterSendDataSource2:: ds 20 tiles
+ENDU
+
+wPrinterSendDataSource1End::
+
+wPrinterHandshake:: db
+wPrinterStatusFlags:: db
+wHandshakeFrameDelay:: db
+wPrinterSerialFrameDelay:: db
+wPrinterSendByteOffset:: dw
+wPrinterDataSize:: dw
+wPrinterTileBuffer:: ds SCREEN_HEIGHT * SCREEN_WIDTH
+wPrinterStatusIndicator:: dw
+wcae2:: db
+wPrinterSettingsTempCopy:: db
+	ds 16
+wPrinterQueueLength:: db
+wPrinterDataEnd::
+
+wPrinterPokedexEntryTextPointer:: dw
+	ds 2
+wPrinterPokedexMonIsOwned:: db
+	ds 226
+UNION
+wcbdc:: ds 1 tiles
+NEXTU
+	ds 14
+wcbea:: dw
+ENDU
+wcbec:: ds 1 tiles
 ENDU
 
 
@@ -1681,7 +1743,7 @@ wEvolutionOccurred:: db
 
 wVBlankSavedROMBank:: db
 
-	ds 1
+wFarCopyDataSavedROMBank:: db
 
 wIsKeyItem:: db
 

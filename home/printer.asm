@@ -1,5 +1,5 @@
 PrinterSerial::
-	homecall PrinterSerial_
+	homecall_alt PrinterSerial_
 	ret
 
 SerialFunction::

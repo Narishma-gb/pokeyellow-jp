@@ -65,7 +65,7 @@ DisplayListMenuIDLoop::
 	ld a, [wBattleType]
 	and a ; is it the Old Man battle?
 	jr z, .notOldManBattle
-.oldManBattle
+; oldManBattle
 	ld a, "▶"
 	ldcoord_a 5, 4 ; place menu cursor in front of first menu entry
 	ld c, 20
@@ -178,7 +178,7 @@ DisplayListMenuIDLoop::
 	bit BIT_D_DOWN, b
 	ld hl, wListScrollOffset
 	jr z, .upPressed
-.downPressed
+; downPressed
 	ld a, [hl]
 	add 3
 	ld b, a
@@ -210,6 +210,8 @@ DisplayChooseQuantityMenu::
 	ld a, [wListMenuID]
 	cp PRICEDITEMLISTMENU
 	jr nz, .printInitialQuantity
+	ld a, "円"
+	ldcoord_a 18, 10
 	hlcoord 8, 10
 .printInitialQuantity
 	ld de, InitialQuantityText
@@ -293,7 +295,7 @@ DisplayChooseQuantityMenu::
 	ld de, SpacesBetweenQuantityAndPriceText
 	call PlaceString
 	ld de, hMoney ; total price
-	ld c, 3 | LEADING_ZEROES | MONEY_SIGN
+	ld c, 3 | LEADING_ZEROES
 	call PrintBCDNumber
 	hlcoord 9, 10
 .printQuantity
@@ -312,10 +314,10 @@ DisplayChooseQuantityMenu::
 	ret
 
 InitialQuantityText::
-	db "×01@"
+	db "×０１@"
 
 SpacesBetweenQuantityAndPriceText::
-	db "      @"
+	db "　　　　　　@"
 
 ExitListMenu::
 	ld a, [wCurrentMenuItem]
@@ -377,7 +379,7 @@ PrintListMenuEntries::
 	jr z, .pokemonPCMenu
 	cp MOVESLISTMENU
 	jr z, .movesMenu
-.itemMenu
+; itemMenu
 	call GetItemName
 	jr .placeNameString
 .pokemonPCMenu
@@ -408,22 +410,23 @@ PrintListMenuEntries::
 	ld a, [wPrintItemPrices]
 	and a ; should prices be printed?
 	jr z, .skipPrintingItemPrice
-.printItemPrice
+; printItemPrice
 	push hl
 	ld a, [de]
 	ld de, ItemPrices
 	ld [wCurItem], a
 	call GetItemPrice
 	pop hl
-	ld bc, SCREEN_WIDTH + 5 ; 1 row down and 5 columns right
+	ld bc, 6 ; 6 columns right
 	add hl, bc
-	ld c, 3 | LEADING_ZEROES | MONEY_SIGN
+	ld c, 3 | LEADING_ZEROES
 	call PrintBCDNumber
+	ld [hl], "円"
 .skipPrintingItemPrice
 	ld a, [wListMenuID]
 	and a ; PCPOKEMONLISTMENU?
 	jr nz, .skipPrintingPokemonLevel
-.printPokemonLevel
+; printPokemonLevel
 	ld a, [wNamedObjectIndex]
 	push af
 	push hl
@@ -448,12 +451,12 @@ PrintListMenuEntries::
 	ld a, [wMonDataLocation]
 	and a ; is it a list of party pokemon or box pokemon?
 	jr z, .skipCopyingLevel
-.copyLevel
+; copyLevel
 	ld a, [wLoadedMonBoxLevel]
 	ld [wLoadedMonLevel], a
 .skipCopyingLevel
 	pop hl
-	ld bc, $1c
+	ld bc, 6 ; 6 columns right
 	add hl, bc
 	call PrintLevel
 	pop af
@@ -465,7 +468,7 @@ PrintListMenuEntries::
 	ld a, [wListMenuID]
 	cp ITEMLISTMENU
 	jr nz, .nextListEntry
-.printItemQuantity
+; printItemQuantity
 	ld a, [wNamedObjectIndex]
 	ld [wCurItem], a
 	call IsKeyItem ; check if item is unsellable
@@ -473,7 +476,7 @@ PrintListMenuEntries::
 	and a ; is the item unsellable?
 	jr nz, .skipPrintingItemQuantity ; if so, don't print the quantity
 	push hl
-	ld bc, SCREEN_WIDTH + 8 ; 1 row down and 8 columns right
+	ld bc, 9 ; 9 columns right
 	add hl, bc
 	ld a, "×"
 	ld [hli], a
@@ -522,4 +525,4 @@ PrintListMenuEntries::
 	jp PlaceString
 
 ListMenuCancelText::
-	db "CANCEL@"
+	db "やめる@"

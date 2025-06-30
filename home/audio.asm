@@ -193,6 +193,7 @@ PlaySound::
 	ld [wAudioFadeOutCounter], a
 	ld a, b
 	ld [wAudioFadeOutControl], a
+
 .done
 	pop bc
 	pop de
@@ -259,7 +260,8 @@ DetermineAudioFunction::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, [wAudioROMBank]
-	call BankswitchCommon
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
 ; determine the audio function, based on the bank
 	cp BANK(Audio1_PlaySound)
 	jr nz, .checkForAudio2
@@ -293,5 +295,6 @@ DetermineAudioFunction::
 
 .done
 	pop af
-	call BankswitchCommon
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
 	ret

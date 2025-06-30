@@ -5,11 +5,6 @@ VBlank::
 	push de
 	push hl
 
-	ldh a, [rVBK] ; vram bank
-	push af
-	xor a
-	ldh [rVBK], a ; reset vram bank to 0
-
 	ldh a, [hLoadedROMBank]
 	ld [wVBlankSavedROMBank], a
 
@@ -41,7 +36,6 @@ VBlank::
 	call TrackPlayTime ; keep track of time played
 
 	call Random
-	call ReadJoypad
 
 	ldh a, [hVBlankOccurred]
 	and a
@@ -71,9 +65,6 @@ VBlank::
 	ld a, [wVBlankSavedROMBank]
 	ldh [hLoadedROMBank], a
 	ld [MBC1RomBank], a
-
-	pop af
-	ldh [rVBK], a
 
 	pop hl
 	pop de

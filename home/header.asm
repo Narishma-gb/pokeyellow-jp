@@ -74,7 +74,7 @@ Start::
 ; Nintendo requires all Game Boy ROMs to begin with a nop ($00) and a jp ($C3)
 ; to the starting address.
 	nop
-	jp _Start
+	jp Init
 
 ; The Game Boy cartridge header data is patched over by rgbfix.
 ; This makes sure it doesn't get used for anything else.

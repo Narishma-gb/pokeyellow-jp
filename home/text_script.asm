@@ -1,6 +1,6 @@
 UnknownText_2812:: ; unreferenced
-	text_far _PokemonText
-	text_end
+	text "#！"
+	done
 
 ; this function is used to display sign messages, sprite dialog, etc.
 ; INPUT: [hSpriteIndex] = sprite ID or [hTextID] = text ID
@@ -35,7 +35,7 @@ DisplayTextID::
 
 	ld a, [wNumSprites]
 	ld e, a
-	ldh a, [hSpriteIndex] ; sprite ID
+	ldh a, [hSpriteIndex]
 	cp e
 	jr z, .spriteHandling
 	jr nc, .skipSpriteHandling
@@ -146,8 +146,9 @@ DisplayPokemartDialogue::
 	jp AfterDisplayingTextID
 
 PokemartGreetingText::
-	text_far _PokemartGreetingText
-	text_end
+	text "ようこそ！"
+	next "おさがしものですか？"
+	done
 
 LoadItemList::
 	ld a, 1
@@ -186,30 +187,22 @@ DisplayPokemonFaintedText::
 	jp AfterDisplayingTextID
 
 PokemonFaintedText::
-	text_far _PokemonFaintedText
-	text_end
+	text_ram wNameBuffer
+	text "は　ちからつきた"
+	done
 
 DisplayPlayerBlackedOutText::
 	ld hl, PlayerBlackedOutText
 	call PrintText
-	ld a, [wStatusFlags6]
-	res BIT_ALWAYS_ON_BIKE, a
-	ld [wStatusFlags6], a
-	CheckEvent EVENT_IN_SAFARI_ZONE
-	jr z, .didnotblackoutinsafari
-	xor a
-	ld [wNumSafariBalls], a
-	ld [wSafariSteps], a
-	ld [wSafariSteps + 1], a
-	EventFlagAddressA EVENT_IN_SAFARI_ZONE
-	ld [wNextSafariZoneGateScript], a
-	ld [wSafariZoneGateCurScript], a
-.didnotblackoutinsafari
 	jp HoldTextDisplayOpen
 
 PlayerBlackedOutText::
-	text_far _PlayerBlackedOutText
-	text_end
+	text "<PLAYER>の　てもとには"
+	line "たたかえる#が　もういない！"
+	
+	para "<PLAYER>は"
+	line "めのまえが　まっくらに　なった！"
+	prompt
 
 DisplayRepelWoreOffText::
 	ld hl, RepelWoreOffText
@@ -217,8 +210,8 @@ DisplayRepelWoreOffText::
 	jp AfterDisplayingTextID
 
 RepelWoreOffText::
-	text_far _RepelWoreOffText
-	text_end
+	text "スプレーの　こうかがきれた"
+	done
 
 DisplayPikachuEmotion::
 	callfar TalkToPikachu

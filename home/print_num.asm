@@ -26,7 +26,7 @@ PrintNumber::
 	jr z, .byte
 	cp 2
 	jr z, .word
-.long
+; long
 	ld a, [de]
 	ldh [hNumToPrint], a
 	inc de
@@ -77,7 +77,7 @@ MACRO print_digit
 	ELSE
 		xor a
 	ENDC
-	ldh [hPowerOf10 + 0], a
+	ldh [hPowerOf10], a
 
 	IF (\1) / $100
 		ld a, \1 / $100   % $100
@@ -93,7 +93,8 @@ MACRO print_digit
 	call .NextDigit
 ENDM
 
-.millions          print_digit 1000000
+; millions         
+	print_digit 1000000
 .hundred_thousands print_digit 100000
 .ten_thousands     print_digit 10000
 .thousands         print_digit 1000
@@ -118,14 +119,14 @@ ENDM
 	call .PrintLeadingZero
 	jr .next
 .past
-	ld a, "0"
+	ld a, "０"
 	add c
 	ld [hl], a
 .next
 
 	call .NextDigit
-.ones
-	ld a, "0"
+; ones
+	ld a, "０"
 	add b
 	ld [hli], a
 	pop de
@@ -202,7 +203,7 @@ ENDM
 	or c
 	jr z, .PrintLeadingZero
 
-	ld a, "0"
+	ld a, "０"
 	add c
 	ld [hl], a
 	ldh [hPastLeadingZeros], a
@@ -211,7 +212,7 @@ ENDM
 .PrintLeadingZero:
 	bit BIT_LEADING_ZEROES, d
 	ret z
-	ld [hl], "0"
+	ld [hl], "０"
 	ret
 
 .NextDigit:

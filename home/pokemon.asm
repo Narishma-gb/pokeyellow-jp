@@ -5,6 +5,7 @@ DrawHPBar::
 
 	push hl
 	push de
+	push bc
 
 	; Left
 	ld a, $71 ; "HP:"
@@ -60,6 +61,7 @@ DrawHPBar::
 	add e
 	ld [hl], a
 .done
+	pop bc
 	pop de
 	pop hl
 	ret
@@ -134,8 +136,8 @@ LoadFrontSpriteByMonIndex::
 	xor a
 	ld [wSpriteFlipped], a
 	pop af
-	jp BankswitchCommon
-
+	call BankswitchCommon
+	ret
 
 PlayCry::
 ; Play monster a's cry.
@@ -305,7 +307,7 @@ HandlePartyMenuInput::
 .swappingPokemon
 	bit BIT_B_BUTTON, b
 	jr z, .handleSwap ; if not, handle swapping the pokemon
-.cancelSwap ; if the B button was pressed
+;.cancelSwap ; if the B button was pressed
 	farcall ErasePartyMenuCursors
 	xor a
 	ld [wMenuItemToSwap], a
@@ -319,8 +321,8 @@ HandlePartyMenuInput::
 	jp HandlePartyMenuInput
 
 PartyMenuText_12cc::
-	text_far _SleepingPikachuText1
-	text_end
+	text "あれ？　いない⋯"
+	prompt
 
 DrawPartyMenu::
 	ld hl, DrawPartyMenu_
@@ -349,16 +351,17 @@ PrintStatusCondition::
 	pop de
 	jr nz, PrintStatusConditionNotFainted
 ; if the pokemon's HP is 0, print "FNT"
-	ld a, "F"
+	ld a, "ひ"
 	ld [hli], a
-	ld a, "N"
+	ld a, "ん"
 	ld [hli], a
-	ld [hl], "T"
+	ld [hl], "し"
 	and a
 	ret
 
 PrintStatusConditionNotFainted::
-	homejp_sf PrintStatusAilment
+	homecall_sf PrintStatusAilment
+	ret
 
 ; function to print pokemon level, leaving off the ":L" if the level is at least 100
 ; INPUT:

@@ -3,14 +3,17 @@ GetMonName::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(MonsterNames)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	ld a, [wNamedObjectIndex]
 	dec a
 	ld hl, MonsterNames
-	ld c, NAME_LENGTH - 1
-	ld b, 0
-	call AddNTimes
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
+	add hl, de
+	add hl, de
+	add hl, de
 	ld de, wNameBuffer
 	push de
 	ld bc, NAME_LENGTH - 1
@@ -19,8 +22,7 @@ GetMonName::
 	ld [hl], "@"
 	pop de
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	pop hl
 	ret
 
@@ -62,11 +64,11 @@ GetMachineName::
 	add NUM_HMS
 	ld [wNamedObjectIndex], a
 	ld hl, HiddenPrefix ; points to "HM"
-	ld bc, 2
+	ld bc, 6
 	jr .WriteMachinePrefix
 .WriteTM
 	ld hl, TechnicalPrefix ; points to "TM"
-	ld bc, 2
+	ld bc, 5
 .WriteMachinePrefix
 	ld de, wNameBuffer
 	call CopyData
@@ -74,7 +76,7 @@ GetMachineName::
 ; now get the machine number and convert it to text
 	ld a, [wNamedObjectIndex]
 	sub TM01 - 1
-	ld b, "0"
+	ld b, "０"
 .FirstDigit
 	sub 10
 	jr c, .SecondDigit
@@ -87,7 +89,7 @@ GetMachineName::
 	ld [de], a
 	inc de
 	pop af
-	ld b, "0"
+	ld b, "０"
 	add b
 	ld [de], a
 	inc de
@@ -101,9 +103,9 @@ GetMachineName::
 	ret
 
 TechnicalPrefix::
-	db "TM"
+	db "わざマシン"
 HiddenPrefix::
-	db "HM"
+	db "ひでんマシン"
 
 ; sets carry if item is HM, clears carry if item is not HM
 ; Input: a = item ID

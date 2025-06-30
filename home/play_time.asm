@@ -1,8 +1,8 @@
 TrackPlayTime::
-	call CountDownIgnoreInputBitReset
 	ld hl, wd479
 	bit 0, [hl]
 	jr nz, .maxIGT
+	call CountDownIgnoreInputBitReset
 	ld a, [wStatusFlags6]
 	bit BIT_GAME_TIMER_COUNTING, a
 	ret z
