@@ -17,4 +17,5 @@ ResetPlayerSpriteData::
 ResetPlayerSpriteData_ClearSpriteData::
 	ld bc, $10
 	xor a
-	jp FillMemory
+	call FillMemory
+	ret

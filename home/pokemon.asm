@@ -129,23 +129,32 @@ LoadFrontSpriteByMonIndex::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(CopyUncompressedPicToHL)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	xor a
 	ldh [hStartTileID], a
 	call CopyUncompressedPicToHL
 	xor a
 	ld [wSpriteFlipped], a
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	ret
 
 PlayCry::
 ; Play monster a's cry.
+	push bc
+	ld b, a
+	ld a, [wLowHealthAlarm]
+	push af
+	xor a
+	ld [wLowHealthAlarm], a
+	ld a, b
 	call GetCryData
 	call PlaySound
-	jp WaitForSoundToFinish
+	call WaitForSoundToFinish
+	pop af
+	ld [wLowHealthAlarm], a
+	pop bc
+	ret
 
 GetCryData::
 ; Load cry data for monster a.
@@ -242,12 +251,23 @@ HandlePartyMenuInput::
 	ld a, $40
 	ld [wPartyMenuAnimMonEnabled], a
 	call HandleMenuInput_
-	call PlaceUnfilledArrowMenuCursor
-	ld b, a
-	xor a
+	push af ; save hJoy5 OR wMenuWrapping enabled, if no inputs were selected within a certain period of time
+	bit BIT_B_BUTTON, a ; was B button pressed?
+	ld a, $0
 	ld [wPartyMenuAnimMonEnabled], a
 	ld a, [wCurrentMenuItem]
 	ld [wPartyAndBillsPCSavedMenuItem], a
+	jr nz, .asm_1258
+	ld a, [wCurrentMenuItem]
+	ld [wWhichPokemon], a
+	callfar IsThisPartymonStarterPikachu_Party
+	jr nc, .asm_1258
+	call CheckPikachuFollowingPlayer
+	jr nz, .asm_128f
+.asm_1258
+	pop af
+	call PlaceUnfilledArrowMenuCursor
+	ld b, a
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wMenuItemToSwap]
@@ -272,6 +292,14 @@ HandlePartyMenuInput::
 	call BankswitchBack
 	and a
 	ret
+.asm_128f
+	pop af
+	ld hl, PartyMenuText_12cc
+	call PrintText
+	xor a
+	ld [wMenuItemToSwap], a
+	pop af
+	ldh [hTileAnimations], a
 .noPokemonChosen
 	call BankswitchBack
 	scf
@@ -279,18 +307,22 @@ HandlePartyMenuInput::
 .swappingPokemon
 	bit BIT_B_BUTTON, b
 	jr z, .handleSwap ; if not, handle swapping the pokemon
-.cancelSwap ; if the B button was pressed
+;.cancelSwap ; if the B button was pressed
 	farcall ErasePartyMenuCursors
 	xor a
 	ld [wMenuItemToSwap], a
 	ld [wPartyMenuTypeOrMessageID], a
 	call RedrawPartyMenu
-	jr HandlePartyMenuInput
+	jp HandlePartyMenuInput
 .handleSwap
 	ld a, [wCurrentMenuItem]
 	ld [wWhichPokemon], a
 	farcall SwitchPartyMon
-	jr HandlePartyMenuInput
+	jp HandlePartyMenuInput
+
+PartyMenuText_12cc::
+	text "あれ？　いない⋯"
+	prompt
 
 DrawPartyMenu::
 	ld hl, DrawPartyMenu_
@@ -379,8 +411,7 @@ GetMonHeader::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, BANK(BaseStats)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	push bc
 	push de
 	push hl
@@ -399,8 +430,6 @@ GetMonHeader::
 	ld b, $77 ; size of Aerodactyl fossil sprite
 	cp FOSSIL_AERODACTYL ; Aerodactyl fossil
 	jr z, .specialID
-	cp MEW
-	jr z, .mew
 	predef IndexToPokedex
 	ld a, [wPokedexNum]
 	dec a
@@ -418,13 +447,6 @@ GetMonHeader::
 	ld [hl], e ; write front sprite pointer
 	inc hl
 	ld [hl], d
-	jr .done
-.mew
-	ld hl, MewBaseStats
-	ld de, wMonHeader
-	ld bc, BASE_DATA_SIZE
-	ld a, BANK(MewBaseStats)
-	call FarCopyData
 .done
 	ld a, [wCurSpecies]
 	ld [wMonHIndex], a
@@ -434,8 +456,7 @@ GetMonHeader::
 	pop de
 	pop bc
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	ret
 
 ; copy party pokemon's name to wNameBuffer

@@ -48,6 +48,3 @@ PlaySoundClipSample::
 	dec a
 	jr nz, .loop
 	ret
-
-; unused?
-	jp _Start

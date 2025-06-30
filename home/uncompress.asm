@@ -10,16 +10,13 @@ UncompressSpriteData::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, b
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	xor a
-	ld [MBC1SRamBank], a
+	call BankswitchCommon
+	ld a, $0
+	call OpenSRAM
 	call _UncompressSpriteData
+	call CloseSRAM
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	ret
 
 ; initializes necessary data to load a sprite and runs UncompressSpriteDataLoop

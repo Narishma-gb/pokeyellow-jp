@@ -1,7 +1,6 @@
 DisplayStartMenu::
-	ld a, BANK(StartMenu_Pokedex)
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	ld a, BANK(StartMenu_Pokedex) ; also bank for other functions
+	call BankswitchCommon
 	ld a, [wWalkBikeSurfState] ; walking/biking/surfing
 	ld [wWalkBikeSurfStateCopy], a
 	ld a, SFX_START_MENU
@@ -9,6 +8,7 @@ DisplayStartMenu::
 
 RedisplayStartMenu::
 	farcall DrawStartMenu
+RedisplayStartMenu_DoNotDrawStartMenu::
 	farcall PrintSafariZoneSteps ; print Safari Zone info, if in Safari Zone
 	call UpdateSprites
 .loop

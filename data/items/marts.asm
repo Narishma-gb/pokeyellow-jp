@@ -2,13 +2,13 @@
 ; they are texts
 
 ViridianMartClerkText::
-	script_mart POKE_BALL, ANTIDOTE, PARLYZ_HEAL, BURN_HEAL
+	script_mart POKE_BALL, POTION, ANTIDOTE, PARLYZ_HEAL, BURN_HEAL
 
 PewterMartClerkText::
 	script_mart POKE_BALL, POTION, ESCAPE_ROPE, ANTIDOTE, BURN_HEAL, AWAKENING, PARLYZ_HEAL
 
 CeruleanMartClerkText::
-	script_mart POKE_BALL, POTION, REPEL, ANTIDOTE, BURN_HEAL, AWAKENING, PARLYZ_HEAL
+	script_mart POKE_BALL, POTION, ESCAPE_ROPE, REPEL, ANTIDOTE, BURN_HEAL, AWAKENING, PARLYZ_HEAL
 
 UnusedBikeShopClerkText:: ; unreferenced
 	script_mart BICYCLE
@@ -35,7 +35,7 @@ CeladonMart5FClerk2Text::
 	script_mart HP_UP, PROTEIN, IRON, CARBOS, CALCIUM
 
 FuchsiaMartClerkText::
-	script_mart ULTRA_BALL, GREAT_BALL, SUPER_POTION, REVIVE, FULL_HEAL, SUPER_REPEL
+	script_mart ULTRA_BALL, GREAT_BALL, HYPER_POTION, REVIVE, FULL_HEAL, SUPER_REPEL
 
 UnusedMartClerkText:: ; unreferenced
 	script_mart GREAT_BALL, HYPER_POTION, SUPER_POTION, FULL_HEAL, REVIVE

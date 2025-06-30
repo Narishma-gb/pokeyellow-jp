@@ -50,6 +50,8 @@ HandleMenuInput_::
 	ld [wCheckFor180DegreeTurn], a
 	ldh a, [hJoy5]
 	ld b, a
+	bit BIT_A_BUTTON, a
+	jr nz, .checkOtherKeys
 	bit BIT_D_UP, a
 	jr z, .checkIfDownPressed
 ; upPressed

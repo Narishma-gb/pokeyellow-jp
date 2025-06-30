@@ -9,7 +9,6 @@ UncompressMonSprite::
 	ld a, [hl]
 	ld [wSpriteInputPtr + 1], a
 ; define (by index number) the bank that a pokemon's image is in
-; index = MEW:             bank $1
 ; index = FOSSIL_KABUTOPS: bank $B
 ;       index < $1F:       bank $9 ("Pics 1")
 ; $1F ≤ index < $4A:       bank $A ("Pics 2")
@@ -18,10 +17,6 @@ UncompressMonSprite::
 ; $99 ≤ index:             bank $D ("Pics 5")
 	ld a, [wCurPartySpecies]
 	ld b, a
-	cp MEW
-	ld a, BANK(MewPicFront)
-	jr z, .GotBank
-	ld a, b
 	cp FOSSIL_KABUTOPS
 	ld a, BANK(FossilKabutopsPic)
 	jr z, .GotBank
@@ -92,8 +87,8 @@ LoadUncompressedSpriteData::
 	add a
 	add a     ; 8*(7*((8-w)/2) + 7-h) ; combined overall offset (in bytes)
 	ldh [hSpriteOffset], a
-	xor a
-	ld [MBC1SRamBank], a
+	ld a, BANK("Sprite Buffers")
+	call OpenSRAM
 	ld hl, sSpriteBuffer0
 	call ZeroSpriteBuffer   ; zero buffer 0
 	ld de, sSpriteBuffer1
@@ -104,6 +99,7 @@ LoadUncompressedSpriteData::
 	ld de, sSpriteBuffer2
 	ld hl, sSpriteBuffer1
 	call AlignSpriteDataCentered    ; copy and align buffer 2 to 1 (containing the LSB of the 2bpp sprite)
+	call CloseSRAM
 	pop de
 	jp InterlaceMergeSpriteBuffers
 
@@ -127,7 +123,7 @@ AlignSpriteDataCentered::
 	dec c
 	jr nz, .columnInnerLoop
 	pop hl
-	ld bc, 7 * 8    ; 7 tiles
+	ld bc, 7 * 8  ; 7 tiles
 	add hl, bc    ; advance one full column
 	pop af
 	dec a
@@ -150,8 +146,8 @@ ZeroSpriteBuffer::
 ; in the resulting sprite, the rows of the two source sprites are interlaced
 ; de: output address
 InterlaceMergeSpriteBuffers::
-	xor a
-	ld [MBC1SRamBank], a
+	ld a, BANK("Sprite Buffers")
+	call OpenSRAM
 	push de
 	ld hl, sSpriteBuffer2 + (SPRITEBUFFERSIZE - 1) ; destination: end of buffer 2
 	ld de, sSpriteBuffer1 + (SPRITEBUFFERSIZE - 1) ; source 2: end of buffer 1
@@ -193,4 +189,5 @@ InterlaceMergeSpriteBuffers::
 	ld c, (2 * SPRITEBUFFERSIZE) / 16 ; $31, number of 16 byte chunks to be copied
 	ldh a, [hLoadedROMBank]
 	ld b, a
-	jp CopyVideoData
+	call CopyVideoData
+	jp CloseSRAM

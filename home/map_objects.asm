@@ -70,6 +70,61 @@ IsItemInBag::
 	and a
 	ret
 
+IsSurfingPikachuInParty::
+; set bit 6 of wd471 if any Pikachu with Surf is in party
+; set bit 7 of wd471 if starter Pikachu is in party (with or without Surf)
+; also performs a bankswitch to IsStarterPikachuInOurParty
+	ld a, [wd471]
+	and $3f
+	ld [wd471], a
+	ld hl, wPartyMon1
+	ld c, PARTY_LENGTH
+	ld b, SURF
+.loop
+	ld a, [hl]
+	cp STARTER_PIKACHU
+	jr nz, .notPikachu
+	push hl
+	ld de, $8
+	add hl, de
+	ld a, [hli]
+	cp b ; does pikachu have surf as one of its moves
+	jr z, .hasSurf
+	ld a, [hli]
+	cp b
+	jr z, .hasSurf
+	ld a, [hli]
+	cp b
+	jr z, .hasSurf
+	ld a, [hli]
+	cp b
+	jr nz, .noSurf
+.hasSurf
+	ld a, [wd471]
+	set 6, a
+	ld [wd471], a
+.noSurf
+	pop hl
+.notPikachu
+	ld de, wPartyMon2 - wPartyMon1
+	add hl, de
+	dec c
+	jr nz, .loop
+	call .checkForStarter
+	ret
+
+.checkForStarter
+	push hl
+	push bc
+	callfar IsStarterPikachuInOurParty
+	pop bc
+	pop hl
+	ret nc
+	ld a, [wd471]
+	set 7, a
+	ld [wd471], a
+	ret
+
 DisplayPokedex::
 	ld [wPokedexNum], a
 	farjp _DisplayPokedex
@@ -91,6 +146,26 @@ SetSpriteImageIndexAfterSettingFacingDirection::
 	ld de, SPRITESTATEDATA1_IMAGEINDEX - SPRITESTATEDATA1_FACINGDIRECTION
 	add hl, de
 	ld [hl], a
+	ret
+
+SpriteFunc_34a1::
+	ldh a, [hSpriteIndex]
+	swap a
+	add $e
+	ld l, a
+	ld h, $c2
+	ld c, [hl]
+	dec c
+	swap c
+	ldh a, [hSpriteOffset]
+	add c
+	ld c, a
+	ldh a, [hSpriteHeight]
+	swap a
+	add $2
+	ld l, a
+	dec h
+	ld [hl], c
 	ret
 
 ; tests if the player's coordinates are in a specified array
@@ -126,7 +201,7 @@ CheckCoords::
 	ld a, [hli]
 	cp c
 	jr nz, .loop
-.inArray
+;.inArray
 	scf
 	ret
 .notInArray
@@ -241,8 +316,8 @@ GetSpriteMovementByte2Pointer::
 	ldh a, [hSpriteIndex]
 	dec a
 	add a
-	ld d, 0
 	ld e, a
+	ld d, 0
 	add hl, de
 	pop de
 	ret

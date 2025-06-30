@@ -70,6 +70,8 @@ DEF rLCDC_DEFAULT EQU (1 << rLCDC_ENABLE) | (1 << rLCDC_WINDOW_TILEMAP) | (1 << 
 	ldh [hSCX], a
 	ldh [hSCY], a
 	ldh [rIF], a
+	ld [wc0f3], a
+	ld [wc0f3 + 1], a
 	ld a, 1 << VBLANK + 1 << TIMER + 1 << SERIAL
 	ldh [rIE], a
 
@@ -133,5 +135,4 @@ StopAllSounds::
 	ld [wAudioFadeOutControl], a
 	ld [wNewSoundID], a
 	ld [wLastMusicSoundID], a
-	dec a
-	jp PlaySound
+	jp StopAllMusic

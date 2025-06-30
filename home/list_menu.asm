@@ -68,7 +68,7 @@ DisplayListMenuIDLoop::
 ; oldManBattle
 	ld a, "▶"
 	ldcoord_a 5, 4 ; place menu cursor in front of first menu entry
-	ld c, 80
+	ld c, 20
 	call DelayFrames
 	xor a
 	ld [wCurrentMenuItem], a
@@ -197,15 +197,13 @@ DisplayListMenuIDLoop::
 DisplayChooseQuantityMenu::
 ; text box dimensions/coordinates for just quantity
 	hlcoord 15, 9
-	ld b, 1 ; height
-	ld c, 3 ; width
+	lb bc, 1, 3 ; height and width
 	ld a, [wListMenuID]
 	cp PRICEDITEMLISTMENU
 	jr nz, .drawTextBox
 ; text box dimensions/coordinates for quantity and price
 	hlcoord 7, 9
-	ld b, 1  ; height
-	ld c, 11 ; width
+	lb bc, 1, 11  ; height and width
 .drawTextBox
 	call TextBoxBorder
 	hlcoord 16, 10
@@ -307,8 +305,11 @@ DisplayChooseQuantityMenu::
 	jp .waitForKeyPressLoop
 .buttonAPressed ; the player chose to make the transaction
 	xor a
+	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	ret
 .buttonBPressed ; the player chose to cancel the transaction
+	xor a
+	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	ld a, $ff
 	ret
 
@@ -329,13 +330,14 @@ ExitListMenu::
 	ld hl, wStatusFlags5
 	res BIT_NO_TEXT_DELAY, [hl]
 	call BankswitchBack
+	xor a
+	ld [wMenuItemToSwap], a ; 0 means no item is currently being swapped
 	scf
 	ret
 
 PrintListMenuEntries::
 	hlcoord 5, 3
-	ld b, 9
-	ld c, 14
+	lb bc, 9, 14
 	call ClearScreenArea
 	ld a, [wListPointer]
 	ld e, a
@@ -350,7 +352,7 @@ PrintListMenuEntries::
 	jr nz, .skipMultiplying
 ; if it's an item menu
 ; item entries are 2 bytes long, so multiply by 2
-	sla a
+	add a
 	sla c
 .skipMultiplying
 	add e
@@ -500,7 +502,7 @@ PrintListMenuEntries::
 	ld a, [wMenuItemToSwap] ; ID of item chosen for swapping (counts from 1)
 	and a ; is an item being swapped?
 	jr z, .nextListEntry
-	sla a
+	add a
 	cp c ; is it this item?
 	jr nz, .nextListEntry
 	dec hl

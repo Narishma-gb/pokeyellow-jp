@@ -10,8 +10,7 @@ ReloadMapData::
 	call LoadTilesetTilePatternData
 	call EnableLCD
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	ret
 
 ; reloads tileset tile patterns
@@ -24,8 +23,7 @@ ReloadTilesetTilePatterns::
 	call LoadTilesetTilePatternData
 	call EnableLCD
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	ret
 
 ; shows the town map and lets the player choose a destination to fly to

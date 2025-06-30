@@ -24,6 +24,8 @@ PlayDefaultMusicCommon::
 	jr z, .walking
 	cp $2
 	jr z, .surfing
+	call CheckForNoBikingMusicMap
+	jr c, .walking
 	ld a, MUSIC_BIKE_RIDING
 	jr .next
 
@@ -66,33 +68,32 @@ PlayDefaultMusicCommon::
 	ld [wNewSoundID], a
 	jp PlaySound
 
+CheckForNoBikingMusicMap::
+; probably used to not change music upon getting on bike
+	ld a, [wCurMap]
+	cp ROUTE_23
+	jr z, .found
+	cp VICTORY_ROAD_1F
+	jr z, .found
+	cp VICTORY_ROAD_2F
+	jr z, .found
+	cp VICTORY_ROAD_3F
+	jr z, .found
+	cp INDIGO_PLATEAU
+	jr z, .found
+	and a
+	ret
+.found
+	scf
+	ret
+
 UpdateMusic6Times::
-; This is called when entering a map, before fading out the current music and
-; playing the default music (i.e. the map's music or biking/surfing music).
-	ld a, [wAudioROMBank]
-	ld b, a
-	cp BANK(Audio1_UpdateMusic)
-	jr nz, .checkForAudio2
-; audio 1
-	ld hl, Audio1_UpdateMusic
-	jr .next
-
-.checkForAudio2
-	cp BANK(Audio2_UpdateMusic)
-	jr nz, .audio3
-; audio 2
-	ld hl, Audio2_UpdateMusic
-	jr .next
-
-.audio3
-	ld hl, Audio3_UpdateMusic
-
-.next
 	ld c, 6
+UpdateMusicCTimes::
 .loop
 	push bc
 	push hl
-	call Bankswitch
+	farcall Audio1_UpdateMusic
 	pop hl
 	pop bc
 	dec c
@@ -135,7 +136,20 @@ PlayMusic::
 	ld [wAudioROMBank], a
 	ld [wAudioSavedROMBank], a
 	ld a, b
+	jr PlaySound
 
+Func_2223::
+	xor a
+	ld [wChannelSoundIDs + CHAN5], a
+	ld [wChannelSoundIDs + CHAN6], a
+	ld [wChannelSoundIDs + CHAN7], a
+	ld [wChannelSoundIDs + CHAN8], a
+	ldh [rNR10], a
+	ret
+
+StopAllMusic::
+	ld a, SFX_STOP_ALL_MUSIC
+	ld [wNewSoundID], a
 ; plays music specified by a. If value is $ff, music is stopped
 PlaySound::
 	push hl
@@ -168,34 +182,7 @@ PlaySound::
 .noFadeOut
 	xor a
 	ld [wNewSoundID], a
-	ldh a, [hLoadedROMBank]
-	ldh [hSavedROMBank], a
-	ld a, [wAudioROMBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
-	cp BANK(Audio1_PlaySound)
-	jr nz, .checkForAudio2
-; audio 1
-	ld a, b
-	call Audio1_PlaySound
-	jr .next2
-
-.checkForAudio2
-	cp BANK(Audio2_PlaySound)
-	jr nz, .audio3
-; audio 2
-	ld a, b
-	call Audio2_PlaySound
-	jr .next2
-
-.audio3
-	ld a, b
-	call Audio3_PlaySound
-
-.next2
-	ldh a, [hSavedROMBank]
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call DetermineAudioFunction
 	jr .done
 
 .fadeOut
@@ -211,4 +198,103 @@ PlaySound::
 	pop bc
 	pop de
 	pop hl
+	ret
+
+GetNextMusicByte::
+	ldh a, [hLoadedROMBank]
+	push af
+	ld a, [wAudioROMBank]
+	call BankswitchCommon
+	ld d, $0
+	ld a, c
+	add a
+	ld e, a
+	ld hl, wChannelCommandPointers
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld a, [hld]
+	ld d, a
+	ld a, [de]
+	inc de
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	ld e, a
+	pop af
+	call BankswitchCommon
+	ld a, e
+	ret
+
+InitMusicVariables::
+	push hl
+	push de
+	push bc
+	homecall Audio2_InitMusicVariables
+	pop bc
+	pop de
+	pop hl
+	ret
+
+InitSFXVariables::
+	push hl
+	push de
+	push bc
+	homecall Audio2_InitSFXVariables
+	pop bc
+	pop de
+	pop hl
+	ret
+
+StopAllAudio::
+	push hl
+	push de
+	push bc
+	homecall Audio2_StopAllAudio
+	pop bc
+	pop de
+	pop hl
+	ret
+
+DetermineAudioFunction::
+	ldh a, [hLoadedROMBank]
+	push af
+	ld a, [wAudioROMBank]
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
+; determine the audio function, based on the bank
+	cp BANK(Audio1_PlaySound)
+	jr nz, .checkForAudio2
+; audio 1
+	ld a, b
+	call Audio1_PlaySound
+	jr .done
+
+.checkForAudio2
+	cp BANK(Audio2_PlaySound)
+	jr nz, .checkForAudio3
+; audio 2
+	ld a, b
+	call Audio2_PlaySound
+	jr .done
+
+.checkForAudio3
+	cp BANK(Audio3_PlaySound)
+	jr nz, .audio4
+; audio 3
+	ld a, b
+	call Audio3_PlaySound
+	jr .done
+
+.audio4
+; invalid banks will default to audio 4
+; this is seen when encountering Missingno,
+; as its sprite dimensions overflow to wAudioROMBank
+	ld a, b
+	call Audio4_PlaySound
+
+.done
+	pop af
+	ldh [hLoadedROMBank], a
+	ld [MBC1RomBank], a
 	ret

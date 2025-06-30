@@ -1,8 +1,8 @@
 SECTION "Garbage Header", ROM0
 INCBIN "garbage/garbage_header.bin"
 
-;SECTION "Garbage 0", ROM0
-;INCBIN "garbage/garbage_0.bin"
+SECTION "Garbage 0", ROM0
+INCBIN "garbage/garbage_0.bin"
 
 
 ;SECTION "Garbage 1", ROMX

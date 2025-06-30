@@ -1,2 +1,2 @@
-_Start::
+_Start:: ; unused
 	jp Init

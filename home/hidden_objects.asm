@@ -1,5 +1,6 @@
 UpdateCinnabarGymGateTileBlocks::
-	farjp UpdateCinnabarGymGateTileBlocks_
+	farcall UpdateCinnabarGymGateTileBlocks_
+	ret
 
 CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	ldh a, [hLoadedROMBank]
@@ -9,22 +10,20 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 	jr z, .nothingFound
 ; A button is pressed
 	ld a, BANK(CheckForHiddenObject)
-	ld [MBC1RomBank], a
-	ldh [hLoadedROMBank], a
+	call BankswitchCommon
 	call CheckForHiddenObject
 	ldh a, [hDidntFindAnyHiddenObject]
 	and a
 	jr nz, .hiddenObjectNotFound
-	ld a, [wHiddenObjectFunctionRomBank]
-	ld [MBC1RomBank], a
-	ldh [hLoadedROMBank], a
-	ld de, .returnAddress
-	push de
-	jp hl
-.returnAddress
 	xor a
+	ldh [hItemAlreadyFound], a
+	ld a, [wHiddenObjectFunctionRomBank]
+	call BankswitchCommon
+	call JumpToAddress
+	ldh a, [hItemAlreadyFound]
 	jr .done
 .hiddenObjectNotFound
+	predef GetTileAndCoordsInFrontOfPlayer
 	farcall PrintBookshelfText
 	ldh a, [hInteractedWithBookshelf]
 	and a
@@ -34,6 +33,5 @@ CheckForHiddenObjectOrBookshelfOrCardKeyDoor::
 .done
 	ldh [hItemAlreadyFound], a
 	pop af
-	ld [MBC1RomBank], a
-	ldh [hLoadedROMBank], a
+	call BankswitchCommon
 	ret

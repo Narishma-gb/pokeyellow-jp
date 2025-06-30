@@ -33,10 +33,11 @@ ROM0
 	"Header"
 	org $150
  	"Home"
-	"rom0"
+	"Garbage 0"
 ROMX $1
 	"rom1"
 ROMX $2
+	"Audio Engine 1"
 	"rom2"
 ROMX $3
 	"rom3"
@@ -51,14 +52,19 @@ ROMX $7
 ROMX $8
 	"rom8"
 ROMX $9
+	"Pics 1"
 	"rom9"
 ROMX $a
+	"Pics 2"
 	"rom10"
 ROMX $b
+	"Pics 3"
 	"rom11"
 ROMX $c
+	"Pics 4"
 	"rom12"
 ROMX $d
+	"Pics 5"
 	"rom13"
 ROMX $e
 	"rom14"
@@ -75,6 +81,7 @@ ROMX $13
 ROMX $14
 	"rom20"
 ROMX $15
+	"Trainer Sight"
 	"rom21"
 ROMX $16
 	"rom22"

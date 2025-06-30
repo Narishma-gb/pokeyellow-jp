@@ -73,7 +73,9 @@ wAudioSavedROMBank:: db
 wFrequencyModifier:: db
 wTempoModifier:: db
 
-	ds 13
+wc0f3:: dw
+
+	ds 11
 
 
 SECTION "Sprite State Data", WRAM0
@@ -102,9 +104,10 @@ wSpriteStateData1::
 ; - F
 wSpritePlayerStateData1::  spritestatedata1 wSpritePlayerStateData1 ; player is struct 0
 ; wSprite01StateData1 - wSprite15StateData1
-FOR n, 1, NUM_SPRITESTATEDATA_STRUCTS
+FOR n, 1, NUM_SPRITESTATEDATA_STRUCTS - 1
 wSprite{02d:n}StateData1:: spritestatedata1 wSprite{02d:n}StateData1
 ENDR
+wSpritePikachuStateData1:: spritestatedata1 wSpritePikachuStateData1 ; pikachu is struct 15
 
 ; more data for all sprites on the current map
 ; holds info for 16 sprites with $10 bytes each
@@ -128,9 +131,10 @@ wSpriteStateData2::
 ; - F
 wSpritePlayerStateData2::  spritestatedata2 wSpritePlayerStateData2 ; player is struct 0
 ; wSprite01StateData2 - wSprite15StateData2
-FOR n, 1, NUM_SPRITESTATEDATA_STRUCTS
+FOR n, 1, NUM_SPRITESTATEDATA_STRUCTS - 1
 wSprite{02d:n}StateData2:: spritestatedata2 wSprite{02d:n}StateData2
 ENDR
+wSpritePikachuStateData2:: spritestatedata2 wSpritePikachuStateData2 ; pikachu is struct 15
 
 ; The high byte of a pointer to anywhere within wSpriteStateData1 can be incremented
 ; to reach within wSpriteStateData2, and vice-versa for decrementing.
@@ -192,6 +196,68 @@ wOverworldMapEnd::
 
 NEXTU
 wTempPic:: ds 7 * 7 tiles
+
+NEXTU
+wPrinterData::
+wPrinterSendState:: db
+wPrinterRowIndex:: db
+
+; Printer data header
+wPrinterDataHeader::
+wc6ea:: db
+wc6eb:: db
+wc6ec:: db
+wc6ed:: db
+wPrinterChecksum:: dw
+
+UNION
+wPrinterSerialReceived:: db
+; bit 7: set if error 1 (battery low)
+; bit 6: set if error 4 (too hot or cold)
+; bit 5: set if error 3 (paper jammed or empty)
+; if this and the previous byte are both $ff: error 2 (connection error)
+wPrinterStatusReceived:: db
+
+wc6f2:: db
+wc6f3:: db
+	ds 12
+wLYOverrides:: ds $100
+wLYOverridesEnd::
+wLYOverridesBuffer:: ds $100
+wLYOverridesBufferEnd::
+
+NEXTU
+wPrinterSendDataSource1:: ds 20 tiles
+wPrinterSendDataSource2:: ds 20 tiles
+ENDU
+
+wPrinterSendDataSource1End::
+
+wPrinterHandshake:: db
+wPrinterStatusFlags:: db
+wHandshakeFrameDelay:: db
+wPrinterSerialFrameDelay:: db
+wPrinterSendByteOffset:: dw
+wPrinterDataSize:: dw
+wPrinterTileBuffer:: ds SCREEN_HEIGHT * SCREEN_WIDTH
+wPrinterStatusIndicator:: dw
+wcae2:: db
+wPrinterSettingsTempCopy:: db
+	ds 16
+wPrinterQueueLength:: db
+wPrinterDataEnd::
+
+wPrinterPokedexEntryTextPointer:: dw
+	ds 2
+wPrinterPokedexMonIsOwned:: db
+	ds 226
+UNION
+wcbdc:: ds 1 tiles
+NEXTU
+	ds 14
+wcbea:: dw
+ENDU
+wcbec:: ds 1 tiles
 ENDU
 
 
@@ -1600,7 +1666,7 @@ wEvolutionOccurred:: db
 
 wVBlankSavedROMBank:: db
 
-	ds 1
+wFarCopyDataSavedROMBank:: db
 
 wIsKeyItem:: db
 

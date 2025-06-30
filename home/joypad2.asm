@@ -66,7 +66,11 @@ WaitForTextScrollButtonPress::
 	ld a, [wTownMapSpriteBlinkingEnabled]
 	and a
 	jr z, .skipAnimation
-	call TownMapSpriteBlinkingAnimation
+	push de
+	push bc
+	callfar TownMapSpriteBlinkingAnimation
+	pop bc
+	pop de
 .skipAnimation
 	hlcoord 18, 16
 	call HandleDownArrowBlinkTiming
@@ -88,6 +92,7 @@ ManualTextScroll::
 	cp LINK_STATE_BATTLING
 	jr z, .inLinkBattle
 	call WaitForTextScrollButtonPress
+	call WaitForSoundToFinish
 	ld a, SFX_PRESS_AB
 	jp PlaySound
 .inLinkBattle

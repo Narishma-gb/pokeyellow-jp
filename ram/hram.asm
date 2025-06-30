@@ -382,4 +382,6 @@ ENDU
 
 hWhoseTurn:: db ; 0 on player's turn, 1 on enemy's turn
 
+hLCDCPointer:: db
+
 ENDSECTION
