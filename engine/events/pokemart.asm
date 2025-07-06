@@ -1,6 +1,6 @@
 DisplayPokemartDialogue_::
 	ld a, [wListScrollOffset]
-	push af
+	ld [wSavedListScrollOffset], a
 	call UpdateSprites
 	xor a
 	ld [wBoughtOrSoldItemInMart], a
@@ -67,7 +67,7 @@ DisplayPokemartDialogue_::
 	ld [wListMenuID], a
 	call DisplayListMenuID
 	jp c, .returnToMainPokemartMenu ; if the player closed the menu
-.confirmItemSale ; if the player is trying to sell a specific item
+;.confirmItemSale ; if the player is trying to sell a specific item
 	call IsKeyItem
 	ld a, [wIsKeyItem]
 	and a
@@ -222,7 +222,7 @@ DisplayPokemartDialogue_::
 	ld a, 1
 	ld [wUpdateSpritesEnabled], a
 	call UpdateSprites
-	pop af
+	ld a, [wSavedListScrollOffset]
 	ld [wListScrollOffset], a
 	ret
 

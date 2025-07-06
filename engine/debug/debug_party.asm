@@ -17,9 +17,10 @@ DebugNewGameParty:
 	; "Tsunekazu Ishihara: Exeggutor is my favorite. That's because I was
 	; always using this character while I was debugging the program."
 	; From https://web.archive.org/web/20000607152840/http://pocket.ign.com/news/14973.html
-	db EXEGGUTOR, 90
-	db CHANSEY, 100
-	db RHYDON, 5
+	db SNORLAX, 80
+	db PERSIAN, 80
+	db JIGGLYPUFF, 15
+	db STARTER_PIKACHU, 5
 	db -1 ; end
 
 PrepareNewGameDebug: ; dummy

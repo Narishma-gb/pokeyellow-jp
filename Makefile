@@ -5,13 +5,12 @@ roms    := \
 	pokeyellow13.gb
 patches := pokeyellow13.patch
 
-rom_obj := wip.o \
+rom_obj := \
+	audio.o \
 	garbage.o \
 	home.o \
+	wip.o \
 	ram.o
-#	audio.o \
-#	garbage.o \
-#	home.o \
 #	main.o \
 #	maps.o \
 #	ram.o \

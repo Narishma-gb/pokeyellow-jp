@@ -23,8 +23,7 @@ PlayerPCMenu:
 	set BIT_NO_MENU_BUTTON_SOUND, [hl]
 	call LoadScreenTilesFromBuffer2
 	hlcoord 0, 0
-	ld b, $8
-	ld c, $a
+	lb bc, 8, 10
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 2, 2

@@ -1,9 +1,12 @@
 CableClubNPC::
 	ld hl, CableClubNPCWelcomeText
 	call PrintText
+	call CheckPikachuFollowingPlayer
+	jr nz, .asm_7048
 	CheckEvent EVENT_GOT_POKEDEX
 	jp nz, .receivedPokedex
 ; if the player hasn't received the pokedex
+.asm_7048
 	ld c, 60
 	call DelayFrames
 	ld hl, CableClubNPCMakingPreparationsText
@@ -119,7 +122,61 @@ CableClubNPC::
 	xor a
 	ld [hld], a
 	ld [hl], a
-	jpfar LinkMenu
+	ld a, [wLetterPrintingDelayFlags]
+	push af
+	callfar LinkMenu
+	pop af
+	ld [wLetterPrintingDelayFlags], a
+	ret
+
+; seems to be similar of Serial_SyncAndExchangeNybble
+Serial_SyncAndExchangeNybbleDouble:
+	ld a, $ff
+	ld [wSerialExchangeNybbleReceiveData], a
+.loop
+	call Serial_ExchangeNybble
+	call DelayFrame
+	push hl
+	ld hl, wUnknownSerialCounter + 1
+	dec [hl]
+	jr nz, .next
+	dec hl
+	dec [hl]
+	jr nz, .next
+	pop hl
+	jr .setUnknownSerialCounterToFFFF
+.next
+	pop hl
+	ld a, [wSerialExchangeNybbleReceiveData]
+	inc a
+	jr z, .loop
+	call DelayFrame
+	ld a, $ff
+	ld [wSerialExchangeNybbleReceiveData], a
+	call Serial_ExchangeNybble
+	ld a, [wSerialExchangeNybbleReceiveData]
+	inc a
+	jr z, .loop
+	ld b, 10
+.syncLoop1
+	call DelayFrame
+	call Serial_ExchangeNybble
+	dec b
+	jr nz, .syncLoop1
+	ld b, 10
+.syncLoop2
+	call DelayFrame
+	call Serial_SendZeroByte
+	dec b
+	jr nz, .syncLoop2
+	ld a, [wSerialExchangeNybbleReceiveData]
+	ld [wSerialSyncAndExchangeNybbleReceiveData], a
+	ret
+.setUnknownSerialCounterToFFFF
+	ld a, $ff
+	ld [wUnknownSerialCounter], a
+	ld [wUnknownSerialCounter + 1], a
+	ret
 
 CableClubNPCAreaReservedFor2FriendsLinkedByCableText:
 	text "こちらは　ともだちと"
@@ -148,7 +205,7 @@ CableClubNPCPleaseWaitText:
 
 CableClubNPCLinkClosedBecauseOfInactivityText:
 	vc_patch Change_link_closed_inactivity_message
-IF DEF(_BLUE_VC)
+IF DEF(_YELLOW_VC)
 	text "それでは　また　おこしください"
 	done
 	text "けを　ちゅうし　いたします！"

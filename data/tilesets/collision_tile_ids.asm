@@ -68,3 +68,6 @@ Facility_Coll::
 
 Plateau_Coll::
 	coll_tiles $1b, $23, $2c, $2d, $3b, $45
+
+BeachHouse_Coll::
+	coll_tiles $01, $11, $12, $14

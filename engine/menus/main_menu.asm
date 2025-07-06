@@ -34,8 +34,7 @@ MainMenu:
 	jr z, .noSaveFile
 ; there's a save file
 	hlcoord 0, 0
-	ld b, 6
-	ld c, 13
+	lb bc, 6, 13
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, ContinueText
@@ -43,8 +42,7 @@ MainMenu:
 	jr .next2
 .noSaveFile
 	hlcoord 0, 0
-	ld b, 4
-	ld c, 13
+	lb bc, 4, 13
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, NewGameText
@@ -129,201 +127,36 @@ InitOptions:
 	ld [wLetterPrintingDelayFlags], a
 	ld a, TEXT_DELAY_MEDIUM
 	ld [wOptions], a
+	ld a, 64 ; audio?
+	ld [wPrinterSettings], a
 	ret
 
-LinkMenu:
-	xor a
-	ld [wLetterPrintingDelayFlags], a
-	ld hl, wStatusFlags4
-	set BIT_LINK_CONNECTED, [hl]
-	ld hl, LinkMenuEmptyText
+Func_5cc1:
+; unused?
+	ld a, $6d
+	cp $80
+	ret c ; will always be executed
+	ld hl, NotEnoughMemoryText
 	call PrintText
-	call SaveScreenTilesToBuffer1
-	ld hl, WhereWouldYouLikeText
-	call PrintText
-	hlcoord 8, 10
-	ld b, $6
-	ld c, $a
-	call TextBoxBorder
-	call UpdateSprites
-	hlcoord 10, 12
-	ld de, CableClubOptionsText
-	call PlaceString
-	xor a
-	ld [wUnusedLinkMenuByte], a
-	ld [wCableClubDestinationMap], a
-	ld hl, wTopMenuItemY
-	ld a, $c
-	ld [hli], a
-	ASSERT wTopMenuItemY + 1 == wTopMenuItemX
-	ld a, 9
-	ld [hli], a
-	ASSERT wTopMenuItemX + 1 == wCurrentMenuItem
-	xor a
-	ld [hli], a
-	inc hl
-	ASSERT wCurrentMenuItem + 2 == wMaxMenuItem
-	ld a, 2
-	ld [hli], a
-	ASSERT wMaxMenuItem + 1 == wMenuWatchedKeys
-	ASSERT 2 + 1 == A_BUTTON | B_BUTTON
-	inc a
-	ld [hli], a
-	ASSERT wMenuWatchedKeys + 1 == wLastMenuItem
-	xor a
-	ld [hl], a
-.waitForInputLoop
-	call HandleMenuInput
-	and A_BUTTON | B_BUTTON
-	add a
-	add a
-	ld b, a
-	ld a, [wCurrentMenuItem]
-	add b
-	add $d0
-	ld [wLinkMenuSelectionSendBuffer], a
-	ld [wLinkMenuSelectionSendBuffer + 1], a
-.exchangeMenuSelectionLoop
-	call Serial_ExchangeLinkMenuSelection
-	ld a, [wLinkMenuSelectionReceiveBuffer]
-	ld b, a
-	and $f0
-	cp $d0
-	jr z, .checkEnemyMenuSelection
-	ld a, [wLinkMenuSelectionReceiveBuffer + 1]
-	ld b, a
-	and $f0
-	cp $d0
-	jr nz, .exchangeMenuSelectionLoop
-.checkEnemyMenuSelection
-	ld a, b
-	and $c ; did the enemy press A or B?
-	jr nz, .enemyPressedAOrB
-; the enemy didn't press A or B
-	ld a, [wLinkMenuSelectionSendBuffer]
-	and $c ; did the player press A or B?
-	jr z, .waitForInputLoop ; if neither the player nor the enemy pressed A or B, try again
-	jr .doneChoosingMenuSelection ; if the player pressed A or B but the enemy didn't, use the player's selection
-.enemyPressedAOrB
-	ld a, [wLinkMenuSelectionSendBuffer]
-	and $c ; did the player press A or B?
-	jr z, .useEnemyMenuSelection ; if the enemy pressed A or B but the player didn't, use the enemy's selection
-; the enemy and the player both pressed A or B
-; The gameboy that is clocking the connection wins.
-	ldh a, [hSerialConnectionStatus]
-	cp USING_INTERNAL_CLOCK
-	jr z, .doneChoosingMenuSelection
-.useEnemyMenuSelection
-	ld a, b
-	ld [wLinkMenuSelectionSendBuffer], a
-	and $3
-	ld [wCurrentMenuItem], a
-.doneChoosingMenuSelection
-	ldh a, [hSerialConnectionStatus]
-	cp USING_INTERNAL_CLOCK
-	jr nz, .skipStartingTransfer
-	call DelayFrame
-	call DelayFrame
-	ld a, START_TRANSFER_INTERNAL_CLOCK
-	ldh [rSC], a
-.skipStartingTransfer
-	ld b, "　"
-	ld c, "　"
-	ld d, "▷"
-	ld a, [wLinkMenuSelectionSendBuffer]
-	and B_BUTTON << 2 ; was B button pressed?
-	jr nz, .updateCursorPosition
-; A button was pressed
-	ld a, [wCurrentMenuItem]
-	cp $2
-	jr z, .updateCursorPosition
-	ld c, d
-	ld d, b
-	dec a
-	jr z, .updateCursorPosition
-	ld b, c
-	ld c, d
-.updateCursorPosition
-	ld a, b
-	ldcoord_a 9, 12
-	ld a, c
-	ldcoord_a 9, 14
-	ld a, d
-	ldcoord_a 9, 16
-	ld c, 40
-	call DelayFrames
-	call LoadScreenTilesFromBuffer1
-	ld a, [wLinkMenuSelectionSendBuffer]
-	and B_BUTTON << 2 ; was B button pressed?
-	jr nz, .choseCancel ; cancel if B pressed
-	ld a, [wCurrentMenuItem]
-	cp $2
-	jr z, .choseCancel
-	xor a
-	ld [wWalkBikeSurfState], a ; start walking
-	ld a, [wCurrentMenuItem]
-	and a
-	ld a, COLOSSEUM
-	jr nz, .next
-	ld a, TRADE_CENTER
-.next
-	ld [wCableClubDestinationMap], a
-	ld hl, PleaseWaitText
-	call PrintText
-	ld c, 50
-	call DelayFrames
-	ld hl, wStatusFlags6
-	res BIT_DEBUG_MODE, [hl]
-	ld a, [wDefaultMap]
-	ld [wDestinationMap], a
-	call PrepareForSpecialWarp
-	ld c, 20
-	call DelayFrames
-	xor a
-	ld [wMenuJoypadPollCount], a
-	ld [wSerialExchangeNybbleSendData], a
-	inc a ; LINK_STATE_IN_CABLE_CLUB
-	ld [wLinkState], a
-	ld [wEnteringCableClub], a
-	jr SpecialEnterMap
-.choseCancel
-	xor a
-	ld [wMenuJoypadPollCount], a
-	vc_hook Wireless_net_stop
-	call Delay3
-	call CloseLinkConnection
-	ld hl, LinkCanceledText
-	call PrintText
-	ld hl, wStatusFlags4
-	res BIT_LINK_CONNECTED, [hl]
-	vc_hook Wireless_net_end
 	ret
 
-WhereWouldYouLikeText:
-	text "どちらの　へやに"
-	line "いきますか？"
-	done
-
-PleaseWaitText:
-	text "それでは　これより"
-	line "ごあんない　いたします"
-	done
-
-LinkCanceledText:
-	text "つうしんは　キャンセル　されました"
+NotEnoughMemoryText:
+	text "イエローバージョンの"
+	line "メモリガ　たりません"
 	done
 
 StartNewGame:
 	ld hl, wStatusFlags6
-; Ensure debug mode is not used when
-; starting a regular new game.
-; Debug mode persists in saved games and
-; is only reset here by the main menu.
+; Ensure debug mode is not used when starting a regular new game.
+; Debug mode persists in saved games for both debug and non-debug builds, and is
+; only reset here by the main menu.
 	res BIT_DEBUG_MODE, [hl]
-; fallthrough
+	; fallthrough
 
 StartNewGameDebug:
 	call OakSpeech
+	ld a, PLAYER_DIR_UP
+	ld [wPlayerMovingDirection], a
 	ld c, 20
 	call DelayFrames
 
@@ -339,6 +172,7 @@ SpecialEnterMap::
 	call ResetPlayerSpriteData
 	ld c, 20
 	call DelayFrames
+	call Func_5cc1
 	ld a, [wEnteringCableClub]
 	and a
 	ret nz
@@ -356,14 +190,14 @@ NewGameText:
 CableClubOptionsText:
 	db   "トレードセンター"
 	next "コロシアム"
+	next "コロシアム２"
 	next "やめる@"
 
 DisplayContinueGameInfo:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 4, 7
-	ld b, 8
-	ld c, 13
+	lb bc, 8, 13
 	call TextBoxBorder
 	hlcoord 5, 9
 	ld de, SaveScreenInfoText
@@ -386,8 +220,7 @@ PrintSaveScreenText:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 5, 0
-	ld b, 8
-	ld c, 13
+	lb bc, 8, 13
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
@@ -445,250 +278,8 @@ SaveScreenInfoText:
 	next "プレイじかん@"
 
 DisplayOptionMenu:
-	hlcoord 0, 0
-	ld b, 3
-	ld c, 18
-	call TextBoxBorder
-	hlcoord 0, 5
-	ld b, 3
-	ld c, 18
-	call TextBoxBorder
-	hlcoord 0, 10
-	ld b, 3
-	ld c, 18
-	call TextBoxBorder
-	hlcoord 1, 1
-	ld de, TextSpeedOptionText
-	call PlaceString
-	hlcoord 1, 6
-	ld de, BattleAnimationOptionText
-	call PlaceString
-	hlcoord 1, 11
-	ld de, BattleStyleOptionText
-	call PlaceString
-	hlcoord 2, 16
-	ld de, OptionMenuCancelText
-	call PlaceString
-	xor a
-	ld [wCurrentMenuItem], a
-	ld [wLastMenuItem], a
-	ASSERT BIT_FAST_TEXT_DELAY == 0
-	inc a ; 1 << BIT_FAST_TEXT_DELAY
-	ld [wLetterPrintingDelayFlags], a
-	ld [wOptionsCancelCursorX], a
-	ld a, 3 ; text speed cursor Y coordinate
-	ld [wTopMenuItemY], a
-	call SetCursorPositionsFromOptions
-	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
-	ld [wTopMenuItemX], a
-	ld a, $01
-	ldh [hAutoBGTransferEnabled], a ; enable auto background transfer
-	call Delay3
-.loop
-	call PlaceMenuCursor
-	call SetOptionsFromCursorPositions
-.getJoypadStateLoop
-	call JoypadLowSensitivity
-	ldh a, [hJoy5]
-	ld b, a
-	and A_BUTTON | B_BUTTON | START | D_RIGHT | D_LEFT | D_UP | D_DOWN ; any key besides select pressed?
-	jr z, .getJoypadStateLoop
-	bit BIT_B_BUTTON, b
-	jr nz, .exitMenu
-	bit BIT_START, b
-	jr nz, .exitMenu
-	bit BIT_A_BUTTON, b
-	jr z, .checkDirectionKeys
-; A was pressed
-	ld a, [wTopMenuItemY]
-	cp 16 ; is the cursor on Cancel?
-	jr nz, .loop
-.exitMenu
-	ld a, SFX_PRESS_AB
-	call PlaySound
+	callfar DisplayOptionMenu_
 	ret
-.eraseOldMenuCursor
-	ld [wTopMenuItemX], a
-	call EraseMenuCursor
-	jp .loop
-.checkDirectionKeys
-	ld a, [wTopMenuItemY]
-	bit BIT_D_DOWN, b
-	jr nz, .downPressed
-	bit BIT_D_UP, b
-	jr nz, .upPressed
-	cp 8 ; cursor in Battle Animation section?
-	jr z, .cursorInBattleAnimation
-	cp 13 ; cursor in Battle Style section?
-	jr z, .cursorInBattleStyle
-	cp 16 ; cursor on Cancel?
-	jr z, .loop
-; cursorInTextSpeed
-	bit BIT_D_LEFT, b
-	jp nz, .pressedLeftInTextSpeed
-	jp .pressedRightInTextSpeed
-.downPressed
-	cp 16
-	ld b, -13
-	ld hl, wOptionsTextSpeedCursorX
-	jr z, .updateMenuVariables
-	ld b, 5
-	cp 3
-	inc hl
-	jr z, .updateMenuVariables
-	cp 8
-	inc hl
-	jr z, .updateMenuVariables
-	ld b, 3
-	inc hl
-	jr .updateMenuVariables
-.upPressed
-	cp 8
-	ld b, -5
-	ld hl, wOptionsTextSpeedCursorX
-	jr z, .updateMenuVariables
-	cp 13
-	inc hl
-	jr z, .updateMenuVariables
-	cp 16
-	ld b, -3
-	inc hl
-	jr z, .updateMenuVariables
-	ld b, 13
-	inc hl
-.updateMenuVariables
-	add b
-	ld [wTopMenuItemY], a
-	ld a, [hl]
-	ld [wTopMenuItemX], a
-	call PlaceUnfilledArrowMenuCursor
-	jp .loop
-.pressedLeftInTextSpeed
-	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
-	cp 1
-	jr z, .updateTextSpeedXCoord
-	sub 7
-	jr .updateTextSpeedXCoord
-.pressedRightInTextSpeed
-	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
-	cp 15
-	jr z, .updateTextSpeedXCoord
-	add 7
-.updateTextSpeedXCoord
-	ld [wOptionsTextSpeedCursorX], a ; text speed cursor X coordinate
-	jp .eraseOldMenuCursor
-.cursorInBattleAnimation
-	ld a, [wOptionsBattleAnimCursorX] ; battle animation cursor X coordinate
-	xor 1 ^ 10 ; toggle between 1 and 10
-	ld [wOptionsBattleAnimCursorX], a
-	jp .eraseOldMenuCursor
-.cursorInBattleStyle
-	ld a, [wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
-	xor 1 ^ 10 ; toggle between 1 and 10
-	ld [wOptionsBattleStyleCursorX], a
-	jp .eraseOldMenuCursor
-
-TextSpeedOptionText:
-	db   "はなしの　はやさ"
-	next "　はやい　　　　ふつう　　　　おそい@"
-
-BattleAnimationOptionText:
-	db   "せんとう　アニメーション"
-	next "　じっくり　みる　　とばして　みる@"
-
-BattleStyleOptionText:
-	db   "しあいの　ルール"
-	next "　いれかえタイプ　　かちぬきタイプ@"
-
-OptionMenuCancelText:
-	db "おわり@"
-
-; sets the options variable according to the current placement of the menu cursors in the options menu
-SetOptionsFromCursorPositions:
-	ld hl, TextSpeedOptionData
-	ld a, [wOptionsTextSpeedCursorX] ; text speed cursor X coordinate
-	ld c, a
-.loop
-	ld a, [hli]
-	cp c
-	jr z, .textSpeedMatchFound
-	inc hl
-	jr .loop
-.textSpeedMatchFound
-	ld a, [hl]
-	ld d, a
-	ld a, [wOptionsBattleAnimCursorX] ; battle animation cursor X coordinate
-	dec a
-	jr z, .battleAnimationOn
-; battleAnimationOff
-	set BIT_BATTLE_ANIMATION, d
-	jr .checkBattleStyle
-.battleAnimationOn
-	res BIT_BATTLE_ANIMATION, d
-.checkBattleStyle
-	ld a, [wOptionsBattleStyleCursorX] ; battle style cursor X coordinate
-	dec a
-	jr z, .battleStyleShift
-; battleStyleSet
-	set BIT_BATTLE_SHIFT, d
-	jr .storeOptions
-.battleStyleShift
-	res BIT_BATTLE_SHIFT, d
-.storeOptions
-	ld a, d
-	ld [wOptions], a
-	ret
-
-; reads the options variable and places menu cursors in the correct positions within the options menu
-SetCursorPositionsFromOptions:
-	ld hl, TextSpeedOptionData + 1
-	ld a, [wOptions]
-	ld c, a
-	and $3f
-	push bc
-	ld de, 2
-	call IsInArray
-	pop bc
-	dec hl
-	ld a, [hl]
-	ld [wOptionsTextSpeedCursorX], a ; text speed cursor X coordinate
-	hlcoord 0, 3
-	call .placeUnfilledRightArrow
-	sla c
-	ld a, 1 ; On
-	jr nc, .storeBattleAnimationCursorX
-	ld a, 10 ; Off
-.storeBattleAnimationCursorX
-	ld [wOptionsBattleAnimCursorX], a ; battle animation cursor X coordinate
-	hlcoord 0, 8
-	call .placeUnfilledRightArrow
-	sla c
-	ld a, 1
-	jr nc, .storeBattleStyleCursorX
-	ld a, 10
-.storeBattleStyleCursorX
-	ld [wOptionsBattleStyleCursorX], a ; battle style cursor X coordinate
-	hlcoord 0, 13
-	call .placeUnfilledRightArrow
-; cursor in front of Cancel
-	hlcoord 0, 16
-	ld a, 1
-.placeUnfilledRightArrow
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld [hl], "▷"
-	ret
-
-; table that indicates how the 3 text speed options affect frame delays
-; Format:
-; 00: X coordinate of menu cursor
-; 01: delay after printing a letter (in frames)
-TextSpeedOptionData:
-	db 15, TEXT_DELAY_SLOW
-	db  8, TEXT_DELAY_MEDIUM
-	db  1, TEXT_DELAY_FAST
-	db  8, -1 ; end (default X coordinate)
 
 CheckForPlayerNameInSRAM:
 ; Check if the player name data in SRAM has a string terminator character
@@ -696,8 +287,9 @@ CheckForPlayerNameInSRAM:
 ; in carry.
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
-	ld a, $1
+	ld a, SRAM_BANKING_MODE
 	ld [MBC1SRamBankingMode], a
+	ASSERT SRAM_BANKING_MODE == BANK("Save Data")
 	ld [MBC1SRamBank], a
 	ld b, NAME_LENGTH
 	ld hl, sPlayerName

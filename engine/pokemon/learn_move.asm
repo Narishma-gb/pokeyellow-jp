@@ -121,8 +121,7 @@ TryingToLearn:
 	ld hl, WhichMoveToForgetText
 	call PrintText
 	hlcoord 10, 8
-	ld b, 8
-	ld c, 8
+	lb bc, 8, 8
 	call TextBoxBorder
 	hlcoord 12, 10
 	ld de, wMovesString
@@ -222,11 +221,36 @@ TryingToLearnText:
 	done
 
 OneTwoAndText:
+; bugfix: In Red/Green/Blue, the SFX_SWAP sound was played in the wrong bank, which played an incorrect sound
+; Yellow has fixed this by swapping to the correct bank
 	text "１　２の　<⋯>@"
 	text_pause
 	text_asm
+	push af
+	push bc
+	push de
+	push hl
+	ld a, $1
+	ld [wMuteAudioAndPauseMusic], a
+	call DelayFrame
+	ld a, [wAudioROMBank]
+	push af
+	ld a, BANK(SFX_Swap_1)
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
+	call WaitForSoundToFinish
 	ld a, SFX_SWAP
-	call PlaySoundWaitForCurrent
+	call PlaySound
+	call WaitForSoundToFinish
+	pop af
+	ld [wAudioROMBank], a
+	ld [wAudioSavedROMBank], a
+	xor a
+	ld [wMuteAudioAndPauseMusic], a
+	pop hl
+	pop de
+	pop bc
+	pop af
 	ld hl, PoofForgotAndText
 	ret
 
@@ -234,7 +258,7 @@ PoofForgotAndText:
 	text "　ポカン！@"
 	text_pause
 	text_start
-	
+
 	para "@"
 	text_ram wLearnMoveMonName
 	text "は　@"

@@ -5,8 +5,7 @@ AskName:
 	ld a, [wIsInBattle]
 	dec a
 	hlcoord 1, 0
-	ld b, 4
-	ld c, 10
+	lb bc, 4, 10
 	call z, ClearScreenArea ; only if in wild battle
 	ld a, [wCurPartySpecies]
 	ld [wNamedObjectIndex], a
@@ -96,8 +95,7 @@ DisplayNamingScreen:
 	call LoadEDTile
 	farcall LoadMonPartySpriteGfx
 	hlcoord 0, 4
-	ld b, 11
-	ld c, 18
+	lb bc, 11, 18 
 	call TextBoxBorder
 	call PrintNamingText
 	ld a, 3

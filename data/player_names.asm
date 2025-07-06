@@ -1,11 +1,13 @@
 DefaultNamesPlayer:
 	db   "じぶんできめる"
-	next "ブルー"
-	next "ツネカズ"
-	next "ジャン@"
+	next "イエロー"
+	next "サトシ"
+	next "ジャック"
+	db   "@"
 
 DefaultNamesRival:
 	db   "じぶんできめる"
-	next "レッド"
-	next "グリーン"
-	next "ヒロシ@"
+	next "ブルー"
+	next "シゲル"
+	next "ジョン"
+	db   "@"

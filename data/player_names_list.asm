@@ -1,11 +1,11 @@
 DefaultNamesPlayerList:
 	db "じぶんできめる@"
-	db "ブルー@"
-	db "ツネカズ@"
-	db "ジャン@"
+	db "イエロー@"
+	db "サトシ@"
+	db "ジャック@"
 
 DefaultNamesRivalList:
 	db "じぶんできめる@"
-	db "レッド@"
-	db "グリーン@"
-	db "ヒロシ@"
+	db "ブルー@"
+	db "シゲル@"
+	db "ジョン@"

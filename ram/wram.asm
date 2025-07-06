@@ -910,6 +910,10 @@ wSwappedMenuItem::
 ; 2 = no fish on map
 wRodResponse::
 	db
+
+NEXTU
+wTitleScreenScene:: db
+wTitleScreenTimer:: db
 ENDU
 
 ; 0 = neither
@@ -1415,7 +1419,11 @@ wPartyMenuTypeOrMessageID::
 ; temporary storage for the number of tiles in a tileset
 wTempTilesetNumTiles:: db
 
-	ds 3
+; used by the pokemart code to save the existing value of wListScrollOffset
+; so that it can be restored when the player is done with the pokemart NPC
+wSavedListScrollOffset:: db
+
+	ds 2
 
 ; base coordinates of frame block
 wBaseCoordX:: db

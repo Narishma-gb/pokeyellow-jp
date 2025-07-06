@@ -35,10 +35,15 @@ ROM0
  	"Home"
 	"Garbage 0"
 ROMX $1
-	"rom1"
+	"bank1"
+	"Garbage 1"
 ROMX $2
+	"Sound Effect Headers 1"
+	"Music Headers 1"
+	"Sound Effects 1"
 	"Audio Engine 1"
-	"rom2"
+	"Music 1"
+	"Garbage 2"
 ROMX $3
 	"rom3"
 ROMX $4
@@ -50,6 +55,7 @@ ROMX $6
 ROMX $7
 	"rom7"
 ROMX $8
+	"Audio Engine 2"
 	"rom8"
 ROMX $9
 	"Pics 1"
@@ -158,6 +164,7 @@ ROMX $39
 ROMX $3a
 	"rom58"
 ROMX $3b
+	"Pikachu PCM"
 	"rom59"
 ROMX $3c
 	"rom60"
@@ -167,18 +174,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; 	"Garbage 0"
-; ROMX $1
-; 	"bank1"
-; 	"Garbage 1"
-; ROMX $2
-; 	"Sound Effect Headers 1"
-; 	"Music Headers 1"
-; 	"Sound Effects 1"
-; 	"Play Battle Music (Audio Engine 1)"
-; 	"Audio Engine 1"
-; 	"Music 1"
-; 	"Garbage 2"
 ; ROMX $3
 ; 	"bank3"
 ; 	"Garbage 3"
@@ -191,7 +186,7 @@ ROMX $3f
 ; ROMX $5
 ; 	"NPC Sprites 2"
 ; 	"Battle Engine 2"
-; 	"Garbage 5"	
+; 	"Garbage 5"
 ; ROMX $6
 ; 	"Maps 1"
 ; 	"Play Time"
@@ -341,6 +336,6 @@ SRAM $2
 SRAM $3
 	"Saved Boxes 2"
 HRAM
-;	"OAM DMA"
+	"OAM DMA"
 	org $ff8a
 	"HRAM"

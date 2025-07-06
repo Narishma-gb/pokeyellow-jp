@@ -22,7 +22,13 @@ UpdatePlayerSprite:
 	ld [wSpritePlayerStateData1ImageIndex], a
 	ret
 .lowerLeftTileIsMapTile
+	ld a, [wUpdateSpritesEnabled]
+	push af
+	ld a, $ff
+	ld [wUpdateSpritesEnabled], a
 	call DetectCollisionBetweenSprites
+	pop af
+	ld [wUpdateSpritesEnabled], a
 	ld h, HIGH(wSpriteStateData1)
 	ld a, [wWalkCounter]
 	and a
@@ -48,42 +54,24 @@ UpdatePlayerSprite:
 	jr z, .notMoving
 	ld a, SPRITE_FACING_RIGHT
 	jr .next
+.next
+	ld [wSpritePlayerStateData1FacingDirection], a
+	ld a, [wFontLoaded]
+	bit BIT_FONT_LOADED, a
+	jr z, .moving
 .notMoving
 ; zero the animation counters
 	xor a
 	ld [wSpritePlayerStateData1IntraAnimFrameCounter], a
 	ld [wSpritePlayerStateData1AnimFrameCounter], a
-	jr .calcImageIndex
-.next
-	ld [wSpritePlayerStateData1FacingDirection], a
-	ld a, [wFontLoaded]
-	bit BIT_FONT_LOADED, a
-	jr nz, .notMoving
+	call Func_4e32
+	jr .skipSpriteAnim
 .moving
 	ld a, [wMovementFlags]
 	bit BIT_SPINNING, a
 	jr nz, .skipSpriteAnim
-	ldh a, [hCurrentSpriteOffset]
-	add $7
-	ld l, a
-	ld a, [hl]
-	inc a
-	ld [hl], a
-	cp 4
-	jr nz, .calcImageIndex
-	xor a
-	ld [hl], a
-	inc hl
-	ld a, [hl]
-	inc a
-	and $3
-	ld [hl], a
-.calcImageIndex
-	ld a, [wSpritePlayerStateData1AnimFrameCounter]
-	ld b, a
-	ld a, [wSpritePlayerStateData1FacingDirection]
-	add b
-	ld [wSpritePlayerStateData1ImageIndex], a
+	call Func_5274
+	call Func_4e32
 .skipSpriteAnim
 ; If the player is standing on a grass tile, make the player's sprite have
 ; lower priority than the background so that it's partially obscured by the
@@ -100,15 +88,12 @@ UpdatePlayerSprite:
 	ld [wSpritePlayerStateData2GrassPriority], a
 	ret
 
-UnusedReadSpriteDataFunction:
-	push bc
-	push af
-	ldh a, [hCurrentSpriteOffset]
-	ld c, a
-	pop af
-	add c
-	ld l, a
-	pop bc
+Func_4e32:
+	ld a, [wSpritePlayerStateData1AnimFrameCounter]
+	ld b, a
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	add b
+	ld [wSpritePlayerStateData1ImageIndex], a
 	ret
 
 UpdateNPCSprite:
@@ -146,6 +131,8 @@ UpdateNPCSprite:
 	jp z, UpdateSpriteMovementDelay  ; [x#SPRITESTATEDATA1_MOVEMENTSTATUS] == 2
 	cp $3
 	jp z, UpdateSpriteInWalkingAnimation  ; [x#SPRITESTATEDATA1_MOVEMENTSTATUS] == 3
+	cp $4
+	jp z, Func_5357
 	ld a, [wWalkCounter]
 	and a
 	ret nz           ; don't do anything yet if player is currently moving
@@ -156,9 +143,9 @@ UpdateNPCSprite:
 	ld l, a
 	ld a, [hl]       ; x#SPRITESTATEDATA2_MOVEMENTBYTE1
 	inc a
-	jr z, .randomMovement  ; value STAY
+	jp z, .randomMovement  ; value STAY
 	inc a
-	jr z, .randomMovement  ; value WALK
+	jp z, .randomMovement  ; value WALK
 ; scripted movement
 	dec a
 	ld [hl], a       ; increment movement byte 1 (movement data index)
@@ -183,12 +170,18 @@ UpdateNPCSprite:
 	ret
 .next
 	cp WALK
-	jr nz, .determineDirection
+	jr nz, .asm_4ecb
 ; current NPC movement data is WALK ($fe). this seems buggy
 	ld [hl], $1     ; set movement byte 1 to $1
 	ld de, wNPCMovementDirections
 	call LoadDEPlusA ; a = [wNPCMovementDirections + $fe] (?)
-	jr .determineDirection
+.asm_4ecb
+	push af
+	call Func_5288
+	pop bc
+	ld a, b
+	jr nc, .determineDirection
+	ret
 .randomMovement
 	call GetTileSpriteStandsOn
 	call Random
@@ -263,34 +256,14 @@ ChangeFacingDirection:
 ; set carry on failure, clears carry on success
 TryWalking:
 	push hl
-	ld h, HIGH(wSpriteStateData1)
-	ldh a, [hCurrentSpriteOffset]
-	add $9
-	ld l, a
-	ld [hl], c          ; x#SPRITESTATEDATA1_FACINGDIRECTION
-	ldh a, [hCurrentSpriteOffset]
-	add $3
-	ld l, a
-	ld [hl], d          ; x#SPRITESTATEDATA1_YSTEPVECTOR
-	inc l
-	inc l
-	ld [hl], e          ; x#SPRITESTATEDATA1_XSTEPVECTOR
+	call Func_5337
 	pop hl
 	push de
 	ld c, [hl]          ; read tile to walk onto
 	call CanWalkOntoTile
 	pop de
 	ret c               ; cannot walk there (reinitialization of delay values already done)
-	ld h, HIGH(wSpriteStateData2)
-	ldh a, [hCurrentSpriteOffset]
-	add $4
-	ld l, a
-	ld a, [hl]          ; x#SPRITESTATEDATA2_MAPY
-	add d
-	ld [hli], a         ; update Y position
-	ld a, [hl]          ; x#SPRITESTATEDATA2_MAPX
-	add e
-	ld [hl], a          ; update X position
+	call Func_5349
 	ldh a, [hCurrentSpriteOffset]
 	ld l, a
 	ld [hl], $10        ; [x#SPRITESTATEDATA2_WALKANIMATIONCOUNTER] = 16
@@ -301,22 +274,7 @@ TryWalking:
 
 ; update the walking animation parameters for a sprite that is currently walking
 UpdateSpriteInWalkingAnimation:
-	ldh a, [hCurrentSpriteOffset]
-	add $7
-	ld l, a
-	ld a, [hl]                       ; x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER
-	inc a
-	ld [hl], a                       ; [x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER]++
-	cp $4
-	jr nz, .noNextAnimationFrame
-	xor a
-	ld [hl], a                       ; [x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER] = 0
-	inc l
-	ld a, [hl]                       ; x#SPRITESTATEDATA1_ANIMFRAMECOUNTER
-	inc a
-	and $3
-	ld [hl], a                       ; advance to next animation frame every 4 ticks (16 ticks total for one step)
-.noNextAnimationFrame
+	call Func_5274
 	ldh a, [hCurrentSpriteOffset]
 	add $3
 	ld l, a
@@ -594,16 +552,8 @@ CanWalkOntoTile:
 	and a
 	ret
 .notScripted
-	ld a, [wTilesetCollisionPtr]
-	ld l, a
-	ld a, [wTilesetCollisionPtr + 1]
-	ld h, a
-.tilePassableLoop
-	ld a, [hli]
-	cp $ff
-	jr z, .impassable
-	cp c
-	jr nz, .tilePassableLoop
+	call _IsTilePassable
+	jr c, .impassable
 	ld h, HIGH(wSpriteStateData2)
 	ldh a, [hCurrentSpriteOffset]
 	add $6
@@ -627,7 +577,13 @@ CanWalkOntoTile:
 	jr nc, .impassable ; don't walk off screen
 	push de
 	push bc
+	ld a, [wUpdateSpritesEnabled]
+	push af
+	ld a, $ff
+	ld [wUpdateSpritesEnabled], a
 	call DetectCollisionBetweenSprites
+	pop af
+	ld [wUpdateSpritesEnabled], a
 	pop bc
 	pop de
 	ld h, HIGH(wSpriteStateData1)
@@ -872,20 +828,235 @@ AnimScriptedNPCMovement:
 	ret
 
 AdvanceScriptedNPCAnimFrameCounter:
+	call Func_5274
+	ld h, HIGH(wSpriteStateData1)
+	ldh a, [hCurrentSpriteOffset]
+	add $8
+	ld l, a
+	ld a, [hl] ; intra-animation frame counter
+	and $3
+	ldh [hSpriteAnimFrameCounter], a
+	ret
+
+Func_5274:
 	ldh a, [hCurrentSpriteOffset]
 	add $7
 	ld l, a
-	ld a, [hl] ; intra-animation frame counter
-	inc a
-	ld [hl], a
-	cp 4
-	ret nz
-	xor a
-	ld [hl], a ; reset intra-animation frame counter
-	inc l
-	ld a, [hl] ; animation frame counter
+	ld h, HIGH(wSpriteStateData1)
+	ld a, [hl]                       ; x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER
 	inc a
 	and $3
+	ld [hl], a                       ; [x#SPRITESTATEDATA1_INTRAANIMFRAMECOUNTER]++
+	ret nz
+	inc l
+	ld a, [hl]                       ; x#SPRITESTATEDATA1_ANIMFRAMECOUNTER
+	inc a
+	and $3
+	ld [hl], a                       ; advance to next animation frame every 4 ticks (16 ticks total for one step)
+	ret
+
+Func_5288:
+; nice lookup table
+; a is supposedly [wNPCMovementDirections + $fe]
+	cp $5
+	jr z, .asm_52af
+	cp $4
+	jr z, .asm_52aa
+	cp $6
+	jr z, .asm_52b4
+	cp $7
+	jr z, .asm_52b9
+	cp $11
+	jr z, .asm_52c3
+	cp $12
+	jr z, .asm_52be
+	cp $13
+	jr z, .asm_52c8
+	cp $14
+	jr z, .asm_52cd
+	xor a
+	ret
+; set 1?
+.asm_52aa
+	call Func_531f
+	jr .asm_52e6
+.asm_52af
+	call Func_5325
+	jr .asm_52e6
+.asm_52b4
+	call Func_5331
+	jr .asm_52e6
+.asm_52b9
+	call Func_532b
+	jr .asm_52e6
+; set 2?
+.asm_52be
+	call Func_531f
+	jr .asm_52fa
+.asm_52c3
+	call Func_5325
+	jr .asm_52fa
+.asm_52c8
+	call Func_5331
+	jr .asm_52fa
+.asm_52cd
+	call Func_532b
+	jr .asm_52fa
+; set 3? (unused)
+.asm_52d2
+	call Func_531f
+	jr .asm_530b
+.asm_52d7
+	call Func_5325
+	jr .asm_530b
+.asm_52dc
+	call Func_5331
+	jr .asm_530b
+.asm_52e1
+	call Func_532b
+	jr .asm_530b
+
+.asm_52e6
+	call Func_5337
+	call Func_5349
+	ldh a, [hCurrentSpriteOffset]
+	ld l, a
+	ld [hl], $8
+	dec h
+	inc l
+	ld [hl], $4
+	call UpdateSpriteImage
+	scf
+	ret
+
+.asm_52fa
+	call Func_5337
+	ldh a, [hCurrentSpriteOffset]
+	ld l, a
+	ld [hl], $8
+	dec h
+	inc l
+	ld [hl], $3
+	call UpdateSpriteImage
+	scf
+	ret
+
+.asm_530b
+	call Func_5337
+	call Func_5349
+	ldh a, [hCurrentSpriteOffset]
+	ld l, a
+	ld [hl], $8
+	dec h
+	inc l
+	ld [hl], $3
+	call UpdateSpriteImage
+	scf
+	ret
+
+Func_531f:
+	lb de, 1, 0
+	ld c, SPRITE_FACING_DOWN
+	ret
+
+Func_5325:
+	lb de, -1, 0
+	ld c, SPRITE_FACING_UP
+	ret
+
+Func_532b:
+	lb de, 0, 1
+	ld c, SPRITE_FACING_RIGHT
+	ret
+
+Func_5331:
+	lb de, 0, -1
+	ld c, SPRITE_FACING_LEFT
+	ret
+
+Func_5337:
+	ldh a, [hCurrentSpriteOffset]
+	add $9
+	ld l, a
+	ld h, HIGH(wSpriteStateData1)
+	ld [hl], c          ; x#SPRITESTATEDATA1_FACINGDIRECTION
+	ldh a, [hCurrentSpriteOffset]
+	add $3
+	ld l, a
+	ld [hl], d          ; x#SPRITESTATEDATA1_YSTEPVECTOR
+	inc l
+	inc l
+	ld [hl], e          ; x#SPRITESTATEDATA1_XSTEPVECTOR
+	ret
+
+Func_5349:
+	ld h, HIGH(wSpriteStateData2)
+	ldh a, [hCurrentSpriteOffset]
+	add $4
+	ld l, a
+	ld a, [hl]          ; x#SPRITESTATEDATA2_MAPY
+	add d
+	ld [hli], a         ; update Y position
+	ld a, [hl]          ; x#SPRITESTATEDATA2_MAPX
+	add e
+	ld [hl], a          ; update X position
+	ret
+
+Func_5357:
+	call Func_5274
+	ldh a, [hCurrentSpriteOffset]
+	add $3
+	ld l, a
+	ld h, HIGH(wSpriteStateData1)
+	ld a, [hli]
+	add a
+	ld b, a
+	ld a, [hl]
+	add b
+	ld [hli], a
+	ld a, [hli]
+	add a
+	ld b, a
+	ld a, [hl]
+	add b
 	ld [hl], a
-	ldh [hSpriteAnimFrameCounter], a
+	ldh a, [hCurrentSpriteOffset]
+	ld l, a
+	ld h, HIGH(wSpriteStateData2)
+	dec [hl]
+	ret nz
+	ld a, $6
+	add l
+	ld l, a
+	ld a, [hl]
+	cp $fe
+	jr nc, .asm_5386
+	ldh a, [hCurrentSpriteOffset]
+	inc a
+	ld l, a
+	ld h, HIGH(wSpriteStateData1)
+	ld [hl], $1
+	ret
+.asm_5386
+	call Random
+	ldh a, [hCurrentSpriteOffset]
+	add $8
+	ld l, a
+	ld h, HIGH(wSpriteStateData2)
+	ldh a, [hRandomAdd]
+	and $7f
+	ld [hl], a
+	dec h
+	ldh a, [hCurrentSpriteOffset]
+	inc a
+	ld l, a
+	ld [hl], $2
+	inc l
+	inc l
+	xor a
+	ld b, [hl]
+	ld [hli], a
+	inc l
+	ld c, [hl]
+	ld [hl], a
 	ret

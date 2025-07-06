@@ -134,8 +134,7 @@ DisplayMoneyBox:
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
 	hlcoord 13, 1
-	ld b, 1
-	ld c, 6
+	lb bc, 1, 6
 	call ClearScreenArea
 	hlcoord 12, 1
 	ld de, CurrencyString
@@ -288,7 +287,7 @@ DisplayTwoOptionMenu:
 	pop hl
 	bit BIT_B_BUTTON, a
 	jr nz, .choseSecondMenuItem ; automatically choose the second option if B is pressed
-.pressedAButton
+;.pressedAButton
 	ld a, [wCurrentMenuItem]
 	ld [wChosenMenuItem], a
 	and a
@@ -371,8 +370,7 @@ DisplayFieldMoveMonMenu:
 
 ; no field moves
 	hlcoord 11, 11
-	ld b, 5
-	ld c, 7
+	lb bc, 5, 7
 	call TextBoxBorder
 	call UpdateSprites
 	jr .printMonMenuEntries
@@ -381,8 +379,7 @@ DisplayFieldMoveMonMenu:
 ; For each field move, move the top of the text box up 2 rows while the leaving
 ; the bottom of the text box at the bottom of the screen.
 	hlcoord 11, 11
-	ld b, 5
-	ld c, 7
+	lb bc, 5, 7
 	ld de, -SCREEN_WIDTH * 2
 .textBoxHeightLoop
 	add hl, de

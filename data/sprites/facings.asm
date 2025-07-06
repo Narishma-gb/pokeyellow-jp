@@ -1,59 +1,126 @@
 SpriteFacingAndAnimationTable:
 ; This table is used for overworld sprites $1-$9.
-	dw .StandingDown, .NormalOAM  ; facing down, walk animation frame 0
-	dw .WalkingDown,  .NormalOAM  ; facing down, walk animation frame 1
-	dw .StandingDown, .NormalOAM  ; facing down, walk animation frame 2
-	dw .WalkingDown,  .FlippedOAM ; facing down, walk animation frame 3
-	dw .StandingUp,   .NormalOAM  ; facing up, walk animation frame 0
-	dw .WalkingUp,    .NormalOAM  ; facing up, walk animation frame 1
-	dw .StandingUp,   .NormalOAM  ; facing up, walk animation frame 2
-	dw .WalkingUp,    .FlippedOAM ; facing up, walk animation frame 3
-	dw .StandingLeft, .NormalOAM  ; facing left, walk animation frame 0
-	dw .WalkingLeft,  .NormalOAM  ; facing left, walk animation frame 1
-	dw .StandingLeft, .NormalOAM  ; facing left, walk animation frame 2
-	dw .WalkingLeft,  .NormalOAM  ; facing left, walk animation frame 3
-	dw .StandingLeft, .FlippedOAM ; facing right, walk animation frame 0
-	dw .WalkingLeft,  .FlippedOAM ; facing right, walk animation frame 1
-	dw .StandingLeft, .FlippedOAM ; facing right, walk animation frame 2
-	dw .WalkingLeft,  .FlippedOAM ; facing right, walk animation frame 3
+	dw .StandingDown  ; facing down, walk animation frame 0
+	dw .WalkingDown   ; facing down, walk animation frame 1
+	dw .StandingDown  ; facing down, walk animation frame 2
+	dw .WalkingDown2  ; facing down, walk animation frame 3
+	dw .StandingUp    ; facing up, walk animation frame 0
+	dw .WalkingUp     ; facing up, walk animation frame 1
+	dw .StandingUp    ; facing up, walk animation frame 2
+	dw .WalkingUp2    ; facing up, walk animation frame 3
+	dw .StandingLeft  ; facing left, walk animation frame 0
+	dw .WalkingLeft   ; facing left, walk animation frame 1
+	dw .StandingLeft  ; facing left, walk animation frame 2
+	dw .WalkingLeft   ; facing left, walk animation frame 3
+	dw .StandingRight ; facing right, walk animation frame 0
+	dw .WalkingRight  ; facing right, walk animation frame 1
+	dw .StandingRight ; facing right, walk animation frame 2
+	dw .WalkingRight  ; facing right, walk animation frame 3
 ; The rest of this table is used for sprites $a and $b.
 ; All orientation and animation parameters lead to the same result.
 ; Used for immobile sprites like items on the ground.
-	dw .StandingDown, .NormalOAM  ; facing down, walk animation frame 0
-	dw .StandingDown, .NormalOAM  ; facing down, walk animation frame 1
-	dw .StandingDown, .NormalOAM  ; facing down, walk animation frame 2
-	dw .StandingDown, .NormalOAM  ; facing down, walk animation frame 3
-	dw .StandingDown, .NormalOAM  ; facing up, walk animation frame 0
-	dw .StandingDown, .NormalOAM  ; facing up, walk animation frame 1
-	dw .StandingDown, .NormalOAM  ; facing up, walk animation frame 2
-	dw .StandingDown, .NormalOAM  ; facing up, walk animation frame 3
-	dw .StandingDown, .NormalOAM  ; facing left, walk animation frame 0
-	dw .StandingDown, .NormalOAM  ; facing left, walk animation frame 1
-	dw .StandingDown, .NormalOAM  ; facing left, walk animation frame 2
-	dw .StandingDown, .NormalOAM  ; facing left, walk animation frame 3
-	dw .StandingDown, .NormalOAM  ; facing right, walk animation frame 0
-	dw .StandingDown, .NormalOAM  ; facing right, walk animation frame 1
-	dw .StandingDown, .NormalOAM  ; facing right, walk animation frame 2
-	dw .StandingDown, .NormalOAM  ; facing right, walk animation frame 3
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+	dw .StandingDown
+; special case
+	dw .SpecialCase ; pikachu maybe?
 
-; four tile ids compose an overworld sprite
-.StandingDown: db $00, $01, $02, $03
-.WalkingDown:  db $80, $81, $82, $83
-.StandingUp:   db $04, $05, $06, $07
-.WalkingUp:    db $84, $85, $86, $87
-.StandingLeft: db $08, $09, $0a, $0b
-.WalkingLeft:  db $88, $89, $8a, $8b
+; Tables used as a reference to transform OAM data.
 
-.NormalOAM:
-	; y, x, attributes
-	db 0, 0, $00 ; top left
-	db 0, 8, $00 ; top right
-	db 8, 0, UNDER_GRASS ; bottom left
-	db 8, 8, UNDER_GRASS | FACING_END ; bottom right
+; Format:
+;	db y, x, attributes, tile index
 
-.FlippedOAM:
-	; y, x, attributes
-	db 0, 8, OAM_HFLIP ; top left
-	db 0, 0, OAM_HFLIP ; top right
-	db 8, 8, OAM_HFLIP | UNDER_GRASS ; bottom left
-	db 8, 0, OAM_HFLIP | UNDER_GRASS | FACING_END ; bottom right
+.StandingDown:
+	db 4 ; #
+	db  0,  0, $00, 0
+	db  0,  8, $01, 0
+	db  8,  0, $02, UNDER_GRASS
+	db  8,  8, $03, UNDER_GRASS | FACING_END
+
+.WalkingDown:
+	db 4 ; #
+	db  0,  0, $80, 0
+	db  0,  8, $81, 0
+	db  8,  0, $82, UNDER_GRASS
+	db  8,  8, $83, UNDER_GRASS | FACING_END
+
+.WalkingDown2:
+	db 4 ; #
+	db  0,  8, $80, OAM_HFLIP
+	db  0,  0, $81, OAM_HFLIP
+	db  8,  8, $82, OAM_HFLIP | UNDER_GRASS
+	db  8,  0, $83, OAM_HFLIP | UNDER_GRASS | FACING_END
+
+.StandingUp:
+	db 4 ; #
+	db  0,  0, $04, 0
+	db  0,  8, $05, 0
+	db  8,  0, $06, UNDER_GRASS
+	db  8,  8, $07, UNDER_GRASS | FACING_END
+
+.WalkingUp:
+	db 4 ; #
+	db  0,  0, $84, 0
+	db  0,  8, $85, 0
+	db  8,  0, $86, UNDER_GRASS
+	db  8,  8, $87, UNDER_GRASS | FACING_END
+
+.WalkingUp2:
+	db 4 ; #
+	db  0,  8, $84, OAM_HFLIP
+	db  0,  0, $85, OAM_HFLIP
+	db  8,  8, $86, OAM_HFLIP | UNDER_GRASS
+	db  8,  0, $87, OAM_HFLIP | UNDER_GRASS | FACING_END
+
+.StandingLeft:
+	db 4 ; #
+	db  0,  0, $08, 0
+	db  0,  8, $09, 0
+	db  8,  0, $0a, UNDER_GRASS
+	db  8,  8, $0b, UNDER_GRASS | FACING_END
+
+.WalkingLeft:
+	db 4 ; #
+	db  0,  0, $88, 0
+	db  0,  8, $89, 0
+	db  8,  0, $8a, UNDER_GRASS
+	db  8,  8, $8b, UNDER_GRASS | FACING_END
+
+.StandingRight:
+	db 4 ; #
+	db  0,  8, $08, OAM_HFLIP
+	db  0,  0, $09, OAM_HFLIP
+	db  8,  8, $0a, OAM_HFLIP | UNDER_GRASS
+	db  8,  0, $0b, OAM_HFLIP | UNDER_GRASS | FACING_END
+
+.WalkingRight:
+	db 4 ; #
+	db  0,  8, $88, OAM_HFLIP
+	db  0,  0, $89, OAM_HFLIP
+	db  8,  8, $8a, OAM_HFLIP | UNDER_GRASS
+	db  8,  0, $8b, OAM_HFLIP | UNDER_GRASS | FACING_END
+
+.SpecialCase:
+	db 9 ; #
+	db -4, -4, $00, 0
+	db -4,  4, $01, 0
+	db -4, 12, $00, OAM_HFLIP
+	db  4, -4, $01, 0
+	db  4,  4, $02, 0
+	db  4, 12, $01, 0
+	db 12, -4, $00, OAM_VFLIP | UNDER_GRASS
+	db 12,  4, $01, UNDER_GRASS
+	db 12, 12, $00, OAM_VFLIP | OAM_HFLIP | UNDER_GRASS | FACING_END

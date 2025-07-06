@@ -10,6 +10,8 @@ PrepareOakSpeech:
 ; In non-debug builds, the instructions can be removed.
 	ld a, [wStatusFlags6]
 	push af
+	ld a, [wPrinterSettings]
+	push af
 	ld hl, wPlayerName
 	ld bc, wBoxDataEnd - wPlayerName
 	xor a
@@ -18,6 +20,12 @@ PrepareOakSpeech:
 	ld bc, wSpriteDataEnd - wSpriteDataStart
 	xor a
 	call FillMemory
+	xor a
+	ld [wSurfingMinigameHiScore], a
+	ld [wSurfingMinigameHiScore + 1], a
+	ld [wSurfingMinigameHiScore + 2], a
+	pop af
+	ld [wPrinterSettings], a
 	pop af
 	ld [wStatusFlags6], a
 	pop af
@@ -37,11 +45,11 @@ PrepareOakSpeech:
 	ld hl, DebugNewGameRivalName
 	ld de, wRivalName
 	ld bc, NAME_LENGTH
-	jp CopyData
+	call CopyData ; rip optimizations
+	ret
 
 OakSpeech:
-	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	call StopAllMusic
 	ld a, BANK(Music_Routes2)
 	ld c, a
 	ld a, MUSIC_ROUTES2
@@ -72,7 +80,7 @@ OakSpeech:
 	call PrintText
 	call GBFadeOutToWhite
 	call ClearScreen
-	ld a, NIDORINO
+	ld a, STARTER_PIKACHU
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	call GetMonHeader
@@ -117,13 +125,13 @@ OakSpeech:
 	ld a, SFX_SHRINK
 	call PlaySound
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	ld c, 4
 	call DelayFrames
-	ld de, RedSprite
 	ld hl, vSprites
-	lb bc, BANK(RedSprite), $0C
+	ld de, RedSprite
+	ld b, BANK(RedSprite)
+	ld c, $0C
 	call CopyVideoData
 	ld de, ShrinkPic1
 	lb bc, BANK(ShrinkPic1), $00
@@ -141,17 +149,13 @@ OakSpeech:
 	ld [wAudioSavedROMBank], a
 	ld a, 10
 	ld [wAudioFadeOutControl], a
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	pop af
-	ldh [hLoadedROMBank], a
-	ld [MBC1RomBank], a
+	call BankswitchCommon
 	ld c, 20
 	call DelayFrames
 	hlcoord 6, 5
-	ld b, 7
-	ld c, 7
+	lb bc, 7, 7
 	call ClearScreenArea
 	call LoadTextBoxTilePatterns
 	ld a, 1
@@ -159,11 +163,12 @@ OakSpeech:
 	ld c, 50
 	call DelayFrames
 	call GBFadeOutToWhite
-	jp ClearScreen
+	call ClearScreen ; rip more tail-end optimizations
+	ret
 
 OakSpeechText1:
 	text "はじめまして！"
-	line "ポケット　モンスターの　せかいへ"
+	line "ポケットモンスターの　せかいへ"
 	cont "ようこそ！"
 
 	para "わたしの　なまえは　オーキド"
@@ -173,18 +178,17 @@ OakSpeechText1:
 
 OakSpeechText2:
 	text "この　せかいには"
-	line "ポケット　モンスターと　よばれる"
+	line "ポケットモンスターと　よばれる"
 
 	para "いきもの　たちが"
 	line "いたるところに　すんでいる！@"
-; BUG: The cry played does not match the sprite displayed.
-	sound_cry_nidorina
+	sound_cry_pikachu
 	text_start
 
 	para "その　#　という　いきものを"
 	line "ひとは　ペットに　したり"
 	cont "しょうぶに　つかったり···"
-	
+
 	para "そして···"
 
 	para "わたしは　この　#の"
@@ -212,7 +216,7 @@ OakSpeechText3:
 	line "きみの　ものがたりの　はじまりだ！"
 
 	para "ゆめと　ぼうけんと！"
-	line "ポケット　モンスターの　せかいへ！"
+	line "ポケットモンスターの　せかいへ！"
 	cont "レッツ　ゴー！"
 	done
 
@@ -261,10 +265,13 @@ IntroDisplayPicCenteredOrUpperRight:
 	push bc
 	ld a, b
 	call UncompressSpriteFromDE
+	ld a, $0
+	call OpenSRAM
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
 	ld bc, $310
 	call CopyData
+	call CloseSRAM
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
 	pop bc

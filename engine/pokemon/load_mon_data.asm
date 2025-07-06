@@ -15,7 +15,7 @@ LoadMonData_::
 
 	ld a, [wWhichPokemon]
 	ld e, a
-	callfar GetMonSpecies
+	call GetMonSpecies
 
 .GetMonHeader
 	ld a, [wCurPartySpecies]
@@ -47,3 +47,22 @@ LoadMonData_::
 	ld de, wLoadedMon
 	ld bc, wPartyMon2 - wPartyMon1
 	jp CopyData
+
+; get species of mon e in list [wMonDataLocation] for LoadMonData
+GetMonSpecies:
+	ld hl, wPartySpecies
+	ld a, [wMonDataLocation]
+	and a
+	jr z, .getSpecies
+	dec a
+	jr z, .enemyParty
+	ld hl, wBoxSpecies
+	jr .getSpecies
+.enemyParty
+	ld hl, wEnemyPartySpecies
+.getSpecies
+	ld d, 0
+	add hl, de
+	ld a, [hl]
+	ld [wCurPartySpecies], a
+	ret

@@ -24,11 +24,14 @@ _UpdateSprites::
 	jr nz, .spriteLoop
 	ret
 .updateCurrentSprite
-	cp $1
-	jp nz, UpdateNonPlayerSprite
-	jp UpdatePlayerSprite
+	ldh a, [hCurrentSpriteOffset]
+	and a
+	jp z, UpdatePlayerSprite
+	cp $f0 ; pikachu
+	jp z, SpawnPikachu
+	ld a, [hl]
 
-UpdateNonPlayerSprite:
+;UpdateNonPlayerSprite:
 	dec a
 	swap a
 	ldh [hTilePlayerStandingOn], a  ; $10 * sprite#
@@ -52,11 +55,8 @@ UpdateNonPlayerSprite:
 ; The reason that 4 is added below to the coordinate is to make it align with a
 ; multiple of $10 to make comparisons easier.
 DetectCollisionBetweenSprites:
-	nop
-
 	ld h, HIGH(wSpriteStateData1)
 	ldh a, [hCurrentSpriteOffset]
-	add LOW(wSpriteStateData1)
 	ld l, a
 
 	ld a, [hl] ; a = [i#SPRITESTATEDATA1_PICTUREID] (0 if slot is unused)
@@ -271,6 +271,17 @@ DetectCollisionBetweenSprites:
 	jr nc, .next ; go to next sprite if distance is still positive after both adjustments
 
 .collision
+	ld a, l
+	and $f0 ; collision with pikachu?
+	jr nz, .asm_4cd9
+	xor a
+	ld [wd433], a
+	ldh a, [hCollidingSpriteOffset]
+	cp $f
+	jr nz, .asm_4cd9
+	call Func_4d0a
+	jr .asm_4cef
+.asm_4cd9
 	ldh a, [hCollidingSpriteTempXValue] ; a = 7 or 9 depending on sprite i's delta X
 	ld b, a
 	ldh a, [hCollidingSpriteTempYValue] ; a = 7 or 9 depending on sprite i's delta Y
@@ -296,6 +307,7 @@ DetectCollisionBetweenSprites:
 ; to indicate which sprite the collision occurred with
 	inc l
 	inc l
+.asm_4cef
 	ldh a, [hCollidingSpriteOffset]
 	ld de, SpriteCollisionBitTable
 	add a
@@ -317,6 +329,26 @@ DetectCollisionBetweenSprites:
 	inc a
 	cp $10
 	jp nz, .loop
+	ret
+
+Func_4d0a:
+	ldh a, [hCollidingSpriteTempXValue]
+	ld b, a
+	ldh a, [hCollidingSpriteTempYValue]
+	inc l
+	cp b
+	jr c, .asm_4d17
+	ld b, %1100
+	jr .asm_4d19
+.asm_4d17
+	ld b, %11
+.asm_4d19
+	ld a, c
+	and b
+	ld [wd433], a
+	ld a, c
+	inc l
+	inc l
 	ret
 
 ; takes delta X or delta Y in a
