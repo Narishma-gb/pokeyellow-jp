@@ -1,7 +1,7 @@
 PrepareTitleScreen::
-	; These debug names are already copied later in PrepareOakSpeech.
-	; Removing the unused copies below has no apparent impact.
-	; CopyDebugName can also be safely deleted afterwards.
+; These debug names are already copied later in PrepareOakSpeech.
+; Removing the unused copies below has no apparent impact.
+; CopyDebugName can also be safely deleted afterwards.
 	ld hl, DebugNewGamePlayerName
 	ld de, wPlayerName
 	call CopyDebugName
@@ -40,11 +40,6 @@ DisplayTitleScreen:
 	ld bc, 5 tiles
 	ld a, BANK(NintendoCopyrightLogoGraphics)
 	call FarCopyData
-	ld hl, NineTile
-	ld de, vTitleLogo tile $6e
-	ld bc, 1 tiles
-	ld a, BANK(NineTile)
-	call FarCopyData
 	ld hl, GameFreakLogoGraphics
 	ld de, vTitleLogo tile $65
 	ld bc, 9 tiles
@@ -53,7 +48,7 @@ DisplayTitleScreen:
 	callfar LoadYellowTitleScreenGFX
 	ld hl, vBGMap0
 	ld bc, (vBGMap1 tile $40) - vBGMap0
-	ld a, " "
+	ld a, "　"
 	call FillMemory
 	callfar TitleScreen_PlacePokemonLogo
 	call FillSpriteBuffer0WithAA
@@ -75,7 +70,6 @@ DisplayTitleScreen:
 	call GBPalNormal
 	ld a, %11100000
 	ldh [rOBP0], a
-	call UpdateCGBPal_OBP0
 
 ; make pokemon logo bounce up and down
 	ld bc, hSCY ; background scroll Y
@@ -97,14 +91,14 @@ DisplayTitleScreen:
 
 .TitleScreenPokemonLogoYScrolls:
 ; Controls the bouncing effect of the Pokemon logo on the title screen
-	db -4,16  ; y scroll amount, number of times to scroll
-	db 3,4
-	db -3,4
-	db 2,2
-	db -2,2
-	db 1,2
-	db -1,2
-	db 0      ; terminate list with 0
+	db -4, 16 ; y scroll amount, number of times to scroll
+	db  3,  4
+	db -3,  4
+	db  2,  2
+	db -2,  2
+	db  1,  2
+	db -1,  2
+	db  0 ; end
 
 .ScrollTitleScreenPokemonLogo:
 ; Scrolls the Pokemon logo on the title screen to create the bouncing effect
@@ -130,7 +124,7 @@ DisplayTitleScreen:
 	jr .titleScreenCopyrightTilesLoop
 
 .tileScreenCopyrightTiles
-	db $e0,$e1,$e2,$e3,$e1,$e2,$ee,$e5,$e6,$e7,$e8,$e9,$ea,$eb,$ec,$ed,$ff ; ©1995-1999 GAME FREAK inc.
+	db $e0, $e1, $e2, $e1, $e3, $e1, $e4, $e5, $e6, $e7, $e8, $e9, $ea, $eb, $ec, $ed, $ff ; ©'95'96'98 GAME FREAK inc.
 
 .finishedBouncingPokemonLogo
 	call LoadScreenTilesFromBuffer1
@@ -167,11 +161,7 @@ DisplayTitleScreen:
 	ldh a, [hJoyHeld]
 	cp D_UP | SELECT | B_BUTTON
 	jr z, .go_to_main_menu
-IF DEF(_DEBUG)
-	and A_BUTTON | SELECT | START
-ELSE
 	and A_BUTTON | START
-ENDC
 	jr nz, .go_to_main_menu
 	call DoTitleScreenFunction
 	jr .titleScreenLoop
@@ -197,15 +187,7 @@ ENDC
 	and D_UP | SELECT | B_BUTTON
 	cp D_UP | SELECT | B_BUTTON
 	jp z, .doClearSaveDialogue
-IF DEF(_DEBUG)
-	ld a, b
-	bit BIT_SELECT, a
-	jp z, MainMenu
-	callfar DebugMenu
-	jp hl
-ELSE
 	jp MainMenu
-ENDC
 
 .asm_42f0
 ; unreferenced
@@ -240,7 +222,6 @@ ENDC
 .doClearSaveDialogue
 	farjp DoClearSaveDialogue
 
-
 TitleScreenCopyTileMapToVRAM:
 	ldh [hAutoBGTransferDest + 1], a
 	jp Delay3
@@ -261,9 +242,9 @@ LoadCopyrightTiles:
 	jp PlaceString
 
 CopyrightTextString:
-	db   $60,$61,$62,$63,$61,$62,$7c,$7f,$65,$66,$67,$68,$69,$6a             ; ©1995-1999  Nintendo
-	next $60,$61,$62,$63,$61,$62,$7c,$7f,$6b,$6c,$6d,$6e,$6f,$70,$71,$72     ; ©1995-1999  Creatures inc.
-	next $60,$61,$62,$63,$61,$62,$7c,$7f,$73,$74,$75,$76,$77,$78,$79,$7a,$7b ; ©1995-1999  GAME FREAK inc.
+	db   $60, $61, $62, $61, $63, $61, $64, "　", $65, $66, $67, $68, $69, $6A                ; ©'95'96'98 Nintendo
+	next $60, $61, $62, $61, $63, $61, $64, "　", $6B, $6C, $6D, $6E, $6F, $70, $71, $72      ; ©'95'96'98 Creatures Inc.
+	next $60, $61, $62, $61, $63, $61, $64, "　", $73, $74, $75, $76, $77, $78, $79, $7A, $7B ; ©'95'96'98 GAME FREAK Inc.
 	db   "@"
 
 TitleScreen_PlayPikachuPCM:
@@ -282,7 +263,6 @@ DoTitleScreenFunction:
 	ld h, [hl]
 	ld l, a
 	jp hl
-
 
 .Jumptable:
 	dw .Nop
@@ -352,10 +332,10 @@ CopyDebugName:
 	jp CopyData
 
 DebugNewGamePlayerName:
-	db "NINTEN@"
+	db "ゲーフリ１@"
 
 DebugNewGameRivalName:
-	db "SONY@"
+	db "クリチャ@"
 
 IncrementResetCounter:
 	ld hl, wTitleScreenScene + 2

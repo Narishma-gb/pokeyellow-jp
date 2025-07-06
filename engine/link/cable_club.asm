@@ -57,7 +57,7 @@ CableClub_DoBattleOrTradeAgain:
 	dec b
 	jr nz, .zeroPlayerDataPatchListLoop
 	ld hl, wLinkEnemyTrainerName
-	ld bc, wTrainerHeaderPtr - wLinkEnemyTrainerName
+	ld bc, $13b ; bug? This does not reach wTrainerHeaderPtr, leaving data in the buffer
 .zeroEnemyPartyLoop
 	xor a
 	ld [hli], a
@@ -297,7 +297,7 @@ CableClub_DoBattleOrTradeAgain:
 	jr CallCurrentTradeCenterFunction
 
 PleaseWaitString:
-	db "PLEASE WAIT!@"
+	db "つうしんじゅんびちゅう！@"
 
 CallCurrentTradeCenterFunction:
 	ld hl, TradeCenterPointerTable
@@ -343,30 +343,17 @@ TradeCenter_SelectMon:
 	ld [wMenuWatchedKeys], a
 	ld a, [wEnemyPartyCount]
 	ld [wMaxMenuItem], a
-	ld a, 9
+	ld a, 3
 	ld [wTopMenuItemY], a
-	ld a, 1
+	ld a, $c
 	ld [wTopMenuItemX], a
 .enemyMonMenu_HandleInput
-	ld hl, hUILayoutFlags
-	set BIT_DOUBLE_SPACED_MENU, [hl]
 	call HandleMenuInput
-	ld hl, hUILayoutFlags
-	res BIT_DOUBLE_SPACED_MENU, [hl]
 	and a
 	jp z, .getNewInput
 	bit BIT_A_BUTTON, a
 	jr z, .enemyMonMenu_ANotPressed
 ; if A button pressed
-	ld a, [wMaxMenuItem]
-	ld c, a
-	ld a, [wCurrentMenuItem]
-	cp c
-	jr c, .displayEnemyMonStats
-	ld a, [wMaxMenuItem]
-	dec a
-	ld [wCurrentMenuItem], a
-.displayEnemyMonStats
 	ld a, INIT_ENEMYOT_LIST
 	ld [wInitListType], a
 	callfar InitList ; the list isn't used
@@ -391,6 +378,7 @@ TradeCenter_SelectMon:
 	dec a
 	cp b
 	jr nc, .playerMonMenu
+; when switching to the player mon menu, if the menu selection would be past the last player mon, select the last player mon
 	ld [wCurrentMenuItem], a
 	jr .playerMonMenu
 .enemyMonMenu_LeftNotPressed
@@ -405,19 +393,12 @@ TradeCenter_SelectMon:
 	ld [wMenuWatchedKeys], a
 	ld a, [wPartyCount]
 	ld [wMaxMenuItem], a
-	ld a, 1
+	ld a, 3
 	ld [wTopMenuItemY], a
-	ld a, 1
+	ld a, 2
 	ld [wTopMenuItemX], a
-	hlcoord 1, 1
-	lb bc, 6, 1
-	call ClearScreenArea
 .playerMonMenu_HandleInput
-	ld hl, hUILayoutFlags
-	set BIT_DOUBLE_SPACED_MENU, [hl]
 	call HandleMenuInput
-	ld hl, hUILayoutFlags
-	res BIT_DOUBLE_SPACED_MENU, [hl]
 	and a ; was anything pressed?
 	jr nz, .playerMonMenu_SomethingPressed
 	jp .getNewInput
@@ -465,14 +446,7 @@ TradeCenter_SelectMon:
 .chosePlayerMon
 	call SaveScreenTilesToBuffer1
 	call PlaceUnfilledArrowMenuCursor
-	ld a, [wMaxMenuItem]
-	ld c, a
 	ld a, [wCurrentMenuItem]
-	cp c
-	jr c, .displayStatsTradeMenu
-	ld a, [wMaxMenuItem]
-	dec a
-.displayStatsTradeMenu
 	push af
 	hlcoord 0, 14
 	lb bc, 2, 18
@@ -488,7 +462,7 @@ TradeCenter_SelectMon:
 	ld a, 16
 	ld [wTopMenuItemY], a
 .selectStatsMenuItem
-	ld a, " "
+	ld a, "　"
 	ldcoord_a 11, 16
 	ld a, D_RIGHT | B_BUTTON | A_BUTTON
 	ld [wMenuWatchedKeys], a
@@ -505,7 +479,7 @@ TradeCenter_SelectMon:
 	call LoadScreenTilesFromBuffer1
 	jp .playerMonMenu
 .selectTradeMenuItem
-	ld a, " "
+	ld a, "　"
 	ldcoord_a 1, 16
 	ld a, D_LEFT | B_BUTTON | A_BUTTON
 	ld [wMenuWatchedKeys], a
@@ -542,7 +516,7 @@ TradeCenter_SelectMon:
 	ld [wTradeCenterPointerTableIndex], a
 	jp CallCurrentTradeCenterFunction
 .statsTrade
-	db "STATS     TRADE@"
+	db "ステイタスをみる　　こうかんにだす@"
 .selectedCancelMenuItem
 	ld a, [wCurrentMenuItem]
 	ld b, a
@@ -553,7 +527,7 @@ TradeCenter_SelectMon:
 	ld l, a
 	ld a, [wMenuCursorLocation + 1]
 	ld h, a
-	ld a, " "
+	ld a, "　"
 	ld [hl], a
 .cancelMenuItem_Loop
 	ld a, "▶" ; filled arrow cursor
@@ -568,7 +542,7 @@ TradeCenter_SelectMon:
 	bit BIT_D_UP, a
 	jr z, .cancelMenuItem_JoypadLoop
 ; if Up pressed
-	ld a, " "
+	ld a, "　"
 	ldcoord_a 1, 16
 	ld a, [wPartyCount]
 	dec a
@@ -617,12 +591,12 @@ TradeCenter_DrawCancelBox:
 	jp PlaceString
 
 CancelTextString:
-	db "CANCEL@"
+	db "こうかんちゅうし@"
 
 TradeCenter_PlaceSelectedEnemyMonMenuCursor:
 	ld a, [wSerialSyncAndExchangeNybbleReceiveData]
-	hlcoord 1, 9
-	ld bc, SCREEN_WIDTH
+	hlcoord 12, 3
+	ld bc, 2 * SCREEN_WIDTH
 	call AddNTimes
 	ld [hl], "▷" ; cursor
 	ret
@@ -641,22 +615,22 @@ TradeCenter_DisplayStats:
 	jp TradeCenter_DrawCancelBox
 
 TradeCenter_DrawPartyLists:
-	hlcoord 0, 0
-	lb bc, 6, 18
+	hlcoord 0, 1
+	lb bc, 12, 8
 	call CableClub_TextBoxBorder
-	hlcoord 0, 8
-	lb bc, 6, 18
+	hlcoord 10, 1
+	lb bc, 12, 8
 	call CableClub_TextBoxBorder
-	hlcoord 5, 0
+	hlcoord 3, 1
 	ld de, wPlayerName
 	call PlaceString
-	hlcoord 5, 8
+	hlcoord 13, 1
 	ld de, wLinkEnemyTrainerName
 	call PlaceString
-	hlcoord 2, 1
+	hlcoord 3, 3
 	ld de, wPartySpecies
 	call TradeCenter_PrintPartyListNames
-	hlcoord 2, 9
+	hlcoord 13, 3
 	ld de, wEnemyPartySpecies
 	; fall through
 
@@ -679,7 +653,7 @@ TradeCenter_PrintPartyListNames:
 	pop de
 	inc de
 	pop hl
-	ld bc, 20
+	ld bc, 2 * SCREEN_WIDTH
 	add hl, bc
 	pop bc
 	inc c
@@ -882,15 +856,19 @@ TradeCenter_Trade:
 	jp CallCurrentTradeCenterFunction
 
 WillBeTradedText:
-	text_far _WillBeTradedText
-	text_end
+	text_ram wNameOfPlayerMonToBeTraded
+	text "　と　@"
+	text_ram wNameBuffer
+	text "　を"
+	line "こうかんします"
+	done
 
 TradeCompleted:
-	db "Trade completed!@"
+	db "こうかんしゅうりょう！@"
 
 TradeCanceled:
-	db   "Too bad! The trade"
-	next "was canceled!@"
+	db   "ざんねんながら"
+	next "こうかんは　キャンセルされました@"
 
 TradeCenterPointerTable:
 	dw TradeCenter_SelectMon
@@ -956,7 +934,7 @@ CableClub_TextBoxBorder:
 	push hl
 	ld a, $7b ; border left vertical line tile
 	ld [hli], a
-	ld a, " "
+	ld a, "　"
 	call CableClub_DrawHorizontalLine
 	ld [hl], $77 ; border right vertical line tile
 	pop hl

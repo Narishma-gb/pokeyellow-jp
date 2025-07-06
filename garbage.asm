@@ -5,12 +5,12 @@ SECTION "Garbage 0", ROM0
 INCBIN "garbage/garbage_0.bin"
 
 
-;SECTION "Garbage 1", ROMX
-;	db $6F, $10, $FF, $03, $FF
+SECTION "Garbage 1", ROMX
+INCBIN "garbage/garbage_1.bin"
 
 
-;SECTION "Garbage 2", ROMX
-;INCBIN "garbage/garbage_2.bin"
+SECTION "Garbage 2", ROMX
+INCBIN "garbage/garbage_2.bin"
 
 
 ;SECTION "Garbage 3", ROMX

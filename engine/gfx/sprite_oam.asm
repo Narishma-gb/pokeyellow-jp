@@ -2,7 +2,6 @@ PrepareOAMData::
 ; Determine OAM data for currently visible
 ; sprites and write it to wShadowOAM.
 ; Yellow code has been changed to use registers more efficiently
-; as well as tweaking the code to show cgb palettes
 
 	ld a, [wUpdateSpritesEnabled]
 	dec a
@@ -58,6 +57,7 @@ PrepareOAMData::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
 ; get sprite priority
 	push de
 	inc d
@@ -68,7 +68,6 @@ PrepareOAMData::
 	and $80
 	ldh [hSpritePriority], a ; temp store sprite priority
 	pop de
-
 
 	call GetSpriteScreenXY
 
@@ -85,30 +84,24 @@ PrepareOAMData::
 	ld e, a
 	ld d, HIGH(wShadowOAM)
 
-.tileLoop
+;.tileLoop
 	ld a, [hli]
 	ld c, a
 .loop
-	ldh a, [hSpriteScreenY]   ; temp for sprite Y position
+	ldh a, [hSpriteScreenY]  ; temp for sprite Y position
 	add $10                  ; Y=16 is top of screen (Y=0 is invisible)
 	add [hl]                 ; add Y offset from table
 	ld [de], a               ; write new sprite OAM Y position
 	inc hl
 	inc e
-	ldh a, [hSpriteScreenX]   ; temp for sprite X position
+	ldh a, [hSpriteScreenX]  ; temp for sprite X position
 	add $8                   ; X=8 is left of screen (X=0 is invisible)
 	add [hl]                 ; add X offset from table
-	ld [de], a
+	ld [de], a               ; write new sprite OAM X position
 	inc hl
 	inc e
 	ld a, [wSavedSpriteImageIndex]
 	add [hl]
-	cp $80
-	jr c, .asm_4a1c
-	ld b, a
-	ldh a, [hPikachuSpriteVRAMOffset]
-	add b
-.asm_4a1c
 	ld [de], a ; tile id
 	inc hl
 	inc e
@@ -119,10 +112,6 @@ PrepareOAMData::
 	or [hl]
 .skipPriority
 	and $f0
-	bit OAM_OBP_NUM, a
-	jr z, .spriteusesOBP0
-	or OAM_HIGH_PALS
-.spriteusesOBP0
 	ld [de], a
 	inc hl
 	inc e
@@ -131,13 +120,14 @@ PrepareOAMData::
 
 	ld a, e
 	ldh [hOAMBufferOffset], a
+
 .nextSprite
 	ldh a, [hSpriteOffset2]
 	add $10
 	cp LOW($100)
 	jp nz, .spriteLoop
 
-	; Clear unused OAM.
+; Clear unused OAM.
 .asm_4a41
 	ld a, [wMovementFlags]
 	bit BIT_LEDGE_OR_FISHING, a
@@ -192,11 +182,11 @@ Func_4a7b:
 	swap a                   ; high nybble determines sprite used (0 is always player sprite, next are some npcs)
 	and $f
 
-	; Sprites $a and $b have one face (and therefore 4 tiles instead of 12).
-	; As a result, sprite $b's tile offset is less than normal.
+; Sprites $a and $b have one face (and therefore 4 tiles instead of 12).
+; As a result, sprite $b's tile offset is less than normal.
 	cp $b
 	jr nz, .notFourTileSprite
-	ld a, $a * 12 + 4 ; $7c
+	ld a, $a * 12 + 4
 	jr .done
 
 .notFourTileSprite

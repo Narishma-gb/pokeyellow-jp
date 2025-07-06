@@ -1,13 +1,13 @@
 DefaultNamesPlayer:
-	db   "NEW NAME"
-	next "YELLOW"
-	next "ASH"
-	next "JACK"
+	db   "じぶんできめる"
+	next "イエロー"
+	next "サトシ"
+	next "ジャック"
 	db   "@"
 
 DefaultNamesRival:
-	db   "NEW NAME"
-	next "BLUE"
-	next "GARY"
-	next "JOHN"
+	db   "じぶんできめる"
+	next "ブルー"
+	next "シゲル"
+	next "ジョン"
 	db   "@"

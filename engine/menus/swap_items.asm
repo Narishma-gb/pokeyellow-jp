@@ -76,7 +76,7 @@ HandleItemListSwapping::
 	ld a, [hli]
 	cp b
 	jr z, .swapSameItemType
-.swapDifferentItems
+; swapDifferentItems
 	ldh [hSwapItemID], a ; save second item ID
 	ld a, [hld]
 	ldh [hSwapItemQuantity], a ; save second item quantity

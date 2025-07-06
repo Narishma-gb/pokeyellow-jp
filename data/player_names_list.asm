@@ -1,11 +1,11 @@
 DefaultNamesPlayerList:
-	db "NEW NAME@"
-	db "YELLOW@"
-	db "ASH@"
-	db "JACK@"
+	db "じぶんできめる@"
+	db "イエロー@"
+	db "サトシ@"
+	db "ジャック@"
 
 DefaultNamesRivalList:
-	db "NEW NAME@"
-	db "BLUE@"
-	db "GARY@"
-	db "JOHN@"
+	db "じぶんできめる@"
+	db "ブルー@"
+	db "シゲル@"
+	db "ジョン@"

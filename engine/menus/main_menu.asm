@@ -123,7 +123,7 @@ MainMenu:
 	jp SpecialEnterMap
 
 InitOptions:
-	ld a, 1 << BIT_FAST_TEXT_DELAY
+	ld a, TEXT_DELAY_FAST
 	ld [wLetterPrintingDelayFlags], a
 	ld a, TEXT_DELAY_MEDIUM
 	ld [wOptions], a
@@ -141,19 +141,21 @@ Func_5cc1:
 	ret
 
 NotEnoughMemoryText:
-	text_far _NotEnoughMemoryText
-	text_end
+	text "イエローバージョンの"
+	line "メモリガ　たりません"
+	done
 
 StartNewGame:
 	ld hl, wStatusFlags6
-	; Ensure debug mode is not used when starting a regular new game.
-	; Debug mode persists in saved games for both debug and non-debug builds, and is
-	; only reset here by the main menu.
+; Ensure debug mode is not used when starting a regular new game.
+; Debug mode persists in saved games for both debug and non-debug builds, and is
+; only reset here by the main menu.
 	res BIT_DEBUG_MODE, [hl]
 	; fallthrough
+
 StartNewGameDebug:
 	call OakSpeech
-	ld a, $8
+	ld a, PLAYER_DIR_UP
 	ld [wPlayerMovingDirection], a
 	ld c, 20
 	call DelayFrames
@@ -177,31 +179,37 @@ SpecialEnterMap::
 	jp EnterMap
 
 ContinueText:
-	db "CONTINUE"
+	db   "つづきからはじめる"
 	next ""
 	; fallthrough
 
 NewGameText:
-	db   "NEW GAME"
-	next "OPTION@"
+	db   "さいしょからはじめる"
+	next "せっていを　かえる@"
+
+CableClubOptionsText: ; unreferenced
+	db   "トレードセンター"
+	next "コロシアム"
+	next "コロシアム２"
+	next "やめる@"
 
 DisplayContinueGameInfo:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 4, 7
-	lb bc, 8, 14
+	lb bc, 8, 13
 	call TextBoxBorder
 	hlcoord 5, 9
 	ld de, SaveScreenInfoText
 	call PlaceString
-	hlcoord 12, 9
+	hlcoord 13, 9
 	ld de, wPlayerName
 	call PlaceString
-	hlcoord 17, 11
+	hlcoord 14, 11
 	call PrintNumBadges
-	hlcoord 16, 13
+	hlcoord 13, 13
 	call PrintNumOwnedMons
-	hlcoord 13, 15
+	hlcoord 12, 15
 	call PrintPlayTime
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
@@ -211,24 +219,24 @@ DisplayContinueGameInfo:
 PrintSaveScreenText:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	hlcoord 4, 0
-	lb bc, 8, 14
+	hlcoord 5, 0
+	lb bc, 8, 13
 	call TextBoxBorder
 	call LoadTextBoxTilePatterns
 	call UpdateSprites
-	hlcoord 5, 2
+	hlcoord 6, 2
 	ld de, SaveScreenInfoText
 	call PlaceString
-	hlcoord 12, 2
+	hlcoord 13, 2
 	ld de, wPlayerName
 	call PlaceString
-	hlcoord 17, 4
+	hlcoord 15, 4
 	call PrintNumBadges
-	hlcoord 16, 6
+	hlcoord 14, 6
 	call PrintNumOwnedMons
 	hlcoord 13, 8
 	call PrintPlayTime
-	ld a, $1
+	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	ld c, 30
 	jp DelayFrames
@@ -236,7 +244,7 @@ PrintSaveScreenText:
 PrintNumBadges:
 	push hl
 	ld hl, wObtainedBadges
-	ld b, $1
+	ld b, 1
 	call CountSetBits
 	pop hl
 	ld de, wNumSetBits
@@ -257,23 +265,26 @@ PrintPlayTime:
 	ld de, wPlayTimeHours
 	lb bc, 1, 3
 	call PrintNumber
-	ld [hl], $6d
+	ld [hl], ":"
 	inc hl
 	ld de, wPlayTimeMinutes
 	lb bc, LEADING_ZEROES | 1, 2
 	jp PrintNumber
 
 SaveScreenInfoText:
-	db   "PLAYER"
-	next "BADGES    "
-	next "#DEX    "
-	next "TIME@"
+	db   "しゅじんこう"
+	next "もっているバッジ　　　　こ"
+	next "#ずかん　　　　ひき"
+	next "プレイじかん@"
 
 DisplayOptionMenu:
 	callfar DisplayOptionMenu_
 	ret
 
 CheckForPlayerNameInSRAM:
+; Check if the player name data in SRAM has a string terminator character
+; (indicating that a name may have been saved there) and return whether it does
+; in carry.
 	ld a, SRAM_ENABLE
 	ld [MBC1SRamEnable], a
 	ld a, SRAM_BANKING_MODE
@@ -288,6 +299,7 @@ CheckForPlayerNameInSRAM:
 	jr z, .found
 	dec b
 	jr nz, .loop
+; not found
 	xor a
 	ld [MBC1SRamEnable], a
 	ld [MBC1SRamBankingMode], a

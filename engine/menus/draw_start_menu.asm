@@ -2,19 +2,19 @@
 DrawStartMenu::
 	CheckEvent EVENT_GOT_POKEDEX
 ; menu with pokedex
-	hlcoord 10, 0
-	lb bc, 14, 8
+	hlcoord 12, 0
+	lb bc, 14, 6
 	jr nz, .drawTextBoxBorder
 ; shorter menu if the player doesn't have the pokedex
-	hlcoord 10, 0
-	lb bc, 12, 8
+	hlcoord 12, 0
+	lb bc, 12, 6
 .drawTextBoxBorder
 	call TextBoxBorder
 	ld a, D_DOWN | D_UP | START | B_BUTTON | A_BUTTON
 	ld [wMenuWatchedKeys], a
 	ld a, $02
 	ld [wTopMenuItemY], a ; Y position of first menu choice
-	ld a, $0b
+	ld a, $0d
 	ld [wTopMenuItemX], a ; X position of first menu choice
 	ld a, [wBattleAndStartSavedMenuItem] ; remembered menu selection from last time
 	ld [wCurrentMenuItem], a
@@ -23,7 +23,7 @@ DrawStartMenu::
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
-	hlcoord 12, 2
+	hlcoord 14, 2
 	CheckEvent EVENT_GOT_POKEDEX
 ; case for not having pokedex
 	ld a, $06
@@ -58,25 +58,25 @@ DrawStartMenu::
 	ret
 
 StartMenuPokedexText:
-	db "POKéDEX@"
+	db "ずかん@"
 
 StartMenuPokemonText:
-	db "#MON@"
+	db "#@"
 
 StartMenuItemText:
-	db "ITEM@"
+	db "どうぐ@"
 
 StartMenuSaveText:
-	db "SAVE@"
+	db "レポート@"
 
 StartMenuResetText:
-	db "RESET@"
+	db "リセット@"
 
 StartMenuExitText:
-	db "EXIT@"
+	db "とじる@"
 
 StartMenuOptionText:
-	db "OPTION@"
+	db "せってい@"
 
 PrintStartMenuItem:
 	push hl

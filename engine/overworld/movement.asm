@@ -55,7 +55,7 @@ UpdatePlayerSprite:
 	ld a, SPRITE_FACING_RIGHT
 	jr .next
 .next
-	ld [wSpritePlayerStateData1FacingDirection], a ; facing direction
+	ld [wSpritePlayerStateData1FacingDirection], a
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
 	jr z, .moving
@@ -125,7 +125,7 @@ UpdateNPCSprite:
 	ld b, a
 	ld a, [wFontLoaded]
 	bit BIT_FONT_LOADED, a
-	jp nz, notYetMoving
+	jp nz, NotYetMoving
 	ld a, b
 	cp $2
 	jp z, UpdateSpriteMovementDelay  ; [x#SPRITESTATEDATA1_MOVEMENTSTATUS] == 2
@@ -203,7 +203,7 @@ UpdateNPCSprite:
 	cp LEFT_RIGHT
 	jr z, .moveLeft
 .moveDown
-	ld de, 2*SCREEN_WIDTH
+	ld de, 2 * SCREEN_WIDTH
 	add hl, de         ; move tile pointer two rows down
 	lb de, 1, 0
 	lb bc, 4, SPRITE_FACING_DOWN
@@ -215,7 +215,7 @@ UpdateNPCSprite:
 	cp LEFT_RIGHT
 	jr z, .moveRight
 .moveUp
-	ld de, -2*SCREEN_WIDTH
+	ld de, -2 * SCREEN_WIDTH
 	add hl, de         ; move tile pointer two rows up
 	lb de, -1, 0
 	lb bc, 8, SPRITE_FACING_UP
@@ -259,7 +259,7 @@ TryWalking:
 	call Func_5337
 	pop hl
 	push de
-	ld c, [hl]
+	ld c, [hl]          ; read tile to walk onto
 	call CanWalkOntoTile
 	pop de
 	ret c               ; cannot walk there (reinitialization of delay values already done)
@@ -347,14 +347,15 @@ UpdateSpriteMovementDelay:
 	jr .moving
 .tickMoveCounter
 	dec [hl]                ; x#SPRITESTATEDATA2_MOVEMENTDELAY
-	jr nz, notYetMoving
+	jr nz, NotYetMoving
 .moving
 	dec h
 	ldh a, [hCurrentSpriteOffset]
 	inc a
 	ld l, a
 	ld [hl], $1             ; [x#SPRITESTATEDATA1_MOVEMENTSTATUS] = 1 (mark as ready to move)
-notYetMoving:
+	; fall through
+NotYetMoving:
 	ld h, HIGH(wSpriteStateData1)
 	ldh a, [hCurrentSpriteOffset]
 	add SPRITESTATEDATA1_ANIMFRAMECOUNTER
@@ -369,7 +370,7 @@ MakeNPCFacePlayer:
 ; disabled. This is only done when rubbing the S.S. Anne captain's back.
 	ld a, [wStatusFlags3]
 	bit BIT_NO_NPC_FACE_PLAYER, a
-	jr nz, notYetMoving
+	jr nz, NotYetMoving
 	res BIT_FACE_PLAYER, [hl]
 	ld a, [wPlayerDirection]
 	bit PLAYER_DIR_BIT_UP, a
@@ -393,7 +394,7 @@ MakeNPCFacePlayer:
 	add $9
 	ld l, a
 	ld [hl], c              ; [x#SPRITESTATEDATA1_FACINGDIRECTION]: set facing direction
-	jr notYetMoving
+	jr NotYetMoving
 
 InitializeSpriteStatus:
 	ld [hl], $1   ; [x#SPRITESTATEDATA1_MOVEMENTSTATUS] = ready
@@ -406,7 +407,6 @@ InitializeSpriteStatus:
 	ld a, $8
 	ld [hli], a   ; [x#SPRITESTATEDATA2_YDISPLACEMENT] = 8
 	ld [hl], a    ; [x#SPRITESTATEDATA2_XDISPLACEMENT] = 8
-	call InitializeSpriteScreenPosition ; could have done fallthrough here
 	ret
 
 ; calculates the sprite's screen position from its map position and the player position
@@ -419,7 +419,7 @@ InitializeSpriteScreenPosition:
 	ld b, a
 	ld a, [hl]      ; x#SPRITESTATEDATA2_MAPY
 	sub b           ; relative to player position
-	call Func_5033
+	swap a          ; * 16
 	sub $4          ; - 4
 	dec h
 	ld [hli], a     ; [x#SPRITESTATEDATA1_YPIXELS]
@@ -428,21 +428,9 @@ InitializeSpriteScreenPosition:
 	ld b, a
 	ld a, [hli]     ; x#SPRITESTATEDATA2_MAPX
 	sub b           ; relative to player position
-	call Func_5033
+	swap a          ; * 16
 	dec h
 	ld [hl], a      ; [x#SPRITESTATEDATA1_XPIXELS]
-	ret
-
-Func_5033:
-	jr nc, .asm_503c
-	cpl
-	inc a
-	swap a
-	cpl
-	inc a
-	ret
-.asm_503c
-	swap a
 	ret
 
 ; tests if sprite is off screen or otherwise unable to do anything
@@ -618,9 +606,8 @@ CanWalkOntoTile:
 	; stuck whenever they walked upwards 5 steps
 	; on the other hand, the amount a sprite can walk out to the
 	; right of bottom is not limited (until the counter overflows)
-	; this was fixed in Yellow
 	cp $5
-	;jr c, .impassable  ; if [x#SPRITESTATEDATA2_YDISPLACEMENT]+d < 5, don't go
+	jr c, .impassable  ; if [x#SPRITESTATEDATA2_YDISPLACEMENT]+d < 5, don't go
 	jr .checkHorizontal
 .upwards
 	sub $1
@@ -631,7 +618,8 @@ CanWalkOntoTile:
 	bit 7, e           ; check if going left (e == -1)
 	jr nz, .left
 	add e
-	cp $5              ; compare, but no conditional jump like in the vertical check above (bug?)
+	cp $5              ; same behaviour as above, 5 steps left
+	jr c, .impassable  ; if [x#SPRITESTATEDATA2_XDISPLACEMENT]+e < 5, don't go
 	jr .passable
 .left
 	sub $1
@@ -674,7 +662,7 @@ GetTileSpriteStandsOn:
 	ld l, a
 	ld a, [hli]     ; x#SPRITESTATEDATA1_YPIXELS
 	add $4          ; align to 2*2 tile blocks (Y position is always off 4 pixels to the top)
-	and $f8         ; in case object is currently moving (XXX why changed to $f8?)
+	and $f0         ; in case object is currently moving
 	srl a           ; screen Y tile * 4
 	ld c, a
 	ld b, $0
