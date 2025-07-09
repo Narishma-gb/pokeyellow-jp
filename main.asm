@@ -35,40 +35,36 @@ INCLUDE "engine/pokemon/remove_mon.asm"
 INCLUDE "engine/events/display_pokedex.asm"
 
 
-;SECTION "bank3", ROMX
+SECTION "bank3", ROMX
 
-;INCLUDE "engine/joypad.asm"
-;INCLUDE "data/maps/songs.asm"
-;INCLUDE "data/maps/map_header_banks.asm"
-;INCLUDE "engine/overworld/clear_variables.asm"
-;INCLUDE "engine/overworld/player_state.asm"
-;INCLUDE "engine/events/poison.asm"
-;INCLUDE "engine/overworld/tilesets.asm"
-;INCLUDE "engine/overworld/daycare_exp.asm"
-;INCLUDE "data/maps/hide_show_data.asm"
-;INCLUDE "engine/overworld/field_move_messages.asm"
-;INCLUDE "engine/items/inventory.asm"
-;INCLUDE "engine/overworld/wild_mons.asm"
-;INCLUDE "engine/items/item_effects.asm"
-;INCLUDE "engine/menus/draw_badges.asm"
-;INCLUDE "engine/overworld/update_map.asm"
-;INCLUDE "engine/overworld/cut.asm"
-;INCLUDE "engine/overworld/missable_objects.asm"
-;INCLUDE "engine/overworld/push_boulder.asm"
-;INCLUDE "engine/pokemon/add_mon.asm"
-;INCLUDE "engine/flag_action.asm"
-;INCLUDE "engine/events/heal_party.asm"
-;INCLUDE "engine/math/bcd.asm"
-;INCLUDE "engine/movie/oak_speech/init_player_data.asm"
-;INCLUDE "engine/items/get_bag_item_quantity.asm"
-;INCLUDE "engine/overworld/pathfinding.asm"
-;INCLUDE "engine/gfx/hp_bar.asm"
-;INCLUDE "engine/events/hidden_objects/bookshelves.asm"
-;INCLUDE "engine/events/hidden_objects/indigo_plateau_statues.asm"
-;INCLUDE "engine/events/hidden_objects/book_or_sculpture.asm"
-;INCLUDE "engine/events/hidden_objects/elevator.asm"
-;INCLUDE "engine/events/hidden_objects/town_map.asm"
-;INCLUDE "engine/events/hidden_objects/pokemon_stuff.asm"
+INCLUDE "engine/joypad.asm"
+INCLUDE "engine/overworld/clear_variables.asm"
+INCLUDE "engine/overworld/player_state.asm"
+INCLUDE "engine/events/poison.asm"
+INCLUDE "engine/overworld/tilesets.asm"
+INCLUDE "engine/overworld/daycare_exp.asm"
+INCLUDE "data/maps/hide_show_data.asm"
+INCLUDE "engine/overworld/wild_mons.asm"
+INCLUDE "engine/items/item_effects.asm"
+INCLUDE "engine/menus/draw_badges.asm"
+INCLUDE "engine/overworld/update_map.asm"
+INCLUDE "engine/overworld/cut.asm"
+INCLUDE "engine/overworld/missable_objects.asm"
+INCLUDE "engine/overworld/push_boulder.asm"
+INCLUDE "engine/pokemon/add_mon.asm"
+INCLUDE "engine/flag_action.asm"
+INCLUDE "engine/events/heal_party.asm"
+INCLUDE "engine/math/bcd.asm"
+INCLUDE "engine/movie/oak_speech/init_player_data.asm"
+INCLUDE "engine/items/get_bag_item_quantity.asm"
+INCLUDE "engine/overworld/pathfinding.asm"
+INCLUDE "engine/gfx/hp_bar.asm"
+INCLUDE "engine/events/hidden_objects/bookshelves.asm"
+INCLUDE "engine/events/hidden_objects/indigo_plateau_statues.asm"
+INCLUDE "engine/events/hidden_objects/book_or_sculpture.asm"
+INCLUDE "engine/events/hidden_objects/elevator.asm"
+INCLUDE "engine/events/hidden_objects/town_map.asm"
+INCLUDE "engine/events/hidden_objects/pokemon_stuff.asm"
 
 
 SECTION "Pikachu PCM", ROMX
@@ -312,9 +308,9 @@ INCLUDE "engine/pikachu/pikachu_pcm.asm"
 ;INCLUDE "engine/events/hidden_objects/pokecenter_pc.asm"
 
 
-;SECTION "Version GFX", ROMX
+SECTION "Version Graphics", ROMX
 
-;INCLUDE "gfx/version.asm"
+INCLUDE "gfx/version.asm"
 
 
 ;SECTION "Battle Engine 11", ROMX

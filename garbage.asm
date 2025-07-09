@@ -13,8 +13,8 @@ SECTION "Garbage 2", ROMX
 INCBIN "garbage/garbage_2.bin"
 
 
-;SECTION "Garbage 3", ROMX
-;INCBIN "garbage/garbage_3.bin"
+SECTION "Garbage 3", ROMX
+INCBIN "garbage/garbage_3.bin"
 
 
 ;SECTION "Garbage 4", ROMX
@@ -97,12 +97,8 @@ INCBIN "garbage/garbage_2.bin"
 ;INCBIN "garbage/garbage_24.bin"
 
 
-;SECTION "Garbage 25", ROMX
-;INCBIN "garbage/garbage_25.bin"
-
-
-;SECTION "Garbage 26", ROMX
-;INCBIN "garbage/garbage_26.bin"
+SECTION "Garbage 26", ROMX
+INCBIN "garbage/garbage_26.bin"
 
 
 ;SECTION "Garbage 28", ROMX

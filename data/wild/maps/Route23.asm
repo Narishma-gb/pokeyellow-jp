@@ -1,15 +1,15 @@
 Route23WildMons:
 	def_grass_wildmons 10 ; encounter rate
-	db 26, SANDSHREW
-	db 33, DITTO
-	db 26, SPEAROW
-	db 38, FEAROW
-	db 38, DITTO
-	db 38, FEAROW
-	db 41, SANDSLASH
-	db 43, DITTO
-	db 41, FEAROW
-	db 43, FEAROW
+	db 41, NIDORINO
+	db 41, NIDORINA
+	db 36, MANKEY
+	db 44, NIDORINO
+	db 44, NIDORINA
+	db 40, FEAROW
+	db 41, MANKEY
+	db 45, FEAROW
+	db 41, PRIMEAPE
+	db 46, PRIMEAPE
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

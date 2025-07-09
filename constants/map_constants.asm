@@ -82,7 +82,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const MT_MOON_B1F,                   14, 14 ; $3C
 	map_const MT_MOON_B2F,                   20, 18 ; $3D
 	map_const CERULEAN_TRASHED_HOUSE,         4,  4 ; $3E
-	map_const CERULEAN_TRADE_HOUSE,           4,  4 ; $3F
+	map_const CERULEAN_MELANIES_HOUSE,        4,  4 ; $3F
 	map_const CERULEAN_POKECENTER,            7,  4 ; $40
 	map_const CERULEAN_GYM,                   5,  7 ; $41
 	map_const BIKE_SHOP,                      4,  4 ; $42
@@ -267,6 +267,7 @@ DEF FIRST_INDOOR_MAP EQU const_value
 	map_const LORELEIS_ROOM,                  5,  6 ; $F5
 	map_const BRUNOS_ROOM,                    5,  6 ; $F6
 	map_const AGATHAS_ROOM,                   5,  6 ; $F7
+	map_const SUMMER_BEACH_HOUSE,             7,  4 ; $F8
 DEF NUM_MAPS EQU const_value
 
 ; Indoor maps, such as houses, use this as the Map ID in their exit warps

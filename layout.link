@@ -45,7 +45,8 @@ ROMX $2
 	"Music 1"
 	"Garbage 2"
 ROMX $3
-	"rom3"
+	"bank3"
+	"Garbage 3"
 ROMX $4
 	"rom4"
 ROMX $5
@@ -96,11 +97,13 @@ ROMX $17
 ROMX $18
 	"rom24"
 ROMX $19
-	"rom25"
+	"Tilesets 1"
 ROMX $1a
-	"rom26"
+	"Version Graphics"
+	"Tilesets 2"
+	"Garbage 26"
 ROMX $1b
-	"rom27"
+	"Tilesets 3"
 ROMX $1c
 	"rom28"
 ROMX $1d
@@ -167,6 +170,7 @@ ROMX $3b
 	"Pikachu PCM"
 	"rom59"
 ROMX $3c
+	"Tilesets 4"
 	"rom60"
 ROMX $3d
 	"rom61"
@@ -174,9 +178,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $3
-; 	"bank3"
-; 	"Garbage 3"
 ; ROMX $4
 ; 	"Move Names"
 ; 	"NPC Sprites 1"
@@ -281,16 +282,6 @@ ROMX $3f
 ; 	"Maps 18"
 ; 	"Hidden Objects 4"
 ; 	"Garbage 24"
-; ROMX $19
-; 	"Tilesets 1"
-; 	"Garbage 25"
-; ROMX $1A
-; 	"Battle Engine 11"
-; 	"Version GFX"
-; 	"Tilesets 2"
-; 	"Garbage 26"
-; ROMX $1B
-; 	"Tilesets 3"
 ; ROMX $1C
 ; 	"bank1C"
 ; 	"Garbage 28"

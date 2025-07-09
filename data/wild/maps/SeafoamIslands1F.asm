@@ -1,15 +1,15 @@
 SeafoamIslands1FWildMons:
 	def_grass_wildmons 15 ; encounter rate
-	db 30, SEEL
-	db 30, HORSEA
-	db 30, STARYU
-	db 30, KRABBY
-	db 28, KRABBY
-	db 21, ZUBAT
-	db 29, GOLBAT
+	db 18, ZUBAT
+	db 25, KRABBY
+	db 27, KRABBY
+	db 27, ZUBAT
+	db 36, ZUBAT
 	db 28, SLOWPOKE
-	db 28, STARYU
-	db 38, SLOWBRO
+	db 30, SLOWPOKE
+	db  9, ZUBAT
+	db 27, GOLBAT
+	db 36, GOLBAT
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate

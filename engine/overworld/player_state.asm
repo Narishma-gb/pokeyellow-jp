@@ -70,7 +70,8 @@ CheckForceBikeOrSurf::
 	ld a, $1
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
-	jp ForceBikeOrSurf
+	call ForceBikeOrSurf
+	ret
 .incorrectMap
 	inc hl
 .incorrectY
@@ -80,7 +81,8 @@ CheckForceBikeOrSurf::
 	ld a, $2
 	ld [wWalkBikeSurfState], a
 	ld [wWalkBikeSurfStateCopy], a
-	jp ForceBikeOrSurf
+	call ForceBikeOrSurf
+	ret
 
 INCLUDE "data/maps/force_bike_surf.asm"
 
@@ -224,8 +226,7 @@ PrintSafariZoneSteps::
 	cp CERULEAN_CAVE_2F
 	ret nc
 	hlcoord 0, 0
-	ld b, 3
-	ld c, 7
+	lb bc, 3, 7
 	call TextBoxBorder
 	hlcoord 1, 1
 	ld de, wSafariSteps
@@ -345,16 +346,8 @@ GetTileTwoStepsInFrontOfPlayer:
 
 CheckForCollisionWhenPushingBoulder:
 	call GetTileTwoStepsInFrontOfPlayer
-	ld hl, wTilesetCollisionPtr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-.loop
-	ld a, [hli]
-	cp $ff
-	jr z, .done ; if the tile two steps ahead is not passable
-	cp c
-	jr nz, .loop
+	call IsTilePassable
+	jr c, .done
 	ld hl, TilePairCollisionsLand
 	call CheckForTilePairCollisions2
 	ld a, $ff

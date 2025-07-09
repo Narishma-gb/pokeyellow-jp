@@ -170,6 +170,12 @@ _AddPartyMon::
 	inc de
 	ld a, [hli]       ; catch rate (held item in gen 2)
 	ld [de], a
+	ld a, [wCurPartySpecies]
+	cp KADABRA
+	jr nz, .notKadabra
+	ld a, TWISTEDSPOON_GSC
+	ld [de], a
+.notKadabra
 	ld hl, wMonHMoves
 	ld a, [hli]
 	inc de

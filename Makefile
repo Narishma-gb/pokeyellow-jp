@@ -10,13 +10,14 @@ rom_obj := \
 	garbage.o \
 	home.o \
 	wip.o \
-	ram.o
+	ram.o \
+	gfx/tilesets.o
 #	main.o \
 #	maps.o \
 #	ram.o \
 #	gfx/pics.o \
 #	gfx/sprites.o \
-#	gfx/tilesets.o
+
 
 pokeyellow_obj      := $(rom_obj:.o=_yellow.o)
 pokeyellow11_obj    := $(rom_obj:.o=_yellow11.o)
@@ -150,12 +151,6 @@ pokeyellow13_vc_opt = -sv -n 3 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEM
 
 gfx/battle/move_anim_0.2bpp: tools/gfx += --trim-whitespace
 gfx/battle/move_anim_1.2bpp: tools/gfx += --trim-whitespace
-
-gfx/intro/blue_jigglypuff_1.2bpp: rgbgfx += -Z
-gfx/intro/blue_jigglypuff_2.2bpp: rgbgfx += -Z
-gfx/intro/blue_jigglypuff_3.2bpp: rgbgfx += -Z
-gfx/intro/gengar.2bpp: rgbgfx += -Z
-gfx/intro/gengar.2bpp: tools/gfx += --remove-duplicates --preserve=0x19,0x76
 
 gfx/credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 

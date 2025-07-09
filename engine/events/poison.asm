@@ -3,13 +3,20 @@ ApplyOutOfBattlePoisonDamage:
 	ASSERT BIT_SCRIPTED_MOVEMENT_STATE == 7
 	add a ; overflows scripted movement state bit into carry flag
 	jp c, .noBlackOut ; no black out if joypad states are being simulated
+	ld a, [wd492]
+	bit 7, a
+	jp nz, .noBlackOut
+	ld a, [wStatusFlags4]
+	bit BIT_LINK_CONNECTED, a
+	jp nz, .noBlackOut
 	ld a, [wPartyCount]
 	and a
 	jp z, .noBlackOut
 	call IncrementDayCareMonExp
+	call Func_c4c7
 	ld a, [wStepCounter]
 	and $3 ; is the counter a multiple of 4?
-	jp nz, .noBlackOut ; only apply poison damage every fourth step
+	jp nz, .skipPoisonEffectAndSound ; only apply poison damage every fourth step
 	ld [wWhichPokemon], a
 	ld hl, wPartyMon1Status
 	ld de, wPartySpecies
@@ -55,6 +62,12 @@ ApplyOutOfBattlePoisonDamage:
 	ld a, TEXT_MON_FAINTED
 	ldh [hTextID], a
 	call DisplayTextID
+	callfar IsThisPartymonStarterPikachu_Party
+	jr nc, .curMonNotPlayerPikachu
+	ldpikacry e, PikachuCry4
+	callfar PlayPikachuSoundClip
+	calladb_ModifyPikachuHappiness PIKAHAPPY_PSNFNT
+.curMonNotPlayerPikachu
 	pop de
 	pop hl
 .nextMon
@@ -110,4 +123,30 @@ ApplyOutOfBattlePoisonDamage:
 	xor a
 .done
 	ld [wOutOfBattleBlackout], a
+	ret
+
+Func_c4c7:
+	ld a, [wStepCounter]
+	and a
+	jr nz, .asm_c4de
+	call Random
+	and $1
+	jr z, .asm_c4de
+	calladb_ModifyPikachuHappiness PIKAHAPPY_WALKING
+.asm_c4de
+	ld hl, wPikachuMood
+	ld a, [hl]
+	cp $80
+	jr z, .asm_c4ef
+	jr c, .asm_c4ea
+	dec a
+	dec a
+.asm_c4ea
+	inc a
+	ld [hl], a
+	cp $80
+	ret nz
+.asm_c4ef
+	xor a
+	ld [wd49b], a
 	ret

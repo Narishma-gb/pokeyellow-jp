@@ -25,4 +25,5 @@
 	const CLUB         ; $15
 	const FACILITY     ; $16
 	const PLATEAU      ; $17
+	const BEACH_HOUSE  ; $18
 DEF NUM_TILESETS EQU const_value

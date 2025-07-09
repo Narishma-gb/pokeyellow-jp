@@ -1,15 +1,15 @@
 PokemonMansionB1FWildMons:
 	def_grass_wildmons 10 ; encounter rate
-	db 33, GRIMER
-	db 31, GRIMER
-	db 35, GROWLITHE
-	db 32, PONYTA
-	db 31, GRIMER
-	db 40, MUK
-	db 34, PONYTA
-	db 35, KOFFING
-	db 38, MUK
-	db 42, WEEZING
+	db 35, GRIMER
+	db 38, GRIMER
+	db 37, RATICATE
+	db 40, RATICATE
+	db 41, MUK
+	db 43, RATICATE
+	db 24, DITTO
+	db 46, RATICATE
+	db 18, DITTO
+	db 12, DITTO
 	end_grass_wildmons
 
 	def_water_wildmons 0 ; encounter rate
