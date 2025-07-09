@@ -26,17 +26,17 @@ MarkTownVisitedAndLoadMissableObjects::
 	ld a, h
 	ldh [hDividend], a
 	ld a, l
-	ldh [hDividend+1], a
+	ldh [hDividend + 1], a
 	xor a
-	ldh [hDividend+2], a
-	ldh [hDividend+3], a
+	ldh [hDividend + 2], a
+	ldh [hDividend + 3], a
 	ld a, $3
 	ldh [hDivisor], a
 	ld b, $2
 	call Divide                ; divide difference by 3, resulting in the global offset (number of missable items before ours)
 	ld a, [wCurMap]
 	ld b, a
-	ldh a, [hDividend+3]
+	ldh a, [hDividend + 3]
 	ld c, a                    ; store global offset in c
 	ld de, wMissableObjectList
 	pop hl
@@ -172,12 +172,12 @@ MissableObjectFlagAction:
 .shifted
 
 	ld a, b
-	and a
+	and a ; FLAG_RESET
 	jr z, .reset
-	cp 2
+	cp FLAG_TEST
 	jr z, .read
 
-.set
+; set
 	ld a, [hl]
 	ld b, a
 	ld a, d

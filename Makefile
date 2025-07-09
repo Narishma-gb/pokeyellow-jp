@@ -10,13 +10,14 @@ rom_obj := \
 	garbage.o \
 	home.o \
 	wip.o \
-	ram.o
+	ram.o \
+	gfx/tilesets.o
 #	main.o \
 #	maps.o \
 #	ram.o \
 #	gfx/pics.o \
 #	gfx/sprites.o \
-#	gfx/tilesets.o
+
 
 pokeyellow_obj      := $(rom_obj:.o=_yellow.o)
 pokeyellow11_obj    := $(rom_obj:.o=_yellow11.o)

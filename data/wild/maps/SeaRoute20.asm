@@ -1,4 +1,4 @@
-Route20WildMons:
+SeaRoute20WildMons:
 	def_grass_wildmons 0 ; encounter rate
 	end_grass_wildmons
 

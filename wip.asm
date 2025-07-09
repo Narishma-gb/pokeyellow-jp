@@ -40,73 +40,19 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 ;INCLUDE "data/maps/map_header_pointers.asm"
+;INCLUDE "data/maps/songs.asm"
+;INCLUDE "data/maps/map_header_banks.asm"
 ;INCLUDE "data/tilesets/collision_tile_ids.asm"
 ;INCLUDE "engine/events/black_out.asm"
 ;INCLUDE "data/pokemon/mew.asm"
 ;INCLUDE "engine/debug/debug_menu.asm"
+;INCLUDE "engine/overworld/field_move_messages.asm"
+;INCLUDE "engine/items/inventory.asm"
 
-
-SECTION "rom3", ROMX
-; ROM $03 : $C000 - $FFFF
-; Progress
-	set_bank_offset 3, $4000
-;
-
-	dr ReadJoypad, $C000
-	dr ClearVariablesOnEnterMap, 3, $4085
-	dr IsPlayerStandingOnWarp, 3, $40AF
-	dr CheckForceBikeOrSurf, 3, $40DB
-	dr IsPlayerFacingEdgeOfMap, 3, $4151
-	dr IsWarpTileInFrontOfPlayer, 3, $41A0
-	dr IsPlayerStandingOnDoorTileOrWarpTile, 3, $41EF
-	dr PrintSafariZoneSteps, 3, $4284
-	dr GetTileAndCoordsInFrontOfPlayer, 3, $42CD
-	dr GetTileTwoStepsInFrontOfPlayer, 3, $4305
-	dr CheckForCollisionWhenPushingBoulder, 3, $4352
-	dr ApplyOutOfBattlePoisonDamage, 3, $43DA
-	dr LoadTilesetHeader, 3, $44F0
-	dr LoadWildData, 3, $4B5E
-	dr UseItem_, 3, $52E9
-	dr TossItem_, 3, $68E0
-	dr IsKeyItem_, 3, $698B
-	dr IsNextTileShoreOrWater, 3, $6AEB
-	dr DrawBadges, 3, $6B63
-	dr ReplaceTileBlock, 3, $6FFE
-	dr UsedCut, 3, $70B4
-	dr MarkTownVisitedAndLoadMissableObjects, 3, $7297
-	dr IsObjectHidden, 3, $7326
-	dr ShowObject, 3, $7348
-	dr ShowObject2, 3, $7348
-	dr HideObject, 3, $7357
-	dr TryPushingBoulder, 3, $73A5
-	dr DoBoulderDustAnimation, 3, $7435
-	dr _AddPartyMon, 3, $7465
-	dr LoadMovePPs, 3, $75FD
-	dr _AddEnemyMonToPlayerParty, 3, $7627
-	dr _MoveMon, 3, $76A8
-	dr FlagActionPredef, 3, $77F0
-	dr HealParty, 3, $782F
-	dr DivideBCDPredef, 3, $78A8
-	dr DivideBCDPredef2, 3, $78A8
-	dr DivideBCDPredef3, 3, $78A8
-	dr DivideBCDPredef4, 3, $78A8 
-	dr AddBCDPredef, 3, $79A7
-	dr SubBCDPredef, 3, $79C0
-	dr InitPlayerData, 3,  $79DA
-	dr InitPlayerData2, 3, $79DA
-	dr GetQuantityOfItemInBag, 3, $7A39
-	dr FindPathToPlayer, 3, $7A4E
-	dr CalcPositionOfPlayerRelativeToNPC, 3, $7ABD
-	dr ConvertNPCMovementDirectionsToJoypadMasks, 3, $7B34
-	dr HPBarLength, 3, $7B70
-	dr UpdateHPBar, 3, $7BB1
-	dr UpdateHPBar2, 3, $7BB1
-	dr PrintBookshelfText, 3, $7CD9
-
-	dr_end 3
 
 SECTION "rom4", ROMX
 ; ROM $04 : $10000 - $13FFF
+; Progress
 	set_bank_offset 4
 
 	dr MoveNames, 4, $4000
@@ -121,6 +67,7 @@ SECTION "rom4", ROMX
 	dr DrawHP, 4, $5888
 	dr DrawHP2, 4, $588F
 	dr StatusScreen, 4, $58E1
+	dr PrintStatsBox, 4, $5A9D
 	dr StatusScreen2, 4, $5B05
 	dr DrawPartyMenu_, 4, $5C7A
 	dr RedrawPartyMenu_, 4, $5C8B
@@ -164,6 +111,7 @@ SECTION "rom6", ROMX
 	dr PewterMuseumGuyMovementScriptPointerTable, 6, $7B24
 	dr PewterGymGuyMovementScriptPointerTable, 6, $7B87
 	dr PewterGuys, 6, $7BE7
+	dr IsPlayerStandingOnDoorTile, 6, $7C87
 	dr HandleLedges, 6, $7CF6
 
 	dr_end 6
@@ -191,6 +139,7 @@ Music_GymLeaderBattle::
 	dr Music_DoLowHealthAlarm, $2131E
 	dr BillsPC_, 8, $5464
 	dr Audio2_PlaySound, 8, $597E
+	dr Music_PokeFluteInBattle, 8, $5A92
 	dr Audio2_InitMusicVariables, $21ABB
 	dr Audio2_InitSFXVariables, $21B7A
 	dr Audio2_StopAllAudio, $21C02
@@ -225,6 +174,8 @@ SECTION "rom11", ROMX
 	set_bank_offset 11
 
 	dr FossilKabutopsPic, 11, $7B92
+	dr CheckIfMoveIsKnown, 11, $7D56
+	dr RespawnOverworldPikachu, 11, $7D92
 	dr ScaleSpriteByTwo, 11, $7DA1
 
 	dr_end 11
@@ -262,6 +213,7 @@ SECTION "rom14", ROMX
 	dr EvolutionAfterBattle, 14, $7145
 	dr LearnMoveFromLevelUp, 14, $73C3
 	dr WriteMonMoves, 14, $74F6
+	dr EvosMovesPointerTable, 14, $759C
 
 	dr_end 14
 
@@ -275,9 +227,13 @@ DisplayBattleMenu::
 	dr ReadPlayerMonCurHPAndStatus, 15, $4F4E
 	dr DrawPlayerHUDAndHPBar, 15, $4F6B
 	dr DrawEnemyHUDAndHPBar, 15, $4FF6
+	dr MoveSelectionMenu, 15, $546E
+	dr IsGhostBattle, 15, $5B1D
+	dr LoadEnemyMonData, 15, $6F84
 	dr DoubleOrHalveSelectedStats, 15, $7188
 	dr LoadHudTilePatterns, 15, $72E1
 	dr JumpMoveEffect, 15, $73A1
+	dr StatModifierUpEffect, 15, $771D
 
 	dr_end 15
 
@@ -325,6 +281,7 @@ SECTION "rom20", ROMX
 ; ROM $14 : $50000 - $53FFF
 	set_bank_offset 20
 
+	dr PrintCardKeyText, 20, $77F3
 	dr CeladonPrizeMenu, 20, $78BF
 
 	dr_end 20
@@ -347,6 +304,8 @@ SECTION "rom22", ROMX
 ; ROM $16 : $58000 - $5BFFF
 	set_bank_offset 22
 
+	dr CalcLevelFromExperience, 22, $4D99
+	dr CalcExperience, 22, $4DC0
 	dr PrintStatusAilment, 22, $4E8B
 	dr OaksAideScript, 22, $4EC6
 
@@ -367,26 +326,6 @@ SECTION "rom24", ROMX
 
 	dr_end 24
 
-SECTION "rom25", ROMX
-; ROM $19 : $64000 - $67FFF
-	set_bank_offset 25
-
-	dr_end 25
-
-SECTION "rom26", ROMX
-; ROM $1a : $68000 - $6BFFF
-	set_bank_offset 26
-
-	dr_end 26
-
-SECTION "rom27", ROMX
-; ROM $1b : $6C000 - $6FFFF
-	set_bank_offset 27
-
-	dr Club_GFX, 27, $7670
-
-	dr_end 27
-
 SECTION "rom28", ROMX
 ; ROM $1c : $70000 - $73FFF
 	set_bank_offset 28
@@ -395,9 +334,11 @@ SECTION "rom28", ROMX
 	dr EnterMapAnim, 28, $4561
 	dr _LeaveMapAnim, 28, $460F
 	dr IsPlayerStandingOnWarpPadOrHole, 28, $47E1
+	dr FishingAnim, 28, $4810
 	dr _HandleMidJump, 28, $48F4
 	dr BattleTransition, 28, $49E3
 	dr FlashScreen, 28, $4BD3
+	dr DisplayTownMap, 28, $4EB4
 	dr LoadTownMap_Nest, 28, $4FE4
 	dr LoadTownMap_Fly, 28, $5014
 	dr TownMapSpriteBlinkingAnimation, 28, $56AA
@@ -422,6 +363,7 @@ SECTION "rom29", ROMX
 ; ROM $1d : $74000 - $77FFF
 	set_bank_offset 29
 
+	dr HiddenItemNear, 29, $405C
 	dr VendingMachineMenu, 29, $4E42
 
 	dr_end 29
@@ -430,10 +372,13 @@ SECTION "rom30", ROMX
 ; ROM $1e : $78000 - $7BFFF
 	set_bank_offset 30
 
+	dr MoveAnimationTiles1, 30, $46EE
 	dr MoveAnimation, 30, $4D5E
 	dr GetIntroMoveSound, 30, $5919
 	dr CopyDownscaledMonTiles, 30, $5B6A
 	dr CopyTileIDsFromList, 30, $5E7D
+	dr AnimCut, 30, $5F39
+	dr AnimateBoulderDust, 30, $5FF7
 
 	dr_end 30
 
@@ -535,6 +480,7 @@ SECTION "rom41", ROMX
 	dr TitleScreen_PlacePokemonLogo, 41, $402B
 	dr TitleScreen_PlacePikaSpeechBubble, 41, $4047
 	dr TitleScreen_PlacePikachu, 41, $4065
+	dr ReadSuperRodData, 41, $4C47
 
 	dr_end 41
 
@@ -692,7 +638,7 @@ SECTION "rom59", ROMX
 
 SECTION "rom60", ROMX
 ; ROM $3c : $F0000 - $F3FFF
-	set_bank_offset 60
+	set_bank_offset 60, $4740
 
 	dr LoadMissableObjectData, 60, $4741
 	dr CheckForHiddenObject, 60, $6AEA
@@ -747,11 +693,15 @@ SECTION "rom63", ROMX
 	dr SetPikachuSpawnWarpPad, 63, $465B
 	dr SetPikachuSpawnBackOutside, 63, $469A
 	dr SpawnPikachu_, 63, $46D5
+	dr IsPikachuRightNextToPlayer, 63, $4B01
 	dr Func_fcc08, 63, $4C08
 	dr IsStarterPikachuInOurParty, 63, $4DB8
 	dr IsThisPartymonStarterPikachu_Party, 63, $4E18
 	dr IsPlayerTalkingToPikachu, 63, $4F0C
+	dr PlaySpecificPikachuEmotion, 63, $5001
 	dr TalkToPikachu, 63, $5004
+	dr PikachuEmotionTable, 63, $5019
+	dr PikachuEmotion26_id, 63, $504D
 	dr PikachuWalksToNurseJoy, 63, $5252
 	dr ApplyPikachuMovementData_, 63, $529A
 	dr SurfingPikachuSprite, 63, $6DE2

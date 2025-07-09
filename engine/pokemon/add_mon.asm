@@ -129,10 +129,10 @@ _AddPartyMon::
 	xor a
 	ld b, a
 	call CalcStat      ; calc HP stat (set cur Hp to max HP)
-	ldh a, [hMultiplicand+1]
+	ldh a, [hMultiplicand + 1]
 	ld [de], a
 	inc de
-	ldh a, [hMultiplicand+2]
+	ldh a, [hMultiplicand + 2]
 	ld [de], a
 	inc de
 	xor a
@@ -151,7 +151,7 @@ _AddPartyMon::
 	ld a, [wEnemyMonHP]    ; copy HP from cur enemy mon
 	ld [de], a
 	inc de
-	ld a, [wEnemyMonHP+1]
+	ld a, [wEnemyMonHP + 1]
 	ld [de], a
 	inc de
 	xor a
@@ -375,13 +375,13 @@ _MoveMon::
 	add hl, bc
 	ld a, [wMoveMonType]
 	cp DAYCARE_TO_PARTY
-	ld a, [wDayCareMon]
+	ld a, [wDayCareMonSpecies]
 	jr z, .copySpecies
 	ld a, [wCurPartySpecies]
 .copySpecies
 	ld [hli], a          ; write new mon ID
 	ld [hl], $ff         ; write new sentinel
-.findMonDataDest
+; findMonDataDest
 	ld a, [wMoveMonType]
 	dec a
 	ld hl, wPartyMons
@@ -440,6 +440,7 @@ _MoveMon::
 	ld hl, wPartyMonOT
 	ld a, [wPartyCount]
 	jr nz, .addOToffset
+	; if it's PARTY_TO_BOX
 	ld hl, wBoxMonOT
 	ld a, [wBoxCount]
 .addOToffset
@@ -450,7 +451,7 @@ _MoveMon::
 .findOTsrc
 	ld hl, wBoxMonOT
 	ld a, [wMoveMonType]
-	and a
+	and a ; BOX_TO_PARTY
 	jr z, .addOToffset2
 	ld hl, wDayCareMonOT
 	cp DAYCARE_TO_PARTY
@@ -463,7 +464,7 @@ _MoveMon::
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld a, [wMoveMonType]
-.findNickDest
+; findNickDest
 	cp PARTY_TO_DAYCARE
 	ld de, wDayCareMonName
 	jr z, .findNickSrc
@@ -471,6 +472,7 @@ _MoveMon::
 	ld hl, wPartyMonNicks
 	ld a, [wPartyCount]
 	jr nz, .addNickOffset
+	; if it's PARTY_TO_BOX
 	ld hl, wBoxMonNicks
 	ld a, [wBoxCount]
 .addNickOffset
@@ -481,7 +483,7 @@ _MoveMon::
 .findNickSrc
 	ld hl, wBoxMonNicks
 	ld a, [wMoveMonType]
-	and a
+	and a ; BOX_TO_PARTY
 	jr z, .addNickOffset2
 	ld hl, wDayCareMonName
 	cp DAYCARE_TO_PARTY
@@ -513,7 +515,7 @@ _MoveMon::
 	ld [hli], a
 	ld d, h
 	ld e, l
-	ld bc, -18
+	ld bc, wPartyMon1StatExp - 1 - wPartyMon1Stats
 	add hl, bc
 	ld b, $1
 	call CalcStats

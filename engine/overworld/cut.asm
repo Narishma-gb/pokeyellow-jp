@@ -22,8 +22,9 @@ UsedCut:
 	jp PrintText
 
 .NothingToCutText
-	text_far _NothingToCutText
-	text_end
+	text "いあいぎりで"
+	line "きれそうな　ものが　ありません！"
+	prompt
 
 .canCut
 	ld [wCutTile], a
@@ -68,15 +69,16 @@ UsedCut:
 	jp RedrawMapView
 
 UsedCutText:
-	text_far _UsedCutText
-	text_end
+	text_ram wNameBuffer
+	text "は"
+	line "いあいぎりで　きりまくった！"
+	prompt
 
 InitCutAnimOAM:
 	xor a
 	ld [wWhichAnimationOffsets], a
 	ld a, %11100100
 	ldh [rOBP1], a
-	call UpdateCGBPal_OBP1
 	ld a, [wCutTile]
 	cp $52
 	jr z, .grass
@@ -125,10 +127,10 @@ WriteCutOrBoulderDustAnimationOAMBlock:
 
 .OAMBlock:
 ; tile ID, attributes
-	db $fc, OAM_OBP1 | OAM_HIGH_PALS
-	db $fd, OAM_OBP1 | OAM_HIGH_PALS
-	db $fe, OAM_OBP1 | OAM_HIGH_PALS
-	db $ff, OAM_OBP1 | OAM_HIGH_PALS
+	db $fc, OAM_OBP1
+	db $fd, OAM_OBP1
+	db $fe, OAM_OBP1
+	db $ff, OAM_OBP1
 
 GetCutOrBoulderDustAnimationOffsets:
 	ld hl, wSpritePlayerStateData1YPixels

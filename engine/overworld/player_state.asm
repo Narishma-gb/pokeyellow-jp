@@ -64,6 +64,7 @@ CheckForceBikeOrSurf::
 	ld a, SCRIPT_SEAFOAMISLANDSB4F_MOVE_OBJECT
 	ld [wSeafoamIslandsB4FCurScript], a
 	jr z, .forceSurfing
+; force bike riding
 	ld hl, wStatusFlags6
 	set BIT_ALWAYS_ON_BIKE, [hl]
 	ld a, $1
@@ -237,23 +238,16 @@ PrintSafariZoneSteps::
 	hlcoord 1, 3
 	ld de, SafariBallText
 	call PlaceString
-	ld a, [wNumSafariBalls]
-	cp 10
-	jr nc, .tenOrMore
 	hlcoord 5, 3
-	ld a, " "
-	ld [hl], a
-.tenOrMore
-	hlcoord 6, 3
 	ld de, wNumSafariBalls
 	lb bc, 1, 2
 	jp PrintNumber
 
 SafariSteps:
-	db "/500@"
+	db "／５００@"
 
 SafariBallText:
-	db "BALL×× @"
+	db "ボール　　　こ@"
 
 GetTileAndCoordsInFrontOfPlayer:
 	call GetPredefRegisters
