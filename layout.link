@@ -48,7 +48,10 @@ ROMX $3
 	"bank3"
 	"Garbage 3"
 ROMX $4
-	"rom4"
+ 	"bank4"
+ 	"NPC Sprites 1"
+	"Battle Engine 1"
+	"Garbage 4"
 ROMX $5
 	"rom5"
 ROMX $6
@@ -178,12 +181,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $4
-; 	"Move Names"
-; 	"NPC Sprites 1"
-; 	"Font Graphics"
-; 	"Battle Engine 1"
-; 	"Garbage 4"
 ; ROMX $5
 ; 	"NPC Sprites 2"
 ; 	"Battle Engine 2"

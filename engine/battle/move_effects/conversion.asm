@@ -25,8 +25,9 @@ ConversionEffect_:
 	jp PrintText
 
 ConvertedTypeText:
-	text_far _ConvertedTypeText
-	text_end
+	text "<TARGET>の　ぞくせいを"
+	line "じぶんに　はりつけた！"
+	prompt
 
 PrintButItFailedText:
 	ld hl, PrintButItFailedText_

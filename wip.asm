@@ -48,48 +48,14 @@ INCLUDE "main.asm"
 ;INCLUDE "engine/debug/debug_menu.asm"
 ;INCLUDE "engine/overworld/field_move_messages.asm"
 ;INCLUDE "engine/items/inventory.asm"
+;INCLUDE "engine/overworld/turn_sprite.asm"
+;INCLUDE "engine/battle/get_trainer_name.asm"
+;INCLUDE "engine/math/random.asm"
 
-
-SECTION "rom4", ROMX
-; ROM $04 : $10000 - $13FFF
-; Progress
-	set_bank_offset 4
-
-	dr MoveNames, 4, $4000
-	dr FontGraphics, 4, $4A19
-	dr FontGraphicsEnd, 4, $4E19
-	dr HpBarAndStatusGraphics, 4, $4E39
-	dr HpBarAndStatusGraphicsEnd, 4, $5019
-	dr NintendoCopyrightLogoGraphics, 4, $5061
-	dr GameFreakLogoGraphics, 4, $5191
-	dr TextBoxGraphics, 4, $5221
-	dr TextBoxGraphicsEnd, 4, $5421
-	dr DrawHP, 4, $5888
-	dr DrawHP2, 4, $588F
-	dr StatusScreen, 4, $58E1
-	dr PrintStatsBox, 4, $5A9D
-	dr StatusScreen2, 4, $5B05
-	dr DrawPartyMenu_, 4, $5C7A
-	dr RedrawPartyMenu_, 4, $5C8B
-	dr RedPicFront, 4, $5F41
-	dr ShrinkPic1, 4, $6040
-	dr ShrinkPic2, 4, $609A
-	dr StartMenu_Pokedex, 4, $60CC
-	dr StartMenu_Pokemon, 4, $60E0
-	dr ErasePartyMenuCursors, 4, $63C0
-	dr StartMenu_Item, 4, $63D5
-	dr StartMenu_TrainerInfo, 4, $654E
-	dr StartMenu_SaveReset, 4, $66D4
-	dr StartMenu_Option, 4, $66E7
-	dr SwitchPartyMon, 4, $6704
-	dr CanLearnTM, 4, $682F
-	dr TMToMove, 4, $685C
-	dr SetEnemyTrainerToStayAndFaceAnyDirection, 4, $7FA0
-
-	dr_end 4
 
 SECTION "rom5", ROMX
 ; ROM $05 : $14000 - $17FFF
+; Progress
 	set_bank_offset 5
 
 	dr _InitMapSprites, 5, $401B
@@ -234,6 +200,8 @@ DisplayBattleMenu::
 	dr LoadHudTilePatterns, 15, $72E1
 	dr JumpMoveEffect, 15, $73A1
 	dr StatModifierUpEffect, 15, $771D
+	dr PrintButItFailedText_, 15, $7F2E
+	dr PlayCurrentMoveAnimation, 15, $7FBB
 
 	dr_end 15
 
@@ -345,9 +313,12 @@ SECTION "rom28", ROMX
 	dr AnimatePartyMon_ForceSpeed1, 28, $56DB
 	dr AnimatePartyMon, 28, $56E3
 	dr LoadMonPartySpriteGfx, 28, $5750
+	dr LoadMonPartySpriteGfxWithLCDDisabled, 28, $5775
+	dr WriteMonPartySpriteOAMByPartyIndex, 28, $5858
 	dr WriteMonPartySpriteOAMBySpecies, 28, $5886
 	dr DoInGameTradeDialogue, 28, $5ADD
 	dr _RunPaletteCommand, 28, $5F2E
+	dr InitPartyMenuBlkPacket, 28, $61B7
 	dr LoadSGB, 28, $6225
 	dr LoadSAV, 28, $751F
 	dr LoadSAV2, 28, $75FA
@@ -649,13 +620,17 @@ SECTION "rom61", ROMX
 ; ROM $3d : $F4000 - $F7FFF
 	set_bank_offset 61
 
+	dr DisplayLinkBattleVersusTextBox, 61, $426A
 	dr ModifyPikachuHappiness, 61, $43A5
 	dr LinkMenu, 61, $4BE6
 	dr PrintStrengthText, 61, $4F0D
+	dr IsSurfingAllowed, 61, $4F5F
 	dr AddItemToInventory_, 61, $4FC6
 	dr RemoveItemFromInventory_, 61, $5036
 	dr TrainerInfoTextBoxTileGraphics, 61, $5079
 	dr TrainerInfoTextBoxTileGraphicsEnd, 61, $5109
+	dr TrainerCardFontGraphics, 61, $5109
+	dr BadgeNumbersTileGraphics, 61, $5279
 	dr InitBattle, 61, $52F9
 	dr InitOpponent, 61, $52FF
 	dr LoadMonBackPic, 61, $547C
@@ -696,7 +671,9 @@ SECTION "rom63", ROMX
 	dr IsPikachuRightNextToPlayer, 63, $4B01
 	dr Func_fcc08, 63, $4C08
 	dr IsStarterPikachuInOurParty, 63, $4DB8
+	dr IsThisPartymonStarterPikachu_Box, 63, $4E0D
 	dr IsThisPartymonStarterPikachu_Party, 63, $4E18
+	dr UpdatePikachuMoodAfterBattle, 63, $4E5A
 	dr IsPlayerTalkingToPikachu, 63, $4F0C
 	dr PlaySpecificPikachuEmotion, 63, $5001
 	dr TalkToPikachu, 63, $5004

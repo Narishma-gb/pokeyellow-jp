@@ -67,37 +67,31 @@ INCLUDE "engine/events/hidden_objects/town_map.asm"
 INCLUDE "engine/events/hidden_objects/pokemon_stuff.asm"
 
 
+SECTION "bank4", ROMX
+
+INCLUDE "data/moves/names.asm"
+INCLUDE "gfx/font.asm"
+INCLUDE "engine/overworld/is_player_just_outside_map.asm"
+INCLUDE "engine/pokemon/status_screen.asm"
+INCLUDE "engine/menus/party_menu.asm"
+INCLUDE "gfx/player.asm"
+INCLUDE "engine/menus/start_sub_menus.asm"
+INCLUDE "engine/items/tms.asm"
+
+
+SECTION "Battle Engine 1", ROMX
+
+INCLUDE "engine/battle/end_of_battle.asm"
+INCLUDE "engine/battle/wild_encounters.asm"
+INCLUDE "engine/battle/move_effects/recoil.asm"
+INCLUDE "engine/battle/move_effects/conversion.asm"
+INCLUDE "engine/battle/move_effects/haze.asm"
+INCLUDE "engine/overworld/npc_movement_2.asm"
+
+
 SECTION "Pikachu PCM", ROMX
 
 INCLUDE "engine/pikachu/pikachu_pcm.asm"
-
-
-;SECTION "Move Names", ROMX
-
-;INCLUDE "data/moves/names.asm"
-
-
-;SECTION "Font Graphics", ROMX
-
-;INCLUDE "gfx/font.asm"
-
-
-;SECTION "Battle Engine 1", ROMX
-
-;INCLUDE "engine/overworld/is_player_just_outside_map.asm"
-;INCLUDE "engine/pokemon/status_screen.asm"
-;INCLUDE "engine/menus/party_menu.asm"
-;INCLUDE "gfx/player.asm"
-;INCLUDE "engine/overworld/turn_sprite.asm"
-;INCLUDE "engine/menus/start_sub_menus.asm"
-;INCLUDE "engine/items/tms.asm"
-;INCLUDE "engine/battle/end_of_battle.asm"
-;INCLUDE "engine/battle/wild_encounters.asm"
-;INCLUDE "engine/battle/move_effects/recoil.asm"
-;INCLUDE "engine/battle/move_effects/conversion.asm"
-;INCLUDE "engine/battle/move_effects/haze.asm"
-;INCLUDE "engine/battle/get_trainer_name.asm"
-;INCLUDE "engine/math/random.asm"
 
 
 ;SECTION "Battle Engine 2", ROMX
