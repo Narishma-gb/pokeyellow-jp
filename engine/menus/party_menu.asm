@@ -30,9 +30,17 @@ RedrawPartyMenu_::
 	call GetPartyMonName
 	pop hl
 	call PlaceString ; print the pokemon's name
-	farcall WriteMonPartySpriteOAMByPartyIndex ; place the appropriate pokemon icon
 	ldh a, [hPartyMonIndex]
 	ld [wWhichPokemon], a
+	callfar IsThisPartymonStarterPikachu_Party
+	jr nc, .regularMon
+	call CheckPikachuFollowingPlayer
+	jr z, .regularMon
+	ld a, $ff
+	ldh [hPartyMonIndex], a
+.regularMon
+	farcall WriteMonPartySpriteOAMByPartyIndex ; place the appropriate pokemon icon
+	ld a, [wWhichPokemon]
 	inc a
 	ldh [hPartyMonIndex], a
 	call LoadMonData

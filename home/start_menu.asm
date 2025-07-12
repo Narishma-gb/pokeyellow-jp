@@ -8,7 +8,6 @@ DisplayStartMenu::
 
 RedisplayStartMenu::
 	farcall DrawStartMenu
-RedisplayStartMenu_DoNotDrawStartMenu::
 	farcall PrintSafariZoneSteps ; print Safari Zone info, if in Safari Zone
 	call UpdateSprites
 .loop

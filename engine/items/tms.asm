@@ -11,6 +11,8 @@ CanLearnTM:
 	ld hl, TechnicalMachines
 .findTMloop
 	ld a, [hli]
+	cp -1 ; reached terminator?
+	jr z, .done
 	cp b
 	jr z, .TMfoundLoop
 	inc c
@@ -19,6 +21,10 @@ CanLearnTM:
 	pop hl
 	ld b, FLAG_TEST
 	predef_jump FlagActionPredef
+.done
+	pop hl
+	ld c, 0
+	ret
 
 ; converts TM/HM number in wTempTMHM into move number
 ; HMs start at 51

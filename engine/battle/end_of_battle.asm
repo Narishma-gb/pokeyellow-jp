@@ -10,6 +10,8 @@ EndOfBattle:
 	ld a, [wEnemyMonStatus]
 	ld [hl], a
 	call ClearScreen
+	ld b, SET_PAL_OVERWORLD
+	call RunPaletteCommand
 	callfar DisplayLinkBattleVersusTextBox
 	ld a, [wBattleResult]
 	cp $1
@@ -43,6 +45,8 @@ EndOfBattle:
 	xor a
 	ld [wForceEvolution], a
 	predef EvolutionAfterBattle
+	ld d, $82
+	callfar UpdatePikachuMoodAfterBattle
 .resetVariables
 	xor a
 	ld [wLowHealthAlarm], a ;disable low health alarm

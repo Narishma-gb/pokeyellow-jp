@@ -162,8 +162,25 @@ StatusScreen:
 	call GBPalNormal
 	hlcoord 1, 0
 	call LoadFlippedFrontSpriteByMonIndex ; draw Pokémon picture
+	ld a, [wMonDataLocation]
+	cp ENEMY_PARTY_DATA
+	jr z, .playRegularCry
+	cp BOX_DATA
+	jr z, .checkBoxData
+	callfar IsThisPartymonStarterPikachu_Party
+	jr nc, .playRegularCry
+	jr .playPikachuSoundClip
+.checkBoxData
+	callfar IsThisPartymonStarterPikachu_Box
+	jr nc, .playRegularCry
+.playPikachuSoundClip
+	ldpikacry e, PikachuCry17
+	callfar PlayPikachuSoundClip
+	jr .continue
+.playRegularCry
 	ld a, [wCurPartySpecies]
 	call PlayCry
+.continue
 	call WaitForTextScrollButtonPress
 	pop af
 	ldh [hTileAnimations], a
@@ -234,16 +251,14 @@ PrintStatsBox:
 	and a ; a is 0 from the status screen
 	jr nz, .DifferentBox
 	hlcoord 0, 8
-	ld b, 8
-	ld c, 8
+	lb bc, 8, 8
 	call TextBoxBorder ; Draws the box
 	hlcoord 1, 10 ; Start printing stats from here
 	ld bc, $5 ; Number offset
 	jr .PrintStats
 .DifferentBox
 	hlcoord 9, 2
-	ld b, 8
-	ld c, 9
+	lb bc, 8, 9
 	call TextBoxBorder
 	hlcoord 11, 4
 	ld bc, $4
@@ -299,8 +314,7 @@ StatusScreen2:
 	hlcoord 19, 3
 	ld [hl], $78 ; │ (Erases right end of HP bar)
 	hlcoord 0, 8
-	ld b, 8
-	ld c, 18
+	lb bc, 8, 18
 	call TextBoxBorder ; Draw move container
 	hlcoord 2, 10
 	ld de, wMovesString

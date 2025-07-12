@@ -17,8 +17,8 @@ SECTION "Garbage 3", ROMX
 INCBIN "garbage/garbage_3.bin"
 
 
-;SECTION "Garbage 4", ROMX
-;	db $7F
+SECTION "Garbage 4", ROMX
+INCBIN "garbage/garbage_4.bin"
 
 
 ;SECTION "Garbage 5", ROMX
