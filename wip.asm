@@ -51,24 +51,13 @@ INCLUDE "main.asm"
 ;INCLUDE "engine/overworld/turn_sprite.asm"
 ;INCLUDE "engine/battle/get_trainer_name.asm"
 ;INCLUDE "engine/math/random.asm"
+;INCLUDE "engine/overworld/emotion_bubbles.asm"
+;INCLUDE "engine/events/evolve_trade.asm"
 
-
-SECTION "rom5", ROMX
-; ROM $05 : $14000 - $17FFF
-; Progress
-	set_bank_offset 5
-
-	dr _InitMapSprites, 5, $401B
-	dr ReloadWalkingTilePatterns, 5, $40D2
-	dr RedBikeSprite, 5, $43F1
-	dr RedSprite, 5, $4571
-	dr SeelSprite, 5, $7AB1
-	dr ActivatePC, 5, $7CE8
-
-	dr_end 5
 
 SECTION "rom6", ROMX
 ; ROM $06 : $18000 - $1BFFF
+; Progress
 	set_bank_offset 6
 
 	dr PlayerStepOutFromDoor, 6, $79EC
@@ -88,6 +77,7 @@ SECTION "rom7", ROMX
 
 	dr DoClearSaveDialogue, 7, $421E
 	dr DisplayElevatorFloorMenu, 7, $427A
+	dr OpenOaksPC, 7, $7869
 	dr SafariZoneCheck, 7, $798C
 	dr SafariZoneCheckSteps, 7, $799B
 	dr PrintSafariGameOverText, 7, $79F0
@@ -103,6 +93,7 @@ SECTION "rom8", ROMX
 Music_GymLeaderBattle::
 
 	dr Music_DoLowHealthAlarm, $2131E
+	dr DisplayPCMainMenu, 8, $5378
 	dr BillsPC_, 8, $5464
 	dr Audio2_PlaySound, 8, $597E
 	dr Music_PokeFluteInBattle, 8, $5A92
@@ -175,6 +166,7 @@ SECTION "rom14", ROMX
 	dr TrainerNames, 14, $5D34
 	dr FormatMovesString, 14, $5E77
 	dr InitList, 14, $5EC5
+	dr PokeballTileGraphics, 14, $6DA7
 	dr TryEvolvingMon, 14, $7137
 	dr EvolutionAfterBattle, 14, $7145
 	dr LearnMoveFromLevelUp, 14, $73C3
@@ -191,6 +183,7 @@ DisplayBattleMenu::
 
 	dr AnyPartyAlive, 15, $4BF8
 	dr ReadPlayerMonCurHPAndStatus, 15, $4F4E
+	dr DrawHUDsAndHPBars, 15, $4F65
 	dr DrawPlayerHUDAndHPBar, 15, $4F6B
 	dr DrawEnemyHUDAndHPBar, 15, $4FF6
 	dr MoveSelectionMenu, 15, $546E
@@ -336,6 +329,7 @@ SECTION "rom29", ROMX
 
 	dr HiddenItemNear, 29, $405C
 	dr VendingMachineMenu, 29, $4E42
+	dr PKMNLeaguePC, 29, $7AB2
 
 	dr_end 29
 
@@ -345,6 +339,7 @@ SECTION "rom30", ROMX
 
 	dr MoveAnimationTiles1, 30, $46EE
 	dr MoveAnimation, 30, $4D5E
+	dr AnimationSubstitute, 30, $5703
 	dr GetIntroMoveSound, 30, $5919
 	dr CopyDownscaledMonTiles, 30, $5B6A
 	dr CopyTileIDsFromList, 30, $5E7D
@@ -681,6 +676,16 @@ SECTION "rom63", ROMX
 	dr PikachuEmotion26_id, 63, $504D
 	dr PikachuWalksToNurseJoy, 63, $5252
 	dr ApplyPikachuMovementData_, 63, $529A
+	dr OfficerJennySprite, 63, $6662
+	dr PikachuSprite, 63, $67E2
+	dr SandshrewSprite, 63, $6962
+	dr OddishSprite, 63, $6A22
+	dr BulbasaurSprite, 63, $6AE2
+	dr JigglypuffSprite, 63, $6BA2
+	dr ClefairySprite, 63, $6C62
+	dr ChanseySprite, 63, $6D22
 	dr SurfingPikachuSprite, 63, $6DE2
+	dr JessieSprite, 63, $6F62
+	dr JamesSprite, 63, $70E2
 
 	dr_end 63

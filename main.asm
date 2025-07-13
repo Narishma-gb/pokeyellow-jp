@@ -89,19 +89,21 @@ INCLUDE "engine/battle/move_effects/haze.asm"
 INCLUDE "engine/overworld/npc_movement_2.asm"
 
 
+SECTION "bank5", ROMX
+
+INCLUDE "engine/gfx/load_pokedex_tiles.asm"
+INCLUDE "engine/overworld/map_sprites.asm"
+
+
+SECTION "Battle Engine 2", ROMX
+
+INCLUDE "engine/battle/move_effects/substitute.asm"
+INCLUDE "engine/menus/pc.asm"
+
+
 SECTION "Pikachu PCM", ROMX
 
 INCLUDE "engine/pikachu/pikachu_pcm.asm"
-
-
-;SECTION "Battle Engine 2", ROMX
-
-;INCLUDE "engine/gfx/load_pokedex_tiles.asm"
-;INCLUDE "engine/overworld/map_sprites.asm"
-;INCLUDE "engine/overworld/emotion_bubbles.asm"
-;INCLUDE "engine/events/evolve_trade.asm"
-;INCLUDE "engine/battle/move_effects/substitute.asm"
-;INCLUDE "engine/menus/pc.asm"
 
 
 ;SECTION "Play Time", ROMX
