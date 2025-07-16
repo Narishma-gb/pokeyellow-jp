@@ -4,8 +4,14 @@ ViridianCityPrintYoungster1Text::
 	ret
 
 .text
-	text_far _ViridianCityYoungster1Text
-	text_end
+	text "きみが　こしに　つけてる"
+	line "その　モンスターボールは<⋯>！"
+	cont "まさしく　#だね！"
+
+	para "いつでも　#の　だしいれが"
+	line "じゆうに　できる　なんて"
+	cont "べんりな　よのなかだね"
+	done
 
 ViridianCityPrintGambler1Text::
 	ld hl, .GymLeaderReturnedText
@@ -20,12 +26,17 @@ ViridianCityPrintGambler1Text::
 	ret
 
 .GymAlwaysClosedText:
-	text_far _ViridianCityGambler1GymAlwaysClosedText
-	text_end
+	text "いつ　きても"
+	line "この　#　ジムは　しまっとる"
+
+	para "いったい　どんな　ヤツが"
+	line "リーダーを　しとるんじゃろか？"
+	done
 
 .GymLeaderReturnedText:
-	text_far _ViridianCityGambler1GymLeaderReturnedText
-	text_end
+	text "トキワ　ジムの　リーダーが"
+	line "かえって　きたぞ！"
+	done
 
 ViridianCityPrintYoungster2Text::
 	ld hl, .YouWantToKnowAboutText
@@ -41,16 +52,21 @@ ViridianCityPrintYoungster2Text::
 	ret
 
 .YouWantToKnowAboutText:
-	text_far _ViridianCityYoungster2YouWantToKnowAboutText
-	text_end
+	text "いもむし　#には"
+	line "２しゅるい　いるって　しらない？"
+	done
 
 .OkThenText:
-	text_far ViridianCityYoungster2OkThenText
-	text_end
+	text "それなら　いいんだ！"
+	done
 
 .CaterpieAndWeedleDescriptionText:
-	text_far ViridianCityYoungster2CaterpieAndWeedleDescriptionText
-	text_end
+	text "キャタピーは　どくが　ないけど"
+	line "ビードルには　どくが　あるよ"
+
+	para "#が　さされないように"
+	line "きを　つけようね"
+	done
 
 ViridianCityPrintGirlText::
 	ld hl, .WhenIGoShopText
@@ -62,12 +78,19 @@ ViridianCityPrintGirlText::
 	ret
 
 .HasntHadHisCoffeeYetText:
-	text_far _ViridianCityGirlHasntHadHisCoffeeYetText
-	text_end
+	text "あらら　じいちゃん！"
+	line "こんな　ところで　ねちゃって"
+	cont "しょーが　ないわね！"
+	cont "よいが　さめるまで　まつしかないわ"
+	done
 
 .WhenIGoShopText:
-	text_far _ViridianCityGirlWhenIGoShopText
-	text_end
+	text "ときどき　ニビシティまで"
+	line "おかいものに　いきますけど"
+
+	para "トキワのもり　って"
+	line "みちが　まがり　くねってるのよ"
+	done
 
 ViridianCityPrintOldManSleepyText::
 	ld hl, .PrivatePropertyText
@@ -82,8 +105,12 @@ ViridianCityPrintOldManSleepyText::
 	ret
 
 .PrivatePropertyText:
-	text_far _ViridianCityOldManSleepyPrivatePropertyText
-	text_end
+	text "ういーっ！　ひっく<⋯>　まちやがれ！"
+	line "わしの　はなしを　きけ！"
+
+	para "<⋯>　こら！"
+	line "いくな！　と　いっとろーが！"
+	done
 
 ViridianCityPrintFisherText::
 	CheckEvent EVENT_GOT_TM42
@@ -107,21 +134,35 @@ ViridianCityPrintFisherText::
 	ret
 
 .YouCanHaveThisText:
-	text_far ViridianCityFisherYouCanHaveThisText
-	text_end
+	text "ふあー！"
+	line "ひなたぼっこ　してて"
+	cont "ねむって　しまった！"
+
+	para "<⋯>　へんな　ゆめを　みた"
+	line "スリープが　ゆめを　くっていた！"
+	cont "<⋯>およ？　ぼく　いつのまに"
+	cont "<TM>　もってるけど？"
+
+	para "うーん"
+	line "きみが　わるい！"
+	cont "これ　きみに　あげる！"
+	prompt
 
 .ReceivedTM42Text:
-	text_far _ViridianCityFisherReceivedTM42Text
+	text "<PLAYER>は　にいちゃんから"
+	line "<TM>４２を　もらった！@"
 	sound_get_item_2
 	text_end
 
 .TM42ExplanationText:
-	text_far _ViridianCityFisherTM42ExplanationText
-	text_end
+	text "<TM>４２の　なかみは<⋯>"
+	line "ゆめくい　だよ<⋯>"
+	cont "<⋯>　ぐー<⋯>"
+	done
 
 .TM42NoRoomText:
-	text_far _ViridianCityFisherTM42NoRoomText
-	text_end
+	text "にもつ　いっぱい　じゃん"
+	done
 
 ViridianCityPrintOldManText::
 	ld hl, .WantMeToShowYouAgainText
@@ -144,16 +185,21 @@ ViridianCityPrintOldManText::
 	ret
 
 .WantMeToShowYouAgainText:
-	text_far _ViridianCityOldManWantMeToShowYouAgainText
-	text_end
+	text "なんじゃ！？"
+	line "また　つかまえかたの"
+	cont "おてほんを　みに　きたのか？"
+	done
 
 .WatchCloselyText:
-	text_far _ViridianCityOldManWatchCloselyText
-	text_end
+	text "ほっほう！"
+	line "では<⋯>　わしが"
+	cont "おてほんを　みせて　やるかな！"
+	done
 
 .NotGoodEnoughForYouText:
-	text_far _ViridianCityOldManNotGoodEnoughForYouText
-	text_end
+	text "そうか<⋯><⋯><⋯>"
+	line "わしは　うまくないからなー"
+	done
 
 ViridianCityPrintSignText::
 	ld hl, .text
@@ -161,8 +207,9 @@ ViridianCityPrintSignText::
 	ret
 
 .text
-	text_far _ViridianCitySignText
-	text_end
+	text "ここは　トキワシティ"
+	line "トキワは　みどり　えいえんのいろ"
+	done
 
 ViridianCityPrintTrainerTips1Text::
 	ld hl, .text
@@ -170,8 +217,13 @@ ViridianCityPrintTrainerTips1Text::
 	ret
 
 .text
-	text_far _ViridianCityTrainerTips1Text
-	text_end
+	text "<⋯>　おとくな　けいじばん！"
+
+	para "とにかく　#を　つかまえて"
+	line "ドンドン　ふやそう！"
+	cont "<TRAINER>との　しょうぶも"
+	cont "たくさん　もってると　ゆうり！"
+	done
 
 ViridianCityPrintTrainerTips2Text::
 	ld hl, .text
@@ -179,8 +231,16 @@ ViridianCityPrintTrainerTips2Text::
 	ret
 
 .text
-	text_far _ViridianCityTrainerTips2Text
-	text_end
+	text "<⋯>　おとくな　けいじばん！"
+
+	para "#には　たいりょくの　ほか"
+	line "わざを　くりだす　げんきの　もと"
+	cont "パワーポイントが　あります"
+
+	para "わざ　ごとの　パワーポイントが"
+	line "なくなった　ときも"
+	cont "#センターで　やすませて！"
+	done
 
 ViridianCityPrintGymSignText::
 	ld hl, .text
@@ -188,8 +248,8 @@ ViridianCityPrintGymSignText::
 	ret
 
 .text
-	text_far _ViridianCityGymSignText
-	text_end
+	text "トキワ　#ジム"
+	done
 
 ViridianCityPrintGymLockedText::
 	ld hl, .text
@@ -197,19 +257,6 @@ ViridianCityPrintGymLockedText::
 	ret
 
 .text
-	text_far _ViridianCityGymLockedText
-	text_end
-
-
-ViridianCityMovePikachu::
-	ld hl, ViridianCityPikachuMovementData
-	ld b, SPRITE_FACING_RIGHT
-	call TryApplyPikachuMovementData
-	ret
-
-ViridianCityPikachuMovementData:
-	db $00
-	db $1d
-	db $1f
-	db $38
-	db $3f
+	text "トキワ　ジムのドアには"
+	line "カギが　かかって　いた<⋯>！"
+	done

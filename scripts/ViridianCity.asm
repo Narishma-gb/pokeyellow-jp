@@ -310,8 +310,10 @@ ViridianCityOldManText:
 	jp TextScriptEnd
 
 ViridianCityOldManYouNeedToWeakenTheTargetText:
-	text_far _ViridianCityOldManYouNeedToWeakenTheTargetText
-	text_end
+	text "はじめの　うちは"
+	line "#を　よわらせてから"
+	cont "とるのが　コツじゃ！"
+	done
 
 ViridianCityOldMan2Text:
 	text_asm
@@ -332,12 +334,30 @@ ViridianCityOldMan2Text:
 	jp TextScriptEnd
 
 .HadMyCoffeeNowText:
-	text_far _ViridianCityOldManHadMyCoffeeNowText
-	text_end
+	text "うーん<⋯>"
+	line "よっぱらってた　みたいじゃ！"
+
+	para "あたまが　いたい<⋯>"
+
+	para "<⋯>　なに？"
+	line "わしが　じゃまで　とおれなかった？"
+
+	para "<⋯>　<⋯>　ほっほう"
+	line "#ずかんを　つくっとるのか！"
+
+	para "だったら　おわびに　#の"
+	line "つかまえかたを　みせてやろう！"
+	done
 
 .LosingMyTouchText:
-	text_far _ViridianCityOldManLosingMyTouchText
-	text_end
+	text "んー　しっぱい　じゃー"
+	line "わしも　うでが　おちたのー"
+
+	para "モンスターボールも"
+	line "なくなって　しまったし"
+	cont "ちかくの　フレンドリィショップに"
+	cont "かいに　いくかな"
+	done
 
 ViridianCitySignText:
 	text_asm

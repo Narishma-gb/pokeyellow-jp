@@ -6,5 +6,10 @@ VermilionTradeHouse_TextPointers:
 	dw_const VermilionTradeHouseGentlemanText, TEXT_VERMILIONTRADEHOUSE_GENTLEMAN
 
 VermilionTradeHouseGentlemanText:
-	text_far TeachingHMsText
-	text_end
+	text "ひでんマシンで"
+	line "おぼえさせた　わざは"
+	cont "わすれさせることが　できない"
+
+	para "おぼえさせるときは"
+	line "よく　かんがえた　ほうが　いいな"
+	done

@@ -45,25 +45,38 @@ VermilionCityPrintOfficerJennyText::
 	ret
 
 OfficerJennyText1:
-	text_far _OfficerJennyText1
-	text_end
+	text "さいきん　いたずら　ばかりする"
+	line "ゼニガメを　つかまえたの！"
+
+	para "うでのいい　トレーナーが　いたら"
+	line "このこを　まかせたいんだけど<⋯>"
+	done
 
 OfficerJennyText2:
-	text_far _OfficerJennyText2
-	text_end
+	text "その　オレンジバッジ！"
+	line "あなた<⋯>"
+
+	para "うでのいい　トレーナーのようね！"
+
+	para "さいきん　いたずら　ばかりする"
+	line "ゼニガメを　つかまえたの！"
+	cont "あなた　ひきとって　くれない？"
+	done
 
 OfficerJennyText3:
-	text_far _OfficerJennyText3
+	text "まかせたわ！"
+	line "だいじに　そだてて　あげてね！@"
 	text_waitbutton
 	text_end
 
 OfficerJennyText4:
-	text_far _OfficerJennyText4
-	text_end
+	text "どうしようかしら<⋯>"
+	line "こまったわ"
+	done
 
 OfficerJennyText5:
-	text_far _OfficerJennyText5
-	text_end
+	text "ゼニガメ　げんきで　やっている？"
+	done
 
 VermilionCityPrintSignText::
 	ld hl, .text
@@ -71,8 +84,9 @@ VermilionCityPrintSignText::
 	ret
 
 .text
-	text_far _VermilionCitySignText
-	text_end
+	text "ここは　クチバ　シティ"
+	line "クチバは　オレンジ　ゆうやけのいろ"
+	done
 
 VermilionCityPrintNoticeSignText::
 	ld hl, .text
@@ -80,8 +94,18 @@ VermilionCityPrintNoticeSignText::
 	ret
 
 .text
-	text_far _VermilionCityNoticeSignText
-	text_end
+	text "<⋯>　おしらせの　チラシだ！"
+
+	para "さいきん<⋯>　１２ばん　どうろに"
+	line "いねむり　#が　しゅつぼつ"
+	cont "とおれない　ことが　あります！"
+
+	para "そういう　とき　シオン　タウンへ"
+	line "いく　かたは　いわやま　トンネルを"
+	cont "とおって　ください！"
+
+	para "<⋯>　クチバ　けいさつ　より"
+	done
 
 VermilionCityPrintPokemonFanClubSignText::
 	ld hl, .text
@@ -89,8 +113,9 @@ VermilionCityPrintPokemonFanClubSignText::
 	ret
 
 .text
-	text_far _VermilionCityPokemonFanClubSignText
-	text_end
+	text "こちら　#　だいすき　クラブ"
+	line "#ずき　だれでも　かんげい！"
+	done
 
 VermilionCityPrintGymSignText::
 	ld hl, .text
@@ -98,8 +123,10 @@ VermilionCityPrintGymSignText::
 	ret
 
 .text
-	text_far _VermilionCityGymSignText
-	text_end
+	text "クチバ　シティ　#　ジム"
+	line "リーダー　マチス"
+	cont "イナズマ　アメリカン！"
+	done
 
 VermilionCityPrintHarborSignText::
 	ld hl, .text
@@ -107,5 +134,5 @@ VermilionCityPrintHarborSignText::
 	ret
 
 .text
-	text_far _VermilionCityHarborSignText
-	text_end
+	text "クチバ　みなと　いりぐち"
+	done

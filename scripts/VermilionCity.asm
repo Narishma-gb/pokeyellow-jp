@@ -150,8 +150,12 @@ VermilionCity_TextPointers:
 	dw_const VermilionCityHarborSignText,         TEXT_VERMILIONCITY_HARBOR_SIGN
 
 VermilionCityBeautyText:
-	text_far _VermilionCityBeautyText
-	text_end
+	text "わたし　スポーツの　あとは"
+	line "あせで　ベトベター！"
+
+	para "<⋯>しってる？　ベトベターって"
+	line "うみの　ヘドロから　うまれたの"
+	done
 
 VermilionCityGambler1Text:
 	text_asm
@@ -167,12 +171,18 @@ VermilionCityGambler1Text:
 	jp TextScriptEnd
 
 .DidYouSeeText:
-	text_far _VermilionCityGambler1DidYouSeeText
-	text_end
+	text "みたかね！　いま　みなとに"
+	line "サント·アンヌごう　という"
+	cont "ふねが　きとるぞ！"
+	done
 
 .SSAnneDepartedText:
-	text_far _VermilionCityGambler1SSAnneDepartedText
-	text_end
+	text "おお！　サント·アンヌごう"
+	line "しゅっぱつ　して　いったか！"
+
+	para "つぎに　クチバに　くる　のは"
+	line "らいねんの　いまごろ　じゃな<⋯>"
+	done
 
 VermilionCitySailor1Text:
 	text_asm
@@ -217,31 +227,50 @@ VermilionCitySailor1Text:
 	db -1 ; end
 
 .WelcomeToSSAnneText:
-	text_far _VermilionCitySailor1WelcomeToSSAnneText
-	text_end
+	text "ようこそ　サント·アンヌ　ごうへ！"
+	done
 
 .DoYouHaveATicketText:
-	text_far _VermilionCitySailor1DoYouHaveATicketText
-	text_end
+	text "ようこそ　サント·アンヌ　ごうへ！"
+
+	para "ちょっと　まって！"
+	line "おきゃくさん　チケットは？"
+	prompt
 
 .FlashedTicketText:
-	text_far _VermilionCitySailor1FlashedTicketText
-	text_end
+	text "<PLAYER>は　せんいんに"
+	line "ふねのチケットを　みせた！"
+
+	para "はい！　けっこう　です！"
+	line "ようこそ　サント·アンヌ　ごうへ！"
+	done
 
 .YouNeedATicketText:
-	text_far _VermilionCitySailor1YouNeedATicketText
-	text_end
+	text "<PLAYER>は　せんいんに"
+	line "チケットを　みせようとした<⋯>"
+	cont "チケットが<⋯>　ない<⋯>！"
+
+	para "<⋯>もうしわけ　ありません！"
+
+	para "はいれる　のは"
+	line "チケットの　ある　かた　だけです"
+	done
 
 .ShipSetSailText:
-	text_far _VermilionCitySailor1ShipSetSailText
-	text_end
+	text "ふねは　しゅっこうしました"
+	done
 
 VermilionCityGambler2Text:
-	text_far _VermilionCityGambler2Text
-	text_end
+	text "わし　じぬし！"
+	line "この　しかくの　ばしょ"
+	cont "ぜーんぶ　わしの　とち！"
+
+	para "ここに　ビル　たてようと　おもって"
+	line "#に　じならし　させとる！"
+	done
 
 VermilionCityMachopText:
-	text_far _VermilionCityMachopText
+	text "ワンリキー『ごおーっ　ごごごー@"
 	text_asm
 	ld a, MACHOP
 	call PlayCry
@@ -250,12 +279,19 @@ VermilionCityMachopText:
 	ret
 
 .StompingTheLandFlatText:
-	text_far _VermilionCityMachopStompingTheLandFlatText
-	text_end
+	text_start
+
+	para "ワンリキーは　うなりながら"
+	line "じめんを　ならしている！"
+	done
 
 VermilionCitySailor2Text:
-	text_far _VermilionCitySailor2Text
-	text_end
+	text "サント·アンヌごうは"
+	line "ゆうめいな　ごうか　きゃくせん！"
+
+	para "１ねんに　１ど　だけ"
+	line "クチバこう　に　とまるんだ！"
+	done
 
 VermilionCitySignText:
 	text_asm

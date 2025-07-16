@@ -108,7 +108,7 @@ PalletTownOakGreetsPlayerScript:
 	ret nz
 	ld a, ~(A_BUTTON | B_BUTTON)
 	ld [wJoyIgnore], a
-	ld a, 1
+	ld a, TRUE
 	ld [wOakWalkedToPlayer], a
 	ld a, $2
 	ld [wSprite01StateData1MovementStatus], a
@@ -251,7 +251,8 @@ PalletTownOakText:
 	jp TextScriptEnd
 
 .HeyWaitDontGoOutText:
-	text_far _PalletTownOakHeyWaitDontGoOutText
+	text "オーキド『おーい！"
+	line "まてー！　まつんじゃあ！@"
 	text_asm
 	ld c, 10
 	call DelayFrames
@@ -265,52 +266,60 @@ PalletTownOakText:
 	jp TextScriptEnd
 
 .ThatWasCloseText:
-	text_far _PalletTownOakThatWasCloseText
-	text_end
+	text "オーキド『あぶない　とこだった！"
+
+	para "くさむらでは"
+	line "やせいの　#が　とびだす！"
+	done
 
 .WhewText:
-	text_far _PalletTownOakWhewText
-	text_end
+	text "オーキド『ふう<⋯>"
+	done
 
 PalletTownOakComeWithMe:
-	text_far _PalletTownOakComeWithMe
-	text_end
+	text "オーキド『このように　くさむらは"
+	line "いつ　#が　とびだして"
+	cont "くるか　わからない！"
+
+	para "こちらも　#を"
+	line "もって　いれば"
+	cont "たたかえるのだが<⋯>"
+	cont "そうじゃ！"
+
+	para "<⋯>　ちょっと"
+	line "わしに　ついて　きなさい！"
+	done
 
 PalletTownGirlText:
-	text_far _PalletTownGirlText
-	text_end
+	text "わたしも"
+	line "#を　そだててるの！"
+
+	para "つよく　なれば"
+	line "ガードマンの　かわりに　なるしね"
+	done
 
 PalletTownFisherText:
-	text_far _PalletTownFisherText
-	text_end
+	text "かがくの　ちからって　すげー！"
+
+	para "いまは　<PC>つうしんで"
+	line "どうぐや　#を"
+	cont "データにして　おくれるんだと"
+	done
 
 PalletTownOaksLabSignText:
-	text_far _PalletTownOaksLabSignText
-	text_end
+	text "ここは　オーキド　はかせの"
+	line "#　けんきゅうじょ"
+	done
 
 PalletTownSignText:
-IF DEF(_DEBUG)
-	text_asm
-	ld a, 239
-	inc a
-	ld [wWhichPewterGuy], a
-	ld hl, .Text
-	call PrintText
-	jp TextScriptEnd
-
-.Text:
-	text_decimal wWhichPewterGuy, 1, 3
-	text "bit"
+	text "ここは　マサラ　タウン"
+	line "マサラは　まっしろ　はじまりのいろ"
 	done
-ELSE
-	text_far _PalletTownSignText
-	text_end
-ENDC
 
 PalletTownPlayersHouseSignText:
-	text_far _PalletTownPlayersHouseSignText
-	text_end
+	text "ここは　<PLAYER>　のいえ"
+	done
 
 PalletTownRivalsHouseSignText:
-	text_far _PalletTownRivalsHouseSignText
-	text_end
+	text "ここは　<RIVAL>　のいえ"
+	done

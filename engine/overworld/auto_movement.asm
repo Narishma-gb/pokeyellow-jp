@@ -1,6 +1,6 @@
 PlayerStepOutFromDoor::
 	ld hl, wStatusFlags5 ; should this be wMovementFlags?
-	res BIT_EXITING_DOOR, [hl]
+	res BIT_UNKNOWN_5_1, [hl]
 	call IsPlayerStandingOnDoorTile
 	jr nc, .notStandingOnDoor
 	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
@@ -131,9 +131,8 @@ PalletMovementScript_WalkToLab:
 	ld [wNPCMovementScriptFunctionNum], a
 	ret
 
-
 RLEList_ProfOakWalkToLab:
-	db NPC_MOVEMENT_DOWN, 6 ; differs from red
+	db NPC_MOVEMENT_DOWN, 6 ; new yellow value
 	db NPC_MOVEMENT_LEFT, 1
 	db NPC_MOVEMENT_DOWN, 5
 	db NPC_MOVEMENT_RIGHT, 3
@@ -146,7 +145,7 @@ RLEList_PlayerWalkToLab:
 	db D_RIGHT, 3
 	db D_DOWN, 5
 	db D_LEFT, 1
-	db D_DOWN, 7 ; differs from red
+	db D_DOWN, 7 ; new yellow value
 	db -1 ; end
 
 PalletMovementScript_Done:

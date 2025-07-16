@@ -22,7 +22,7 @@ CeruleanCity_ScriptPointers:
 
 CeruleanCityRocketDefeatedScript:
 	ld a, [wIsInBattle]
-	cp $ff
+	cp $ff ; lost battle
 	jp z, CeruleanCityClearScripts
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
@@ -36,10 +36,6 @@ CeruleanCityRocketDefeatedScript:
 	ret
 
 CeruleanCityDefaultScript:
-IF DEF(_DEBUG)
-	call DebugPressedOrHeldB
-	ret nz
-ENDC
 	CheckEvent EVENT_BEAT_CERULEAN_ROCKET_THIEF
 	jr nz, .skipRocketThiefEncounter
 	ld hl, CeruleanCityCoords1
@@ -150,7 +146,7 @@ CeruleanCityRivalBattleScript:
 
 CeruleanCityRivalDefeatedScript:
 	ld a, [wIsInBattle]
-	cp $ff
+	cp $ff ; lost battle
 	jp z, CeruleanCityClearScripts
 	call CeruleanCityFaceRivalScript
 	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
@@ -249,20 +245,55 @@ CeruleanCityRivalText:
 	jp TextScriptEnd
 
 .PreBattleText:
-	text_far _CeruleanCityRivalPreBattleText
-	text_end
+	text "<RIVAL>『よう　<PLAYER>！"
+
+	para "こんな　とこ"
+	line "うろちょろ　してたのか！"
+
+	para "おれ　なんか　つよいの　すごいの"
+	line "いろいろ　つかまえ　ちゃって"
+	cont "ぜっこうちょう　だぜ！"
+
+	para "<⋯>　どれどれ　<PLAYER>は"
+	line "なんか　つかまえた？"
+	cont "みせて　みろよ！"
+	done
 
 CeruleanCityRivalDefeatedText:
-	text_far _CeruleanCityRivalDefeatedText
-	text_end
+	text "なんだよー！"
+	line "ムキに　なっちゃって！"
+	cont "<⋯>　わかった　わかった！"
+	prompt
 
 CeruleanCityRivalVictoryText:
-	text_far _CeruleanCityRivalVictoryText
-	text_end
+	text "なんたって！"
+	line "おれは　てんさい　だからよ！"
+	prompt
 
 CeruleanCityRivalIWentToBillsText:
-	text_far _CeruleanCityRivalIWentToBillsText
-	text_end
+	text "<RIVAL>『へへーんッ！"
+
+	para "おれ　マサキの　うちに　いって"
+	line "めずらしい　#　たくさん"
+	cont "みせて　もらっちゃった　もんね！"
+
+	para "おかげで　#　ずかんの"
+	line "ページが　ふえたぜ！"
+
+	para "なにしろ　マサキは　ゆうめいな"
+	line "#　マニア　だからな！"
+
+	para "<PC>　つうしんの"
+	line "#　あずかり　システム！"
+	cont "あれも　マサキが　つくったんだぜ"
+
+	para "おまえも　つかってるんなら"
+	line "いちど　おれいに　いけば？"
+
+	para "おっと　みちくさ　くってる"
+	line "ばあい　じゃ　ないぜ！"
+	cont "<⋯>　じゃな　バイビー！"
+	done
 
 CeruleanCityRocketText:
 	text_asm
@@ -302,43 +333,77 @@ CeruleanCityRocketText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _CeruleanCityRocketText
-	text_end
+	text "あ　こら！"
+	line "ひとんちの　にわ　はいるなよ！"
+	cont "<⋯>　<⋯>　え　おれ？"
+
+	para "<⋯>　ただの　とおり　すがりだ"
+	line "ぜーんぜん　あやしくないよ！"
+	cont "<⋯>　<⋯>　あやしい？"
+	done
 
 .ReceivedTM28Text:
-	text_far _CeruleanCityRocketReceivedTM28Text
+	text "<PLAYER>は　<ROCKET>いんから"
+	line "<TM>２８を　とりかえした！@"
 	sound_get_item_1
-	text_far _CeruleanCityRocketIBetterGetMovingText
+	text_start
+
+	para "そ　それじゃ<⋯>！"
+	line "おれは　たいさん　するから！"
+	cont "<⋯>　<⋯>　ばいばーい！@"
 	text_waitbutton
 	text_end
 
 .TM28NoRoomText:
-	text_far _CeruleanCityRocketTM28NoRoomText
-	text_end
+	text "にもつが　いっぱいだ！"
+
+	para "<⋯>　これ　わたさないと"
+	line "おれ　にげられないよ！"
+	done
 
 .IGiveUpText:
-	text_far _CeruleanCityRocketIGiveUpText
-	text_end
+	text "ひょえー　まいった！"
+	line "もう　しないよ！"
+	cont "みのがして　くれい！"
+	prompt
 
 .IllReturnTheTMText:
-	text_far _CeruleanCityRocketIllReturnTheTMText
-	text_end
+	text "<⋯>　わかった！"
+	line "ぬすんだ　<TM>も　かえすよ"
+	prompt
 
 CeruleanCityCooltrainerMText:
-	text_far _CeruleanCityCooltrainerMText
-	text_end
+	text "きみも　#　やってるか！"
+	line "あつめたり　たたかったり"
+	cont "いろいろ　たいへん　だな！"
+	done
 
 CeruleanCitySuperNerd1Text:
-	text_far _CeruleanCitySuperNerd1Text
-	text_end
+	text "みせの　まえの　うえきが　じゃまで"
+	line "むこうへ　いけないよ！"
+
+	para "でも　どこか　まわりみち　すると"
+	line "いける　らしい　けど<⋯>"
+	done
 
 CeruleanCitySuperNerd2Text:
-	text_far _CeruleanCitySuperNerd2Text
-	text_end
+	text "ほほう<⋯>！"
+	line "#の　ずかんを　つくってる？"
+	cont "それは　たのしそう　だなあ！"
+	done
 
 CeruleanCityGuardText:
-	text_far _CeruleanCityGuardText
-	text_end
+	text "かわいそうに<⋯>"
+
+	para "この　いえは"
+	line "ドロボーに　はいられたの！"
+	cont "はんにんは　わかっています！"
+	cont "ロケットだんの　しわざよ！"
+
+	para "けいさつ　としても"
+	line "ロケットだんの　あくじ　には"
+	cont "ほとほと　こまっているの！"
+	done
 
 CeruleanCityCooltrainerF1Text:
 	text_asm
@@ -351,27 +416,37 @@ CeruleanCityCooltrainerF1Text:
 .notFirstText
 	cp 100 ; 80/256 chance of 2nd dialogue
 	jr c, .notSecondText
-	ld hl, .ElectrodePunchText
+	ld hl, .ElectrodeTackleText
 	call PrintText
 	jr .end
 .notSecondText
 	; 100/256 chance of 3rd dialogue
-	ld hl, .ElectrodeWithdrawText
+	ld hl, .ElectrodeSwiftText
 	call PrintText
 .end
 	jp TextScriptEnd
 
 .ElectrodeUseSonicboomText:
-	text_far _CeruleanCityCooltrainerF1ElectrodeUseSonicboomText
-	text_end
+	text "さあ　マルマイン！"
+	line "ソニックブーム　よ！"
+	cont "<⋯>　まる　ってば"
+	cont "わたしの　いうこと　きいて！"
+	done
 
-.ElectrodePunchText:
-	text_far _CeruleanCityCooltrainerF1ElectrodePunchText
-	text_end
+.ElectrodeTackleText:
+	text "マルマイン！　そこで　たいあたりっ！"
+	line "<⋯>　がっくし　また　ダメ！"
+	done
 
-.ElectrodeWithdrawText:
-	text_far _CeruleanCityCooltrainerF1ElectrodeWithdrawText
-	text_end
+.ElectrodeSwiftText:
+	text "マルマイン！　スピードスター！"
+	line "あん　<⋯>ちがーう！"
+	cont "#って　むずかしいわ！"
+
+	para "#が"
+	line "いうこと　きくか　どうかは"
+	cont "ひとの　うでまえ　しだい　なんだもの"
+	done
 
 CeruleanCityElectrodeText:
 	text_asm
@@ -401,41 +476,58 @@ CeruleanCityElectrodeText:
 	jp TextScriptEnd
 
 .TookASnoozeText:
-	text_far _CeruleanCityElectrodeTookASnoozeText
-	text_end
+	text "マルマインは　ひるね　してる<⋯>"
+	done
 
 .IsLoafingAroundText:
-	text_far _CeruleanCityElectrodeIsLoafingAroundText
-	text_end
+	text "マルマインは　なまけてる<⋯>"
+	done
 
 .TurnedAwayText:
-	text_far _CeruleanCityElectrodeTurnedAwayText
-	text_end
+	text "マルマインは　そっぽを　むいた！"
+	done
 
 .IgnoredOrdersText:
-	text_far _CeruleanCityElectrodeIgnoredOrdersText
-	text_end
+	text "マルマインは　しらんぷり　した<⋯>"
+	done
 
 CeruleanCityCooltrainerF2Text:
-	text_far _CeruleanCityCooltrainerF2Text
-	text_end
+	text "わたしも　じてんしゃ　ほしい！"
+	line "まっかな　じてんしゃ！"
+
+	para "それで　よごすの　いや　だから"
+	line "おうちに　かざるわ！"
+	done
 
 CeruleanCitySuperNerd3Text:
-	text_far _CeruleanCitySuperNerd3Text
-	text_end
+	text "ここは<⋯>　ハナダ　どうくつ！"
+	line "こわい　ほど　つよい　#が"
+	cont "せいそく　してるぞ！"
+
+	para "#　リーグ　にんてい"
+	line "チャンピオン　しか　はいれないのだ！"
+	done
 
 CeruleanCitySignText:
-	text_far _CeruleanCitySignText
-	text_end
+	text "ここは　ハナダシティ"
+	line "ハナダは　みずいろ　しんぴのいろ"
+	done
 
 CeruleanCityTrainerTipsText:
-	text_far _CeruleanCityTrainerTipsText
-	text_end
+	text "<⋯>　おとくな　けいじばん！"
+
+	para "しんかの　さいちゅうに"
+	line "ビー　ボタンを　おすと"
+	cont "しんかは　とまって　しまいます"
+	done
 
 CeruleanCityBikeShopSign:
-	text_far _CeruleanCityBikeShopSign
-	text_end
+	text "くさむらも　どうくつも　スイスイ！"
+	line "<⋯>　<⋯>　ミラクル·サイクル"
+	done
 
 CeruleanCityGymSign:
-	text_far _CeruleanCityGymSign
-	text_end
+	text "ハナダ　シティ　#　ジム"
+	line "リーダー　カスミ"
+	cont "おてんば　にんぎょ"
+	done

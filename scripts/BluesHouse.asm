@@ -59,30 +59,42 @@ BluesHouseDaisySittingText:
 	jp TextScriptEnd
 
 BluesHouseDaisyRivalAtLabText:
-	text_far _BluesHouseDaisyRivalAtLabText
-	text_end
+	text "こんにちは　<PLAYER>くん！"
+	line "おとうとの　<RIVAL>なら"
+	cont "おじいちゃんの　けんきゅうじょよ"
+	done
 
 BluesHouseDaisyOfferMapText:
-	text_far _BluesHouseDaisyOfferMapText
-	text_end
+	text "オーキドの　おじいちゃん"
+	line "おしごと　たのんだんだって？"
+	cont "たいへんねー"
+	cont "これ　あげるから　つかって！"
+	prompt
 
 GotMapText:
-	text_far _GotMapText
+	text "<PLAYER>は　おねえさんから"
+	line "@"
+	text_ram wStringBuffer
+	text "を　もらった！@"
 	sound_get_key_item
 	text_end
 
 BluesHouseDaisyBagFullText:
-	text_far _BluesHouseDaisyBagFullText
-	text_end
+	text "にもつ　いっぱいよ"
+	done
 
 BluesHouseDaisyUseMapText:
-	text_far _BluesHouseDaisyUseMapText
-	text_end
+	text "じぶんの　いる　ばしょや"
+	line "まちの　なまえが　しりたいとき"
+	cont "タウンマップ　つかうと　いいわよ"
+	done
 
 BluesHouseDaisyWalkingText:
-	text_far _BluesHouseDaisyWalkingText
-	text_end
+	text "いつも　いっしょに　いると"
+	line "#とも　なかよく　なれるわよ"
+	done
 
 BluesHouseTownMapText:
-	text_far _BluesHouseTownMapText
-	text_end
+	text "カントー　ちほうの　ちずだ！"
+	line "<⋯>　もらえたら　うれしい？"
+	done

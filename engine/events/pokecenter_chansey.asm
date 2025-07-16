@@ -7,5 +7,5 @@ PokecenterChanseyText::
 	ret
 
 NurseChanseyText:
-	text_far _NurseChanseyText
-	text_end
+	text "ラッキー『ラッキー"
+	done
