@@ -106,16 +106,18 @@ SECTION "Pikachu PCM", ROMX
 INCLUDE "engine/pikachu/pikachu_pcm.asm"
 
 
-;SECTION "Play Time", ROMX
+SECTION "bank3C", ROMX
 
-;INCLUDE "engine/play_time.asm"
+INCLUDE "engine/overworld/unused_load_missable_object_data.asm"
+INCLUDE "engine/events/pokecenter_chansey.asm"
 
 
-;SECTION "Doors and Ledges", ROMX
+SECTION "Doors and Ledges", ROMX
 
-;INCLUDE "engine/overworld/auto_movement.asm"
-;INCLUDE "engine/overworld/doors.asm"
-;INCLUDE "engine/overworld/ledges.asm"
+INCLUDE "engine/overworld/auto_movement.asm"
+INCLUDE "engine/events/pewter_guys.asm"
+INCLUDE "engine/overworld/doors.asm"
+INCLUDE "engine/overworld/ledges.asm"
 
 
 ;SECTION "Clear Save", ROMX
@@ -174,7 +176,7 @@ INCLUDE "engine/pikachu/pikachu_pcm.asm"
 ;INCLUDE "engine/movie/title2.asm"
 ;INCLUDE "engine/battle/link_battle_versus_text.asm"
 ;INCLUDE "engine/slots/slot_machine.asm"
-;INCLUDE "engine/events/pewter_guys.asm"
+
 ;INCLUDE "engine/math/multiply_divide.asm"
 ;INCLUDE "engine/slots/game_corner_slots.asm"
 

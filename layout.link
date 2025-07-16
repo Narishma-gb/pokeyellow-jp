@@ -58,7 +58,10 @@ ROMX $5
 	"Battle Engine 2"
 	"Garbage 5"
 ROMX $6
-	"rom6"
+	"Maps 1"
+	"Maps 2"
+	"Doors and Ledges"
+	"Garbage 6"
 ROMX $7
 	"rom7"
 ROMX $8
@@ -177,6 +180,8 @@ ROMX $3b
 	"rom59"
 ROMX $3c
 	"Tilesets 4"
+	"bank3C"
+	"Maps 22"
 	"rom60"
 ROMX $3d
 	"rom61"
@@ -184,12 +189,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $6
-; 	"Maps 1"
-; 	"Play Time"
-; 	"Maps 2"
-; 	"Doors and Ledges"
-; 	"Garbage 6"
 ; ROMX $7
 ; 	"Maps 3"
 ; 	"Clear Save"

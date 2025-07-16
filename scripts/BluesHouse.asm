@@ -1,8 +1,9 @@
 BluesHouse_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, BluesHouse_ScriptPointers
-	ld a, [wBluesHouseCurScript]
-	jp CallFunctionInTable
+	xor a
+	call CallFunctionInTable
+	ret
 
 BluesHouse_ScriptPointers:
 	def_script_pointers
@@ -13,8 +14,6 @@ BluesHouseDefaultScript:
 	SetEvent EVENT_ENTERED_BLUES_HOUSE
 	ld a, SCRIPT_BLUESHOUSE_NOOP
 	ld [wBluesHouseCurScript], a
-	ret
-
 BluesHouseNoopScript:
 	ret
 
@@ -37,12 +36,12 @@ BluesHouseDaisySittingText:
 .give_town_map
 	ld hl, BluesHouseDaisyOfferMapText
 	call PrintText
-	ld a, HS_TOWN_MAP
-	ld [wMissableObjectIndex], a
-	predef HideObject
 	lb bc, TOWN_MAP, 1
 	call GiveItem
 	jr nc, .bag_full
+	ld a, HS_TOWN_MAP
+	ld [wMissableObjectIndex], a
+	predef HideObject
 	ld hl, GotMapText
 	call PrintText
 	SetEvent EVENT_GOT_TOWN_MAP
@@ -91,10 +90,8 @@ BluesHouseDaisyUseMapText:
 	done
 
 BluesHouseDaisyWalkingText:
-	text "にんげんと　おなじように"
-	line "#も　いきてるの！"
-	cont "たいりょくが　ないときは"
-	cont "やすませて　あげて！"
+	text "いつも　いっしょに　いると"
+	line "#とも　なかよく　なれるわよ"
 	done
 
 BluesHouseTownMapText:

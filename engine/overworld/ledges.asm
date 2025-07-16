@@ -61,19 +61,20 @@ LoadHoppingShadowOAM:
 	ld de, LedgeHoppingShadow
 	lb bc, BANK(LedgeHoppingShadow), (LedgeHoppingShadowEnd - LedgeHoppingShadow) / $8
 	call CopyVideoDataDouble
-	ld a, $9
-	lb bc, $54, $48 ; b, c = y, x coordinates of shadow
-	ld de, LedgeHoppingShadowOAMBlock
-	call WriteOAMBlock
+	ld hl, LedgeHoppingShadowOAM
+	ld de, wShadowOAMSprite36
+	ld bc, LedgeHoppingShadowOAMEnd - LedgeHoppingShadowOAM
+	call CopyData
+	ld a, $a0
+	ld [wShadowOAMSprite38YCoord], a
+	ld [wShadowOAMSprite39YCoord], a
 	ret
 
 LedgeHoppingShadow:
 	INCBIN "gfx/overworld/shadow.1bpp"
 LedgeHoppingShadowEnd:
 
-LedgeHoppingShadowOAMBlock:
-; tile ID, attributes
-	db $ff, OAM_OBP1
-	db $ff, OAM_HFLIP
-	db $ff, OAM_VFLIP
-	db $ff, OAM_HFLIP | OAM_VFLIP
+LedgeHoppingShadowOAM:
+	dbsprite  9, 11,  0,  0, $ff, 0
+	dbsprite 10, 11,  0,  0, $ff, OAM_HFLIP
+LedgeHoppingShadowOAMEnd:

@@ -37,8 +37,8 @@ _EndNPCMovementScript::
 	res BIT_EXITING_DOOR, [hl]
 	xor a
 	ld [wNPCMovementScriptSpriteOffset], a
-	ld [wNPCMovementScriptPointerTableNum], a
 	ld [wNPCMovementScriptFunctionNum], a
+	ld [wNPCMovementScriptPointerTableNum], a
 	ld [wUnusedOverrideSimulatedJoypadStatesIndex], a
 	ld [wSimulatedJoypadStatesIndex], a
 	ld [wSimulatedJoypadStatesEnd], a
@@ -79,6 +79,10 @@ PalletMovementScript_OakMoveLeft:
 	ld a, $3
 	ld [wNPCMovementScriptFunctionNum], a
 .done
+	ld a, BANK(Music_MuseumGuy)
+	ld c, a
+	ld a, MUSIC_MUSEUM_GUY
+	call PlayMusic
 	ld hl, wStatusFlags7
 	set BIT_NO_MAP_MUSIC, [hl]
 	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
@@ -128,7 +132,7 @@ PalletMovementScript_WalkToLab:
 	ret
 
 RLEList_ProfOakWalkToLab:
-	db NPC_MOVEMENT_DOWN, 5
+	db NPC_MOVEMENT_DOWN, 6 ; new yellow value
 	db NPC_MOVEMENT_LEFT, 1
 	db NPC_MOVEMENT_DOWN, 5
 	db NPC_MOVEMENT_RIGHT, 3
@@ -141,7 +145,7 @@ RLEList_PlayerWalkToLab:
 	db D_RIGHT, 3
 	db D_DOWN, 5
 	db D_LEFT, 1
-	db D_DOWN, 6
+	db D_DOWN, 7 ; new yellow value
 	db -1 ; end
 
 PalletMovementScript_Done:
@@ -163,11 +167,9 @@ PewterMuseumGuyMovementScriptPointerTable::
 
 PewterMovementScript_WalkToMuseum:
 	ld a, BANK(Music_MuseumGuy)
-	ld [wAudioROMBank], a
-	ld [wAudioSavedROMBank], a
+	ld c, a
 	ld a, MUSIC_MUSEUM_GUY
-	ld [wNewSoundID], a
-	call PlaySound
+	call PlayMusic
 	ld a, [wSpriteIndex]
 	swap a
 	ld [wNPCMovementScriptSpriteOffset], a
@@ -179,7 +181,7 @@ PewterMovementScript_WalkToMuseum:
 	ld [wSimulatedJoypadStatesIndex], a
 	xor a
 	ld [wWhichPewterGuy], a
-	predef PewterGuys
+	call PewterGuys
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterMuseumGuy
 	call DecodeRLEList
@@ -219,11 +221,9 @@ PewterGymGuyMovementScriptPointerTable::
 
 PewterMovementScript_WalkToGym:
 	ld a, BANK(Music_MuseumGuy)
-	ld [wAudioROMBank], a
-	ld [wAudioSavedROMBank], a
+	ld c, a
 	ld a, MUSIC_MUSEUM_GUY
-	ld [wNewSoundID], a
-	call PlaySound
+	call PlayMusic
 	ld a, [wSpriteIndex]
 	swap a
 	ld [wNPCMovementScriptSpriteOffset], a
@@ -236,7 +236,7 @@ PewterMovementScript_WalkToGym:
 	ld [wSimulatedJoypadStatesIndex], a
 	ld a, 1
 	ld [wWhichPewterGuy], a
-	predef PewterGuys
+	call PewterGuys
 	ld hl, wNPCMovementDirections2
 	ld de, RLEList_PewterGymGuy
 	call DecodeRLEList
@@ -264,29 +264,4 @@ RLEList_PewterGymGuy:
 	db NPC_MOVEMENT_LEFT, 11
 	db NPC_MOVEMENT_DOWN, 5
 	db NPC_MOVEMENT_RIGHT, 3
-	db -1 ; end
-
-SetEnemyTrainerToStayAndFaceAnyDirection::
-	ld a, [wCurMap]
-	cp POKEMON_TOWER_7F
-	ret z ; the Rockets on Pokemon Tower 7F leave after battling, so don't set them
-	ld hl, RivalIDs
-	ld a, [wEngagedTrainerClass]
-	ld b, a
-.loop
-	ld a, [hli]
-	cp -1
-	jr z, .notRival
-	cp b
-	ret z ; the rival leaves after battling, so don't set him
-	jr .loop
-.notRival
-	ld a, [wSpriteIndex]
-	ldh [hSpriteIndex], a
-	jp SetSpriteMovementBytesToFF
-
-RivalIDs:
-	db OPP_RIVAL1
-	db OPP_RIVAL2
-	db OPP_RIVAL3
 	db -1 ; end

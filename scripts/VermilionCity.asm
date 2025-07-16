@@ -1,5 +1,7 @@
 VermilionCity_Script:
 	call EnableAutoTextBoxDrawing
+	ld hl, wd492
+	res 7, [hl]
 	ld hl, wCurrentMapScriptFlags
 	bit BIT_CUR_MAP_LOADED_2, [hl]
 	res BIT_CUR_MAP_LOADED_2, [hl]
@@ -11,11 +13,24 @@ VermilionCity_Script:
 	call nz, .setFirstLockTrashCanIndex
 	ld hl, VermilionCity_ScriptPointers
 	ld a, [wVermilionCityCurScript]
-	jp CallFunctionInTable
+	call CallFunctionInTable
+	call .vermilionCityScript_19869
+	ret
+
+.vermilionCityScript_19869
+	CheckEventHL EVENT_LEFT_FANCLUB_AFTER_BIKE_VOUCHER
+	ret nz
+	CheckEventReuseHL EVENT_GOT_BIKE_VOUCHER
+	ret z
+	SetEventReuseHL EVENT_LEFT_FANCLUB_AFTER_BIKE_VOUCHER
+	ret
 
 .setFirstLockTrashCanIndex
 	call Random
+	ldh a, [hRandomAdd]
+	ld b, a
 	ldh a, [hRandomSub]
+	adc b
 	and $e
 	ld [wFirstLockTrashCanIndex], a
 	ret
@@ -41,10 +56,10 @@ VermilionCity_ScriptPointers:
 VermilionCityDefaultScript:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
-	ret nz
+	jr nz, .return
 	ld hl, SSAnneTicketCheckCoords
 	call ArePlayerCoordsInArray
-	ret nc
+	jr nc, .return
 	xor a
 	ldh [hJoyHeld], a
 	ld [wSavedCoordIndex], a ; unnecessary
@@ -66,6 +81,9 @@ VermilionCityDefaultScript:
 	call StartSimulatingJoypadStates
 	ld a, SCRIPT_VERMILIONCITY_PLAYER_MOVING_UP1
 	ld [wVermilionCityCurScript], a
+	ret
+
+.return
 	ret
 
 SSAnneTicketCheckCoords:
@@ -122,6 +140,7 @@ VermilionCity_TextPointers:
 	dw_const VermilionCityGambler2Text,           TEXT_VERMILIONCITY_GAMBLER2
 	dw_const VermilionCityMachopText,             TEXT_VERMILIONCITY_MACHOP
 	dw_const VermilionCitySailor2Text,            TEXT_VERMILIONCITY_SAILOR2
+	dw_const VermilionCityOfficerJennyText,       TEXT_VERMILIONCITY_OFFICER_JENNY
 	dw_const VermilionCitySignText,               TEXT_VERMILIONCITY_SIGN
 	dw_const VermilionCityNoticeSignText,         TEXT_VERMILIONCITY_NOTICE_SIGN
 	dw_const MartSignText,                        TEXT_VERMILIONCITY_MART_SIGN
@@ -275,35 +294,31 @@ VermilionCitySailor2Text:
 	done
 
 VermilionCitySignText:
-	text "ここは　クチバ　シティ"
-	line "クチバは　オレンジ　ゆうやけのいろ"
-	done
+	text_asm
+	farcall VermilionCityPrintSignText
+	jp TextScriptEnd
 
 VermilionCityNoticeSignText:
-	text "<⋯>　おしらせの　チラシだ！"
-
-	para "さいきん<⋯>　１２ばん　どうろに"
-	line "いねむり　#が　しゅつぼつ"
-	cont "とおれない　ことが　あります！"
-
-	para "そういう　とき　シオン　タウンへ"
-	line "いく　かたは　いわやま　トンネルを"
-	cont "とおって　ください！"
-
-	para "<⋯>　クチバ　けいさつ　より"
-	done
+	text_asm
+	farcall VermilionCityPrintNoticeSignText
+	jp TextScriptEnd
 
 VermilionCityPokemonFanClubSignText:
-	text "こちら　#　だいすき　クラブ"
-	line "#ずき　だれでも　かんげい！"
-	done
+	text_asm
+	farcall VermilionCityPrintPokemonFanClubSignText
+	jp TextScriptEnd
 
 VermilionCityGymSignText:
-	text "クチバ　シティ　#　ジム"
-	line "リーダー　マチス"
-	cont "イナズマ　アメリカン！"
-	done
+	text_asm
+	farcall VermilionCityPrintGymSignText
+	jp TextScriptEnd
 
 VermilionCityHarborSignText:
-	text "クチバ　みなと　いりぐち"
-	done
+	text_asm
+	farcall VermilionCityPrintHarborSignText
+	jp TextScriptEnd
+
+VermilionCityOfficerJennyText:
+	text_asm
+	farcall VermilionCityPrintOfficerJennyText
+	jp TextScriptEnd

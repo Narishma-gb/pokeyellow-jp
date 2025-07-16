@@ -1,5 +1,14 @@
 CeladonCity_Script:
 	call EnableAutoTextBoxDrawing
+	ld hl, CeladonCity_ScriptPointers
+	ld a, [wCeladonCityCurScript]
+	call CallFunctionInTable
+	ret
+
+CeladonCity_ScriptPointers:
+	dw CeladonCityScript1
+
+CeladonCityScript1:
 	ResetEvents EVENT_1B8, EVENT_1BF
 	ResetEvent EVENT_67F
 	ret
@@ -27,10 +36,10 @@ CeladonCity_TextPointers:
 
 CeladonCityLittleGirlText:
 	text "わたしの　ドガース！"
-	line "グレンじま　で　つかまえたの！"
-	cont "おこると　どくガス　はくけど<⋯>"
+	line "ともだちから　もらったの！"
 
-	para "ふだんは　いいこ　なのよ"
+	para "なかよく　なるために"
+	line "いろいろ　やさしくして　あげたのよ！"
 	done
 
 CeladonCityGramps1Text:
@@ -136,17 +145,9 @@ CeladonCityRocket2Text:
 	done
 
 CeladonCityTrainerTips1Text:
-	text "<⋯>　おとくな　けいじばん！"
-
-	para "ヨクアタールは　わざの"
-	line "めいちゅう　りつ　を　あげる！"
-
-	para "クリティカッターは　わざが"
-	line "きゅうしょに　あたり　やすくなる"
-
-	para "アイテムの　おかいもとめは"
-	line "タマムシ　デパートで　どうぞ！"
-	done
+	text_asm
+	farcall CeladonCityPrintTrainerTips1Text
+	jp TextScriptEnd
 
 CeladonCitySignText:
 	text "ここは　タマムシ　シティ"

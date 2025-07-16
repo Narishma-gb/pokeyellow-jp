@@ -55,26 +55,11 @@ INCLUDE "main.asm"
 ;INCLUDE "engine/events/evolve_trade.asm"
 
 
-SECTION "rom6", ROMX
-; ROM $06 : $18000 - $1BFFF
-; Progress
-	set_bank_offset 6
-
-	dr PlayerStepOutFromDoor, 6, $79EC
-	dr _EndNPCMovementScript, 6, $7A29
-	dr PalletMovementScriptPointerTable, 6, $7A4E
-	dr PewterMuseumGuyMovementScriptPointerTable, 6, $7B24
-	dr PewterGymGuyMovementScriptPointerTable, 6, $7B87
-	dr PewterGuys, 6, $7BE7
-	dr IsPlayerStandingOnDoorTile, 6, $7C87
-	dr HandleLedges, 6, $7CF6
-
-	dr_end 6
-
 SECTION "rom7", ROMX
 ; ROM $07 : $1C000 - $1FFFF
 	set_bank_offset 7
 
+	dr Route1_Blocks, 7, $40FC
 	dr DoClearSaveDialogue, 7, $421E
 	dr DisplayElevatorFloorMenu, 7, $427A
 	dr OpenOaksPC, 7, $7869
@@ -226,6 +211,8 @@ SECTION "rom18", ROMX
 ; ROM $12 : $48000 - $4BFFF
 	set_bank_offset 18
 
+	dr Route7_Blocks, 18, $4051
+
 	dr_end 18
 
 SECTION "rom19", ROMX
@@ -242,6 +229,8 @@ SECTION "rom20", ROMX
 ; ROM $14 : $50000 - $53FFF
 	set_bank_offset 20
 
+	dr Route22_Blocks, 20, $403D
+	dr Route24_Blocks, 20, $46ED
 	dr PrintCardKeyText, 20, $77F3
 	dr CeladonPrizeMenu, 20, $78BF
 
@@ -252,6 +241,13 @@ SECTION "rom21", ROMX
 ; ROM $15 : $54000 - $57FFF
 	set_bank_offset 21
 
+	dr Route2_Blocks, 21, $4086
+	dr Route3_Blocks, 21, $425D
+	dr Route4_Blocks, 21, $43F4
+	dr Route5_Blocks, 21, $45DA
+	dr Route9_Blocks, 21, $4706
+	dr Route19_Blocks, 21, $4F01
+	dr Route21_Blocks, 21, $507D
 	dr _GetSpritePosition1, 21, $7D18
 	dr _GetSpritePosition2, 21, $7D38
 	dr _SetSpritePosition1, 21, $7D5C
@@ -265,6 +261,11 @@ SECTION "rom22", ROMX
 ; ROM $16 : $58000 - $5BFFF
 	set_bank_offset 22
 
+	dr Route6_Blocks, 22, $4079
+	dr Route11_Blocks, 22, $455F
+	dr Route15_Blocks, 22, $49CC
+	dr Route16_Blocks, 22, $4B84
+	dr Route18_Blocks, 22, $4C9C
 	dr CalcLevelFromExperience, 22, $4D99
 	dr CalcExperience, 22, $4DC0
 	dr PrintStatusAilment, 22, $4E8B
@@ -328,6 +329,7 @@ SECTION "rom29", ROMX
 	set_bank_offset 29
 
 	dr HiddenItemNear, 29, $405C
+	dr CeruleanHideRocket, 29, $40AF
 	dr VendingMachineMenu, 29, $4E42
 	dr PKMNLeaguePC, 29, $7AB2
 
@@ -494,6 +496,7 @@ SECTION "rom48", ROMX
 	dr ResetStatusAndHalveMoneyOnBlackout, 48, $4168
 	dr SetMapSpecificScriptFlagsOnMapReload, 48, $41CE
 	dr HallOfFamePC, 48, $4698
+	dr ViridianCityMovePikachu, 48, $4CE8
 
 	dr_end 48
 
@@ -604,9 +607,8 @@ SECTION "rom59", ROMX
 
 SECTION "rom60", ROMX
 ; ROM $3c : $F0000 - $F3FFF
-	set_bank_offset 60, $4740
+	set_bank_offset 60, $4E92
 
-	dr LoadMissableObjectData, 60, $4741
 	dr CheckForHiddenObject, 60, $6AEA
 
 	dr_end 60

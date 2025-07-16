@@ -65,9 +65,7 @@ CeruleanCityDefaultScript:
 	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .walking
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 .walking
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
@@ -137,23 +135,8 @@ CeruleanCityRivalBattleScript:
 	call SaveEndBattleTextPointers
 	ld a, OPP_RIVAL1
 	ld [wCurOpponent], a
-
-	; select which team to use during the encounter
-	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, $7
-	jr .done
-.NotSquirtle
-	cp STARTER3
-	jr nz, .Charmander
-	ld a, $8
-	jr .done
-.Charmander
-	ld a, $9
-.done
+	ld a, 3
 	ld [wTrainerNo], a
-
 	xor a
 	ldh [hJoyHeld], a
 	call CeruleanCityFaceRivalScript
@@ -172,9 +155,7 @@ CeruleanCityRivalDefeatedScript:
 	ld a, TEXT_CERULEANCITY_RIVAL
 	ldh [hTextID], a
 	call DisplayTextID
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	farcall Music_RivalAlternateStart
 	ld a, CERULEANCITY_RIVAL
 	ldh [hSpriteIndex], a
@@ -237,7 +218,7 @@ CeruleanCity_TextPointers:
 	dw_const CeruleanCitySuperNerd2Text,    TEXT_CERULEANCITY_SUPER_NERD2
 	dw_const CeruleanCityGuardText,         TEXT_CERULEANCITY_GUARD1
 	dw_const CeruleanCityCooltrainerF1Text, TEXT_CERULEANCITY_COOLTRAINER_F1
-	dw_const CeruleanCitySlowbroText,       TEXT_CERULEANCITY_SLOWBRO
+	dw_const CeruleanCityElectrodeText,     TEXT_CERULEANCITY_ELECTRODE
 	dw_const CeruleanCityCooltrainerF2Text, TEXT_CERULEANCITY_COOLTRAINER_F2
 	dw_const CeruleanCitySuperNerd3Text,    TEXT_CERULEANCITY_SUPER_NERD3
 	dw_const CeruleanCityGuardText,         TEXT_CERULEANCITY_GUARD2
@@ -412,16 +393,16 @@ CeruleanCitySuperNerd2Text:
 	done
 
 CeruleanCityGuardText:
-	text "かわいそーな　ことに"
+	text "かわいそうに<⋯>"
 
 	para "この　いえは"
-	line "ドロボーに　はいられたんだ！"
-	cont "はんにんは　わかっとる！"
-	cont "<ROCKET>の　しわざだ！"
+	line "ドロボーに　はいられたの！"
+	cont "はんにんは　わかっています！"
+	cont "ロケットだんの　しわざよ！"
 
 	para "けいさつ　としても"
-	line "<ROCKET>の　あくじ　には"
-	cont "ほとほと　こまっとるのだ！"
+	line "ロケットだんの　あくじ　には"
+	cont "ほとほと　こまっているの！"
 	done
 
 CeruleanCityCooltrainerF1Text:
@@ -429,36 +410,36 @@ CeruleanCityCooltrainerF1Text:
 	ldh a, [hRandomAdd]
 	cp 180 ; 76/256 chance of 1st dialogue
 	jr c, .notFirstText
-	ld hl, .SlowbroUseSonicboomText
+	ld hl, .ElectrodeUseSonicboomText
 	call PrintText
 	jr .end
 .notFirstText
 	cp 100 ; 80/256 chance of 2nd dialogue
 	jr c, .notSecondText
-	ld hl, .SlowbroPunchText
+	ld hl, .ElectrodeTackleText
 	call PrintText
 	jr .end
 .notSecondText
 	; 100/256 chance of 3rd dialogue
-	ld hl, .SlowbroWithdrawText
+	ld hl, .ElectrodeSwiftText
 	call PrintText
 .end
 	jp TextScriptEnd
 
-.SlowbroUseSonicboomText:
-	text "さあ　ヤドラン！"
-	line "ソニック　ブーム　だすのよ！"
-	cont "<⋯>やどらーん　ってば"
+.ElectrodeUseSonicboomText:
+	text "さあ　マルマイン！"
+	line "ソニックブーム　よ！"
+	cont "<⋯>　まる　ってば"
 	cont "わたしの　いうこと　きいて！"
 	done
 
-.SlowbroPunchText:
-	text "ヤドラン！　そこで　パーンチ！"
+.ElectrodeTackleText:
+	text "マルマイン！　そこで　たいあたりっ！"
 	line "<⋯>　がっくし　また　ダメ！"
 	done
 
-.SlowbroWithdrawText:
-	text "ヤドラン！　からに　こもるの！"
+.ElectrodeSwiftText:
+	text "マルマイン！　スピードスター！"
 	line "あん　<⋯>ちがーう！"
 	cont "#って　むずかしいわ！"
 
@@ -467,7 +448,7 @@ CeruleanCityCooltrainerF1Text:
 	cont "ひとの　うでまえ　しだい　なんだもの"
 	done
 
-CeruleanCitySlowbroText:
+CeruleanCityElectrodeText:
 	text_asm
 	ldh a, [hRandomAdd]
 	cp 180 ; 76/256 chance of 1st dialogue
@@ -495,19 +476,19 @@ CeruleanCitySlowbroText:
 	jp TextScriptEnd
 
 .TookASnoozeText:
-	text "ヤドランは　ひるね　してる<⋯>"
+	text "マルマインは　ひるね　してる<⋯>"
 	done
 
 .IsLoafingAroundText:
-	text "ヤドランは　なまけてる<⋯>"
+	text "マルマインは　なまけてる<⋯>"
 	done
 
 .TurnedAwayText:
-	text "ヤドランは　そっぽを　むいた！"
+	text "マルマインは　そっぽを　むいた！"
 	done
 
 .IgnoredOrdersText:
-	text "ヤドランは　しらんぷり　した<⋯>"
+	text "マルマインは　しらんぷり　した<⋯>"
 	done
 
 CeruleanCityCooltrainerF2Text:

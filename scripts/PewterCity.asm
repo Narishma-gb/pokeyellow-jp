@@ -1,8 +1,11 @@
 PewterCity_Script:
 	call EnableAutoTextBoxDrawing
+	ld hl, wd492
+	res 7, [hl]
 	ld hl, PewterCity_ScriptPointers
 	ld a, [wPewterCityCurScript]
-	jp CallFunctionInTable
+	call CallFunctionInTable
+	ret
 
 PewterCity_ScriptPointers:
 	def_script_pointers
@@ -27,7 +30,7 @@ PewterCityCheckPlayerLeavingEastScript:
 	ld hl, PewterCityPlayerLeavingEastCoords
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
 	ld a, TEXT_PEWTERCITY_YOUNGSTER
 	ldh [hTextID], a
@@ -49,9 +52,9 @@ PewterCitySuperNerd1ShowsPlayerMuseumScript:
 	ld a, SPRITE_FACING_UP
 	ldh [hSpriteFacingDirection], a
 	call SetSpriteFacingDirectionAndDelay
-	ld a, ($3 << 4) | SPRITE_FACING_UP
+	ld a, SPRITE_FACING_UP
 	ldh [hSpriteImageIndex], a
-	call SetSpriteImageIndexAfterSettingFacingDirection
+	call SpriteFunc_34a1
 	call PlayDefaultMusic
 	ld hl, wMiscFlags
 	set BIT_NO_SPRITE_UPDATES, [hl]
@@ -116,10 +119,7 @@ PewterCityYoungsterShowsPlayerGymScript:
 	ldh [hSpriteIndex], a
 	ld a, SPRITE_FACING_LEFT
 	ldh [hSpriteFacingDirection], a
-	call SetSpriteFacingDirectionAndDelay
-	ld a, ($1 << 4) | SPRITE_FACING_LEFT
-	ldh [hSpriteImageIndex], a
-	call SetSpriteImageIndexAfterSettingFacingDirection
+	call SpriteFunc_34a1
 	call PlayDefaultMusic
 	ld hl, wMiscFlags
 	set BIT_NO_SPRITE_UPDATES, [hl]
