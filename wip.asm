@@ -55,24 +55,6 @@ INCLUDE "main.asm"
 ;INCLUDE "engine/events/evolve_trade.asm"
 
 
-SECTION "Audio Engine 2", ROMX
-SECTION "rom8", ROMX
-; ROM $08 : $20000 - $23FFF
-	set_bank_offset 8
-
-Music_GymLeaderBattle::
-
-	dr Music_DoLowHealthAlarm, $2131E
-	dr DisplayPCMainMenu, 8, $5378
-	dr BillsPC_, 8, $5464
-	dr Audio2_PlaySound, 8, $597E
-	dr Music_PokeFluteInBattle, 8, $5A92
-	dr Audio2_InitMusicVariables, $21ABB
-	dr Audio2_InitSFXVariables, $21B7A
-	dr Audio2_StopAllAudio, $21C02
-
-	dr_end 8
-
 SECTION "Pics 1", ROMX
 SECTION "rom9", ROMX
 ; ROM $09 : $24000 - $27FFF
@@ -308,6 +290,7 @@ SECTION "rom28", ROMX
 	dr SaveSAVtoSRAM1, 28, $7765
 	dr SaveSAVtoSRAM2, 28, $7789
 	dr SaveSAVtoSRAM, 28, $77C4
+	dr ChangeBox, 28, $7801
 	dr ClearSAV, 28, $7A79
 
 	dr_end 28
@@ -586,6 +569,7 @@ SECTION "rom58", ROMX
 	set_bank_offset 58
 
 	dr PrinterSerial_, 58, $42D1
+	dr PrintPCBox, 58, $453A
 	dr PrinterDebug, 58, $467C
 
 	dr_end 58

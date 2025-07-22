@@ -11,15 +11,15 @@ DisplayPCMainMenu::
 	and a
 	jr nz, .leaguePCAvailable
 	hlcoord 0, 0
-	lb bc, 8, 14
+	lb bc, 8, 13
 	jr .next
 .noOaksPC
 	hlcoord 0, 0
-	lb bc, 6, 14
+	lb bc, 6, 13
 	jr .next
 .leaguePCAvailable
 	hlcoord 0, 0
-	lb bc, 10, 14
+	lb bc, 10, 13
 .next
 	call TextBoxBorder
 	call UpdateSprites
@@ -82,19 +82,19 @@ DisplayPCMainMenu::
 	ldh [hAutoBGTransferEnabled], a
 	ret
 
-SomeonesPCText:   db "SOMEONE's PC@"
-BillsPCText:      db "BILL's PC@"
-PlayersPCText:    db "'s PC@"
-OaksPCText:       db "PROF.OAK's PC@"
-PKMNLeaguePCText: db "<PKMN>LEAGUE@"
-LogOffPCText:     db "LOG OFF@"
+SomeonesPCText:   db "だれかの　<PC>@"
+BillsPCText:      db "マサキの　<PC>@"
+PlayersPCText:    db "の　<PC>@"
+OaksPCText:       db "オーキドの　<PC>@"
+PKMNLeaguePCText: db "ポケモン　リーグ@"
+LogOffPCText:     db "スイッチを　きる@"
 
 BillsPC_::
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	xor a
 	ld [wParentMenuItem], a
-	inc a               ; MONSTER_NAME
+	inc a ; MONSTER_NAME
 	ld [wNameListType], a
 	call LoadHpBarAndStatusTilePatterns
 	ld a, [wListScrollOffset]
@@ -149,17 +149,7 @@ BillsPCMenu:
 	call TextBoxBorder
 	ld a, [wCurrentBoxNum]
 	and $7f
-	cp 9
-	jr c, .singleDigitBoxNum
-; two digit box num
-	sub 9
-	hlcoord 17, 16
-	ld [hl], "1"
-	add "0"
-	jr .next
-.singleDigitBoxNum
-	add "1"
-.next
+	add "１"
 	ldcoord_a 18, 16
 	hlcoord 10, 16
 	ld de, BoxNoPCText
@@ -252,19 +242,10 @@ BillsPCDeposit:
 	ld [wRemoveMonFromBox], a
 	call RemovePokemon
 	call WaitForSoundToFinish
-	ld hl, wBoxNumString
 	ld a, [wCurrentBoxNum]
 	and $7f
-	cp 9
-	jr c, .singleDigitBoxNum
-	sub 9
-	ld [hl], "1"
-	inc hl
-	add "0"
-	jr .next
-.singleDigitBoxNum
-	add "1"
-.next
+	ld hl, wBoxNumString
+	add "１"
 	ld [hli], a
 	ld [hl], "@"
 	ld hl, MonWasStoredText
@@ -272,8 +253,8 @@ BillsPCDeposit:
 	jp BillsPCMenu
 
 SleepingPikachuText2:
-	text_far _SleepingPikachuText2
-	text_end
+	text "あれ？　いない⋯"
+	prompt
 
 BillsPCWithdraw:
 	ld a, [wBoxCount]
@@ -369,7 +350,7 @@ DisplayMonListMenu:
 	xor a
 	ld [wPrintItemPrices], a
 	ld [wListMenuID], a
-	inc a                ; MONSTER_NAME
+	inc a ; MONSTER_NAME
 	ld [wNameListType], a
 	ld a, [wPartyAndBillsPCSavedMenuItem]
 	ld [wCurrentMenuItem], a
@@ -379,16 +360,15 @@ DisplayMonListMenu:
 	ret
 
 BillsPCMenuText:
-	db   "WITHDRAW <PKMN>"
-	next "DEPOSIT <PKMN>"
-	next "RELEASE <PKMN>"
-	next "CHANGE BOX"
-	next "PRINT BOX"
-	next "SEE YA!"
-	db "@"
+	db   "#を　つれていく"
+	next "#を　あずける"
+	next "#を　にがす"
+	next "ボックスを　かえる"
+	next "ボックスを　プリント"
+	next "さようなら@"
 
 BoxNoPCText:
-	db "BOX No.@"
+	db "いまのボックス@"
 
 KnowsHMMove::
 ; returns whether mon with party index [wWhichPokemon] knows an HM move
@@ -421,8 +401,8 @@ HMMoveArray:
 INCLUDE "data/moves/hm_moves.asm"
 
 DisplayDepositWithdrawMenu:
-	hlcoord 9, 10
-	lb bc, 6, 9
+	hlcoord 11, 10
+	lb bc, 6, 7
 	call TextBoxBorder
 	ld a, [wParentMenuItem]
 	and a ; was the Deposit or Withdraw item selected in the parent menu?
@@ -430,15 +410,14 @@ DisplayDepositWithdrawMenu:
 	jr nz, .next
 	ld de, WithdrawPCText
 .next
-	hlcoord 11, 12
+	hlcoord 13, 12
 	call PlaceString
-	hlcoord 11, 14
+	hlcoord 13, 14
 	ld de, StatsCancelPCText
 	call PlaceString
 	ld hl, wTopMenuItemY
 	ld a, 12
 	ld [hli], a ; wTopMenuItemY
-	ld a, 10
 	ld [hli], a ; wTopMenuItemX
 	xor a
 	ld [hli], a ; wCurrentMenuItem
@@ -486,63 +465,91 @@ DisplayDepositWithdrawMenu:
 	call LoadGBPal
 	jr .loop
 
-DepositPCText:  db "DEPOSIT@"
-WithdrawPCText: db "WITHDRAW@"
+DepositPCText:  db "あずける@"
+WithdrawPCText: db "ひきとる@"
 StatsCancelPCText:
-	db   "STATS"
-	next "CANCEL@"
+	db   "つよさをみる"
+	next "キャンセル@"
 
 SwitchOnText:
-	text_far _SwitchOnText
-	text_end
+	text "スイッチ　オン！"
+	prompt
 
 WhatText:
-	text_far _WhatText
-	text_end
+	text "なんに　するん？"
+	done
 
-DepositWhichMonText:
-	text_far _DepositWhichMonText
-	text_end
+DepositWhichMonText: ; unreferenced
+	text "どの　#を"
+	line "あずけたいんや？"
+	done
 
 MonWasStoredText:
-	text_far _MonWasStoredText
-	text_end
+	text_ram wStringBuffer
+	text "を　ボックス@"
+	text_ram wBoxNumString
+	text "に"
+	line "あずけた！"
+	prompt
 
 CantDepositLastMonText:
-	text_far _CantDepositLastMonText
-	text_end
+	text "それ　あずけたら"
+	line "こまるん　ちゃう？"
+	prompt
 
 BoxFullText:
-	text_far _BoxFullText
-	text_end
+	text "あちゃ！　ウチは"
+	line "#で　いっぱいや"
+	prompt
 
 MonIsTakenOutText:
-	text_far _MonIsTakenOutText
-	text_end
+	text_ram wStringBuffer
+	text "を"
+	line "また　つれていく　ことにした！"
+	cont "@"
+	text_ram wStringBuffer
+	text "を　うけとった！"
+	prompt
 
 NoMonText:
-	text_far _NoMonText
-	text_end
+	text "なに？"
+	line "ウチは　なんも　あずかっとらんで？"
+	prompt
 
 CantTakeMonText:
-	text_far _CantTakeMonText
-	text_end
+	text "そんなん　いうても"
+	line "#　もちきれへんやんけ！"
+
+	para "とりあえず　あずけるか　にがすか"
+	line "したら　ええんちゃう？"
+	prompt
 
 PikachuUnhappyText:
-	text_far _PikachuUnhappyText
-	text_end
+	text "そやけど　@"
+	text_ram wNameBuffer
+	text "　いやそうやで！"
+	prompt
 
-ReleaseWhichMonText:
-	text_far _ReleaseWhichMonText
-	text_end
+ReleaseWhichMonText: ; unreferenced
+	text "どの　#を"
+	line "にがすんや？"
+	done
 
 OnceReleasedText:
-	text_far _OnceReleasedText
-	text_end
+	text "にがすと　@"
+	text_ram wStringBuffer
+	text "は"
+	line "もう　もどってこんで　ええんか？"
+	done
 
 MonWasReleasedText:
-	text_far _MonWasReleasedText
-	text_end
+	text_ram wStringBuffer
+	text "を"
+	line "そとに　にがして　あげた！"
+	cont "ばいばい　@"
+	text_ram wStringBuffer
+	text "！"
+	prompt
 
 CableClubLeftGameboy::
 	ldh a, [hSerialConnectionStatus]
@@ -579,9 +586,10 @@ CableClubRightGameboy::
 	tx_pre_jump JustAMomentText
 
 JustAMomentText::
-	text_far _JustAMomentText
-	text_end
+	text "ちょっと　まってね"
+	done
 
+UnusedOpenBillsPC:
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	cp SPRITE_FACING_UP
 	ret nz

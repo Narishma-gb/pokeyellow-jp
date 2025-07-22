@@ -69,8 +69,14 @@ ROMX $7
 	"Hidden Objects 1"
 	"Garbage 7"
 ROMX $8
+	"Sound Effect Headers 2"
+	"Music Headers 2"
+	"Sound Effects 2"
+	"Low Health Alarm (Audio Engine 2)"
+	"Bill's PC"
 	"Audio Engine 2"
-	"rom8"
+	"Music 2"
+	"Garbage 8"
 ROMX $9
 	"Pics 1"
 	"rom9"
@@ -193,14 +199,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $8
-; 	"Sound Effect Headers 2"
-; 	"Music Headers 2"
-; 	"Sound Effects 2"
-; 	"Low Health Alarm (Audio Engine 2)"
-; 	"Bill's PC"
-; 	"Audio Engine 2"
-; 	"Music 2"
 ; ROMX $9
 ; 	"Pics 1"
 ; 	"Battle Engine 3"

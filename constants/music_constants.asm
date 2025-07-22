@@ -30,13 +30,13 @@ ENDM
 
 	; AUDIO_2
 	audio_def 2
-;	music_const MUSIC_GYM_LEADER_BATTLE,   Music_GymLeaderBattle
-;	music_const MUSIC_TRAINER_BATTLE,      Music_TrainerBattle
-;	music_const MUSIC_WILD_BATTLE,         Music_WildBattle
-;	music_const MUSIC_FINAL_BATTLE,        Music_FinalBattle
-;	music_const MUSIC_DEFEATED_TRAINER,    Music_DefeatedTrainer
-;	music_const MUSIC_DEFEATED_WILD_MON,   Music_DefeatedWildMon
-;	music_const MUSIC_DEFEATED_GYM_LEADER, Music_DefeatedGymLeader
+	music_const MUSIC_GYM_LEADER_BATTLE,   Music_GymLeaderBattle
+	music_const MUSIC_TRAINER_BATTLE,      Music_TrainerBattle
+	music_const MUSIC_WILD_BATTLE,         Music_WildBattle
+	music_const MUSIC_FINAL_BATTLE,        Music_FinalBattle
+	music_const MUSIC_DEFEATED_TRAINER,    Music_DefeatedTrainer
+	music_const MUSIC_DEFEATED_WILD_MON,   Music_DefeatedWildMon
+	music_const MUSIC_DEFEATED_GYM_LEADER, Music_DefeatedGymLeader
 
 	; AUDIO_3
 	audio_def 3
@@ -171,65 +171,65 @@ DEF MAX_SFX_ID_1 EQUS "SFX_SAFARI_ZONE_PA"
 
 	; AUDIO_2
 	audio_def 2
-;	music_const SFX_LEVEL_UP,           SFX_Level_Up
+	music_const SFX_LEVEL_UP,           SFX_Level_Up
 
-;	music_const SFX_BALL_TOSS,          SFX_Ball_Toss
-;	music_const SFX_BALL_POOF,          SFX_Ball_Poof
-;	music_const SFX_FAINT_THUD,         SFX_Faint_Thud
-;	music_const SFX_RUN,                SFX_Run
-;	music_const SFX_DEX_PAGE_ADDED,     SFX_Dex_Page_Added
-;	music_const SFX_CAUGHT_MON,         SFX_Caught_Mon
+	music_const SFX_BALL_TOSS,          SFX_Ball_Toss
+	music_const SFX_BALL_POOF,          SFX_Ball_Poof
+	music_const SFX_FAINT_THUD,         SFX_Faint_Thud
+	music_const SFX_RUN,                SFX_Run
+	music_const SFX_DEX_PAGE_ADDED,     SFX_Dex_Page_Added
+	music_const SFX_CAUGHT_MON,         SFX_Caught_Mon
 
 DEF BATTLE_SFX_START EQUS "SFX_PECK"
-;	music_const SFX_PECK,               SFX_Peck
-;	music_const SFX_FAINT_FALL,         SFX_Faint_Fall
-;	music_const SFX_BATTLE_09,          SFX_Battle_09
-;	music_const SFX_POUND,              SFX_Pound
-;	music_const SFX_BATTLE_0B,          SFX_Battle_0B
-;	music_const SFX_BATTLE_0C,          SFX_Battle_0C
-;	music_const SFX_BATTLE_0D,          SFX_Battle_0D
-;	music_const SFX_BATTLE_0E,          SFX_Battle_0E
-;	music_const SFX_BATTLE_0F,          SFX_Battle_0F
-;	music_const SFX_DAMAGE,             SFX_Damage
-;	music_const SFX_NOT_VERY_EFFECTIVE, SFX_Not_Very_Effective
-;	music_const SFX_BATTLE_12,          SFX_Battle_12
-;	music_const SFX_BATTLE_13,          SFX_Battle_13
-;	music_const SFX_BATTLE_14,          SFX_Battle_14
-;	music_const SFX_VINE_WHIP,          SFX_Vine_Whip
-;	music_const SFX_BATTLE_16,          SFX_Battle_16 ; unused?
-;	music_const SFX_BATTLE_17,          SFX_Battle_17
-;	music_const SFX_BATTLE_18,          SFX_Battle_18
-;	music_const SFX_BATTLE_19,          SFX_Battle_19
-;	music_const SFX_SUPER_EFFECTIVE,    SFX_Super_Effective
-;	music_const SFX_BATTLE_1B,          SFX_Battle_1B
-;	music_const SFX_BATTLE_1C,          SFX_Battle_1C
-;	music_const SFX_DOUBLESLAP,         SFX_Doubleslap
-;	music_const SFX_BATTLE_1E,          SFX_Battle_1E
-;	music_const SFX_HORN_DRILL,         SFX_Horn_Drill
-;	music_const SFX_BATTLE_20,          SFX_Battle_20
-;	music_const SFX_BATTLE_21,          SFX_Battle_21
-;	music_const SFX_BATTLE_22,          SFX_Battle_22
-;	music_const SFX_BATTLE_23,          SFX_Battle_23
-;	music_const SFX_BATTLE_24,          SFX_Battle_24
-;	music_const SFX_BATTLE_25,          SFX_Battle_25
-;	music_const SFX_BATTLE_26,          SFX_Battle_26
-;	music_const SFX_BATTLE_27,          SFX_Battle_27
-;	music_const SFX_BATTLE_28,          SFX_Battle_28
-;	music_const SFX_BATTLE_29,          SFX_Battle_29
-;	music_const SFX_BATTLE_2A,          SFX_Battle_2A
-;	music_const SFX_BATTLE_2B,          SFX_Battle_2B
-;	music_const SFX_BATTLE_2C,          SFX_Battle_2C
-;	music_const SFX_PSYBEAM,            SFX_Psybeam
-;	music_const SFX_BATTLE_2E,          SFX_Battle_2E
-;	music_const SFX_BATTLE_2F,          SFX_Battle_2F
-;	music_const SFX_PSYCHIC_M,          SFX_Psychic_M
-;	music_const SFX_BATTLE_31,          SFX_Battle_31
-;	music_const SFX_BATTLE_32,          SFX_Battle_32
-;	music_const SFX_BATTLE_33,          SFX_Battle_33
-;	music_const SFX_BATTLE_34,          SFX_Battle_34
-;	music_const SFX_BATTLE_35,          SFX_Battle_35
-;	music_const SFX_BATTLE_36,          SFX_Battle_36
-;	music_const SFX_SILPH_SCOPE,        SFX_Silph_Scope
+	music_const SFX_PECK,               SFX_Peck
+	music_const SFX_FAINT_FALL,         SFX_Faint_Fall
+	music_const SFX_BATTLE_09,          SFX_Battle_09
+	music_const SFX_POUND,              SFX_Pound
+	music_const SFX_BATTLE_0B,          SFX_Battle_0B
+	music_const SFX_BATTLE_0C,          SFX_Battle_0C
+	music_const SFX_BATTLE_0D,          SFX_Battle_0D
+	music_const SFX_BATTLE_0E,          SFX_Battle_0E
+	music_const SFX_BATTLE_0F,          SFX_Battle_0F
+	music_const SFX_DAMAGE,             SFX_Damage
+	music_const SFX_NOT_VERY_EFFECTIVE, SFX_Not_Very_Effective
+	music_const SFX_BATTLE_12,          SFX_Battle_12
+	music_const SFX_BATTLE_13,          SFX_Battle_13
+	music_const SFX_BATTLE_14,          SFX_Battle_14
+	music_const SFX_VINE_WHIP,          SFX_Vine_Whip
+	music_const SFX_BATTLE_16,          SFX_Battle_16 ; unused?
+	music_const SFX_BATTLE_17,          SFX_Battle_17
+	music_const SFX_BATTLE_18,          SFX_Battle_18
+	music_const SFX_BATTLE_19,          SFX_Battle_19
+	music_const SFX_SUPER_EFFECTIVE,    SFX_Super_Effective
+	music_const SFX_BATTLE_1B,          SFX_Battle_1B
+	music_const SFX_BATTLE_1C,          SFX_Battle_1C
+	music_const SFX_DOUBLESLAP,         SFX_Doubleslap
+	music_const SFX_BATTLE_1E,          SFX_Battle_1E
+	music_const SFX_HORN_DRILL,         SFX_Horn_Drill
+	music_const SFX_BATTLE_20,          SFX_Battle_20
+	music_const SFX_BATTLE_21,          SFX_Battle_21
+	music_const SFX_BATTLE_22,          SFX_Battle_22
+	music_const SFX_BATTLE_23,          SFX_Battle_23
+	music_const SFX_BATTLE_24,          SFX_Battle_24
+	music_const SFX_BATTLE_25,          SFX_Battle_25
+	music_const SFX_BATTLE_26,          SFX_Battle_26
+	music_const SFX_BATTLE_27,          SFX_Battle_27
+	music_const SFX_BATTLE_28,          SFX_Battle_28
+	music_const SFX_BATTLE_29,          SFX_Battle_29
+	music_const SFX_BATTLE_2A,          SFX_Battle_2A
+	music_const SFX_BATTLE_2B,          SFX_Battle_2B
+	music_const SFX_BATTLE_2C,          SFX_Battle_2C
+	music_const SFX_PSYBEAM,            SFX_Psybeam
+	music_const SFX_BATTLE_2E,          SFX_Battle_2E
+	music_const SFX_BATTLE_2F,          SFX_Battle_2F
+	music_const SFX_PSYCHIC_M,          SFX_Psychic_M
+	music_const SFX_BATTLE_31,          SFX_Battle_31
+	music_const SFX_BATTLE_32,          SFX_Battle_32
+	music_const SFX_BATTLE_33,          SFX_Battle_33
+	music_const SFX_BATTLE_34,          SFX_Battle_34
+	music_const SFX_BATTLE_35,          SFX_Battle_35
+	music_const SFX_BATTLE_36,          SFX_Battle_36
+	music_const SFX_SILPH_SCOPE,        SFX_Silph_Scope
 DEF BATTLE_SFX_END   EQUS "SFX_SILPH_SCOPE + 1"
 DEF MAX_SFX_ID_2 EQUS "SFX_SILPH_SCOPE"
 
