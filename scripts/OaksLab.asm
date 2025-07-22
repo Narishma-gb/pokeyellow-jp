@@ -464,7 +464,7 @@ OaksLabPlayerWatchRivalExitScript:
 .turnPlayerDown
 	cp $4
 	ret nz
-	xor a ; ld a, SPRITE_FACING_DOWN
+	xor a ; SPRITE_FACING_DOWN
 .done
 	ld [wSpritePlayerStateData1FacingDirection], a
 	ret
@@ -767,16 +767,23 @@ OaksLabRivalText:
 	jp TextScriptEnd
 
 .GrampsIsntAroundText:
-	text_far _OaksLabRivalGrampsIsntAroundText
-	text_end
+	text "<RIVAL>『よう　<PLAYER>！"
+	line "オーキドの　じいさんなら　いないぜ"
+
+	para "#を　くれるって　いうから"
+	line "オレも　いそいで　きたんだけど⋯"
+	done
 
 .IllGetABetterPokemonThanYou:
-	text_far _OaksLabRivalIllGetABetterPokemonThanYou
-	text_end
+	text "<RIVAL>『ふん！"
+	line "おまえよりも　いい　#"
+	cont "あとで　もらうもんねー！"
+	done
 
 .MyPokemonLooksStrongerText:
-	text_far _OaksLabRivalMyPokemonLooksStrongerText
-	text_end
+	text "<RIVAL>『おれの"
+	line "#の　ほうが　つよそうだぜ"
+	done
 
 OaksLabEeveePokeBallText:
 	text_asm
@@ -791,8 +798,9 @@ OaksLabEeveePokeBallText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabThatsAPokeball
-	text_end
+	text "モンスターボールだ"
+	line "なかに　#が　はいってるぞ！"
+	done
 
 OaksLabRivalExclamationScript:
 	ld a, OAKSLAB_RIVAL
@@ -825,12 +833,16 @@ OaksLabOak1Text:
 	ld b, POKE_BALL
 	call IsItemInBag
 	jr nz, .come_see_me_sometimes
+
+; bug: this part is a useless check, as the same check was performed earlier
+; if we branched here, it's because wNumSetBits < 2
 	ld hl, wPokedexOwned
 	ld b, wPokedexOwnedEnd - wPokedexOwned
 	call CountSetBits
 	ld a, [wNumSetBits]
 	cp 2
 	jr nc, .come_see_me_sometimes
+
 	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
 	jr nz, .give_poke_balls
 	CheckEvent EVENT_GOT_POKEDEX
@@ -880,40 +892,105 @@ OaksLabOak1Text:
 	jp TextScriptEnd
 
 .GoAheadItsYours:
-	text_far _OaksLabOak1GoAheadItsYours
-	text_end
+	text "オーキド『さあ"
+	line "とるが　よい！"
+	done
 
 .YourPokemonCanFightText:
-	text_far _OaksLabOak1YourPokemonCanFightText
-	text_end
+	text "オーキド『そうじゃ！"
+	line "やせいの　#が　でて　きても"
+
+	para "そいつを　たたかわせて　いけば"
+	line "となりまちへ　いける！"
+	done
 
 .YouShouldTalkToIt:
-	text_far _OaksLabOak1YouShouldTalkToIt
-	text_end
+	text "オーキド『たまには"
+	line "そいつに　はなしかけて"
+	cont "ようすを　みると　いいじゃろう"
+	done
 
 .DeliverParcelText:
-	text_far _OaksLabOak1DeliverParcelText
+	text "オーキド『おお！　<PLAYER>"
+
+	para "どーだい？"
+	line "わしの　やった#は<⋯>ほう"
+
+	para "だいぶ"
+	line "なついた　みたいだな？"
+
+	para "おまえ　#<TRAINER>の"
+	line "さいのうが　あるな！"
+
+	para "<⋯>え　わしに　わたす　ものが？"
+
+	para "<PLAYER>は　オーキド　はかせに"
+	line "とどけものを　わたした！@"
 	sound_get_key_item
-	text_far _OaksLabOak1ParcelThanksText
-	text_end
+	text_start
+
+	para "おお！　これは"
+	line "わしが　ちゅうもん　してた"
+
+	para "とくせいの　モンスターボールじゃ"
+	line "どうも　ありがとよ！"
+
+	para "ところで　さっき　いいわすれたが"
+	line "おねがいが　あるんじゃ<⋯>"
+	done
 
 .PokemonAroundTheWorldText:
-	text_far _OaksLabOak1PokemonAroundTheWorldText
-	text_end
+	text "せかい　じゅうに　すんでいる"
+	line "#たちが"
+	cont "<PLAYER>を　まって　おるぞー！"
+	done
 
 .GivePokeballsText:
-	text_far _OaksLabOak1ReceivedPokeballsText
+	text "オーキド『#を"
+	line "ただ　みつけただけ　では"
+	cont "くわしい　データを"
+	cont "てに　いれる　ことは　できん！"
+
+	para "かならず"
+	line "つかまえなければ　ならんのだ！"
+	cont "ほれ　そのために<⋯>"
+	cont "モンスターボールをわたそう！"
+
+	para "<PLAYER>は　５こ"
+	line "モンスターボールを　もらった！@"
 	sound_get_key_item
-	text_far _OaksLabGivePokeballsExplanationText
-	text_end
+	text_start
+
+	para "やせいの　#が"
+	line "とびだしてきたら　チャーンス！"
+
+	para "わしが　やってみせたように"
+	line "モンスターボールを"
+	cont "ポイ！っと　なげれば"
+	cont "#を　つかまえ　られる！"
+
+	para "ただし<⋯>　うまく　とれるか"
+	line "どうかは　わからんぞ！"
+
+	para "げんきな　#は　にげやすいし"
+	line "うんも　あるからな！"
+	done
 
 .ComeSeeMeSometimesText:
-	text_far _OaksLabOak1ComeSeeMeSometimesText
-	text_end
+	text "オーキド『ときどきは"
+	line "わしの　とこに　かおを　だせ！"
+
+	para "#ずかんの　ページが"
+	line "きに　なるんでな！"
+	done
 
 .HowIsYourPokedexComingText:
-	text_far _OaksLabOak1HowIsYourPokedexComingText
-	text_end
+	text "オーキド『よく　きた！"
+	line "#ずかんの"
+	cont "ちょうしは　どうかな？"
+	cont "どれ<⋯>　ちょっと"
+	cont "みて　あげようか！"
+	prompt
 
 OaksLabPokedexText:
 	text_asm
@@ -922,12 +999,13 @@ OaksLabPokedexText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabPokedexText
-	text_end
+	text "ずかん　みたいな　ものが　ある！"
+	line "なかは　しろいページ　ばっかりだ！"
+	done
 
 OaksLabOak2Text:
-	text_far _OaksLabOak2Text
-	text_end
+	text "？"
+	done
 
 OaksLabGirlText:
 	text_asm
@@ -936,8 +1014,12 @@ OaksLabGirlText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabGirlText
-	text_end
+	text "ああ　みえても　オーキドはかせは"
+	line "#の　オーソリティなの！"
+
+	para "はかせを　そんけいする"
+	line "#　<TRAINER>も　おおいわよ！"
+	done
 
 OaksLabRivalFedUpWithWaitingText:
 	text_asm
@@ -946,8 +1028,9 @@ OaksLabRivalFedUpWithWaitingText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabRivalFedUpWithWaitingText
-	text_end
+	text "<RIVAL>『じいさん！"
+	line "まちくたびれたぞー！"
+	done
 
 OaksLabOakChooseMonText:
 	text_asm
@@ -956,8 +1039,25 @@ OaksLabOakChooseMonText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabOakChooseMonText
-	text_end
+	text "オーキド『おお　<RIVAL>！"
+	line "なんじゃ　もう　きていたのか？"
+
+	para "しばらく　してから"
+	line "くるように　いっておいたのに⋯"
+
+	para "まあ　よい"
+	line "ちょっと　そこで　まっておれ"
+
+	para "ほれ　<PLAYER>！"
+	line "そこに　まるいたまが　あるじゃろう"
+	cont "ほっほ！"
+
+	para "モンスターボールと　いって"
+	line "#が　はいって　おるのじゃ"
+
+	para "それを　おまえに　やろう！"
+	line "さあ　とるがよい！"
+	done
 
 OaksLabRivalWhatAboutMeText:
 	text_asm
@@ -966,8 +1066,9 @@ OaksLabRivalWhatAboutMeText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabRivalWhatAboutMeText
-	text_end
+	text "<RIVAL>『あッ！　ずるい！"
+	line "じいさん！　おれにも　くれよお！"
+	done
 
 OaksLabOakBePatientText:
 	text_asm
@@ -976,8 +1077,10 @@ OaksLabOakBePatientText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabOakBePatientText
-	text_end
+	text "オーキド『まー！"
+	line "そう　あわてるな　<RIVAL>！"
+	cont "おまえにも　あとで　やるから"
+	done
 
 OaksLabRivalReceivedMonText:
 	text_asm
@@ -994,25 +1097,37 @@ OaksLabRivalReceivedMonText:
 	jp TextScriptEnd
 
 OaksLabRivalTakesText1:
-	text_far _OaksLabRivalTakesText1
-	text_end
+	text "<RIVAL>『<PLAYER>！"
+	line "こいつは　おれが　もらったぜ！"
+	prompt
 
 OaksLabRivalTakesText2:
-	text_far _OaksLabRivalTakesText2
+	text "<RIVAL>は　"
+	line "#を　よこどりした！@"
 	sound_get_key_item
 	text_end
 
 OaksLabRivalTakesText3:
-	text_far _OaksLabRivalTakesText3
-	text_end
+	text "オーキド『こら！　<RIVAL>！"
+	line "なにを　やっておるんじゃ！"
+	prompt
 
 OaksLabRivalTakesText4:
-	text_far _OaksLabRivalTakesText4
-	text_end
+	text "<RIVAL>『じいさん！"
+	line "おれは　これが　ほしい！"
+	prompt
 
 OaksLabRivalTakesText5:
-	text_far _OaksLabRivalTakesText5
-	text_end
+	text "オーキド『⋯しかたのない　やつじゃ⋯"
+	line "よかろう！　その#は"
+	cont "おまえに　やろう！"
+
+	para "どうせ　おまえにも"
+	line "わたす　つもり　だったからな⋯"
+
+	para "<PLAYER>"
+	line "こっちに　きてくれんか"
+	done
 
 OaksLabPlayerReceivedMonText:
 	text_asm
@@ -1043,11 +1158,19 @@ OaksLabPlayerReceivedMonText:
 	jp TextScriptEnd
 
 OaksLabOakGivesText:
-	text_far _OaksLabOakGivesText
-	text_end
+	text "オーキド『<PLAYER>！"
+	line "こいつは　さっきの　#じゃ！"
+
+	para "つかまえた　ばかりで"
+	line "あまり　ひとには　なれておらんが"
+	cont "こいつを　かわりに　やろう！"
+	prompt
 
 OaksLabReceivedText:
-	text_far _OaksLabReceivedText
+	text "<PLAYER>は　オーキドから"
+	line "@"
+	text_ram wNameBuffer
+	text "を　もらった！@"
 	sound_get_key_item
 	text_end
 
@@ -1058,8 +1181,9 @@ OaksLabOakDontGoAwayYetText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabOakDontGoAwayYetText
-	text_end
+	text "オーキド『こら　どこへいく！"
+	line "もどってこんか！"
+	done
 
 OaksLabRivalIllTakeYouOnText:
 	text_asm
@@ -1068,16 +1192,24 @@ OaksLabRivalIllTakeYouOnText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabRivalIllTakeYouOnText
-	text_end
+	text "<RIVAL>『まてよ！　<PLAYER>！"
+	line "せっかく　じーさんに"
+	cont "#　もらったんだぜ！"
+
+	para "<⋯>　ちょっと"
+	line "おれの　あいて　してみろ！"
+	done
 
 OaksLabRivalIPickedTheWrongPokemonText:
-	text_far _OaksLabRivalIPickedTheWrongPokemonText
-	text_end
+	text "えー　そんな　バカな！"
+	line "おまえの　#に"
+	cont "すりゃあ　よかった！"
+	prompt
 
 OaksLabRivalAmIGreatOrWhatText:
-	text_far _OaksLabRivalAmIGreatOrWhatText
-	text_end
+	text "<RIVAL>『やりー！"
+	line "おれって　てんさい？"
+	prompt
 
 OaksLabRivalSmellYouLaterText:
 	text_asm
@@ -1086,8 +1218,13 @@ OaksLabRivalSmellYouLaterText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabRivalSmellYouLaterText
-	text_end
+	text "<RIVAL>『よーし！"
+	line "ほかの　#と　たたかわせて"
+	cont "もっと　もっと　つよくするぜ！"
+
+	para "<PLAYER>！　じいさん！"
+	line "そんじゃ　あばよ！"
+	done
 
 OaksLabPikachuDislikesPokeballsText1:
 	text_asm
@@ -1098,8 +1235,8 @@ OaksLabPikachuDislikesPokeballsText1:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabPikachuDislikesPokeballsText1
-	text_end
+	text "オーキド『おや？"
+	done
 
 OaksLabPikachuDislikesPokeballsText2:
 	text_asm
@@ -1108,37 +1245,95 @@ OaksLabPikachuDislikesPokeballsText2:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabPikachuDislikesPokeballsText2
-	text_end
+	text "オーキド『ほう！"
+
+	para "めずらしいこと　だが"
+	line "そいつは　モンスターボールが"
+	cont "きらいな　ようじゃのう<⋯>"
+
+	para "ならば　つれて　あるいたらどうだ？"
+
+	para "そのほうが　そいつも"
+	line "よろこぶ　ことじゃろう！"
+
+	para "はなしかけて　ようすを"
+	line "みることも　できるからな！"
+	done
 
 OaksLabRivalGrampsText:
-	text_far _OaksLabRivalGrampsText
-	text_end
+	text "<RIVAL>『じいさん！"
+	done
 
 OaksLabRivalMyPokemonHasGrownStrongerText:
-	text_far _OaksLabRivalMyPokemonHasGrownStrongerText
-	text_end
+	text "<RIVAL>『じいさん"
+	line "おれの　#　そだったぜ！"
+	cont "ちょっと　みてくれよ"
+	done
 
 OaksLabOakIHaveARequestText:
-	text_far _OaksLabOakIHaveARequestText
-	text_end
+	text "オーキド『おお　<RIVAL>か"
+	line "ちょうど　いい！"
+
+	para "おまえたちに　たのみが　あるんじゃ"
+	done
 
 OaksLabOakMyInventionPokedexText:
-	text_far _OaksLabOakMyInventionPokedexText
-	text_end
+	text "つくえの　うえに　あるのは"
+	line "わしが　つくった　#ずかん！"
+
+	para "みつけた　#の　データが"
+	line "じどうてきに　かきこまれて"
+	cont "ページが　ふえて　いく　という"
+
+	para "たいへん　ハイテクな"
+	line "ずかん　なのじゃ！"
+	done
 
 OaksLabOakGotPokedexText:
-	text_far _OaksLabOakGotPokedexText
+	text "オーキド『<PLAYER>　<RIVAL>"
+	line "これを　おまえたちに　あずける！"
+
+	para "<PLAYER>は　オーキドから"
+	line "#ずかんを　もらった！@"
 	sound_get_key_item
 	text_end
 
 OaksLabOakThatWasMyDreamText:
-	text_far _OaksLabOakThatWasMyDreamText
-	text_end
+	text "この　せかいの　すべての"
+	line "#を　きろくした"
+	cont "かんぺきな　ずかんを　つくること！"
+
+	para "それが　わしの　ゆめ　だった！"
+
+	para "しかし　わしも　もう　ジジイ！"
+	line "そこまで　ムリは　できん！"
+
+	para "そこで　おまえ　たちには"
+	line "わしの　かわりに"
+	cont "ゆめを　はたして　ほしいのじゃ！"
+
+	para "さあ　ふたりとも"
+	line "さっそく　しゅっぱつ　してくれい！"
+
+	para "これは　#の　れきしに　のこる"
+	line "いだいな　しごとじゃー！"
+	done
 
 OaksLabRivalLeaveItAllToMeText:
-	text_far _OaksLabRivalLeaveItAllToMeText
-	text_end
+	text "<RIVAL>『よーし！　じいさん！"
+	line "ぜんぶ　おれに　まかせなー！"
+
+	para "<PLAYER>！"
+	line "ざんねんだが　おまえの　でばんは"
+	cont "まったく　ねーぜ！"
+
+	para "そうだ！　うちの　ねえちゃん　から"
+	line "タウンマップを　かりて　いこう！"
+
+	para "<PLAYER>　には　かさない　ように"
+	line "ねえちゃんに　いって　おくから"
+	cont "おれんちへ　きても　むだ　だからな！"
+	done
 
 OaksLabScientistText:
 	text_asm
@@ -1147,5 +1342,6 @@ OaksLabScientistText:
 	jp TextScriptEnd
 
 .Text:
-	text_far _OaksLabScientistText
-	text_end
+	text "わたしも　はかせの　じょしゅ　として"
+	line "#を　けんきゅう　してます"
+	done

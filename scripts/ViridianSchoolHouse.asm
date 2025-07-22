@@ -9,8 +9,10 @@ ViridianSchoolHouse_TextPointers:
 	dw_const ViridianSchoolHouseLittleGirlText,   TEXT_VIRIDIANSCHOOLHOUSE_LITTLE_GIRL
 
 ViridianSchoolHouseBrunetteGirlText:
-	text_far _ViridianSchoolHouseBrunetteGirlText
-	text_end
+	text "ふー"
+	line "ノートの　なかの　こと"
+	cont "わたし　ぜんぶ　おぼえるの"
+	done
 
 ViridianSchoolHouseCooltrainerFText:
 	text_asm

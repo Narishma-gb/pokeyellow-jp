@@ -17,16 +17,39 @@ BillsHousePrintBillPokemonText::
 	jr .use_machine
 
 .ImNotAPokemonText:
-	text_far _BillsHouseBillImNotAPokemonText
-	text_end
+	text "こんちわ！"
+	line "ぼく　#<⋯>！"
+	cont "<⋯>　ちゃうわい！"
+
+	para "わいは　マサキ！"
+	line "ひと　よんで　#マニアや！"
+	cont "あッ　なんや　そのめは？"
+	cont "あんさん　しんよう　してへんな"
+
+	para "ホントやで！"
+	line "じっけんに　しっぱい　して"
+	cont "#と　くっついて　もうたんや"
+
+	para "なッ！"
+	line "たすけて　くれへん？"
+	done
 
 .UseSeparationSystemText:
-	text_far _BillsHouseBillUseSeparationSystemText
-	text_end
+	text "わいが"
+	line "てんそう　マシンに　はいるさかい"
+	cont "ぶんり　プログラムを　たのむで！"
+	cont "そうや　そこの　<PC>や！"
+	done
 
 .NoYouGottaHelpText:
-	text_far _BillsHouseBillNoYouGottaHelpText
-	text_end
+	text "そんなあ<⋯>"
+	line "つめたい　こと　いわんといて"
+	cont "よッ<⋯>　いろおとこ！"
+	cont "にくいねーッ"
+	cont "だいとうりょう！"
+	cont "ほな！　オッケー　やな！"
+	cont "きまりや！"
+	prompt
 
 BillsHousePrintBillSSTicketText::
 	CheckEvent EVENT_GOT_SS_TICKET
@@ -55,22 +78,42 @@ BillsHousePrintBillSSTicketText::
 	ret
 
 .ThankYouText:
-	text_far _BillsHouseBillThankYouText
-	text_end
+	text "マサキ『やあー！"
+	line "おおきに　おおきに　たすかったわ！"
+
+	para "で<⋯>　あんさん！"
+	line "わての　#　コレクション"
+	cont "みに　きたの　ちゃうんか？"
+	cont "なんや　おもろないなー"
+	cont "ああ　そや！"
+
+	para "おれい　っちゅーのも"
+	line "なんやけど<⋯>　これ　やるわ！"
+	prompt
 
 .SSTicketReceivedText:
-	text_far _SSTicketReceivedText
+	text "<PLAYER>は　マサキから"
+	line "@"
+	text_ram wStringBuffer
+	text "を　もらった！@"
 	sound_get_key_item
 	text_promptbutton
 	text_end
 
 .SSTicketNoRoomText:
-	text_far _SSTicketNoRoomText
-	text_end
+	text "にもつ　いっぱいで　もてへんよ"
+	done
 
 .WhyDontYouGoInsteadOfMeText:
-	text_far _BillsHouseBillWhyDontYouGoInsteadOfMeText
-	text_end
+	text "いま　クチバの　みなとに"
+	line "サント·アンヌ　ごうが　きとんのや"
+	cont "#　<TRAINER>も"
+	cont "ぎょうさん　くる　らしいで"
+
+	para "チケット　もろたのは　ええんやけど"
+	line "パーティとか　すきや　ないからな"
+	cont "かわりに　いって　あそんでえな"
+	done
 
 BillsHousePrintBillCheckOutMyRarePokemonText::
 	ld hl, .text
@@ -78,8 +121,12 @@ BillsHousePrintBillCheckOutMyRarePokemonText::
 	ret
 
 .text
-	text_far _BillsHouseBillCheckOutMyRarePokemonText
-	text_end
+	text "マサキ『そや！"
+
+	para "わての　#　コレクション"
+	line "ちびっと　だけ　みせたろか？"
+	cont "わての　<PC>　みてみぃ"
+	done
 
 Func_f24ae::
 	ld a, [wCurMap]
@@ -128,29 +175,4 @@ Data_f2505:
 	db $20
 	db $20
 	db $1e
-	db $3f
-
-Func_f250b::
-	ld hl, Data_f251c
-	ld b, SPRITE_FACING_UP
-	call TryApplyPikachuMovementData
-	ld hl, Data_f2521
-	ld b, SPRITE_FACING_RIGHT
-	call TryApplyPikachuMovementData
-	ret
-
-Data_f251c:
-	db $00
-	db $1f
-	db $1d
-	db $38
-	db $3f
-
-Data_f2521:
-	db $00
-	db $1e
-	db $1f
-	db $1f
-	db $1d
-	db $38
 	db $3f

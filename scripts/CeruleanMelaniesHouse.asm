@@ -62,45 +62,54 @@ CeruleanMelanieHouseMelanieText:
 	jp TextScriptEnd
 
 CeruleanHouse1Text_1cfc8:
-	text_far MelanieText1
+	text "わたしは　ここで　きずついた"
+	line "#たちの　せわを　しています"
+
+	para "この　フシギダネも"
+	line "すっかり　げんきに　なったし"
+	cont "だいじに　してくれる"
+	cont "トレーナーを　さがしているの@"
 	text_waitbutton
 	text_end
 
 CeruleanHouse1Text_1cfce:
-	text_far MelanieText2
-	text_end
+	text "そうだ！"
+	line "あなた　この　フシギダネの"
+	cont "めんどうを　みてくださらない？"
+	done
 
 CeruleanHouse1Text_1cfd3:
-	text_far MelanieText3
+	text "それじゃ　おねがいします！@"
 	text_waitbutton
 	text_end
 
 CeruleanHouse1Text_1cfd9:
-	text_far MelanieText4
+	text "フシギダネ　がんばってます？@"
 	text_waitbutton
 	text_end
 
 CeruleanHouse1Text_1cfdf:
-	text_far MelanieText5
+	text "そう<⋯>"
+	line "ざんねん　です<⋯>@"
 	text_waitbutton
 	text_end
 
 CeruleanMelanieHouseBulbasaurText:
-	text_far MelanieBulbasaurText
+	text "フシギダネ『ダネ@"
 	text_asm
 	ld a, BULBASAUR
 	call PlayCry
 	jp TextScriptEnd
 
 CeruleanMelanieHouseOddishText:
-	text_far MelanieOddishText
+	text "ナゾノクサ『ナゾー@"
 	text_asm
 	ld a, ODDISH
 	call PlayCry
 	jp TextScriptEnd
 
 CeruleanMelanieHouseSandshrewText:
-	text_far MelanieSandshrewText
+	text "サンド『ピキー@"
 	text_asm
 	ld a, SANDSHREW
 	call PlayCry

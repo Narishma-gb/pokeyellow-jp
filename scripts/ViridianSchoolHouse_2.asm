@@ -4,8 +4,10 @@ ViridianSchoolHousePrintLittleGirlText::
 	ret
 
 .text
-	text_far _ViridianSchoolHouseLittleGirlText
-	text_end
+	text "おねえちゃんが　いってたけど"
+	line "#って　だいじに　してると"
+	cont "なついて　くれるんだって"
+	done
 
 ViridianSchoolHousePrintCooltrainerFText::
 	ld hl, .text
@@ -13,5 +15,8 @@ ViridianSchoolHousePrintCooltrainerFText::
 	ret
 
 .text
-	text_far _ViridianSchoolHouseCooltrainerFText
-	text_end
+	text "はい！"
+
+	para "こくばんに　かかれてる　こと"
+	line "ちゃんと　みて！"
+	done

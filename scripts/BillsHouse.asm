@@ -262,8 +262,9 @@ BillsHouse_TextPointers:
 	dw_const BillsHouseBillDontLeaveText,             TEXT_BILLSHOUSE_BILL_DONT_LEAVE
 
 BillsHouseBillDontLeaveText:
-	text_far _BillsHouseBillDontLeaveText
-	text_end
+	text "なんや　どこ　いくんや！"
+	line "ちょっと　まちーな"
+	done
 
 BillsHouseBillPokemonText:
 	text_asm

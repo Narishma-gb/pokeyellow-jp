@@ -7,10 +7,6 @@ SafariZoneCheck::
 	jr SafariZoneGameStillGoing
 
 SafariZoneCheckSteps::
-IF DEF(_DEBUG)
-	call DebugPressedOrHeldB
-	ret nz
-ENDC
 	ld a, [wSafariSteps]
 	ld b, a
 	ld a, [wSafariSteps + 1]
@@ -74,9 +70,12 @@ SafariGameOverText:
 	jp TextScriptEnd
 
 TimesUpText:
-	text_far _TimesUpText
-	text_end
+	text "アナウンス『ピンポーン！"
+
+	para "じかんが　きました！"
+	prompt
 
 GameOverText:
-	text_far _GameOverText
-	text_end
+	text "アナウンス『サファリ　ゲーム"
+	line "おわり　でーす！"
+	done

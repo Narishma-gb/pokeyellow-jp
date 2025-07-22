@@ -9,7 +9,7 @@ PewterNidoranHouse_TextPointers:
 	dw_const PewterNidoranHouseMiddleAgedManText, TEXT_PEWTERNIDORANHOUSE_MIDDLE_AGED_MAN
 
 PewterNidoranHouseNidoranText:
-	text_far _PewterNidoranHouseNidoranText
+	text "ニドラン『バウバウ！@"
 	text_asm
 	ld a, NIDORAN_M
 	call PlayCry
@@ -17,9 +17,19 @@ PewterNidoranHouseNidoranText:
 	jp TextScriptEnd
 
 PewterNidoranHouseLittleBoyText:
-	text_far _PewterNidoranHouseLittleBoyText
-	text_end
+	text "ニドラン　おすわり！"
+	done
 
 PewterNidoranHouseMiddleAgedManText:
-	text_far _PewterNidoranHouseMiddleAgedManText
-	text_end
+	text "うちの　#　よそもの"
+	line "だから　き　むずかしいよ"
+
+	para "よそもの　ってのは　ひとと"
+	line "こうかん　した　#だよ"
+
+	para "そだつのは　はやいが"
+	line "ちからのない　<TRAINER>の"
+	cont "いうことは　きかん！"
+
+	para "バッジさえ　あれば<⋯>"
+	done
