@@ -95,112 +95,111 @@ INCLUDE "audio/music/pokecenter.asm"
 
 
 ; Audio Engine 2 (Bank $08)
-;	audio_def 2
+	audio_def 2
 
-;SECTION "Audio Engine 2", ROMX
+SECTION "Sound Effect Headers 2", ROMX
 
-;INCLUDE "audio/engine_2.asm"
-;INCLUDE "audio/poke_flute.asm"
-
-
-;SECTION "Low Health Alarm (Audio Engine 2)", ROMX
-
-;INCLUDE "audio/low_health_alarm.asm"
+INCLUDE "audio/headers/sfx_headers_common.asm"
+INCLUDE "audio/headers/sfx_headers_2.asm"
 
 
-;SECTION "Sound Effect Headers 2", ROMX
+SECTION "Music Headers 2", ROMX
 
-;INCLUDE "audio/headers/sfx_headers_common.asm"
-;INCLUDE "audio/headers/sfx_headers_2.asm"
-
-
-;SECTION "Music Headers 2", ROMX
-
-;INCLUDE "audio/headers/music_headers_2.asm"
+INCLUDE "audio/headers/music_headers_2.asm"
 
 
-;SECTION "Sound Effects 2", ROMX
+SECTION "Sound Effects 2", ROMX
 
-;INCLUDE "audio/noise_wave_common.asm"
+INCLUDE "audio/noise_common.asm"
 
-;INCLUDE "audio/sfx/press_ab.asm"
-;INCLUDE "audio/sfx/start_menu.asm"
-;INCLUDE "audio/sfx/tink.asm"
-;INCLUDE "audio/sfx/heal_hp.asm"
-;INCLUDE "audio/sfx/heal_ailment.asm"
-;INCLUDE "audio/sfx/silph_scope.asm"
-;INCLUDE "audio/sfx/ball_toss.asm"
-;INCLUDE "audio/sfx/ball_poof.asm"
-;INCLUDE "audio/sfx/faint_thud.asm"
-;INCLUDE "audio/sfx/run.asm"
-;INCLUDE "audio/sfx/dex_page_added.asm"
-;INCLUDE "audio/sfx/pokeflute_ch7.asm"
-;INCLUDE "audio/sfx/peck.asm"
-;INCLUDE "audio/sfx/faint_fall.asm"
-;INCLUDE "audio/sfx/battle_09.asm"
-;INCLUDE "audio/sfx/pound.asm"
-;INCLUDE "audio/sfx/battle_0b.asm"
-;INCLUDE "audio/sfx/battle_0c.asm"
-;INCLUDE "audio/sfx/battle_0d.asm"
-;INCLUDE "audio/sfx/battle_0e.asm"
-;INCLUDE "audio/sfx/battle_0f.asm"
-;INCLUDE "audio/sfx/damage.asm"
-;INCLUDE "audio/sfx/not_very_effective.asm"
-;INCLUDE "audio/sfx/battle_12.asm"
-;INCLUDE "audio/sfx/battle_13.asm"
-;INCLUDE "audio/sfx/battle_14.asm"
-;INCLUDE "audio/sfx/vine_whip.asm"
-;INCLUDE "audio/sfx/battle_16.asm"
-;INCLUDE "audio/sfx/battle_17.asm"
-;INCLUDE "audio/sfx/battle_18.asm"
-;INCLUDE "audio/sfx/battle_19.asm"
-;INCLUDE "audio/sfx/super_effective.asm"
-;INCLUDE "audio/sfx/battle_1b.asm"
-;INCLUDE "audio/sfx/battle_1c.asm"
-;INCLUDE "audio/sfx/doubleslap.asm"
-;INCLUDE "audio/sfx/battle_1e.asm"
-;INCLUDE "audio/sfx/horn_drill.asm"
-;INCLUDE "audio/sfx/battle_20.asm"
-;INCLUDE "audio/sfx/battle_21.asm"
-;INCLUDE "audio/sfx/battle_22.asm"
-;INCLUDE "audio/sfx/battle_23.asm"
-;INCLUDE "audio/sfx/battle_24.asm"
-;INCLUDE "audio/sfx/battle_25.asm"
-;INCLUDE "audio/sfx/battle_26.asm"
-;INCLUDE "audio/sfx/battle_27.asm"
-;INCLUDE "audio/sfx/battle_28.asm"
-;INCLUDE "audio/sfx/battle_29.asm"
-;INCLUDE "audio/sfx/battle_2a.asm"
-;INCLUDE "audio/sfx/battle_2b.asm"
-;INCLUDE "audio/sfx/battle_2c.asm"
-;INCLUDE "audio/sfx/psybeam.asm"
-;INCLUDE "audio/sfx/battle_2e.asm"
-;INCLUDE "audio/sfx/battle_2f.asm"
-;INCLUDE "audio/sfx/psychic_m.asm"
-;INCLUDE "audio/sfx/battle_31.asm"
-;INCLUDE "audio/sfx/battle_32.asm"
-;INCLUDE "audio/sfx/battle_33.asm"
-;INCLUDE "audio/sfx/battle_34.asm"
-;INCLUDE "audio/sfx/battle_35.asm"
-;INCLUDE "audio/sfx/battle_36.asm"
+INCLUDE "audio/sfx/press_ab.asm"
+INCLUDE "audio/sfx/start_menu.asm"
+INCLUDE "audio/sfx/tink.asm"
+INCLUDE "audio/sfx/heal_hp.asm"
+INCLUDE "audio/sfx/heal_ailment.asm"
+INCLUDE "audio/sfx/silph_scope.asm"
+INCLUDE "audio/sfx/ball_toss.asm"
+INCLUDE "audio/sfx/ball_poof.asm"
+INCLUDE "audio/sfx/faint_thud.asm"
+INCLUDE "audio/sfx/run.asm"
+INCLUDE "audio/sfx/dex_page_added.asm"
+INCLUDE "audio/sfx/swap.asm" ; added in yellow
+INCLUDE "audio/sfx/pokeflute_ch7.asm"
+INCLUDE "audio/sfx/peck.asm"
+INCLUDE "audio/sfx/faint_fall.asm"
+INCLUDE "audio/sfx/battle_09.asm"
+INCLUDE "audio/sfx/pound.asm"
+INCLUDE "audio/sfx/battle_0b.asm"
+INCLUDE "audio/sfx/battle_0c.asm"
+INCLUDE "audio/sfx/battle_0d.asm"
+INCLUDE "audio/sfx/battle_0e.asm"
+INCLUDE "audio/sfx/battle_0f.asm"
+INCLUDE "audio/sfx/damage.asm"
+INCLUDE "audio/sfx/not_very_effective.asm"
+INCLUDE "audio/sfx/battle_12.asm"
+INCLUDE "audio/sfx/battle_13.asm"
+INCLUDE "audio/sfx/battle_14.asm"
+INCLUDE "audio/sfx/vine_whip.asm"
+INCLUDE "audio/sfx/battle_16.asm"
+INCLUDE "audio/sfx/battle_17.asm"
+INCLUDE "audio/sfx/battle_18.asm"
+INCLUDE "audio/sfx/battle_19.asm"
+INCLUDE "audio/sfx/super_effective.asm"
+INCLUDE "audio/sfx/battle_1b.asm"
+INCLUDE "audio/sfx/battle_1c.asm"
+INCLUDE "audio/sfx/doubleslap.asm"
+INCLUDE "audio/sfx/battle_1e.asm"
+INCLUDE "audio/sfx/horn_drill.asm"
+INCLUDE "audio/sfx/battle_20.asm"
+INCLUDE "audio/sfx/battle_21.asm"
+INCLUDE "audio/sfx/battle_22.asm"
+INCLUDE "audio/sfx/battle_23.asm"
+INCLUDE "audio/sfx/battle_24.asm"
+INCLUDE "audio/sfx/battle_25.asm"
+INCLUDE "audio/sfx/battle_26.asm"
+INCLUDE "audio/sfx/battle_27.asm"
+INCLUDE "audio/sfx/battle_28.asm"
+INCLUDE "audio/sfx/battle_29.asm"
+INCLUDE "audio/sfx/battle_2a.asm"
+INCLUDE "audio/sfx/battle_2b.asm"
+INCLUDE "audio/sfx/battle_2c.asm"
+INCLUDE "audio/sfx/psybeam.asm"
+INCLUDE "audio/sfx/battle_2e.asm"
+INCLUDE "audio/sfx/battle_2f.asm"
+INCLUDE "audio/sfx/psychic_m.asm"
+INCLUDE "audio/sfx/battle_31.asm"
+INCLUDE "audio/sfx/battle_32.asm"
+INCLUDE "audio/sfx/battle_33.asm"
+INCLUDE "audio/sfx/battle_34.asm"
+INCLUDE "audio/sfx/battle_35.asm"
+INCLUDE "audio/sfx/battle_36.asm"
 
-;INCLUDE "audio/cry_common.asm"
+INCLUDE "audio/cry_common.asm"
 
 
-;SECTION "Music 2", ROMX
+SECTION "Low Health Alarm (Audio Engine 2)", ROMX
 
-;INCLUDE "audio/sfx/pokeflute_ch5_ch6.asm"
-;INCLUDE "audio/sfx/unused_fanfare.asm"
-;INCLUDE "audio/music/gym_leader_battle.asm"
-;INCLUDE "audio/music/trainer_battle.asm"
-;INCLUDE "audio/music/wild_battle.asm"
-;INCLUDE "audio/music/final_battle.asm"
-;INCLUDE "audio/sfx/level_up.asm"
-;INCLUDE "audio/sfx/get_item2.asm"
-;INCLUDE "audio/sfx/caught_mon.asm"
-;INCLUDE "audio/music/defeated_trainer.asm"
-;INCLUDE "audio/music/defeated_wild_mon.asm"
-;INCLUDE "audio/music/defeated_gym_leader.asm"
+INCLUDE "audio/low_health_alarm.asm"
+
+
+SECTION "Audio Engine 2", ROMX
+
+INCLUDE "audio/engine_2.asm"
+
+
+SECTION "Music 2", ROMX
+
+INCLUDE "audio/sfx/unused_fanfare.asm"
+INCLUDE "audio/music/gym_leader_battle.asm"
+INCLUDE "audio/music/trainer_battle.asm"
+INCLUDE "audio/music/wild_battle.asm"
+INCLUDE "audio/music/final_battle.asm"
+INCLUDE "audio/sfx/level_up.asm"
+INCLUDE "audio/sfx/get_item2.asm"
+INCLUDE "audio/sfx/caught_mon.asm"
+INCLUDE "audio/music/defeated_trainer.asm"
+INCLUDE "audio/music/defeated_wild_mon.asm"
+INCLUDE "audio/music/defeated_gym_leader.asm"
 
 
 ;; Audio Engine 3 (Bank $1F)

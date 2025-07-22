@@ -127,9 +127,9 @@ INCLUDE "engine/events/hidden_objects/bills_house_pc.asm"
 INCLUDE "engine/events/hidden_objects/oaks_lab_email.asm"
 
 
-;SECTION "Bill's PC", ROMX
+SECTION "Bill's PC", ROMX
 
-;INCLUDE "engine/pokemon/bills_pc.asm"
+INCLUDE "engine/pokemon/bills_pc.asm"
 
 
 ;SECTION "Battle Engine 3", ROMX

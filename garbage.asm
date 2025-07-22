@@ -33,6 +33,10 @@ SECTION "Garbage 7", ROMX
 INCBIN "garbage/garbage_7.bin"
 
 
+SECTION "Garbage 8", ROMX
+INCBIN "garbage/garbage_8.bin"
+
+
 ;SECTION "Garbage 9", ROMX
 ;INCBIN "garbage/garbage_9.bin"
 
