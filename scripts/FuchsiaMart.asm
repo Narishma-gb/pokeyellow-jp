@@ -1,5 +1,6 @@
 FuchsiaMart_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ret
 
 FuchsiaMart_TextPointers:
 	def_text_pointers
@@ -8,7 +9,7 @@ FuchsiaMart_TextPointers:
 	dw_const FuchsiaMartCooltrainerFText,  TEXT_FUCHSIAMART_COOLTRAINER_F
 
 FuchsiaMartMiddleAgedManText:
-	text "サファリゾーン！　と　かかれた"
+	text "サファリ　ゾーン！　と　かかれた"
 	line "ペナントは　ないのかね？"
 
 	para "ちょうちんは？"

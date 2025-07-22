@@ -24,9 +24,12 @@ Route22GateDefaultScript:
 	ret nc
 	xor a
 	ldh [hJoyHeld], a
+	ld a, SPRITE_FACING_LEFT
+	ld [wSprite01StateData1FacingDirection], a
 	ld a, TEXT_ROUTE22GATE_GUARD
 	ldh [hTextID], a
-	jp DisplayTextID
+	call DisplayTextID
+	ret
 
 Route22GateScriptCoords:
 	dbmapcoord  4,  2

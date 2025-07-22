@@ -71,179 +71,179 @@ INCLUDE "data/maps/objects/SilphCo6F.asm"
 SilphCo6F_Blocks: INCBIN "maps/SilphCo6F.blk"
 
 
-;SECTION "Maps 3", ROMX
+SECTION "Maps 3", ROMX
 
-;INCLUDE "data/maps/headers/CinnabarIsland.asm"
-;INCLUDE "data/maps/objects/CinnabarIsland.asm"
-;CinnabarIsland_Blocks: INCBIN "maps/CinnabarIsland.blk"
+INCLUDE "data/maps/headers/CinnabarIsland.asm"
+INCLUDE "data/maps/objects/CinnabarIsland.asm"
+CinnabarIsland_Blocks: INCBIN "maps/CinnabarIsland.blk"
 
-;INCLUDE "data/maps/headers/Route1.asm"
-;INCLUDE "data/maps/objects/Route1.asm"
-;Route1_Blocks: INCBIN "maps/Route1.blk"
+INCLUDE "data/maps/headers/Route1.asm"
+INCLUDE "data/maps/objects/Route1.asm"
+Route1_Blocks: INCBIN "maps/Route1.blk"
 
-;UndergroundPathRoute8_Blocks: INCBIN "maps/_UndergroundPathEntrance.blk"
+UndergroundPathRoute8_Blocks: INCBIN "maps/_UndergroundPathEntrance.blk"
 
-;OaksLab_Blocks: INCBIN "maps/OaksLab.blk"
+OaksLab_Blocks: INCBIN "maps/OaksLab.blk"
 
-;MrPsychicsHouse_Blocks:
-;NameRatersHouse_Blocks:
-;MrFujisHouse_Blocks:
-;Route16FlyHouse_Blocks:
-;Route2TradeHouse_Blocks:
-;SaffronPidgeyHouse_Blocks:
-;VermilionPidgeyHouse_Blocks:
-;LavenderCuboneHouse_Blocks:
-;CeruleanTradeHouse_Blocks:
-;PewterNidoranHouse_Blocks:
-;PewterSpeechHouse_Blocks:
-;ViridianNicknameHouse_Blocks: INCBIN "maps/_House1.blk"
+MrPsychicsHouse_Blocks:
+NameRatersHouse_Blocks:
+MrFujisHouse_Blocks:
+Route16FlyHouse_Blocks:
+Route2TradeHouse_Blocks:
+SaffronPidgeyHouse_Blocks:
+VermilionPidgeyHouse_Blocks:
+LavenderCuboneHouse_Blocks:
+CeruleanMelaniesHouse_Blocks:
+PewterNidoranHouse_Blocks:
+PewterSpeechHouse_Blocks:
+ViridianNicknameHouse_Blocks: INCBIN "maps/_House1.blk"
 
-;CeladonMansionRoofHouse_Blocks:
-;ViridianSchoolHouse_Blocks: INCBIN "maps/_House2.blk"
+CeladonMansionRoofHouse_Blocks:
+ViridianSchoolHouse_Blocks: INCBIN "maps/_House2.blk"
 
-;CeruleanTrashedHouse_Blocks: INCBIN "maps/CeruleanTrashedHouse.blk"
+CeruleanTrashedHouse_Blocks: INCBIN "maps/CeruleanTrashedHouse.blk"
 
-;DiglettsCaveRoute11_Blocks:
-;DiglettsCaveRoute2_Blocks: INCBIN "maps/_DiglettsCaveEntrance.blk"
+DiglettsCaveRoute11_Blocks:
+DiglettsCaveRoute2_Blocks: INCBIN "maps/_DiglettsCaveEntrance.blk"
 
 
-;SECTION "Maps 4", ROMX
+SECTION "Maps 4", ROMX
 
-;INCLUDE "scripts/CinnabarIsland.asm"
+INCLUDE "scripts/CinnabarIsland.asm"
 
-;INCLUDE "scripts/Route1.asm"
+INCLUDE "scripts/Route1.asm"
 
-;INCLUDE "data/maps/headers/OaksLab.asm"
-;INCLUDE "scripts/OaksLab.asm"
-;INCLUDE "data/maps/objects/OaksLab.asm"
+INCLUDE "data/maps/headers/OaksLab.asm"
+INCLUDE "scripts/OaksLab.asm"
+INCLUDE "data/maps/objects/OaksLab.asm"
 
-;INCLUDE "data/maps/headers/ViridianMart.asm"
-;INCLUDE "scripts/ViridianMart.asm"
-;INCLUDE "data/maps/objects/ViridianMart.asm"
-;ViridianMart_Blocks: INCBIN "maps/_Mart.blk"
+INCLUDE "data/maps/headers/ViridianMart.asm"
+INCLUDE "scripts/ViridianMart.asm"
+INCLUDE "data/maps/objects/ViridianMart.asm"
+ViridianMart_Blocks: INCBIN "maps/_Mart.blk"
 
-;INCLUDE "data/maps/headers/ViridianSchoolHouse.asm"
-;INCLUDE "scripts/ViridianSchoolHouse.asm"
-;INCLUDE "data/maps/objects/ViridianSchoolHouse.asm"
+INCLUDE "data/maps/headers/ViridianSchoolHouse.asm"
+INCLUDE "scripts/ViridianSchoolHouse.asm"
+INCLUDE "data/maps/objects/ViridianSchoolHouse.asm"
 
-;INCLUDE "data/maps/headers/ViridianNicknameHouse.asm"
-;	ds 1
-;INCLUDE "scripts/ViridianNicknameHouse.asm"
-;INCLUDE "data/maps/objects/ViridianNicknameHouse.asm"
+INCLUDE "data/maps/headers/ViridianNicknameHouse.asm"
+	ds 1
+INCLUDE "scripts/ViridianNicknameHouse.asm"
+INCLUDE "data/maps/objects/ViridianNicknameHouse.asm"
 
-;INCLUDE "data/maps/headers/PewterNidoranHouse.asm"
-;INCLUDE "scripts/PewterNidoranHouse.asm"
-;INCLUDE "data/maps/objects/PewterNidoranHouse.asm"
+INCLUDE "data/maps/headers/PewterNidoranHouse.asm"
+INCLUDE "scripts/PewterNidoranHouse.asm"
+INCLUDE "data/maps/objects/PewterNidoranHouse.asm"
 
-;INCLUDE "data/maps/headers/PewterSpeechHouse.asm"
-;INCLUDE "scripts/PewterSpeechHouse.asm"
-;INCLUDE "data/maps/objects/PewterSpeechHouse.asm"
+INCLUDE "data/maps/headers/PewterSpeechHouse.asm"
+INCLUDE "scripts/PewterSpeechHouse.asm"
+INCLUDE "data/maps/objects/PewterSpeechHouse.asm"
 
-;INCLUDE "data/maps/headers/CeruleanTrashedHouse.asm"
-;INCLUDE "scripts/CeruleanTrashedHouse.asm"
-;INCLUDE "data/maps/objects/CeruleanTrashedHouse.asm"
+INCLUDE "data/maps/headers/CeruleanTrashedHouse.asm"
+INCLUDE "scripts/CeruleanTrashedHouse.asm"
+INCLUDE "data/maps/objects/CeruleanTrashedHouse.asm"
 
-;INCLUDE "data/maps/headers/CeruleanTradeHouse.asm"
-;INCLUDE "scripts/CeruleanTradeHouse.asm"
-;INCLUDE "data/maps/objects/CeruleanTradeHouse.asm"
+INCLUDE "data/maps/headers/CeruleanMelaniesHouse.asm"
+INCLUDE "scripts/CeruleanMelaniesHouse.asm"
+INCLUDE "data/maps/objects/CeruleanMelaniesHouse.asm"
 
-;INCLUDE "data/maps/headers/BikeShop.asm"
-;INCLUDE "scripts/BikeShop.asm"
-;INCLUDE "data/maps/objects/BikeShop.asm"
-;BikeShop_Blocks: INCBIN "maps/BikeShop.blk"
+INCLUDE "data/maps/headers/BikeShop.asm"
+INCLUDE "scripts/BikeShop.asm"
+INCLUDE "data/maps/objects/BikeShop.asm"
+BikeShop_Blocks: INCBIN "maps/BikeShop.blk"
 
-;INCLUDE "data/maps/headers/MrFujisHouse.asm"
-;INCLUDE "scripts/MrFujisHouse.asm"
-;INCLUDE "data/maps/objects/MrFujisHouse.asm"
+INCLUDE "data/maps/headers/MrFujisHouse.asm"
+INCLUDE "scripts/MrFujisHouse.asm"
+INCLUDE "data/maps/objects/MrFujisHouse.asm"
 
-;INCLUDE "data/maps/headers/LavenderCuboneHouse.asm"
-;INCLUDE "scripts/LavenderCuboneHouse.asm"
-;INCLUDE "data/maps/objects/LavenderCuboneHouse.asm"
+INCLUDE "data/maps/headers/LavenderCuboneHouse.asm"
+INCLUDE "scripts/LavenderCuboneHouse.asm"
+INCLUDE "data/maps/objects/LavenderCuboneHouse.asm"
 
-;INCLUDE "data/maps/headers/NameRatersHouse.asm"
-;INCLUDE "scripts/NameRatersHouse.asm"
-;INCLUDE "data/maps/objects/NameRatersHouse.asm"
+INCLUDE "data/maps/headers/NameRatersHouse.asm"
+INCLUDE "scripts/NameRatersHouse.asm"
+INCLUDE "data/maps/objects/NameRatersHouse.asm"
 
-;INCLUDE "data/maps/headers/VermilionPidgeyHouse.asm"
-;INCLUDE "scripts/VermilionPidgeyHouse.asm"
-;INCLUDE "data/maps/objects/VermilionPidgeyHouse.asm"
+INCLUDE "data/maps/headers/VermilionPidgeyHouse.asm"
+INCLUDE "scripts/VermilionPidgeyHouse.asm"
+INCLUDE "data/maps/objects/VermilionPidgeyHouse.asm"
 
-;INCLUDE "data/maps/headers/VermilionDock.asm"
-;INCLUDE "scripts/VermilionDock.asm"
-;INCLUDE "data/maps/objects/VermilionDock.asm"
-;VermilionDock_Blocks: INCBIN "maps/VermilionDock.blk"
+INCLUDE "data/maps/headers/VermilionDock.asm"
+INCLUDE "scripts/VermilionDock.asm"
+INCLUDE "data/maps/objects/VermilionDock.asm"
+VermilionDock_Blocks: INCBIN "maps/VermilionDock.blk"
 
-;INCLUDE "data/maps/headers/CeladonMansionRoofHouse.asm"
-;INCLUDE "scripts/CeladonMansionRoofHouse.asm"
-;INCLUDE "data/maps/objects/CeladonMansionRoofHouse.asm"
+INCLUDE "data/maps/headers/CeladonMansionRoofHouse.asm"
+INCLUDE "scripts/CeladonMansionRoofHouse.asm"
+INCLUDE "data/maps/objects/CeladonMansionRoofHouse.asm"
 
-;INCLUDE "data/maps/headers/FuchsiaMart.asm"
-;INCLUDE "scripts/FuchsiaMart.asm"
-;INCLUDE "data/maps/objects/FuchsiaMart.asm"
-;FuchsiaMart_Blocks: INCBIN "maps/_Mart.blk"
+INCLUDE "data/maps/headers/FuchsiaMart.asm"
+INCLUDE "scripts/FuchsiaMart.asm"
+INCLUDE "data/maps/objects/FuchsiaMart.asm"
+FuchsiaMart_Blocks: INCBIN "maps/_Mart.blk"
 
-;INCLUDE "data/maps/headers/SaffronPidgeyHouse.asm"
-;INCLUDE "scripts/SaffronPidgeyHouse.asm"
-;INCLUDE "data/maps/objects/SaffronPidgeyHouse.asm"
+INCLUDE "data/maps/headers/SaffronPidgeyHouse.asm"
+INCLUDE "scripts/SaffronPidgeyHouse.asm"
+INCLUDE "data/maps/objects/SaffronPidgeyHouse.asm"
 
-;INCLUDE "data/maps/headers/MrPsychicsHouse.asm"
-;INCLUDE "scripts/MrPsychicsHouse.asm"
-;INCLUDE "data/maps/objects/MrPsychicsHouse.asm"
+INCLUDE "data/maps/headers/MrPsychicsHouse.asm"
+INCLUDE "scripts/MrPsychicsHouse.asm"
+INCLUDE "data/maps/objects/MrPsychicsHouse.asm"
 
-;INCLUDE "data/maps/headers/DiglettsCaveRoute2.asm"
-;INCLUDE "scripts/DiglettsCaveRoute2.asm"
-;INCLUDE "data/maps/objects/DiglettsCaveRoute2.asm"
+INCLUDE "data/maps/headers/DiglettsCaveRoute2.asm"
+INCLUDE "scripts/DiglettsCaveRoute2.asm"
+INCLUDE "data/maps/objects/DiglettsCaveRoute2.asm"
 
-;INCLUDE "data/maps/headers/Route2TradeHouse.asm"
-;INCLUDE "scripts/Route2TradeHouse.asm"
-;INCLUDE "data/maps/objects/Route2TradeHouse.asm"
+INCLUDE "data/maps/headers/Route2TradeHouse.asm"
+INCLUDE "scripts/Route2TradeHouse.asm"
+INCLUDE "data/maps/objects/Route2TradeHouse.asm"
 
-;INCLUDE "data/maps/headers/Route5Gate.asm"
-;INCLUDE "scripts/Route5Gate.asm"
-;INCLUDE "data/maps/objects/Route5Gate.asm"
-;Route5Gate_Blocks: INCBIN "maps/_RouteGate1.blk"
+INCLUDE "data/maps/headers/Route5Gate.asm"
+INCLUDE "scripts/Route5Gate.asm"
+INCLUDE "data/maps/objects/Route5Gate.asm"
+Route5Gate_Blocks: INCBIN "maps/_RouteGate1.blk"
 
-;INCLUDE "data/maps/headers/Route6Gate.asm"
-;INCLUDE "scripts/Route6Gate.asm"
-;INCLUDE "data/maps/objects/Route6Gate.asm"
-;Route6Gate_Blocks: INCBIN "maps/_RouteGate1.blk"
+INCLUDE "data/maps/headers/Route6Gate.asm"
+INCLUDE "scripts/Route6Gate.asm"
+INCLUDE "data/maps/objects/Route6Gate.asm"
+Route6Gate_Blocks: INCBIN "maps/_RouteGate1.blk"
 
-;INCLUDE "data/maps/headers/Route7Gate.asm"
-;INCLUDE "scripts/Route7Gate.asm"
-;INCLUDE "data/maps/objects/Route7Gate.asm"
-;Route7Gate_Blocks: INCBIN "maps/_RouteGate2.blk"
+INCLUDE "data/maps/headers/Route7Gate.asm"
+INCLUDE "scripts/Route7Gate.asm"
+INCLUDE "data/maps/objects/Route7Gate.asm"
+Route7Gate_Blocks: INCBIN "maps/_RouteGate2.blk"
 
-;INCLUDE "data/maps/headers/Route8Gate.asm"
-;INCLUDE "scripts/Route8Gate.asm"
-;INCLUDE "data/maps/objects/Route8Gate.asm"
-;Route8Gate_Blocks: INCBIN "maps/_RouteGate2.blk"
+INCLUDE "data/maps/headers/Route8Gate.asm"
+INCLUDE "scripts/Route8Gate.asm"
+INCLUDE "data/maps/objects/Route8Gate.asm"
+Route8Gate_Blocks: INCBIN "maps/_RouteGate2.blk"
 
-;INCLUDE "data/maps/headers/UndergroundPathRoute8.asm"
-;INCLUDE "scripts/UndergroundPathRoute8.asm"
-;INCLUDE "data/maps/objects/UndergroundPathRoute8.asm"
+INCLUDE "data/maps/headers/UndergroundPathRoute8.asm"
+INCLUDE "scripts/UndergroundPathRoute8.asm"
+INCLUDE "data/maps/objects/UndergroundPathRoute8.asm"
 
-;INCLUDE "data/maps/headers/PowerPlant.asm"
-;INCLUDE "scripts/PowerPlant.asm"
-;INCLUDE "data/maps/objects/PowerPlant.asm"
-;PowerPlant_Blocks: INCBIN "maps/PowerPlant.blk"
+INCLUDE "data/maps/headers/PowerPlant.asm"
+INCLUDE "scripts/PowerPlant.asm"
+INCLUDE "data/maps/objects/PowerPlant.asm"
+PowerPlant_Blocks: INCBIN "maps/PowerPlant.blk"
 
-;INCLUDE "data/maps/headers/DiglettsCaveRoute11.asm"
-;INCLUDE "scripts/DiglettsCaveRoute11.asm"
-;INCLUDE "data/maps/objects/DiglettsCaveRoute11.asm"
+INCLUDE "data/maps/headers/DiglettsCaveRoute11.asm"
+INCLUDE "scripts/DiglettsCaveRoute11.asm"
+INCLUDE "data/maps/objects/DiglettsCaveRoute11.asm"
 
-;INCLUDE "data/maps/headers/Route16FlyHouse.asm"
-;INCLUDE "scripts/Route16FlyHouse.asm"
-;INCLUDE "data/maps/objects/Route16FlyHouse.asm"
+INCLUDE "data/maps/headers/Route16FlyHouse.asm"
+INCLUDE "scripts/Route16FlyHouse.asm"
+INCLUDE "data/maps/objects/Route16FlyHouse.asm"
 
-;INCLUDE "data/maps/headers/Route22Gate.asm"
-;INCLUDE "scripts/Route22Gate.asm"
-;INCLUDE "data/maps/objects/Route22Gate.asm"
-;Route22Gate_Blocks: INCBIN "maps/Route22Gate.blk"
+INCLUDE "data/maps/headers/Route22Gate.asm"
+INCLUDE "scripts/Route22Gate.asm"
+INCLUDE "data/maps/objects/Route22Gate.asm"
+Route22Gate_Blocks: INCBIN "maps/Route22Gate.blk"
 
-;INCLUDE "data/maps/headers/BillsHouse.asm"
-;INCLUDE "scripts/BillsHouse.asm"
-;INCLUDE "data/maps/objects/BillsHouse.asm"
-;BillsHouse_Blocks: INCBIN "maps/BillsHouse.blk"
+INCLUDE "data/maps/headers/BillsHouse.asm"
+INCLUDE "scripts/BillsHouse.asm"
+INCLUDE "data/maps/objects/BillsHouse.asm"
+BillsHouse_Blocks: INCBIN "maps/BillsHouse.blk"
 
 
 ;SECTION "Maps 5", ROMX
@@ -1228,7 +1228,7 @@ SECTION "Maps 22", ROMX
 INCLUDE "scripts/ViridianCity_2.asm"
 INCLUDE "scripts/VermilionCity_2.asm"
 INCLUDE "scripts/CeladonCity_2.asm"
-;INCLUDE "scripts/Route1_2.asm"
+INCLUDE "scripts/Route1_2.asm"
 ;INCLUDE "scripts/Route22_2.asm"
 ;INCLUDE "scripts/RedsHouse1F_2.asm"
 ;INCLUDE "scripts/OaksLab_2.asm"

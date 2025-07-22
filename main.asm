@@ -101,17 +101,6 @@ INCLUDE "engine/battle/move_effects/substitute.asm"
 INCLUDE "engine/menus/pc.asm"
 
 
-SECTION "Pikachu PCM", ROMX
-
-INCLUDE "engine/pikachu/pikachu_pcm.asm"
-
-
-SECTION "bank3C", ROMX
-
-INCLUDE "engine/overworld/unused_load_missable_object_data.asm"
-INCLUDE "engine/events/pokecenter_chansey.asm"
-
-
 SECTION "Doors and Ledges", ROMX
 
 INCLUDE "engine/overworld/auto_movement.asm"
@@ -120,22 +109,22 @@ INCLUDE "engine/overworld/doors.asm"
 INCLUDE "engine/overworld/ledges.asm"
 
 
-;SECTION "Clear Save", ROMX
+SECTION "Clear Save", ROMX
 
-;INCLUDE "engine/movie/oak_speech/clear_save.asm"
-;INCLUDE "engine/events/elevator.asm"
+INCLUDE "engine/movie/oak_speech/clear_save.asm"
+INCLUDE "engine/events/elevator.asm"
 
 
-;SECTION "Hidden Objects 1", ROMX
+SECTION "Hidden Objects 1", ROMX
 
-;INCLUDE "engine/menus/oaks_pc.asm"
-;INCLUDE "engine/events/hidden_objects/new_bike.asm"
-;INCLUDE "engine/events/hidden_objects/oaks_lab_posters.asm"
-;INCLUDE "engine/events/hidden_objects/safari_game.asm"
-;INCLUDE "engine/events/hidden_objects/cinnabar_gym_quiz.asm"
-;INCLUDE "engine/events/hidden_objects/magazines.asm"
-;INCLUDE "engine/events/hidden_objects/bills_house_pc.asm"
-;INCLUDE "engine/events/hidden_objects/oaks_lab_email.asm"
+INCLUDE "engine/menus/oaks_pc.asm"
+INCLUDE "engine/events/hidden_objects/new_bike.asm"
+INCLUDE "engine/events/hidden_objects/oaks_lab_posters.asm"
+INCLUDE "engine/events/hidden_objects/safari_game.asm"
+INCLUDE "engine/events/hidden_objects/cinnabar_gym_quiz.asm"
+INCLUDE "engine/events/hidden_objects/magazines.asm"
+INCLUDE "engine/events/hidden_objects/bills_house_pc.asm"
+INCLUDE "engine/events/hidden_objects/oaks_lab_email.asm"
 
 
 ;SECTION "Bill's PC", ROMX
@@ -363,3 +352,14 @@ INCLUDE "gfx/version.asm"
 ;INCLUDE "engine/movie/evolution.asm"
 ;INCLUDE "engine/overworld/elevator.asm"
 ;INCLUDE "engine/items/tm_prices.asm"
+
+
+SECTION "Pikachu PCM", ROMX
+
+INCLUDE "engine/pikachu/pikachu_pcm.asm"
+
+
+SECTION "bank3C", ROMX
+
+INCLUDE "engine/overworld/unused_load_missable_object_data.asm"
+INCLUDE "engine/events/pokecenter_chansey.asm"

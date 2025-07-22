@@ -54,9 +54,7 @@ BillsHouseInitiatedText::
 	line "ぶんり　プログラムを　きどう　した！@"
 	text_promptbutton
 	text_asm
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	ld c, 16
 	call DelayFrames
 	ld a, SFX_SWITCH
@@ -87,8 +85,7 @@ BillsHousePokemonList::
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	hlcoord 0, 0
-	ld b, 10
-	ld c, 9
+	lb bc, 10, 9
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, BillsMonListText

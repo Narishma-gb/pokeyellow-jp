@@ -8,7 +8,7 @@ Route22Gate_Object:
 	warp_event  4,  7, LAST_MAP, 1
 	warp_event  5,  7, LAST_MAP, 1
 	warp_event  4,  0, LAST_MAP, 1
-	warp_event  5,  0, LAST_MAP, 2
+	warp_event  5,  0, LAST_MAP, 1
 
 	def_bg_events
 

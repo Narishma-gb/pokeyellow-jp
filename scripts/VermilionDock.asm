@@ -38,10 +38,9 @@ VermilionDock_Script:
 
 VermilionDockSSAnneLeavesScript:
 	SetEventForceReuseHL EVENT_SS_ANNE_LEFT
-	ld a, SFX_STOP_ALL_MUSIC
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	ld c, BANK(Music_Surfing)
 	ld a, MUSIC_SURFING
 	call PlayMusic

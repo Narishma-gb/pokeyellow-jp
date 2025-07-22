@@ -3,7 +3,8 @@ ViridianMart_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, ViridianMart_ScriptPointers
 	ld a, [wViridianMartCurScript]
-	jp CallFunctionInTable
+	call CallFunctionInTable
+	ret
 
 ViridianMartCheckParcelDeliveredScript:
 	CheckEvent EVENT_OAK_GOT_PARCEL
@@ -23,7 +24,7 @@ ViridianMart_ScriptPointers:
 	def_script_pointers
 	dw_const ViridianMartDefaultScript,    SCRIPT_VIRIDIANMART_DEFAULT
 	dw_const ViridianMartOaksParcelScript, SCRIPT_VIRIDIANMART_OAKS_PARCEL
-	dw_const ViridianMartNoopScript,       SCRIPT_VIRIDIANMART_NOOP
+	dw_const ViridianMartScript2,          SCRIPT_VIRIDIANMART_SCRIPT2
 
 ViridianMartDefaultScript:
 	call UpdateSprites
@@ -56,10 +57,21 @@ ViridianMartOaksParcelScript:
 	lb bc, OAKS_PARCEL, 1
 	call GiveItem
 	SetEvent EVENT_GOT_OAKS_PARCEL
-	ld a, SCRIPT_VIRIDIANMART_NOOP
+	ld a, SCRIPT_VIRIDIANMART_SCRIPT2
 	ld [wViridianMartCurScript], a
-	; fallthrough
-ViridianMartNoopScript:
+	ret
+
+ViridianMartScript2:
+	CheckEventHL EVENT_COMPLETED_CATCH_TRAINING
+	ret z
+	CheckAndSetEventReuseHL EVENT_SPAWNED_OLD_MAN_1
+	ret nz
+	ld a, HS_OLD_MAN_2
+	ld [wMissableObjectIndex], a
+	predef HideObject
+	ld a, HS_OLD_MAN_1
+	ld [wMissableObjectIndex], a
+	predef ShowObject
 	ret
 
 ViridianMart_TextPointers:
@@ -100,10 +112,10 @@ ViridianMartClerkParcelQuestText:
 
 ViridianMartYoungsterText:
 	text "ねえ　この　みせの　うれすじは"
-	line "どくけし　なんだって！"
+	line "まひなおし　なんだって！"
 	done
 
 ViridianMartCooltrainerMText:
-	text "ないなー　キズぐすり<⋯>"
-	line "ここでは　うりきれてる　みたい"
+	text "いつも　うりきれだった　キズぐすり"
+	line "やっと　かえるように　なったよ"
 	done

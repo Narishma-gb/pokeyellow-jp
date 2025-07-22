@@ -1,5 +1,6 @@
 PewterNidoranHouse_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ret
 
 PewterNidoranHouse_TextPointers:
 	def_text_pointers

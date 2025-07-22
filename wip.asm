@@ -55,21 +55,6 @@ INCLUDE "main.asm"
 ;INCLUDE "engine/events/evolve_trade.asm"
 
 
-SECTION "rom7", ROMX
-; ROM $07 : $1C000 - $1FFFF
-	set_bank_offset 7
-
-	dr Route1_Blocks, 7, $40FC
-	dr DoClearSaveDialogue, 7, $421E
-	dr DisplayElevatorFloorMenu, 7, $427A
-	dr OpenOaksPC, 7, $7869
-	dr SafariZoneCheck, 7, $798C
-	dr SafariZoneCheckSteps, 7, $799B
-	dr PrintSafariGameOverText, 7, $79F0
-	dr UpdateCinnabarGymGateTileBlocks_, 7, $7D26
-
-	dr_end 7
-
 SECTION "Audio Engine 2", ROMX
 SECTION "rom8", ROMX
 ; ROM $08 : $20000 - $23FFF
@@ -230,6 +215,7 @@ SECTION "rom20", ROMX
 	set_bank_offset 20
 
 	dr Route22_Blocks, 20, $403D
+	dr Route20_Blocks, 20, $417D
 	dr Route24_Blocks, 20, $46ED
 	dr PrintCardKeyText, 20, $77F3
 	dr CeladonPrizeMenu, 20, $78BF
@@ -270,6 +256,7 @@ SECTION "rom22", ROMX
 	dr CalcExperience, 22, $4DC0
 	dr PrintStatusAilment, 22, $4E8B
 	dr OaksAideScript, 22, $4EC6
+	dr RemoveGuardDrink, 22, $7F6B
 
 	dr_end 22
 
@@ -321,6 +308,7 @@ SECTION "rom28", ROMX
 	dr SaveSAVtoSRAM1, 28, $7765
 	dr SaveSAVtoSRAM2, 28, $7789
 	dr SaveSAVtoSRAM, 28, $77C4
+	dr ClearSAV, 28, $7A79
 
 	dr_end 28
 
@@ -347,6 +335,7 @@ SECTION "rom30", ROMX
 	dr CopyTileIDsFromList, 30, $5E7D
 	dr AnimCut, 30, $5F39
 	dr AnimateBoulderDust, 30, $5FF7
+	dr LoadSmokeTileFourTimes, 30, $6063
 
 	dr_end 30
 
@@ -359,6 +348,7 @@ Music_BikeRiding::
 Music_MeetEvilTrainer::
 Music_TitleScreen::
 Music_GameCorner::
+Music_Surfing::
 
 	dr Audio3_PlaySound, 31, $510D
 
@@ -497,6 +487,8 @@ SECTION "rom48", ROMX
 	dr SetMapSpecificScriptFlagsOnMapReload, 48, $41CE
 	dr HallOfFamePC, 48, $4698
 	dr ViridianCityMovePikachu, 48, $4CE8
+	dr OaksLabPikachuMovementScript, 48, $4CF6
+	dr Func_f250b, 48, $4D35
 
 	dr_end 48
 
@@ -607,7 +599,15 @@ SECTION "rom59", ROMX
 
 SECTION "rom60", ROMX
 ; ROM $3c : $F0000 - $F3FFF
-	set_bank_offset 60, $4E92
+	set_bank_offset 60, $4FD0
+
+	dr ViridianSchoolHousePrintLittleGirlText_cpy, 60, $5346
+INCLUDE "scripts/ViridianSchoolHouse_2.asm"
+	set_bank_offset 60, $539C
+
+	dr BillsHousePrintBillPokemonText_cpy, 60, $659A
+INCLUDE "scripts/BillsHouse_2.asm"
+	set_bank_offset 60, $6886
 
 	dr CheckForHiddenObject, 60, $6AEA
 
@@ -671,11 +671,17 @@ SECTION "rom63", ROMX
 	dr IsThisPartymonStarterPikachu_Box, 63, $4E0D
 	dr IsThisPartymonStarterPikachu_Party, 63, $4E18
 	dr UpdatePikachuMoodAfterBattle, 63, $4E5A
+	dr CheckPikachuFaintedOrStatused, 63, $4E73
 	dr IsPlayerTalkingToPikachu, 63, $4F0C
+	dr InitializePikachuTextID, 63, $4F20
 	dr PlaySpecificPikachuEmotion, 63, $5001
 	dr TalkToPikachu, 63, $5004
 	dr PikachuEmotionTable, 63, $5019
+	dr PikachuEmotion23_id, 63, $5047
 	dr PikachuEmotion26_id, 63, $504D
+	dr PikachuEmotion27_id, 63, $504F
+	dr PikachuEmotion31_id, 63, $5057
+	dr PikachuEmotion32_id, 63, $5059
 	dr PikachuWalksToNurseJoy, 63, $5252
 	dr ApplyPikachuMovementData_, 63, $529A
 	dr OfficerJennySprite, 63, $6662

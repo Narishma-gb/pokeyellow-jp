@@ -105,7 +105,7 @@ SaffronGateGuardGeeImThirstyText:
 
 SaffronGateGuardGiveDrinkText:
 	text "あ　それは"
-	cont "おいしそうな　のみもの<⋯>"
+	line "おいしそうな　のみもの<⋯>"
 	cont "<⋯>　<⋯>"
 	cont "え？"
 	cont "ぼくに　くれる？"
@@ -114,7 +114,7 @@ SaffronGateGuardGiveDrinkText:
 	text_start
 
 	para "<⋯>　<⋯>"
-	cont "ゴクゴク<⋯>"
+	line "ゴクゴク<⋯>"
 	cont "<⋯>"
 	cont "ゴクゴク<⋯>　<⋯>"
 	cont "ヤマブキ　シティに"

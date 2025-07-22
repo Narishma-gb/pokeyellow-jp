@@ -1,10 +1,12 @@
 ViridianSchoolHouse_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ret
 
 ViridianSchoolHouse_TextPointers:
 	def_text_pointers
 	dw_const ViridianSchoolHouseBrunetteGirlText, TEXT_VIRIDIANSCHOOLHOUSE_BRUNETTE_GIRL
 	dw_const ViridianSchoolHouseCooltrainerFText, TEXT_VIRIDIANSCHOOLHOUSE_COOLTRAINER_F
+	dw_const ViridianSchoolHouseLittleGirlText,   TEXT_VIRIDIANSCHOOLHOUSE_LITTLE_GIRL
 
 ViridianSchoolHouseBrunetteGirlText:
 	text "ふー"
@@ -13,8 +15,11 @@ ViridianSchoolHouseBrunetteGirlText:
 	done
 
 ViridianSchoolHouseCooltrainerFText:
-	text "はい！"
+	text_asm
+	farcall ViridianSchoolHousePrintCooltrainerFText
+	jp TextScriptEnd
 
-	para "こくばんに　かかれてる　こと"
-	line "ちゃんと　みて！"
-	done
+ViridianSchoolHouseLittleGirlText:
+	text_asm
+	farcall ViridianSchoolHousePrintLittleGirlText
+	jp TextScriptEnd

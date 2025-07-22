@@ -53,6 +53,7 @@ NameRatersHouseNameRaterText:
 	xor a
 	ld [wPartyMenuTypeOrMessageID], a
 	ld [wUpdateSpritesEnabled], a
+	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 	push af
 	call GBPalWhiteOutWithDelay3

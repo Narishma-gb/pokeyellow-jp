@@ -31,7 +31,7 @@ MrFujisHouseSuperNerdText:
 	done
 
 .MrFujiHadBeenPrayingText:
-	text "フジ　ろうじん　カラカラの　れいを"
+	text "フジ　ろうじん　ガラガラの　れいを"
 	line "なぐさめに　いってたんだね"
 	done
 

@@ -1,43 +1,88 @@
 BillsHouse_Script:
+	call BillsHouseScript_1e09e
 	call EnableAutoTextBoxDrawing
 	ld a, [wBillsHouseCurScript]
 	ld hl, BillsHouse_ScriptPointers
-	jp CallFunctionInTable
+	call CallFunctionInTable
+	ret
 
 BillsHouse_ScriptPointers:
 	def_script_pointers
-	dw_const BillsHouseDefaultScript,              SCRIPT_BILLSHOUSE_DEFAULT
-	dw_const BillsHousePokemonWalkToMachineScript, SCRIPT_BILLSHOUSE_POKEMON_WALK_TO_MACHINE
-	dw_const BillsHousePokemonEntersMachineScript, SCRIPT_BILLSHOUSE_POKEMON_ENTERS_MACHINE
-	dw_const BillsHouseBillExitsMachineScript,     SCRIPT_BILLSHOUSE_BILL_EXITS_MACHINE
-	dw_const BillsHouseCleanupScript,              SCRIPT_BILLSHOUSE_CLEANUP
-	dw_const BillsHousePCScript,                   SCRIPT_BILLSHOUSE_PC
+	dw_const BillsHouseScript0, SCRIPT_BILLSHOUSE_SCRIPT0
+	dw_const BillsHouseScript1, SCRIPT_BILLSHOUSE_SCRIPT1
+	dw_const BillsHouseScript2, SCRIPT_BILLSHOUSE_SCRIPT2
+	dw_const BillsHouseScript3, SCRIPT_BILLSHOUSE_SCRIPT3
+	dw_const BillsHouseScript4, SCRIPT_BILLSHOUSE_SCRIPT4
+	dw_const BillsHouseScript5, SCRIPT_BILLSHOUSE_SCRIPT5
+	dw_const BillsHouseScript6, SCRIPT_BILLSHOUSE_SCRIPT6
+	dw_const BillsHouseScript7, SCRIPT_BILLSHOUSE_SCRIPT7
+	dw_const BillsHouseScript8, SCRIPT_BILLSHOUSE_SCRIPT8
+	dw_const BillsHouseScript9, SCRIPT_BILLSHOUSE_SCRIPT9
 
-BillsHouseDefaultScript:
+BillsHouseScript_1e09e:
+	ld hl, wd492
+	bit 7, [hl]
+	set 7, [hl]
+	ret nz
+	CheckEventHL EVENT_MET_BILL_2
+	jr z, .asm_1e0af
+	jr .asm_1e0b3
+
+.asm_1e0af
+	ld a, SCRIPT_BILLSHOUSE_SCRIPT0
+	jr .asm_1e0b5
+
+.asm_1e0b3
+	ld a, SCRIPT_BILLSHOUSE_SCRIPT9
+.asm_1e0b5
+	ld [wBillsHouseCurScript], a
 	ret
 
-BillsHousePokemonWalkToMachineScript:
+BillsHouseScript0:
+	ld a, [wd471]
+	bit 7, a
+	jr z, .asm_1e0d2
+	callfar CheckPikachuFaintedOrStatused
+	jr c, .asm_1e0d2
+	callfar Func_f24d5
+.asm_1e0d2
+	xor a
+	ld [wJoyIgnore], a
+	ld a, SCRIPT_BILLSHOUSE_SCRIPT1
+	ld [wBillsHouseCurScript], a
+	ret
+
+BillsHouseScript1:
+	ret
+
+BillsHouseScript2:
+	ld a, A_BUTTON | B_BUTTON | SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld [wJoyIgnore], a
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
-	ld de, .PokemonWalkToMachineMovement
+	ld de, MovementData_1e79c
 	jr nz, .notDown
-	ld de, .PokemonWalkAroundPlayerMovement
+	call CheckPikachuFollowingPlayer
+	jr nz, .asm_1e0f8
+	callfar Func_f250b
+.asm_1e0f8
+	ld de, MovementData_1e7a0
 .notDown
 	ld a, BILLSHOUSE_BILL_POKEMON
 	ldh [hSpriteIndex], a
 	call MoveSprite
-	ld a, SCRIPT_BILLSHOUSE_POKEMON_ENTERS_MACHINE
+	ld a, SCRIPT_BILLSHOUSE_SCRIPT3
 	ld [wBillsHouseCurScript], a
 	ret
 
-.PokemonWalkToMachineMovement:
+MovementData_1e79c:
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
 ; make Bill walk around the player
-.PokemonWalkAroundPlayerMovement:
+MovementData_1e7a0:
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_UP
@@ -45,25 +90,58 @@ BillsHousePokemonWalkToMachineScript:
 	db NPC_MOVEMENT_UP
 	db -1 ; end
 
-BillsHousePokemonEntersMachineScript:
+BillsHouseScript3:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
 	ld a, HS_BILL_POKEMON
 	ld [wMissableObjectIndex], a
 	predef HideObject
-	SetEvent EVENT_BILL_SAID_USE_CELL_SEPARATOR
+	call CheckPikachuFollowingPlayer
+	jr z, .asm_1e13e
+	ld hl, PikachuMovementData_1e14d
+	ld a, [wSpritePlayerStateData1FacingDirection]
+	and a ; cp SPRITE_FACING_DOWN
+	jr nz, .asm_1e133
+	ld hl, PikachuMovementData_1e152
+.asm_1e133
+	call ApplyPikachuMovementData
+	callfar InitializePikachuTextID
+.asm_1e13e
 	xor a
 	ld [wJoyIgnore], a
-	ld a, SCRIPT_BILLSHOUSE_BILL_EXITS_MACHINE
+	SetEvent EVENT_BILL_SAID_USE_CELL_SEPARATOR
+	ld a, SCRIPT_BILLSHOUSE_SCRIPT4
 	ld [wBillsHouseCurScript], a
 	ret
 
-BillsHouseBillExitsMachineScript:
+PikachuMovementData_1e14d:
+	db $00
+	db $1e
+	db $1e
+	db $1e
+	db $3f
+
+PikachuMovementData_1e152:
+	db $00
+	db $1e
+	db $1f
+	db $1e
+	db $1e
+	db $20
+	db $36
+	db $3f
+
+BillsHouseScript4:
 	CheckEvent EVENT_USED_CELL_SEPARATOR_ON_BILL
 	ret z
-	ld a, D_RIGHT | D_LEFT | D_UP | D_DOWN
+	ld a, SELECT | START | D_RIGHT | D_LEFT | D_UP | D_DOWN
 	ld [wJoyIgnore], a
+	ld a, SCRIPT_BILLSHOUSE_SCRIPT5
+	ld [wBillsHouseCurScript], a
+	ret
+
+BillsHouseScript5:
 	ld a, BILLSHOUSE_BILL1
 	ld [wSpriteIndex], a
 	ld a, $c
@@ -80,15 +158,34 @@ BillsHouseBillExitsMachineScript:
 	predef ShowObject
 	ld c, 8
 	call DelayFrames
+	ld hl, wd471
+	bit 7, [hl]
+	jr z, .asm_1e1c6
+	call CheckPikachuFollowingPlayer
+	jr z, .asm_1e1c6
 	ld a, BILLSHOUSE_BILL1
 	ldh [hSpriteIndex], a
-	ld de, .BillExitMachineMovement
+	ld a, SPRITE_FACING_DOWN
+	ldh [hSpriteFacingDirection], a
+	call SetSpriteFacingDirectionAndDelay
+	ld hl, PikachuMovementData_1e1a9
+	call ApplyPikachuMovementData
+	ld a, $f
+	ld [wEmotionBubbleSpriteIndex], a
+	ld a, EXCLAMATION_BUBBLE
+	ld [wWhichEmotionBubble], a
+	predef EmotionBubble
+	callfar InitializePikachuTextID
+.asm_1e1c6
+	ld a, BILLSHOUSE_BILL1
+	ldh [hSpriteIndex], a
+	ld de, MovementData_1e807
 	call MoveSprite
-	ld a, SCRIPT_BILLSHOUSE_CLEANUP
+	ld a, SCRIPT_BILLSHOUSE_SCRIPT6
 	ld [wBillsHouseCurScript], a
 	ret
 
-.BillExitMachineMovement:
+MovementData_1e807:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
@@ -96,24 +193,65 @@ BillsHouseBillExitsMachineScript:
 	db NPC_MOVEMENT_DOWN
 	db -1 ; end
 
-BillsHouseCleanupScript:
+PikachuMovementData_1e1a9:
+	db $00
+	db $37
+	db $3f
+
+BillsHouseScript6:
 	ld a, [wStatusFlags5]
 	bit BIT_SCRIPTED_NPC_MOVEMENT, a
 	ret nz
-	xor a
-	ld [wJoyIgnore], a
 	SetEvent EVENT_MET_BILL_2 ; this event seems redundant
 	SetEvent EVENT_MET_BILL
-	ld a, SCRIPT_BILLSHOUSE_DEFAULT
+	ld a, SCRIPT_BILLSHOUSE_SCRIPT7
 	ld [wBillsHouseCurScript], a
 	ret
 
-BillsHousePCScript:
-	ld a, TEXT_BILLSHOUSE_ACTIVATE_PC
+BillsHouseScript7:
+	xor a
+	ld [wPlayerMovingDirection], a
+	ld a, SPRITE_FACING_UP
+	ld [wSpritePlayerStateData1FacingDirection], a
+	ld a, ~(A_BUTTON | B_BUTTON)
+	ld [wJoyIgnore], a
+	ld de, RLE_1e219
+	ld hl, wSimulatedJoypadStatesEnd
+	call DecodeRLEList
+	dec a
+	ld [wSimulatedJoypadStatesIndex], a
+	call StartSimulatingJoypadStates
+	ld a, SCRIPT_BILLSHOUSE_SCRIPT8
+	ld [wBillsHouseCurScript], a
+	ret
+
+RLE_1e219:
+	db D_RIGHT, $3
+	db $FF
+
+BillsHouseScript8:
+	ld a, [wSimulatedJoypadStatesIndex]
+	and a
+	ret nz
+	xor a
+	ld [wPlayerMovingDirection], a
+	ld a, SPRITE_FACING_UP
+	ld [wSpritePlayerStateData1FacingDirection], a
+	ld a, BILLSHOUSE_BILL1
+	ldh [hSpriteIndex], a
+	ld a, SPRITE_FACING_DOWN
+	ldh [hSpriteFacingDirection], a
+	call SetSpriteFacingDirectionAndDelay
+	xor a
+	ld [wJoyIgnore], a
+	ld a, TEXT_BILLSHOUSE_BILL_SS_TICKET
 	ldh [hTextID], a
 	call DisplayTextID
-	ld a, SCRIPT_BILLSHOUSE_DEFAULT
+	ld a, SCRIPT_BILLSHOUSE_SCRIPT9
 	ld [wBillsHouseCurScript], a
+	ret
+
+BillsHouseScript9:
 	ret
 
 BillsHouse_TextPointers:
@@ -121,143 +259,24 @@ BillsHouse_TextPointers:
 	dw_const BillsHouseBillPokemonText,               TEXT_BILLSHOUSE_BILL_POKEMON
 	dw_const BillsHouseBillSSTicketText,              TEXT_BILLSHOUSE_BILL_SS_TICKET
 	dw_const BillsHouseBillCheckOutMyRarePokemonText, TEXT_BILLSHOUSE_BILL_CHECK_OUT_MY_RARE_POKEMON
-	dw_const BillsHouseActivatePCScript,              TEXT_BILLSHOUSE_ACTIVATE_PC
+	dw_const BillsHouseBillDontLeaveText,             TEXT_BILLSHOUSE_BILL_DONT_LEAVE
 
-BillsHouseActivatePCScript:
-	script_bills_pc
+BillsHouseBillDontLeaveText:
+	text "なんや　どこ　いくんや！"
+	line "ちょっと　まちーな"
+	done
 
 BillsHouseBillPokemonText:
 	text_asm
-	ld hl, .ImNotAPokemonText
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	jr nz, .answered_no
-.use_machine
-	ld hl, .UseSeparationSystemText
-	call PrintText
-	ld a, SCRIPT_BILLSHOUSE_POKEMON_WALK_TO_MACHINE
-	ld [wBillsHouseCurScript], a
-	jr .text_script_end
-.answered_no
-	ld hl, .NoYouGottaHelpText
-	call PrintText
-	jr .use_machine
-.text_script_end
+	farcall BillsHousePrintBillPokemonText
 	jp TextScriptEnd
-
-.ImNotAPokemonText:
-	text "こんちわ！"
-	line "ぼく　#<⋯>！"
-	cont "<⋯>　ちゃうわい！"
-
-	para "わいは　マサキ！"
-	line "ひと　よんで　#マニアや！"
-	cont "あッ　なんや　そのめは？"
-	cont "あんさん　しんよう　してへんな"
-
-	para "ホントやで！"
-	line "じっけんに　しっぱい　して"
-	cont "#と　くっついて　もうたんや"
-
-	para "なッ！"
-	line "たすけて　くれへん？"
-	done
-
-.UseSeparationSystemText:
-	text "わいが"
-	line "てんそう　マシンに　はいるさかい"
-	cont "ぶんり　プログラムを　たのむで！"
-	cont "そうや　そこの　<PC>や！"
-	done
-
-.NoYouGottaHelpText:
-	text "そんなあ<⋯>"
-	line "つめたい　こと　いわんといて"
-	cont "よッ<⋯>　いろおとこ！"
-	cont "にくいねーッ"
-	cont "だいとうりょう！"
-	cont "ほな！　オッケー　やな！"
-	cont "きまりや！"
-	prompt
 
 BillsHouseBillSSTicketText:
 	text_asm
-	CheckEvent EVENT_GOT_SS_TICKET
-	jr nz, .got_ss_ticket
-	ld hl, .ThankYouText
-	call PrintText
-	lb bc, S_S_TICKET, 1
-	call GiveItem
-	jr nc, .bag_full
-	ld hl, .SSTicketReceivedText
-	call PrintText
-	SetEvent EVENT_GOT_SS_TICKET
-	ld a, HS_CERULEAN_GUARD_1
-	ld [wMissableObjectIndex], a
-	predef ShowObject
-	ld a, HS_CERULEAN_GUARD_2
-	ld [wMissableObjectIndex], a
-	predef HideObject
-.got_ss_ticket
-	ld hl, .WhyDontYouGoInsteadOfMeText
-	call PrintText
-	jr .text_script_end
-.bag_full
-	ld hl, .SSTicketNoRoomText
-	call PrintText
-.text_script_end
+	farcall BillsHousePrintBillSSTicketText
 	jp TextScriptEnd
-
-.ThankYouText:
-	text "マサキ『やあー！"
-	line "おおきに　おおきに　たすかったわ！"
-
-	para "で<⋯>　あんさん！"
-	line "わての　#　コレクション"
-	cont "みに　きたの　ちゃうんか？"
-	cont "なんや　おもろないなー"
-	cont "ああ　そや！"
-
-	para "おれい　っちゅーのも"
-	line "なんやけど<⋯>　これ　やるわ！"
-	prompt
-
-.SSTicketReceivedText:
-	text "<PLAYER>は　マサキから"
-	line "@"
-	text_ram wStringBuffer
-	text "を　もらった！@"
-	sound_get_key_item
-	text_promptbutton
-	text_end
-
-.SSTicketNoRoomText:
-	text "にもつ　いっぱいで　もてへんよ"
-	done
-
-.WhyDontYouGoInsteadOfMeText:
-	text "いま　クチバの　みなとに"
-	line "サント·アンヌ　ごうが　きとんのや"
-	cont "#　<TRAINER>も"
-	cont "ぎょうさん　くる　らしいで"
-
-	para "チケット　もろたのは　ええんやけど"
-	line "パーティとか　すきや　ないからな"
-	cont "かわりに　いって　あそんでえな"
-	done
 
 BillsHouseBillCheckOutMyRarePokemonText:
 	text_asm
-	ld hl, .Text
-	call PrintText
+	farcall BillsHousePrintBillCheckOutMyRarePokemonText
 	jp TextScriptEnd
-
-.Text:
-	text "マサキ『そや！"
-
-	para "わての　#　コレクション"
-	line "ちびっと　だけ　みせたろか？"
-	cont "わての　<PC>　みてみぃ"
-	done

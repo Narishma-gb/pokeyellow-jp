@@ -3,7 +3,8 @@ DisplayOakLabEmailText:
 	cp SPRITE_FACING_UP
 	ret nz
 	call EnableAutoTextBoxDrawing
-	tx_pre_jump OakLabEmailText
+	tx_pre OakLabEmailText
+	ret
 
 OakLabEmailText::
 	text "<PC>を　みると"

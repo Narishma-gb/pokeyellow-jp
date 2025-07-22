@@ -63,7 +63,11 @@ ROMX $6
 	"Doors and Ledges"
 	"Garbage 6"
 ROMX $7
-	"rom7"
+	"Maps 3"
+	"Clear Save"
+	"Maps 4"
+	"Hidden Objects 1"
+	"Garbage 7"
 ROMX $8
 	"Audio Engine 2"
 	"rom8"
@@ -189,12 +193,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $7
-; 	"Maps 3"
-; 	"Clear Save"
-; 	"Maps 4"
-; 	"Hidden Objects 1"
-; 	"Garbage 7"
 ; ROMX $8
 ; 	"Sound Effect Headers 2"
 ; 	"Music Headers 2"

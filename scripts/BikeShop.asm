@@ -1,5 +1,6 @@
 BikeShop_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ret
 
 BikeShop_TextPointers:
 	def_text_pointers
@@ -51,8 +52,7 @@ BikeShopClerkText:
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	hlcoord 0, 0
-	ld b, 4
-	ld c, 15
+	lb bc, 4, 15
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 2, 2
@@ -60,11 +60,12 @@ BikeShopClerkText:
 	call PlaceString
 	ld hl, BikeShopClerkDoYouLikeItText
 	call PrintText
+	; This fixes the bike shop instatext glitch
+	ld hl, wStatusFlags5
+	res BIT_NO_TEXT_DELAY, [hl]
 	call HandleMenuInput
 	bit BIT_B_BUTTON, a
 	jr nz, .cancel
-	ld hl, wStatusFlags5
-	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .cancel

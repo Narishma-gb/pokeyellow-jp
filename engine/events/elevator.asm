@@ -1,6 +1,12 @@
 DisplayElevatorFloorMenu:
+	ld hl, wStatusFlags5
+	ld a, [hl]
+	push af
+	set BIT_NO_TEXT_DELAY, [hl]
 	ld hl, WhichFloorText
 	call PrintText
+	pop af
+	ld [wStatusFlags5], a
 	ld hl, wItemList
 	ld a, l
 	ld [wListPointer], a
