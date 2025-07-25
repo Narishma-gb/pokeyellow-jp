@@ -28,7 +28,6 @@ PromptUserToPlaySlots:
 	call GBPalNormal
 	ld a, $e4
 	ldh [rOBP0], a
-	call UpdateCGBPal_OBP0
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	xor a
@@ -56,8 +55,9 @@ PromptUserToPlaySlots:
 	jp CloseTextDisplay
 
 PlaySlotMachineText:
-	text_far _PlaySlotMachineText
-	text_end
+	text "スロットマシーンが　ある！"
+	line "あそびますか？"
+	done
 
 MainSlotMachineLoop:
 	call SlotMachine_PrintCreditCoins
@@ -149,29 +149,32 @@ MainSlotMachineLoop:
 	jp MainSlotMachineLoop
 
 CoinMultiplierSlotMachineText:
-	db   "×3"
-	next "×2"
-	next "×1@"
+	db   "３まい"
+	next "２まい"
+	next "１まい@"
 
 OutOfCoinsSlotMachineText:
-	text_far _OutOfCoinsSlotMachineText
-	text_end
+	text "コインが"
+	line "なくなっちゃった<⋯>"
+	done
 
 BetHowManySlotMachineText:
-	text_far _BetHowManySlotMachineText
-	text_end
+	text "コインを"
+	line "なんまい　かけますか？"
+	done
 
 StartSlotMachineText:
-	text_far _StartSlotMachineText
-	text_end
+	text "スタート！"
+	done
 
 NotEnoughCoinsSlotMachineText:
-	text_far _NotEnoughCoinsSlotMachineText
-	text_end
+	text "コインが　たりません！"
+	prompt
 
 OneMoreGoSlotMachineText:
-	text_far _OneMoreGoSlotMachineText
-	text_end
+	text "もう　１かい"
+	line "あそびますか？"
+	done
 
 SlotMachine_SetFlags:
 	ld hl, wSlotMachineFlags
@@ -459,7 +462,6 @@ SlotMachine_CheckForMatches:
 	ldh a, [rBGP]
 	xor $40
 	ldh [rBGP], a
-	call UpdateCGBPal_BGP
 	ld c, 5
 	call DelayFrames
 	dec b
@@ -476,7 +478,6 @@ SlotMachine_CheckForMatches:
 	call SlotMachine_PrintPayoutCoins
 	ld a, $e4
 	ldh [rOBP0], a
-	call UpdateCGBPal_OBP0
 	jp .done
 
 SymbolLinedUpSlotMachineText:
@@ -492,8 +493,11 @@ SymbolLinedUpSlotMachineText:
 	ret
 
 LinedUpText:
-	text_far _LinedUpText
-	text_end
+	text "が　そろった！"
+	line "コイン@"
+	text_ram wStringBuffer
+	text "まい　いただき！"
+	done
 
 SlotRewardPointers:
 	dw SlotReward300Func
@@ -510,20 +514,20 @@ SlotRewardPointers:
 	dw SlotReward15Text
 
 SlotReward300Text:
-	db "300@"
+	db "３００@"
 
 SlotReward100Text:
-	db "100@"
+	db "１００@"
 
 SlotReward8Text:
-	db "8@"
+	db "８@"
 
 SlotReward15Text:
-	db "15@"
+	db "１５@"
 
 NotThisTimeText:
-	text_far _NotThisTimeText
-	text_end
+	text "はずれー"
+	prompt
 
 ; compares the slot machine tiles at bc, de, and hl
 SlotMachine_CheckForMatch:
@@ -613,7 +617,7 @@ SlotReward300Func:
 	ret
 
 YeahText:
-	text_far _YeahText
+	text "やった！@"
 	text_pause
 	text_end
 
@@ -702,7 +706,6 @@ SlotMachine_PayCoinsToPlayer:
 	ldh a, [rOBP0]
 	xor $40 ; make the slot wheel symbols flash
 	ldh [rOBP0], a
-	call UpdateCGBPal_OBP0
 	ld a, 5
 .skip1
 	ld [wAnimCounter], a
