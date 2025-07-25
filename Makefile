@@ -12,10 +12,10 @@ rom_obj := \
 	wip.o \
 	maps.o \
 	ram.o \
+	gfx/pics.o \
 	gfx/sprites.o \
 	gfx/tilesets.o
 #	main.o \
-#	gfx/pics.o \
 
 pokeyellow_obj      := $(rom_obj:.o=_yellow.o)
 pokeyellow11_obj    := $(rom_obj:.o=_yellow11.o)
@@ -152,7 +152,7 @@ gfx/battle/move_anim_1.2bpp: tools/gfx += --trim-whitespace
 
 gfx/credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 
-gfx/slots/blue_slots_1.2bpp: tools/gfx += --trim-whitespace
+gfx/slots/slots_1.2bpp: tools/gfx += --trim-whitespace
 
 gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
 gfx/tilesets/reds_house.2bpp: tools/gfx += --preserve=0x48

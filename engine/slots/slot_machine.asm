@@ -24,6 +24,7 @@ PromptUserToPlaySlots:
 	call LoadFontTilePatterns
 	ld b, SET_PAL_SLOTS
 	call RunPaletteCommand
+	call Delay3
 	call GBPalNormal
 	ld a, $e4
 	ldh [rOBP0], a
@@ -82,8 +83,7 @@ MainSlotMachineLoop:
 	ld [wLastMenuItem], a
 	ld [wMenuWatchMovingOutOfBounds], a
 	hlcoord 14, 11
-	ld b, 5
-	ld c, 4
+	lb bc, 5, 4
 	call TextBoxBorder
 	hlcoord 16, 12
 	ld de, CoinMultiplierSlotMachineText
@@ -860,17 +860,17 @@ LoadSlotMachineTiles:
 	ld de, vChars0
 	ld bc, $1c tiles ; should be SlotMachineTiles2End - SlotMachineTiles2, or $18 tiles
 	ld a, BANK(SlotMachineTiles2)
-	call FarCopyData2
+	call FarCopyData
 	ld hl, SlotMachineTiles1
 	ld de, vChars2
 	ld bc, SlotMachineTiles1End - SlotMachineTiles1
 	ld a, BANK(SlotMachineTiles1)
-	call FarCopyData2
+	call FarCopyData
 	ld hl, SlotMachineTiles2
 	ld de, vChars2 tile $25
 	ld bc, $1c tiles ; should be SlotMachineTiles2End - SlotMachineTiles2, or $18 tiles
 	ld a, BANK(SlotMachineTiles2)
-	call FarCopyData2
+	call FarCopyData
 	ld hl, SlotMachineMap
 	decoord 0, 0
 	ld bc, SlotMachineMapEnd - SlotMachineMap
@@ -892,5 +892,5 @@ SlotMachineMapEnd:
 INCLUDE "data/events/slot_machine_wheels.asm"
 
 SlotMachineTiles1:
-	INCBIN "gfx/slots/blue_slots_1.2bpp"
+	INCBIN "gfx/slots/slots_1.2bpp"
 SlotMachineTiles1End:

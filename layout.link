@@ -79,19 +79,23 @@ ROMX $8
 	"Garbage 8"
 ROMX $9
 	"Pics 1"
-	"rom9"
+	"Battle Engine 3"
+	"Garbage 9"
 ROMX $a
 	"Pics 2"
-	"rom10"
+	"Battle Engine 4"
+	"Garbage 10"
 ROMX $b
 	"Pics 3"
-	"rom11"
+	"Battle Engine 5"
+	"Garbage 11"
 ROMX $c
 	"Pics 4"
-	"rom12"
+	"Garbage 12"
 ROMX $d
 	"Pics 5"
-	"rom13"
+	"Slot Machines"
+	"Garbage 13"
 ROMX $e
 	"rom14"
 ROMX $f
@@ -199,26 +203,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $9
-; 	"Pics 1"
-; 	"Battle Engine 3"
-; 	"Garbage 9"
-; ROMX $A
-; 	"Pics 2"
-; 	"Battle Engine 4"
-; 	"Garbage 10"
-; ROMX $B
-; 	"Pics 3"
-; 	"Battle Engine 5"
-; 	"Garbage 11"
-; ROMX $C
-; 	"Pics 4"
-; 	"Battle Engine 6"
-; 	"Garbage 12"
-; ROMX $D
-; 	"Pics 5"
-; 	"Slot Machines"
-; 	"Garbage 13"
 ; ROMX $E
 ; 	"Battle Engine 7"
 ; 	"Garbage 14"

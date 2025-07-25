@@ -53,58 +53,17 @@ INCLUDE "main.asm"
 ;INCLUDE "engine/math/random.asm"
 ;INCLUDE "engine/overworld/emotion_bubbles.asm"
 ;INCLUDE "engine/events/evolve_trade.asm"
+;INCLUDE "engine/battle/move_effects/focus_energy.asm"
+;INCLUDE "data/pokemon/base_stats/mew.asm"
+;INCBIN "gfx/player/redb.pic"
+;INCBIN "gfx/battle/oldmanb.pic"
+;INCLUDE "gfx/trainer_card.asm"
+;INCLUDE "engine/battle/move_effects/pay_day.asm"
+;INCLUDE "engine/battle/move_effects/mist.asm"
+;INCLUDE "engine/battle/move_effects/one_hit_ko.asm"
+;INCLUDE "engine/battle/link_battle_versus_text.asm"
+;INCLUDE "engine/math/multiply_divide.asm"
 
-
-SECTION "Pics 1", ROMX
-SECTION "rom9", ROMX
-; ROM $09 : $24000 - $27FFF
-	set_bank_offset 9
-
-	dr PrintMonType, 9, $7D20
-	dr PrintMoveType, 9, $7D50
-	dr SaveTrainerName, 9, $7DDE
-
-	dr_end 9
-
-SECTION "Pics 2", ROMX
-SECTION "rom10", ROMX
-; ROM $0a : $28000 - $2BFFF
-	set_bank_offset 10
-
-	dr ChangeBGPalColor0_4Frames, 10, $7D4C
-	dr PredefShakeScreenVertically, 10, $7D61
-	dr PredefShakeScreenHorizontally, 10, $7D87
-
-	dr_end 10
-
-SECTION "Pics 3", ROMX
-SECTION "rom11", ROMX
-; ROM $0b : $2C000 - $2FFFF
-	set_bank_offset 11
-
-	dr FossilKabutopsPic, 11, $7B92
-	dr CheckIfMoveIsKnown, 11, $7D56
-	dr RespawnOverworldPikachu, 11, $7D92
-	dr ScaleSpriteByTwo, 11, $7DA1
-
-	dr_end 11
-
-SECTION "Pics 4", ROMX
-SECTION "rom12", ROMX
-; ROM $0c : $30000 - $33FFF
-	set_bank_offset 12
-
-	dr_end 12
-
-SECTION "Pics 5", ROMX
-SECTION "rom13", ROMX
-; ROM $0d : $34000 - $37FFF
-	set_bank_offset 13
-
-	dr FossilAerodactylPic, 13, $67A1
-	dr GhostPic, 13, $6920
-
-	dr_end 13
 
 SECTION "rom14", ROMX
 ; ROM $0e : $38000 - $3BFFF
@@ -140,6 +99,7 @@ DisplayBattleMenu::
 	dr DrawEnemyHUDAndHPBar, 15, $4FF6
 	dr MoveSelectionMenu, 15, $546E
 	dr IsGhostBattle, 15, $5B1D
+	dr MoveHitTest, 15, $69E1
 	dr LoadEnemyMonData, 15, $6F84
 	dr DoubleOrHalveSelectedStats, 15, $7188
 	dr LoadHudTilePatterns, 15, $72E1
@@ -311,6 +271,7 @@ SECTION "rom30", ROMX
 	set_bank_offset 30
 
 	dr MoveAnimationTiles1, 30, $46EE
+	dr SlotMachineTiles2, 30, $4BDE
 	dr MoveAnimation, 30, $4D5E
 	dr AnimationSubstitute, 30, $5703
 	dr GetIntroMoveSound, 30, $5919

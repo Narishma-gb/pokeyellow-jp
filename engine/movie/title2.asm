@@ -1,3 +1,5 @@
+; Leftover of Blue. Seemingly unused
+
 TitleScroll_WaitBall:
 ; Wait around for the TitleBall animation to play out.
 ; hi: speed
@@ -90,11 +92,11 @@ TitleBallYTable:
 TitleScreenAnimateBallIfStarterOut:
 ; Animate the TitleBall if a starter just got scrolled out.
 	ld a, [wTitleMonSpecies]
-	cp STARTER1
+	cp CHARMANDER ; starter 1
 	jr z, .ok
-	cp STARTER2
+	cp SQUIRTLE ; starter 2
 	jr z, .ok
-	cp STARTER3
+	cp BULBASAUR ; starter 3
 	ret nz
 .ok
 	ld e, 1 ; animate titleball

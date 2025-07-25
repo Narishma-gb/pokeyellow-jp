@@ -132,42 +132,32 @@ SECTION "Bill's PC", ROMX
 INCLUDE "engine/pokemon/bills_pc.asm"
 
 
-;SECTION "Battle Engine 3", ROMX
+SECTION "Battle Engine 3", ROMX
 
-;INCLUDE "engine/battle/print_type.asm"
-;INCLUDE "engine/battle/save_trainer_name.asm"
-;INCLUDE "engine/battle/move_effects/focus_energy.asm"
-
-
-;SECTION "Battle Engine 4", ROMX
-
-;INCLUDE "engine/battle/move_effects/leech_seed.asm"
+INCLUDE "engine/battle/print_type.asm"
+INCLUDE "engine/battle/save_trainer_name.asm"
 
 
-;SECTION "Battle Engine 5", ROMX
+SECTION "Battle Engine 4", ROMX
 
-;INCLUDE "engine/battle/display_effectiveness.asm"
-;INCLUDE "gfx/trainer_card.asm"
-;INCLUDE "engine/items/tmhm.asm"
-;INCLUDE "engine/battle/scale_sprites.asm"
-;INCLUDE "engine/battle/move_effects/pay_day.asm"
-;INCLUDE "engine/slots/game_corner_slots2.asm"
+INCLUDE "engine/gfx/screen_effects.asm"
+INCLUDE "engine/battle/move_effects/leech_seed.asm"
 
 
-;SECTION "Battle Engine 6", ROMX
+SECTION "Battle Engine 5", ROMX
 
-;INCLUDE "engine/battle/move_effects/mist.asm"
-;INCLUDE "engine/battle/move_effects/one_hit_ko.asm"
+INCLUDE "engine/battle/display_effectiveness.asm"
+INCLUDE "engine/items/tmhm.asm"
+INCLUDE "engine/pikachu/respawn_overworld_pikachu.asm"
+INCLUDE "engine/battle/scale_sprites.asm"
+INCLUDE "engine/slots/game_corner_slots2.asm"
 
 
-;SECTION "Slot Machines", ROMX
+SECTION "Slot Machines", ROMX
 
-;INCLUDE "engine/movie/title2.asm"
-;INCLUDE "engine/battle/link_battle_versus_text.asm"
-;INCLUDE "engine/slots/slot_machine.asm"
-
-;INCLUDE "engine/math/multiply_divide.asm"
-;INCLUDE "engine/slots/game_corner_slots.asm"
+INCLUDE "engine/movie/title2.asm"
+INCLUDE "engine/slots/slot_machine.asm"
+INCLUDE "engine/slots/game_corner_slots.asm"
 
 
 ;SECTION "Battle Engine 7", ROMX
@@ -212,11 +202,6 @@ INCLUDE "engine/pokemon/bills_pc.asm"
 ;SECTION "Hidden Objects Core", ROMX
 
 ;INCLUDE "engine/overworld/hidden_objects.asm"
-
-
-;SECTION "Screen Effects", ROMX
-
-;INCLUDE "engine/gfx/screen_effects.asm"
 
 
 ;SECTION "Predefs", ROMX
