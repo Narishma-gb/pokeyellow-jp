@@ -1,11 +1,17 @@
 TrainerAI:
-	and a
 	ld a, [wIsInBattle]
 	dec a
-	ret z ; if not a trainer, we're done here
+	jr z, .done ; if not a trainer, we're done here
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
-	ret z ; if in a link battle, we're done as well
+	jr z, .done ; if in a link battle, we're done as well
+	ld a, [wEnemyBattleStatus1]
+	and 1 << CHARGING_UP | 1 << THRASHING_ABOUT | 1 << STORING_ENERGY
+	jr nz, .done ; don't follow trainer ai if opponent is in a locked state
+	ld a, [wEnemyBattleStatus2]
+	and 1 << USING_RAGE
+	jr nz, .done ; don't follow trainer ai if opponent is locked in rage
+	             ; note that this doesn't check for hyper beam recharge which can cause problems
 	ld a, [wTrainerClass] ; what trainer class is this?
 	dec a
 	ld c, a
@@ -16,7 +22,7 @@ TrainerAI:
 	add hl, bc
 	ld a, [wAICount]
 	and a
-	ret z ; if no AI uses left, we're done here
+	jr z, .done ; if no AI uses left, we're done here
 	inc hl
 	inc a
 	jr nz, .getpointer
@@ -29,6 +35,9 @@ TrainerAI:
 	ld l, a
 	call Random
 	jp hl
+.done
+	and a
+	ret
 
 INCLUDE "data/trainers/ai_pointers.asm"
 
@@ -91,22 +100,22 @@ ErikaAI:
 	jp AIUseSuperPotion
 
 KogaAI:
-	cp 25 percent + 1
+	cp 13 percent - 1
 	ret nc
 	jp AIUseXAttack
 
 BlaineAI:
 	cp 25 percent + 1
 	ret nc
+	ld a, 10
+	call AICheckIfHPBelowFraction
+	ret nc
 	jp AIUseSuperPotion
 
 SabrinaAI:
 	cp 25 percent + 1
 	ret nc
-	ld a, 10
-	call AICheckIfHPBelowFraction
-	ret nc
-	jp AIUseHyperPotion
+	jp AIUseXDefend
 
 Rival2AI:
 	cp 13 percent - 1

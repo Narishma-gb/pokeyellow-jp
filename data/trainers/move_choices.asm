@@ -28,7 +28,7 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1       ; GAMBLER
 	move_choices 1, 3    ; BEAUTY
 	move_choices 1, 2    ; PSYCHIC_TR
-	move_choices 1, 3    ; ROCKER
+	move_choices 1       ; ROCKER
 	move_choices 1       ; JUGGLER
 	move_choices 1       ; TAMER
 	move_choices 1       ; BIRD_KEEPER
@@ -44,11 +44,11 @@ TrainerClassMoveChoiceModifications:
 	move_choices 1       ; BRUNO
 	move_choices 1       ; BROCK
 	move_choices 1, 3    ; MISTY
-	move_choices 1, 3    ; LT_SURGE
+	move_choices 1       ; LT_SURGE
 	move_choices 1, 3    ; ERIKA
 	move_choices 1, 3    ; KOGA
-	move_choices 1, 3    ; BLAINE
-	move_choices 1, 3    ; SABRINA
+	move_choices 1       ; BLAINE
+	move_choices 1       ; SABRINA
 	move_choices 1, 2    ; GENTLEMAN
 	move_choices 1, 3    ; RIVAL2
 	move_choices 1, 3    ; RIVAL3

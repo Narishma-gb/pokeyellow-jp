@@ -9,7 +9,7 @@ TryEvolvingMon:
 	call Evolution_FlagAction
 
 ; this is only called after battle
-; it is supposed to do level up evolutions, though there is a bug that allows item evolutions to occur
+; it does level up evolutions, though there was a bug in red/blue that allows item evolutions to occur which is patched here
 EvolutionAfterBattle:
 	ldh a, [hTileAnimations]
 	push af
@@ -93,9 +93,11 @@ Evolution_PartyMonLoop: ; loop over party mons
 	jp c, Evolution_PartyMonLoop ; if so, go the next mon
 	jr .doEvolution
 .checkItemEvo
+	ld a, [wIsInBattle] ; are we in battle?
+	and a
 	ld a, [hli]
-	; Bug: Wild encounters can cause stone evolutions without
-	; having any stones available. This was fixed in Yellow.
+	jp nz, .nextEvoEntry1 ; don't evolve if we're in a battle as wCurPartySpecies could be holding the last mon sent out
+
 	ld b, a ; evolution item
 	ld a, [wCurItem] ; same as [wCurPartySpecies]
 	cp b ; was the evolution item in this entry used?
@@ -332,23 +334,9 @@ Evolution_ReloadTilesetTilePatterns:
 	jp ReloadTilesetTilePatterns
 
 LearnMoveFromLevelUp:
-	ld hl, EvosMovesPointerTable
 	ld a, [wPokedexNum] ; species
 	ld [wCurPartySpecies], a
-	dec a
-	ld bc, 0
-	ld hl, EvosMovesPointerTable
-	add a
-	rl b
-	ld c, a
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-.skipEvolutionDataLoop ; loop to skip past the evolution data, which comes before the move data
-	ld a, [hli]
-	and a ; have we reached the end of the evolution data?
-	jr nz, .skipEvolutionDataLoop ; if not, jump back up
+	call GetMonLearnset
 .learnSetLoop ; loop over the learn set until we reach a move that is learnt at the current level or the end of the list
 	ld a, [hli]
 	and a ; have we reached the end of the learn set?
@@ -384,9 +372,136 @@ LearnMoveFromLevelUp:
 	call GetMoveName
 	call CopyToStringBuffer
 	predef LearnMove
+	ld a, b
+	and a
+	jr z, .done
+	callfar IsThisPartymonStarterPikachu_Party
+	jr nc, .done
+	ld a, [wMoveNum]
+	cp THUNDERBOLT
+	jr z, .foundThunderOrThunderbolt
+	cp THUNDER
+	jr nz, .done
+.foundThunderOrThunderbolt
+	ld a, $5
+	ld [wd49b], a
+	ld a, $85
+	ld [wPikachuMood], a
 .done
 	ld a, [wCurPartySpecies]
 	ld [wNamedObjectIndex], a
+	ret
+
+Func_3b079:
+	ld a, [wCurPartySpecies]
+	push af
+	call Func_3b0a2
+	jr c, .asm_3b09c
+
+	call Func_3b10f
+	jr nc, .asm_3b096
+
+	call Func_3b0a2
+	jr c, .asm_3b09c
+
+	call Func_3b10f
+	jr nc, .asm_3b096
+
+	call Func_3b0a2
+	jr c, .asm_3b09c
+.asm_3b096
+	pop af
+	ld [wCurPartySpecies], a
+	and a
+	ret
+.asm_3b09c
+	pop af
+	ld [wCurPartySpecies], a
+	scf
+	ret
+
+Func_3b0a2:
+	ld a, [wTempTMHM]
+	ld [wMoveNum], a
+	predef CanLearnTM
+	ld a, c
+	and a
+	jr nz, .asm_3b0ec
+	ld hl, Pointer_3b0ee
+	ld a, [wCurPartySpecies]
+	ld de, $1
+	call IsInArray
+	jr c, .asm_3b0d2
+	ld a, $ff
+	ld [wMonHGrowthRate], a
+	ld a, [wTempTMHM]
+	ld hl, wMonHMoves
+	ld de, $1
+	call IsInArray
+	jr c, .asm_3b0ec
+.asm_3b0d2
+	ld a, [wTempTMHM]
+	ld d, a
+	call GetMonLearnset
+.loop
+	ld a, [hli]
+	and a
+	jr z, .asm_3b0ea
+	ld b, a
+	ld a, [wCurEnemyLevel]
+	cp b
+	jr c, .asm_3b0ea
+	ld a, [hli]
+	cp d
+	jr z, .asm_3b0ec
+	jr .loop
+.asm_3b0ea
+	and a
+	ret
+.asm_3b0ec
+	scf
+	ret
+
+INCLUDE "data/pokemon/unknown_list.asm"
+
+Func_3b10f:
+	ld c, $0
+.asm_3b111
+	ld hl, EvosMovesPointerTable
+	ld b, $0
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+.asm_3b11b
+	ld a, [hli]
+	and a
+	jr z, .asm_3b130
+	cp $2
+	jr nz, .asm_3b124
+	inc hl
+.asm_3b124
+	inc hl
+	ld a, [wCurPartySpecies]
+	cp [hl]
+	jr z, .asm_3b138
+	inc hl
+	ld a, [hl]
+	and a
+	jr nz, .asm_3b11b
+.asm_3b130
+	inc c
+	ld a, c
+	cp VICTREEBEL
+	jr c, .asm_3b111
+	and a
+	ret
+.asm_3b138
+	inc c
+	ld a, c
+	ld [wCurPartySpecies], a
+	scf
 	ret
 
 ; writes the moves a mon has at level [wCurEnemyLevel] to [de]
@@ -396,21 +511,7 @@ WriteMonMoves:
 	push hl
 	push de
 	push bc
-	ld hl, EvosMovesPointerTable
-	ld b, 0
-	ld a, [wCurPartySpecies]
-	dec a
-	add a
-	rl b
-	ld c, a
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-.skipEvoEntriesLoop
-	ld a, [hli]
-	and a
-	jr nz, .skipEvoEntriesLoop
+	call GetMonLearnset
 	jr .firstMove
 .nextMove
 	pop de
@@ -523,5 +624,22 @@ WriteMonMoves_ShiftMoveData:
 
 Evolution_FlagAction:
 	predef_jump FlagActionPredef
+
+GetMonLearnset:
+	ld hl, EvosMovesPointerTable
+	ld b, 0
+	ld a, [wCurPartySpecies]
+	dec a
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+.skipEvolutionDataLoop ; loop to skip past the evolution data, which comes before the move data
+	ld a, [hli]
+	and a ; have we reached the end of the evolution data?
+	jr nz, .skipEvolutionDataLoop ; if not, jump back up
+	ret
 
 INCLUDE "data/pokemon/evos_moves.asm"

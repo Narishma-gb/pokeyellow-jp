@@ -24,8 +24,7 @@
 	     SELFDESTRUCT, EGG_BOMB,     FIRE_BLAST,   SWIFT,        SKULL_BASH,   \
 	     SOFTBOILED,   DREAM_EATER,  SKY_ATTACK,   REST,         THUNDER_WAVE, \
 	     PSYWAVE,      EXPLOSION,    ROCK_SLIDE,   TRI_ATTACK,   SUBSTITUTE,   \
-	     CUT,          FLY,          SURF,         STRENGTH,     FLASH,        \
-	     UNUSED
+	     CUT,          FLY,          SURF,         STRENGTH,     FLASH
 	; end
 
-	db %11111111 ; padding
+	db 0 ; padding
