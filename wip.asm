@@ -54,7 +54,6 @@ INCLUDE "main.asm"
 ;INCLUDE "engine/overworld/emotion_bubbles.asm"
 ;INCLUDE "engine/events/evolve_trade.asm"
 ;INCLUDE "engine/battle/move_effects/focus_energy.asm"
-;INCLUDE "data/pokemon/base_stats/mew.asm"
 ;INCBIN "gfx/player/redb.pic"
 ;INCBIN "gfx/battle/oldmanb.pic"
 ;INCLUDE "gfx/trainer_card.asm"
@@ -63,28 +62,12 @@ INCLUDE "main.asm"
 ;INCLUDE "engine/battle/move_effects/one_hit_ko.asm"
 ;INCLUDE "engine/battle/link_battle_versus_text.asm"
 ;INCLUDE "engine/math/multiply_divide.asm"
+;INCLUDE "engine/battle/unused_stats_functions.asm"
+;INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
+;INCLUDE "engine/battle/move_effects/heal.asm"
+;INCLUDE "engine/battle/move_effects/transform.asm"
+;INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
 
-
-SECTION "rom14", ROMX
-; ROM $0e : $38000 - $3BFFF
-	set_bank_offset 14
-
-	dr Moves, 14, $4000
-	dr BaseStats, 14, $43DE
-	dr MonsterNames, 14, $5462
-	dr CryData, 14, $5818
-	dr TrainerPicAndMoneyPointers, 14, $5C49
-	dr TrainerNames, 14, $5D34
-	dr FormatMovesString, 14, $5E77
-	dr InitList, 14, $5EC5
-	dr PokeballTileGraphics, 14, $6DA7
-	dr TryEvolvingMon, 14, $7137
-	dr EvolutionAfterBattle, 14, $7145
-	dr LearnMoveFromLevelUp, 14, $73C3
-	dr WriteMonMoves, 14, $74F6
-	dr EvosMovesPointerTable, 14, $759C
-
-	dr_end 14
 
 SECTION "rom15", ROMX
 ; ROM $0f : $3C000 - $3FFFF
@@ -92,6 +75,7 @@ SECTION "rom15", ROMX
 
 DisplayBattleMenu::
 
+	dr EnemySendOut, 15, $4A4E
 	dr AnyPartyAlive, 15, $4BF8
 	dr ReadPlayerMonCurHPAndStatus, 15, $4F4E
 	dr DrawHUDsAndHPBars, 15, $4F65
@@ -99,6 +83,7 @@ DisplayBattleMenu::
 	dr DrawEnemyHUDAndHPBar, 15, $4FF6
 	dr MoveSelectionMenu, 15, $546E
 	dr IsGhostBattle, 15, $5B1D
+	dr AIGetTypeEffectiveness, 15, $68BF
 	dr MoveHitTest, 15, $69E1
 	dr LoadEnemyMonData, 15, $6F84
 	dr DoubleOrHalveSelectedStats, 15, $7188
@@ -144,11 +129,7 @@ SECTION "rom18", ROMX
 
 SECTION "rom19", ROMX
 ; ROM $13 : $4C000 - $4FFFF
-	set_bank_offset 19
-
-	dr Rival1Pic, 19, $6049
-	dr ProfOakPic, 19, $613A
-	dr JessieJamesPic, 19, $7C81
+	set_bank_offset 19, $7E79
 
 	dr_end 19
 
@@ -280,6 +261,7 @@ SECTION "rom30", ROMX
 	dr AnimCut, 30, $5F39
 	dr AnimateBoulderDust, 30, $5FF7
 	dr LoadSmokeTileFourTimes, 30, $6063
+	dr EvolveMon, 30, $7E87
 
 	dr_end 30
 

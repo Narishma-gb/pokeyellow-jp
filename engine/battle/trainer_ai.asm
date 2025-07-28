@@ -483,13 +483,13 @@ AIUseFullRestore:
 	inc de
 	ld hl, wEnemyMonMaxHP + 1
 	ld a, [hld]
-	ld [de], a
+	ld [de], a ; wHPBarNewHP
 	inc de
 	ld [wHPBarMaxHP], a
 	ld [wEnemyMonHP + 1], a
 	ld a, [hl]
 	ld [de], a
-	ld [wHPBarMaxHP+1], a
+	ld [wHPBarMaxHP + 1], a
 	ld [wEnemyMonHP], a
 	jr AIPrintItemUseAndUpdateHPBar
 
@@ -521,12 +521,12 @@ AIRecoverHP:
 	ld [hld], a
 	ld [wHPBarNewHP], a
 	ld a, [hl]
-	ld [wHPBarOldHP+1], a
-	ld [wHPBarNewHP+1], a
+	ld [wHPBarOldHP + 1], a
+	ld [wHPBarNewHP + 1], a
 	jr nc, .next
 	inc a
 	ld [hl], a
-	ld [wHPBarNewHP+1], a
+	ld [wHPBarNewHP + 1], a
 .next
 	inc hl
 	ld a, [hld]
@@ -539,7 +539,7 @@ AIRecoverHP:
 	ld a, [hli]
 	ld b, a
 	ld a, [de]
-	ld [wHPBarMaxHP+1], a
+	ld [wHPBarMaxHP + 1], a
 	sbc b
 	jr nc, AIPrintItemUseAndUpdateHPBar
 	inc de
@@ -549,7 +549,7 @@ AIRecoverHP:
 	ld [wHPBarNewHP], a
 	ld a, [de]
 	ld [hl], a
-	ld [wHPBarNewHP+1], a
+	ld [wHPBarNewHP + 1], a
 	; fallthrough
 
 AIPrintItemUseAndUpdateHPBar:
@@ -622,8 +622,12 @@ SwitchEnemyMon:
 	ret
 
 AIBattleWithdrawText:
-	text_far _AIBattleWithdrawText
-	text_end
+	text_ram wTrainerName
+	text "は"
+	line "@"
+	text_ram wEnemyMonNick
+	text "をひっこめた！"
+	prompt
 
 AIUseFullHeal:
 	call AIPlayRestoringSFX
@@ -747,5 +751,11 @@ AIPrintItemUse_:
 	jp PrintText
 
 AIBattleUseItemText:
-	text_far _AIBattleUseItemText
-	text_end
+	text_ram wTrainerName
+	text "は　@"
+	text_ram wEnemyMonNick
+	text "に"
+	line "@"
+	text_ram wNameBuffer
+	text "を　つかった"
+	prompt

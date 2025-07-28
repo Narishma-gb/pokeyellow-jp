@@ -97,7 +97,8 @@ ROMX $d
 	"Slot Machines"
 	"Garbage 13"
 ROMX $e
-	"rom14"
+	"Battle Engine 6"
+	"Garbage 14"
 ROMX $f
 	"rom15"
 ROMX $10
@@ -107,6 +108,7 @@ ROMX $11
 ROMX $12
 	"rom18"
 ROMX $13
+	"Pics 6"
 	"rom19"
 ROMX $14
 	"rom20"
@@ -203,9 +205,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $E
-; 	"Battle Engine 7"
-; 	"Garbage 14"
 ; ROMX $F
 ; 	"Battle Core"
 ; ROMX $10

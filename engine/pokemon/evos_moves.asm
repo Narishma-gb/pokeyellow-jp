@@ -301,20 +301,31 @@ CancelledEvolution:
 	jp Evolution_PartyMonLoop
 
 EvolvedText:
-	text_far _EvolvedText
-	text_end
+	text "おめでとう！　@"
+	text_ram wStringBuffer
+	text "は"
+	done
 
 IntoText:
-	text_far _IntoText
-	text_end
+	text_start
+	line "@"
+	text_ram wNameBuffer
+	text "に　しんかした"
+	done
 
 StoppedEvolvingText:
-	text_far _StoppedEvolvingText
-	text_end
+	text "あれ<⋯>？"
+	line "@"
+	text_ram wStringBuffer
+	text "の　へんかが　とまった！"
+	prompt
 
 IsEvolvingText:
-	text_far _IsEvolvingText
-	text_end
+	text "<⋯>　おや！？"
+	line "@"
+	text_ram wStringBuffer
+	text "の　ようすが<⋯>！"
+	done
 
 Evolution_ReloadTilesetTilePatterns:
 	ld a, [wLinkState]
