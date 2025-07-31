@@ -61,8 +61,8 @@ SECTION "Garbage 14", ROMX
 INCBIN "garbage/garbage_14.bin"
 
 
-;SECTION "Garbage 15", ROMX
-;INCBIN "garbage/garbage_15.bin"
+SECTION "Garbage 15", ROMX
+INCBIN "garbage/garbage_15.bin"
 
 
 ;SECTION "Garbage 16", ROMX

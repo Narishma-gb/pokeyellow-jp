@@ -1,4 +1,4 @@
-ExclamationPointMoveSets:
+SentenceEndMoveSets:
 ; set 0
 	db SWORDS_DANCE
 	db GROWTH
@@ -16,7 +16,7 @@ ExclamationPointMoveSets:
 	db TELEPORT
 	db MIMIC
 	db DOUBLE_TEAM
-	db BIDE ; corrected JP grammar: moved from set 1 in pokered
+	db BIDE
 	db BARRAGE
 	db 0 ; end set
 
