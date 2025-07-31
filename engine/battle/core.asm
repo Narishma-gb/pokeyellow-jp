@@ -156,10 +156,16 @@ StartBattle:
 	call DelayFrames
 	call SaveScreenTilesToBuffer1
 .checkAnyPartyAlive
+	ld a, [wBattleType]
+	cp BATTLE_TYPE_RUN
+	jp z, .specialBattle
+	cp BATTLE_TYPE_PIKACHU
+	jp z, .specialBattle
 	call AnyPartyAlive
 	ld a, d
 	and a
 	jp z, HandlePlayerBlackOut ; jump if no mon is alive
+.specialBattle
 	call LoadScreenTilesFromBuffer1
 	ld a, [wBattleType]
 	and a ; is it a normal battle?
@@ -334,6 +340,8 @@ MainInBattleLoop:
 	ld [wMoveMenuType], a
 	inc a
 	ld [wAnimationID], a
+	xor a
+	ld [wMenuItemToSwap], a
 	call MoveSelectionMenu
 	push af
 	call LoadScreenTilesFromBuffer1
@@ -371,7 +379,6 @@ MainInBattleLoop:
 	ld [wPlayerSelectedMove], a
 .specialMoveNotUsed
 	callfar SwitchEnemyMon
-	jp .enemyMovesFirst
 .noLinkBattle
 	ld a, [wPlayerSelectedMove]
 	cp QUICK_ATTACK
@@ -904,6 +911,9 @@ ReplaceFaintedEnemyMon:
 	ld hl, wEnemyHPBarColor
 	ld e, $30
 	call GetBattleHealthBarColor
+	ldpal a, SHADE_BLACK, SHADE_DARK, SHADE_LIGHT, SHADE_WHITE
+	ldh [rOBP0], a
+	ldh [rOBP1], a
 	callfar DrawEnemyPokeballs
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
@@ -974,9 +984,7 @@ TrainerDefeatedText:
 
 PlayBattleVictoryMusic:
 	push af
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySoundWaitForCurrent
+	call StopAllMusic
 	ld c, BANK(Music_DefeatedTrainer)
 	pop af
 	call PlayMusic
@@ -1054,10 +1062,36 @@ RemoveFaintedPlayerMon:
 	and a ; was this called by HandleEnemyMonFainted?
 	ret z ; if so, return
 
+	ld a, [wPlayerMonNumber]
+	ld [wWhichPokemon], a
+	callfar IsThisPartymonStarterPikachu_Party
+	jr nc, .notPlayerPikachu
+	ldpikacry e, PikachuCry4
+	callfar PlayPikachuSoundClip
+	jr .printText
+.notPlayerPikachu
 	ld a, [wBattleMonSpecies]
 	call PlayCry
+.printText
 	ld hl, PlayerMonFaintedText
-	jp PrintText
+	call PrintText
+	ld a, [wPlayerMonNumber]
+	ld [wWhichPokemon], a
+	ld a, [wBattleMonLevel]
+	ld b, a
+	ld a, [wEnemyMonLevel]
+	sub b ; enemylevel - playerlevel
+	      ; are we stronger than the opposing pokemon?
+	jr c, .regularFaint ; if so, deduct happiness regularly
+
+	cp 30 ; is the enemy 30 levels greater than us?
+	jr nc, .carelessTrainer ; if so, punish the player for being careless, as they shouldn't be fighting a very high leveled trainer with such a level difference
+.regularFaint
+	callabd_ModifyPikachuHappiness PIKAHAPPY_FAINTED
+	ret
+.carelessTrainer
+	callabd_ModifyPikachuHappiness PIKAHAPPY_CARELESSTRAINER
+	ret
 
 PlayerMonFaintedText:
 	text_ram wBattleMonNick
@@ -1115,7 +1149,7 @@ ChooseNextMon:
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jr nz, .notLinkBattle
-	inc a ; 1
+	ld a, 1
 	ld [wActionResultOrTookBattleTurn], a
 	call LinkBattleExchangeData
 .notLinkBattle
@@ -1530,6 +1564,8 @@ TryRunningFromBattle:
 	ld a, [wBattleType]
 	cp BATTLE_TYPE_SAFARI
 	jp z, .canEscape ; jump if it's a safari battle
+	cp BATTLE_TYPE_RUN
+	jp z, .canEscape ; hurry, get away?
 	ld a, [wLinkState]
 	cp LINK_STATE_BATTLING
 	jp z, .canEscape
@@ -1787,19 +1823,46 @@ SendOutMon:
 	call RunPaletteCommand
 	ld hl, wEnemyBattleStatus1
 	res USING_TRAPPING_MOVE, [hl]
+	callfar IsThisPartymonStarterPikachu
+	jr c, .starterPikachu
 	ld a, $1
 	ldh [hWhoseTurn], a
 	ld a, POOF_ANIM
 	call PlayMoveAnimation
 	hlcoord 4, 11
 	predef AnimateSendingOutMon
+	jr .playRegularCry
+.starterPikachu
+	xor a
+	ldh [hWhoseTurn], a
+	ld a, $1
+	ldh [hAutoBGTransferEnabled], a
+	callfar StarterPikachuBattleEntranceAnimation
+	callfar IsPlayerPikachuAsleepInParty
+	ldpikacry e, PikachuCry37
+	jr c, .asm_3cd81
+	ldpikacry e, PikachuCry11
+.asm_3cd81
+	callfar PlayPikachuSoundClip
+	jr .done
+.playRegularCry
 	ld a, [wCurPartySpecies]
 	call PlayCry
+.done
 	call PrintEmptyString
 	jp SaveScreenTilesToBuffer1
 
 ; show 2 stages of the player mon getting smaller before disappearing
 AnimateRetreatingPlayerMon:
+	ld a, [wWhichPokemon]
+	push af
+	ld a, [wPlayerMonNumber]
+	ld [wWhichPokemon], a
+	callfar IsThisPartymonStarterPikachu
+	pop bc
+	ld a, b
+	ld [wWhichPokemon], a
+	jr c, .starterPikachu
 	hlcoord 1, 5
 	lb bc, 7, 7
 	call ClearScreenArea
@@ -1823,10 +1886,17 @@ AnimateRetreatingPlayerMon:
 	call .clearScreenArea
 	ld a, $4c
 	ldcoord_a 5, 11
+	jr .clearScreenArea
+.starterPikachu
+	xor a
+	ldh [hWhoseTurn], a
+	callfar AnimationSlideMonOff
+	ret
 .clearScreenArea
 	hlcoord 1, 5
 	lb bc, 7, 7
-	jp ClearScreenArea
+	call ClearScreenArea
+	ret
 
 ; reads player's current mon's HP into wBattleMonHP
 ReadPlayerMonCurHPAndStatus:
@@ -2049,12 +2119,15 @@ DisplayBattleMenu::
 .menuselected
 	ld [wTextBoxID], a
 	call DisplayTextBoxID
- ; handle menu input if it's not the old man tutorial
+ ; handle menu input if it's not the old man tutorial or prof. oak pikachu battle
 	ld a, [wBattleType]
-	ASSERT BATTLE_TYPE_OLD_MAN == 1
-	dec a
-	jp nz, .handleBattleMenuInput
+	cp BATTLE_TYPE_OLD_MAN
+	jr z, .doSimulatedMenuInput
+	cp BATTLE_TYPE_PIKACHU
+	jr z, .doSimulatedMenuInput
+	jp .handleBattleMenuInput
 ; the following happens for the old man tutorial
+.doSimulatedMenuInput
 	; Temporarily save the player name in wLinkEnemyTrainerName.
 	; Since wLinkEnemyTrainerName == wGrassRate, this affects wild encounters.
 	; The wGrassRate byte and following wGrassMons buffer will get overwritten again when entering a map with wild Pokémon.
@@ -2063,24 +2136,31 @@ DisplayBattleMenu::
 	ld bc, NAME_LENGTH
 	call CopyData
 	ld hl, .oldManName
+	ld a, [wBattleType]
+	dec a
+	jr z, .useOldManName
+	ld hl, .profOakName
+.useOldManName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
 	call CopyData
 ; the following simulates the keystrokes by drawing menus on screen
 	hlcoord 10, 14
 	ld [hl], "▶"
-	ld c, 80
+	ld c, 20
 	call DelayFrames
 	ld [hl], "　"
 	hlcoord 15, 14
 	ld [hl], "▶"
-	ld c, 50
+	ld c, 20
 	call DelayFrames
 	ld [hl], "▷"
 	ld a, $2 ; select the "ITEM" menu
 	jp .upperLeftMenuItemWasNotSelected
 .oldManName
 	db "おじいさん@"
+.profOakName
+	db "オーキド@"
 .handleBattleMenuInput
 	ld a, [wBattleAndStartSavedMenuItem]
 	ld [wCurrentMenuItem], a
@@ -2162,6 +2242,9 @@ DisplayBattleMenu::
 	ld [wCurrentMenuItem], a
 .AButtonPressed
 	call PlaceUnfilledArrowMenuCursor
+	ld a, [wBattleType]
+	cp BATTLE_TYPE_RUN
+	jr z, .handleUnusedBattle
 	ld a, [wCurrentMenuItem]
 	ld [wBattleAndStartSavedMenuItem], a
 	and a
@@ -2177,7 +2260,18 @@ DisplayBattleMenu::
 .throwSafariBallWasSelected
 	ld a, SAFARI_BALL
 	ld [wCurItem], a
-	jr UseBagItem
+	jp UseBagItem
+.handleUnusedBattle
+	ld a, [wCurrentMenuItem]
+	cp $3
+	jp z, BattleMenu_RunWasSelected
+	ld hl, .RunAwayText
+	call PrintText
+	jp DisplayBattleMenu
+
+.RunAwayText
+	text "はやく　にげるのじゃ！"
+	prompt
 
 .upperLeftMenuItemWasNotSelected ; a menu item other than the upper left item was selected
 	cp $2
@@ -2214,18 +2308,22 @@ BagWasSelected:
 	call DrawHUDsAndHPBars
 .next
 	ld a, [wBattleType]
-	dec a ; is it the old man tutorial?
-	jr nz, DisplayPlayerBag ; no, it is a normal battle
-	ld hl, OldManItemList
+	cp BATTLE_TYPE_OLD_MAN ; is it the old man tutorial?
+	jr z, .simulatedInputBattle
+	cp BATTLE_TYPE_PIKACHU ; is it the prof oak battle with pikachu?
+	jr z, .simulatedInputBattle
+	jr DisplayPlayerBag
+.simulatedInputBattle
+	ld hl, SimulatedInputBattleItemList
 	ld a, l
 	ld [wListPointer], a
 	ld a, h
 	ld [wListPointer + 1], a
 	jr DisplayBagMenu
 
-OldManItemList:
+SimulatedInputBattleItemList:
 	db 1 ; # items
-	db POKE_BALL, 50
+	db POKE_BALL, 1
 	db -1 ; end
 
 DisplayPlayerBag:
@@ -2329,6 +2427,7 @@ PartyMenuOrRockOrRun:
 	call LoadScreenTilesFromBuffer1
 	xor a ; NORMAL_PARTY_MENU
 	ld [wPartyMenuTypeOrMessageID], a
+	ld [wMenuItemToSwap], a
 	call DisplayPartyMenu
 .checkIfPartyMonWasSelected
 	jp nc, .partyMonWasSelected ; if a party mon was selected, jump, else we quit the party menu
@@ -2385,6 +2484,8 @@ PartyMenuOrRockOrRun:
 	predef StatusScreen
 	predef StatusScreen2
 ; now we need to reload the enemy mon pic
+	ld a, 1
+	ldh [hWhoseTurn], a
 	ld a, [wEnemyBattleStatus2]
 	bit HAS_SUBSTITUTE_UP, a ; does the enemy mon have a substitute?
 	ld hl, AnimationSubstitute
@@ -2495,15 +2596,13 @@ MoveSelectionMenu:
 	call CopyData
 	callfar FormatMovesString
 	hlcoord 0, 8
-	ld b, 8
-	ld c, 8
+	lb bc, 8, 8
 	ld a, [wMoveMenuType]
 	cp $2
 	jr nz, .drawbox
 ; box coords for regular or mimic menu
 	hlcoord 10, 8
-	ld b, 8
-	ld c, 8
+	lb bc, 8, 8
 .drawbox
 	call TextBoxBorder
 	hlcoord 2, 10
@@ -2698,6 +2797,55 @@ SelectMenuItem_CursorDown:
 	ld [wCurrentMenuItem], a
 	jp SelectMenuItem
 
+Func_3d4f5:
+	bit BIT_TRAINER_BATTLE, a
+	ld a, $0
+	jr nz, .asm_3d4fd
+	ld a, $1
+.asm_3d4fd
+	ldh [hWhoseTurn], a
+	call LoadScreenTilesFromBuffer1
+	call Func_3d536
+	ld a, [wTestBattlePlayerSelectedMove]
+	and a
+	jp z, MoveSelectionMenu
+	ld [wAnimationID], a
+	xor a
+	ld [wAnimationType], a
+	predef MoveAnimation
+	callfar Func_78e98
+	jp MoveSelectionMenu
+
+Func_3d523:
+	ld a, [wTestBattlePlayerSelectedMove]
+	dec a
+	jr asm_3d52d
+Func_3d529:
+	ld a, [wTestBattlePlayerSelectedMove]
+	inc a
+asm_3d52d:
+	ld [wTestBattlePlayerSelectedMove], a
+	call Func_3d536
+	jp MoveSelectionMenu
+
+Func_3d536:
+	hlcoord 10, 16
+	lb bc, 2, 10
+	call ClearScreenArea
+	hlcoord 10, 17
+	ld de, wTestBattlePlayerSelectedMove
+	lb bc, LEADING_ZEROES | 1, 3
+	call PrintNumber
+	ld a, [wTestBattlePlayerSelectedMove]
+	and a
+	ret z
+	cp STRUGGLE
+	ret nc
+	ld [wNamedObjectIndex], a
+	call GetMoveName
+	hlcoord 13, 17
+	jp PlaceString
+
 AnyMoveToSelect:
 ; return z and Struggle as the selected move if all moves have 0 PP and/or are disabled
 	ld a, STRUGGLE
@@ -2712,7 +2860,7 @@ AnyMoveToSelect:
 	or [hl]
 	inc hl
 	or [hl]
-; BUG: does not allow Struggle if PP Up has been used
+	and PP_MASK
 	ret nz
 	jr .noMovesLeft
 .handleDisabledMove
@@ -2749,6 +2897,9 @@ NoMovesLeftText:
 	done
 
 SwapMovesInMenu:
+	ld a, [wPlayerBattleStatus3]
+	bit TRANSFORMED, a
+	jp nz, MoveSelectionMenu
 	ld a, [wMenuItemToSwap]
 	and a
 	jr z, .noMenuItemSelected
@@ -2828,8 +2979,7 @@ PrintMenuItem:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	hlcoord 9, 12
-	ld b, 4
-	ld c, 9
+	lb bc, 4, 9
 	call TextBoxBorder
 	ld a, [wPlayerDisabledMove]
 	and a
@@ -2997,6 +3147,9 @@ SelectEnemyMove:
 LinkBattleExchangeData:
 	ld a, $ff
 	ld [wSerialExchangeNybbleReceiveData], a
+	ld a, [wPlayerMoveListIndex]
+	cp LINKBATTLE_RUN ; is the player running from battle?
+	jr z, .doExchange
 	ld a, [wActionResultOrTookBattleTurn]
 	and a ; is the player switching in another mon?
 	jr nz, .switching
@@ -3029,7 +3182,7 @@ LinkBattleExchangeData:
 	jr z, .syncLoop1
 	vc_hook Wireless_end_exchange
 	vc_patch Wireless_net_delay_1
-IF DEF(_BLUE_VC)
+IF DEF(_YELLOW_VC)
 	ld b, 26
 ELSE
 	ld b, 10
@@ -3042,7 +3195,7 @@ ENDC
 	jr nz, .syncLoop2
 	vc_hook Wireless_start_send_zero_bytes
 	vc_patch Wireless_net_delay_2
-IF DEF(_BLUE_VC)
+IF DEF(_YELLOW_VC)
 	ld b, 26
 ELSE
 	ld b, 10
@@ -3418,7 +3571,7 @@ CheckPlayerStatusConditions:
 	call PlayMoveAnimation
 	call BattleRandom
 	cp 50 percent + 1 ; chance to hurt itself
-	jp c, .ParalysisCheck ; BUG: if confused, mon can use a move that has just been disabled this turn
+	jr c, .TriedToUseDisabledMoveCheck
 	ld hl, wPlayerBattleStatus1
 	ld a, [hl]
 	and 1 << CONFUSED ; if mon hurts itself, clear every other status from wPlayerBattleStatus1
@@ -3807,11 +3960,11 @@ SentenceEnd1Text:
 	done
 
 SentenceEnd2Text:
-	text "を　した！"
+	text "した！"
 	done
 
 SentenceEnd3Text:
-	text "した！"
+	text "を　した！"
 	done
 
 SentenceEnd4Text:
@@ -4073,19 +4226,28 @@ CheckForDisobedience:
 	ld a, [wBattleMonMoves + 1]
 	and a ; is the second move slot empty?
 	jr z, .monDoesNothing ; mon will not use move if it only knows one move
+	ld a, [wPlayerDisabledMoveNumber]
+	and a
+	jr nz, .monDoesNothing
+	ld a, [wPlayerSelectedMove]
+	cp STRUGGLE
+	jr z, .monDoesNothing ; mon will not use move if struggling
 ; check if only one move has remaining PP
 	ld hl, wBattleMonPP
 	push hl
 	ld a, [hli]
-; BUG: does not factor PP Up. If PP Up was used, and only a single move
-; remains with PP, mon can use it and actually not disobey
-	ld b, [hl]
-	inc hl
+	and PP_MASK
+	ld b, a
+	ld a, [hli]
+	and PP_MASK
 	add b
-	ld b, [hl]
-	inc hl
+	ld b, a
+	ld a, [hli]
+	and PP_MASK
 	add b
-	ld b, [hl]
+	ld b, a
+	ld a, [hl]
+	and PP_MASK
 	add b
 	pop hl
 	push af
@@ -4093,7 +4255,9 @@ CheckForDisobedience:
 	ld c, a
 	ld b, $0
 	add hl, bc
-	ld b, [hl]
+	ld a, [hl]
+	and PP_MASK
+	ld b, a
 	pop af
 	cp b
 	jr z, .monDoesNothing ; mon will not use move if only one move has remaining PP
@@ -5020,7 +5184,7 @@ AttackSubstitute:
 	ldh a, [hWhoseTurn]
 	xor $01
 	ldh [hWhoseTurn], a
-	callfar HideSubstituteShowMonAnim ; animate the substitute breaking
+	callfar Func_79929 ; animate the substitute breaking
 ; flip the turn back to the way it was
 	ldh a, [hWhoseTurn]
 	xor $01
@@ -6341,13 +6505,17 @@ SwapPlayerAndEnemyLevels:
 ; (for use when scrolling the player sprite and enemy's silhouettes on screen)
 LoadPlayerBackPic:
 	ld a, [wBattleType]
-	dec a ; is it the old man tutorial?
-	ld de, RedPicBack
-	jr nz, .next
 	ld de, OldManPicBack
+	cp BATTLE_TYPE_OLD_MAN ; is it the old man tutorial?
+	jr z, .next
+	ld de, ProfOakPicBack
+	cp BATTLE_TYPE_PIKACHU ; is it the pikachu battle at the beginning of the game?
+	jr z, .next
+	ld de, RedPicBack
 .next
 	ld a, BANK(RedPicBack)
 	ASSERT BANK(RedPicBack) == BANK(OldManPicBack)
+	ASSERT BANK(RedPicBack) == BANK(ProfOakPicBack)
 	call UncompressSpriteFromDE
 	predef ScaleSpriteByTwo
 	ld hl, wShadowOAM
@@ -6383,18 +6551,15 @@ LoadPlayerBackPic:
 	jr nz, .loop
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
-	ld a, $a
-	ld [MBC1SRamEnable], a
-	xor a
-	ld [MBC1SRamBank], a
+	ld a, $0
+	call OpenSRAM
 	ld hl, vSprites
 	ld de, sSpriteBuffer1
 	ldh a, [hLoadedROMBank]
 	ld b, a
 	ld c, 7 * 7
 	call CopyVideoData
-	xor a
-	ld [MBC1SRamEnable], a
+	call CloseSRAM
 	ld a, $31
 	ldh [hStartTileID], a
 	hlcoord 1, 5
@@ -6702,7 +6867,7 @@ BattleRandom:
 	pop hl
 	vc_hook Unknown_BattleRandom_ret_c
 	vc_patch BattleRandom_ret
-IF DEF(_BLUE_VC)
+IF DEF(_YELLOW_VC)
 	ret
 ELSE
 	ret c
@@ -6775,285 +6940,6 @@ HandleExplodingAnimation:
 PlayMoveAnimation:
 	ld [wAnimationID], a
 	call Delay3
-	predef_jump MoveAnimation
-
-InitBattle::
-	ld a, [wCurOpponent]
-	and a
-	jr z, DetermineWildOpponent
-
-InitOpponent:
-	ld a, [wCurOpponent]
-	ld [wCurPartySpecies], a
-	ld [wEnemyMonSpecies2], a
-	jr InitBattleCommon
-
-DetermineWildOpponent:
-	ld a, [wStatusFlags6]
-	bit BIT_DEBUG_MODE, a
-	jr z, .notDebugMode
-	ldh a, [hJoyHeld]
-	bit BIT_B_BUTTON, a ; disable wild encounters
-	ret nz
-.notDebugMode
-	ld a, [wNumberOfNoRandomBattleStepsLeft]
-	and a
-	ret nz
-	callfar TryDoWildEncounter
-	ret nz
-InitBattleCommon:
-	ld a, [wMapPalOffset]
-	push af
-	ld hl, wLetterPrintingDelayFlags
-	ld a, [hl]
-	push af
-	res BIT_TEXT_DELAY, [hl] ; no delay
-	callfar InitBattleVariables
-	ld a, [wEnemyMonSpecies2]
-	sub OPP_ID_OFFSET
-	jp c, InitWildBattle
-	ld [wTrainerClass], a
-	call GetTrainerInformation
-	callfar ReadTrainer
-	call DoBattleTransitionAndInitBattleVariables
-	call _LoadTrainerPic
-	xor a
-	ld [wEnemyMonSpecies2], a
-	ldh [hStartTileID], a
-	dec a
-	ld [wAICount], a
-	hlcoord 12, 0
-	predef CopyUncompressedPicToTilemap
-	ld a, $ff
-	ld [wEnemyMonPartyPos], a
-	ld a, $2
-	ld [wIsInBattle], a
-	jp _InitBattleCommon
-
-InitWildBattle:
-	ld a, $1
-	ld [wIsInBattle], a
-	call LoadEnemyMonData
-	call DoBattleTransitionAndInitBattleVariables
-	ld a, [wCurOpponent]
-	cp RESTLESS_SOUL
-	jr z, .isGhost
-	call IsGhostBattle
-	jr nz, .isNoGhost
-.isGhost
-	ld hl, wMonHSpriteDim
-	ld a, $66
-	ld [hli], a   ; write sprite dimensions
-	ld bc, GhostPic
-	ld a, c
-	ld [hli], a   ; write front sprite pointer
-	ld [hl], b
-	ld hl, wEnemyMonNick  ; set name to "ゆうれい"
-	ld a, "ゆ"
-	ld [hli], a
-	ld a, "う"
-	ld [hli], a
-	ld a, "れ"
-	ld [hli], a
-	ld a, "い"
-	ld [hli], a
-	ld [hl], "@"
-	ld a, [wCurPartySpecies]
-	push af
-	ld a, MON_GHOST
-	ld [wCurPartySpecies], a
-	ld de, vFrontPic
-	call LoadMonFrontSprite ; load ghost sprite
-	pop af
-	ld [wCurPartySpecies], a
-	jr .spriteLoaded
-.isNoGhost
-	ld de, vFrontPic
-	call LoadMonFrontSprite ; load mon sprite
-.spriteLoaded
-	xor a
-	ld [wTrainerClass], a
-	ldh [hStartTileID], a
-	hlcoord 12, 0
-	predef CopyUncompressedPicToTilemap
-
-; common code that executes after init battle code specific to trainer or wild battles
-_InitBattleCommon:
-	ld b, SET_PAL_BATTLE_BLACK
-	call RunPaletteCommand
-	call SlidePlayerAndEnemySilhouettesOnScreen
-	xor a
-	ldh [hAutoBGTransferEnabled], a
-	ld hl, .emptyString
-	call PrintText
-	call SaveScreenTilesToBuffer1
-	call ClearScreen
-	ld a, $98
-	ldh [hAutoBGTransferDest + 1], a
-	ld a, $1
-	ldh [hAutoBGTransferEnabled], a
-	call Delay3
-	ld a, $9c
-	ldh [hAutoBGTransferDest + 1], a
-	call LoadScreenTilesFromBuffer1
-	hlcoord 9, 7
-	lb bc, 5, 10
-	call ClearScreenArea
-	hlcoord 1, 0
-	lb bc, 4, 10
-	call ClearScreenArea
-	call ClearSprites
-	ld a, [wIsInBattle]
-	dec a ; is it a wild battle?
-	call z, DrawEnemyHUDAndHPBar ; draw enemy HUD and HP bar if it's a wild battle
-	call StartBattle
-	callfar EndOfBattle
-	pop af
-	ld [wLetterPrintingDelayFlags], a
-	pop af
-	ld [wMapPalOffset], a
-	ld a, [wSavedTileAnimations]
-	ldh [hTileAnimations], a
-	scf
+	predef MoveAnimation
+	callfar Func_78e98
 	ret
-.emptyString
-	db "@"
-
-_LoadTrainerPic:
-	ld a, [wTrainerPicPointer]
-	ld e, a
-	ld a, [wTrainerPicPointer + 1]
-	ld d, a ; de contains pointer to trainer pic
-	ld a, [wLinkState]
-	and a
-	ld a, BANK("Pics 6") ; this is where all the trainer pics are (not counting Red's)
-	jr z, .loadSprite
-	ld a, BANK(RedPicFront)
-.loadSprite
-	call UncompressSpriteFromDE
-	ld de, vFrontPic
-	ld a, $77
-	ld c, a
-	jp LoadUncompressedSpriteData
-
-; unreferenced
-ResetCryModifiers:
-	xor a
-	ld [wFrequencyModifier], a
-	ld [wTempoModifier], a
-	jp PlaySound
-
-; animates the mon "growing" out of the pokeball
-AnimateSendingOutMon:
-	ld a, [wPredefHL]
-	ld h, a
-	ld a, [wPredefHL + 1]
-	ld l, a
-	ldh a, [hStartTileID]
-	ldh [hBaseTileID], a
-	ld b, $4c
-	ld a, [wIsInBattle]
-	and a
-	jr z, .notInBattle
-	add b
-	ld [hl], a
-	call Delay3
-	ld bc, -(SCREEN_WIDTH * 2 + 1)
-	add hl, bc
-	ld a, 1
-	ld [wDownscaledMonSize], a
-	lb bc, 3, 3
-	predef CopyDownscaledMonTiles
-	ld c, 4
-	call DelayFrames
-	ld bc, -(SCREEN_WIDTH * 2 + 1)
-	add hl, bc
-	xor a
-	ld [wDownscaledMonSize], a
-	lb bc, 5, 5
-	predef CopyDownscaledMonTiles
-	ld c, 5
-	call DelayFrames
-	ld bc, -(SCREEN_WIDTH * 2 + 1)
-	jr .next
-.notInBattle
-	ld bc, -(SCREEN_WIDTH * 6 + 3)
-.next
-	add hl, bc
-	ldh a, [hBaseTileID]
-	add $31
-	jr CopyUncompressedPicToHL
-
-CopyUncompressedPicToTilemap:
-	ld a, [wPredefHL]
-	ld h, a
-	ld a, [wPredefHL + 1]
-	ld l, a
-	ldh a, [hStartTileID]
-CopyUncompressedPicToHL::
-	lb bc, 7, 7
-	ld de, SCREEN_WIDTH
-	push af
-	ld a, [wSpriteFlipped]
-	and a
-	jr nz, .flipped
-	pop af
-.loop
-	push bc
-	push hl
-.innerLoop
-	ld [hl], a
-	add hl, de
-	inc a
-	dec c
-	jr nz, .innerLoop
-	pop hl
-	inc hl
-	pop bc
-	dec b
-	jr nz, .loop
-	ret
-
-.flipped
-	push bc
-	ld b, 0
-	dec c
-	add hl, bc
-	pop bc
-	pop af
-.flippedLoop
-	push bc
-	push hl
-.flippedInnerLoop
-	ld [hl], a
-	add hl, de
-	inc a
-	dec c
-	jr nz, .flippedInnerLoop
-	pop hl
-	dec hl
-	pop bc
-	dec b
-	jr nz, .flippedLoop
-	ret
-
-LoadMonBackPic:
-; Assumes the monster's attributes have
-; been loaded with GetMonHeader.
-	ld a, [wBattleMonSpecies2]
-	ld [wCurPartySpecies], a
-	hlcoord 1, 5
-	ld b, 7
-	ld c, 8
-	call ClearScreenArea
-	ld hl,  wMonHBackSprite - wMonHeader
-	call UncompressMonSprite
-	predef ScaleSpriteByTwo
-	ld de, vBackPic
-	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
-	ld hl, vSprites
-	ld de, vBackPic
-	ld c, (2 * SPRITEBUFFERSIZE) / 16 ; count of 16-byte chunks to be copied
-	ldh a, [hLoadedROMBank]
-	ld b, a
-	jp CopyVideoData

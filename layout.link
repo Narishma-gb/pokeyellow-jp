@@ -100,7 +100,8 @@ ROMX $e
 	"Battle Engine 6"
 	"Garbage 14"
 ROMX $f
-	"rom15"
+	"Battle Core"
+	"Garbage 15"
 ROMX $10
 	"rom16"
 ROMX $11
@@ -205,8 +206,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $F
-; 	"Battle Core"
 ; ROMX $10
 ; 	"bank10"
 ; 	"Garbage 16"

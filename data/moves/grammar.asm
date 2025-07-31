@@ -6,7 +6,6 @@ SentenceEndMoveSets:
 
 ; set 1
 	db RECOVER
-	db BIDE
 	db SELFDESTRUCT
 	db AMNESIA
 	db 0 ; end set
@@ -17,6 +16,7 @@ SentenceEndMoveSets:
 	db TELEPORT
 	db MIMIC
 	db DOUBLE_TEAM
+	db BIDE
 	db BARRAGE
 	db 0 ; end set
 

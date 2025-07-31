@@ -175,10 +175,10 @@ INCLUDE "gfx/trade.asm"
 INCLUDE "engine/pokemon/evos_moves.asm"
 
 
-;SECTION "Battle Core", ROMX
+SECTION "Battle Core", ROMX
 
-;INCLUDE "engine/battle/core.asm"
-;INCLUDE "engine/battle/effects.asm"
+INCLUDE "engine/battle/core.asm"
+INCLUDE "engine/battle/effects.asm"
 
 
 ;SECTION "bank10", ROMX

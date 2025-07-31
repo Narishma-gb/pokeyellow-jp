@@ -67,33 +67,8 @@ INCLUDE "main.asm"
 ;INCLUDE "engine/battle/move_effects/heal.asm"
 ;INCLUDE "engine/battle/move_effects/transform.asm"
 ;INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
+;INCLUDE "engine/battle/init_battle.asm"
 
-
-SECTION "rom15", ROMX
-; ROM $0f : $3C000 - $3FFFF
-	set_bank_offset 15
-
-DisplayBattleMenu::
-
-	dr EnemySendOut, 15, $4A4E
-	dr AnyPartyAlive, 15, $4BF8
-	dr ReadPlayerMonCurHPAndStatus, 15, $4F4E
-	dr DrawHUDsAndHPBars, 15, $4F65
-	dr DrawPlayerHUDAndHPBar, 15, $4F6B
-	dr DrawEnemyHUDAndHPBar, 15, $4FF6
-	dr MoveSelectionMenu, 15, $546E
-	dr IsGhostBattle, 15, $5B1D
-	dr AIGetTypeEffectiveness, 15, $68BF
-	dr MoveHitTest, 15, $69E1
-	dr LoadEnemyMonData, 15, $6F84
-	dr DoubleOrHalveSelectedStats, 15, $7188
-	dr LoadHudTilePatterns, 15, $72E1
-	dr JumpMoveEffect, 15, $73A1
-	dr StatModifierUpEffect, 15, $771D
-	dr PrintButItFailedText_, 15, $7F2E
-	dr PlayCurrentMoveAnimation, 15, $7FBB
-
-	dr_end 15
 
 SECTION "rom16", ROMX
 ; ROM $10 : $40000 - $43FFF
@@ -157,6 +132,7 @@ SECTION "rom21", ROMX
 	dr Route9_Blocks, 21, $4706
 	dr Route19_Blocks, 21, $4F01
 	dr Route21_Blocks, 21, $507D
+	dr GainExperience, 21, $525F
 	dr _GetSpritePosition1, 21, $7D18
 	dr _GetSpritePosition2, 21, $7D38
 	dr _SetSpritePosition1, 21, $7D5C
@@ -254,7 +230,14 @@ SECTION "rom30", ROMX
 	dr MoveAnimationTiles1, 30, $46EE
 	dr SlotMachineTiles2, 30, $4BDE
 	dr MoveAnimation, 30, $4D5E
+	dr Func_78e98, 30, $4E53
+	dr AnimationSlideMonOff, 30, $52D2
+	dr AnimationSlideEnemyMonOff, 30, $52DC
+	dr AnimationMinimizeMon, 30, $55C2
 	dr AnimationSubstitute, 30, $5703
+	dr HideSubstituteShowMonAnim, 30, $576A
+	dr ReshowSubstituteAnim, 30, $5806
+	dr Func_79929, 30, $587D
 	dr GetIntroMoveSound, 30, $5919
 	dr CopyDownscaledMonTiles, 30, $5B6A
 	dr CopyTileIDsFromList, 30, $5E7D
@@ -544,8 +527,19 @@ SECTION "rom61", ROMX
 ; ROM $3d : $F4000 - $F7FFF
 	set_bank_offset 61
 
+	dr PrintBeginningBattleText, 61, $4000
+	dr PrintSendOutMonMessage, 61, $4154
+	dr RetreatMon, 61, $41EB
 	dr DisplayLinkBattleVersusTextBox, 61, $426A
+	dr DoubleSelectedStats, 61, $42A1
+	dr HalveSelectedStats, 61, $42C8
+	dr _ScrollTrainerPicAfterBattle, 61, $42F4
+	dr StarterPikachuBattleEntranceAnimation, 61, $433A
+	dr DecrementPP, 61, $4376
 	dr ModifyPikachuHappiness, 61, $43A5
+	dr RedPicBack, 61, $444C
+	dr OldManPicBack, 61, $44DC
+	dr ProfOakPicBack, 61, $456D
 	dr LinkMenu, 61, $4BE6
 	dr PrintStrengthText, 61, $4F0D
 	dr IsSurfingAllowed, 61, $4F5F
@@ -561,6 +555,14 @@ SECTION "rom61", ROMX
 	dr AnimateSendingOutMon, 61, $54AA
 	dr CopyUncompressedPicToTilemap, 61, $54FD
 	dr CopyUncompressedPicToHL, 61, $5507
+	dr FocusEnergyEffect_, 61, $558C
+	dr HealEffect_, 61, $55C6
+	dr TransformEffect_, 61, $56B2
+	dr ReflectLightScreenEffect_, 61, $579E
+	dr MistEffect_, 61, $580E
+	dr OneHitKOEffect_, 61, $5848
+	dr PayDayEffect_, 61, $5881
+	dr ParalyzeEffect_, 61, $58DF
 	dr GetMachinePrice, 61, $5951
 	dr _Multiply, 61, $598B
 	dr _Divide, 61, $59EF
@@ -597,6 +599,7 @@ SECTION "rom63", ROMX
 	dr IsStarterPikachuInOurParty, 63, $4DB8
 	dr IsThisPartymonStarterPikachu_Box, 63, $4E0D
 	dr IsThisPartymonStarterPikachu_Party, 63, $4E18
+	dr IsThisPartymonStarterPikachu, 63, $4E18
 	dr UpdatePikachuMoodAfterBattle, 63, $4E5A
 	dr CheckPikachuFaintedOrStatused, 63, $4E73
 	dr IsPlayerTalkingToPikachu, 63, $4F0C
@@ -609,6 +612,7 @@ SECTION "rom63", ROMX
 	dr PikachuEmotion27_id, 63, $504F
 	dr PikachuEmotion31_id, 63, $5057
 	dr PikachuEmotion32_id, 63, $5059
+	dr IsPlayerPikachuAsleepInParty, 63, $50D0
 	dr PikachuWalksToNurseJoy, 63, $5252
 	dr ApplyPikachuMovementData_, 63, $529A
 	dr OfficerJennySprite, 63, $6662
