@@ -197,849 +197,121 @@ PokedexEntryPointers:
 ; weight in tenths of kg
 ; text entry
 
-RhydonDexEntry:
-	db "ドリル@"
-	db 19
-	dw 1200
-	db   "ぜんしんを　よろいのような　ひふで"
-	next "まもっている。２０００どの"
-	next "マグマの　なかでも　いきられる"
-	dex
-
-KangaskhanDexEntry:
-	db "おやこ@"
-	db 22
-	dw 800
-	db   "こどもは　ははおやの　おなかにある"
-	next "ふくろから　ほとんど　でてこない。"
-	next "やく３ねんで　おやばなれする"
-	dex
-
-NidoranMDexEntry:
-	db "どくばり@"
-	db 5
-	dw 90
-	db   "みみを　たてて　きけんを"
-	next "かんじとる。からだの　とげが"
-	next "おおきいほど　つよい　どくをだす"
-	dex
-
-ClefairyDexEntry:
-	db "ようせい@"
-	db 6
-	dw 75
-	db   "ふしぎで　かわいいので　おおくの"
-	next "ファンがいる。ただし　せいそくちが"
-	next "かぎられ　みつけるの<GA>たいへん"
-	dex
-
-SpearowDexEntry:
-	db "ことり@"
-	db 3
-	dw 20
-	db   "くさむらの　むしなどを　たべる。"
-	next "はね<GA>みじかいために　いつも"
-	next "いそがしく　はばたいている"
-	dex
-
-VoltorbDexEntry:
-	db "ボール@"
-	db 5
-	dw 104
-	db   "はつでんしょなどに　あらわれる。"
-	next "モンスターボールと　まちがえて"
-	next "さわって　しびれるひとが　おおい"
-	dex
-
-NidokingDexEntry:
-	db "ドリル@"
-	db 14
-	dw 620
-	db   "ふとい　しっぽを　ふりまわして"
-	next "あいてを　しめつける。そして"
-	next "せぼねを　へしおって　しまう"
-	dex
-
-SlowbroDexEntry:
-	db "やどかり@"
-	db 16
-	dw 785
-	db   "くっついている　シェルダーは"
-	next "ヤドンの　たべのこした　ものを"
-	next "エサにして　いきているという"
-	dex
+BulbasaurDexEntry:
+	db "たね@"
+	db 7
+	dw 69
+	db   "なんにちだって　なにも　たべなくても"
+	next "げんき！　せなかのタネに　たくさん"
+	next "えいよう<GA>あるから　へいきだ！@"
 
 IvysaurDexEntry:
 	db "たね@"
 	db 10
 	dw 130
-	db   "せなかの　つぼみ<GA>おおきく"
-	next "そだってくると　２ほんあしで"
-	next "たつこと<GA>できなくなるらしい"
+	db   "ようぶんを　とって　おおきくなった"
+	next "つぼみから　かおり<GA>ただよいだすと"
+	next "もうすぐ　ハナがひらく　しょうこだ"
 	dex
 
-ExeggutorDexEntry:
-	db "やしのみ@"
+VenusaurDexEntry:
+	db "たね@"
 	db 20
-	dw 1200
-	db   "ごくまれに　あたまの　どれか"
-	next "ひとつ<GA>じめんに　おちると"
-	next "タマタマになって　うごきだすという"
+	dw 1000
+	db   "せなかに　はえた　おおきな　ハナは"
+	next "たいようの　ひかりを　きゅうしゅうし"
+	next "エネルギーに　へんかん　できる"
 	dex
 
-LickitungDexEntry:
-	db "なめまわし@"
-	db 12
-	dw 655
-	db   "ベロ<GA>カメレオン　みたいに"
-	next "ぐんぐん　のびていく。なめられると"
-	next "なぜか　ピリピリ　しびれてくる"
+CharmanderDexEntry:
+	db "とかげ@"
+	db 6
+	dw 85
+	db   "しずかな　ところに　つれていくと"
+	next "シッポ<GA>もえてる　ちいさな"
+	next "おと<GA>きこえてくるよ"
 	dex
 
-ExeggcuteDexEntry:
-	db "たまご@"
-	db 4
-	dw 25
-	db   "たまごだと　おもって　さわると"
-	next "なかま<GA>どんどん　あつまってきて"
-	next "しゅうだん　こうげきに　あう"
+CharmeleonDexEntry:
+	db "かえん@"
+	db 11
+	dw 190
+	db   "きょうてきと　たたかいつづけ"
+	next "エキサイトすると　あおじろい"
+	next "ほのおを　はきだすことがある"
 	dex
 
-GrimerDexEntry:
-	db "ヘドロ@"
-	db 9
-	dw 300
-	db   "きたない　ばしょに　あらわれる。"
-	next "こうじょう<GA>ながす　ヘドロ"
-	next "はいえきを　のんで　いきている"
+CharizardDexEntry:
+	db "かえん@"
+	db 17
+	dw 905
+	db   "くちから　しゃくねつの　ほのおを"
+	next "はきだすとき　シッポのさきは"
+	next "より　あかく　はげしく　もえあがる"
 	dex
 
-GengarDexEntry:
-	db "シャドー@"
-	db 15
-	dw 405
-	db   "まんげつのよる　かげ<GA>かってに"
-	next "うごきだして　わらうのは"
-	next "ゲンガーの　しわざに　ちがいない"
+SquirtleDexEntry:
+	db "かめのこ@"
+	db 5
+	dw 90
+	db   "すいめんから　みずを　ふんしゃして"
+	next "エサをとる。あぶなくなると　こうらに"
+	next "てあしを　ひっこめて　みをまもる"
 	dex
 
-NidoranFDexEntry:
-	db "どくばり@"
-	db 4
-	dw 70
-	db   "からだは　ちいさくても　どくばりを"
-	next "もつため　ちゅうい<GA>ひつようだ。"
-	next "メスのほう<GA>ツノ<GA>ちいさい"
-	dex
-
-NidoqueenDexEntry:
-	db "ドリル@"
-	db 13
-	dw 600
-	db   "かたい　うろこで　こうげきから"
-	next "みを　まもる。かんろくの　ある"
-	next "ボディから　おおわざを　くりだす"
-	dex
-
-CuboneDexEntry:
-	db "こどく@"
-	db 4
-	dw 65
-	db   "あたまに　ほねの　ヘルメットを"
-	next "かぶって　いるので　ほんとうの"
-	next "かおを　みたものは　いない"
-	dex
-
-RhyhornDexEntry:
-	db "とげとげ@"
+WartortleDexEntry:
+	db "かめ@"
 	db 10
-	dw 1150
-	db   "ほね<GA>じょうぶで　にんげんの"
-	next "１０００ばい　かたい。たいあたりで"
-	next "おおがたトレーラーも　ふっとばす"
-	dex
-
-LaprasDexEntry:
-	db "のりもの@"
-	db 25
-	dw 2200
-	db   "かつて　たくさん　つかまえたため"
-	next "ぜつめつ　すんぜんに　なっている。"
-	next "ひとをのせて　すすむ"
-	dex
-
-ArcanineDexEntry:
-	db "でんせつ@"
-	db 19
-	dw 1550
-	db   "むかしから　おおくの　ひとを"
-	next "とりこにした　うつくしい　#。"
-	next "とぶように　かろやかに　はしる"
-	dex
-
-MewDexEntry:
-	db "しんしゅ@"
-	db 4
-	dw 40
-	db   "いまでも　まぼろしの　ポケモンと"
-	next "いわれる。そのすがたを　みたものは"
-	next "ぜんこくでも　ほとんど　いない"
-	dex
-
-GyaradosDexEntry:
-	db "きょうあく@"
-	db 65
-	dw 2350
-	db   "めったに　すがたを　あらわさないが"
-	next "ひとたび　あばれだすと　おおきな"
-	next "とし<GA>かいめつする　ときもある"
-	dex
-
-ShellderDexEntry:
-	db "２まいがい@"
-	db 3
-	dw 40
-	db   "かたいカラは　どんな　こうげきも"
-	next "はねかえす。ひらいた　ときに"
-	next "なかを　こうげき　されると　よわい"
-	dex
-
-TentacoolDexEntry:
-	db "くらげ@"
-	db 9
-	dw 455
-	db   "うみの　あさい　ところを　ただよう。"
-	next "つりびと<GA>まちがって　つりあげ"
-	next "さされる　こと<GA>おおいと　きく"
-	dex
-
-GastlyDexEntry:
-	db "ガスじょう@"
-	db 13
-	dw 1
-	db   "すがた<GA>ほとんど　みえない。"
-	next "しらない　あいだに　ガスに"
-	next "おかされて　きを　うしなう"
-	dex
-
-ScytherDexEntry:
-	db "かまきり@"
-	db 15
-	dw 560
-	db   "ニンジャの　ような　すばやさ。"
-	next "あまりに　はやく　うごいたときは"
-	next "なんびきも　いるように　みえる"
-	dex
-
-StaryuDexEntry:
-	db "ほしがた@"
-	db 8
-	dw 345
-	db   "からだの　いちぶを　きりとられても"
-	next "じこさいせいして　もとに　もどる"
-	next "なぞの　おおい　いきものだ"
+	dw 225
+	db   "ポカンと　あたまを　たたかれるとき"
+	next "こうらに　ひっこんで　よける。でも"
+	next "ちょっとだけ　シッポ<GA>でているよ"
 	dex
 
 BlastoiseDexEntry:
 	db "こうら@"
 	db 16
 	dw 855
-	db   "こうらに　ふんしゃこうが　あって"
-	next "ロケットのような　いきおいで"
-	next "つっこんでくる　すごい　やつだ"
+	db   "あいてに　ねらいを　さだめると"
+	next "しょうぼうしゃの　ホースより"
+	next "つよい　いきおいで　みずを　だす"
 	dex
 
-PinsirDexEntry:
-	db "くわがた@"
-	db 15
-	dw 550
-	db   "ツノに　はさんでも　ちぎれない"
-	next "ばあいは　はさんだまま　ふりまわし"
-	next "なげとばす　せんぽうを　つかう"
+CaterpieDexEntry:
+	db "いもむし@"
+	db 3
+	dw 29
+	db   "あたまの　さきにある　しょっかくに"
+	next "ふれると　きょうれつな　においを"
+	next "だして　みを　まもろうとする"
 	dex
 
-TangelaDexEntry:
-	db "ツルじょう@"
-	db 10
-	dw 350
-	db   "ぜんしん<GA>かいそうのような"
-	next "ツルに　おおわれていて"
-	next "あるくたびに　ゆらゆら　ゆれる"
-	dex
-
-GrowlitheDexEntry:
-	db "こいぬ@"
+MetapodDexEntry:
+	db "さなぎ@"
 	db 7
-	dw 190
-	db   "なわばり　いしき<GA>とても　つよい。"
-	next "ゆだんして　ちかづくと　ほえられ"
-	next "かみつかれ　いたいめに　あう"
-	dex
-
-OnixDexEntry:
-	db "いわへび@"
-	db 88
-	dw 2100
-	db   "せいちょうすると　からだの"
-	next "がんせきせいぶん<GA>へんかして"
-	next "くろい　ダイヤモンドの　ようになる"
-	dex
-
-FearowDexEntry:
-	db "くちばし@"
-	db 12
-	dw 380
-	db   "おおきな　つばさで　おおぞらを"
-	next "とびつづけること<GA>できる。"
-	next "１かいも　おりなくても　へいきだ"
-	dex
-
-PidgeyDexEntry:
-	db "ことり@"
-	db 3
-	dw 18
-	db   "もりや　はやしに　おおく　ぶんぷ。"
-	next "ちじょうでも　はげしく　はばたいて"
-	next "すなを　かけたりする"
-	dex
-
-SlowpokeDexEntry:
-	db "まぬけ@"
-	db 12
-	dw 360
-	db   "うごき<GA>のろく　まぬけ。"
-	next "たたかれても　５びょう　たってから"
-	next "いたさを　かんじるほどだ"
-	dex
-
-KadabraDexEntry:
-	db "ねんりき@"
-	db 13
-	dw 565
-	db   "からだから　とくべつな　アルファはが"
-	next "でていて　そばに　ちかよるだけで"
-	next "あたま<GA>いたくなってくる"
-	dex
-
-GravelerDexEntry:
-	db "がんせき@"
-	db 10
-	dw 1050
-	db   "さかみちを　ころがりながら　いどう。"
-	next "じゃまな　ものは　どんどん"
-	next "おしつぶして　すすんでいく"
-	dex
-
-ChanseyDexEntry:
-	db "たまご@"
-	db 11
-	dw 346
-	db   "せいそくすう<GA>とても　すくない。"
-	next "つかまえた　ひとには　しあわせを"
-	next "もたらすと　いわれている"
-	dex
-
-MachokeDexEntry:
-	db "かいりき@"
-	db 15
-	dw 705
-	db   "すごく　きょうじんな　にくたいなので"
-	next "パワーセーブ　ベルトを　つけて"
-	next "つよさを　せいぎょしている"
-	dex
-
-MrMimeDexEntry:
-	db "バリアー@"
-	db 13
-	dw 545
-	db   "パントマイムの　じゃまを　すると"
-	next "とつぜん　おおきな　てのひらで"
-	next "おうふくビンタを　してくるという"
-	dex
-
-HitmonleeDexEntry:
-	db "キック@"
-	db 15
-	dw 498
-	db   "いそいで　はしるとき　だんだん"
-	next "あし<GA>のびていって　ものすごい"
-	next "おおまたに　なって　すすむ"
-	dex
-
-HitmonchanDexEntry:
-	db "パンチ@"
-	db 14
-	dw 502
-	db   "なんにも　してない　ようでも"
-	next "みえない　スピードで　パンチを"
-	next "だしまくってるから　きを　つけろ"
-	dex
-
-ArbokDexEntry:
-	db "コブラ@"
-	db 35
-	dw 650
-	db   "おなかの　おそろしい　もようは"
-	next "ちいきに　よって　なんしゅるいか"
-	next "パターン<GA>あるという　ウワサだ"
-	dex
-
-ParasectDexEntry:
-	db "きのこ@"
-	db 10
-	dw 295
-	db   "ムシの　からだより　おおきくなった"
-	next "キノコの　いしで　かつどうする。"
-	next "しめった　ばしょを　このむという"
-	dex
-
-PsyduckDexEntry:
-	db "あひる@"
-	db 8
-	dw 196
-	db   "ボーッとした　かおに　ゆだんすると"
-	next "すかさず　ねんりきや　かなしばりを"
-	next "つかってくる　あなどれない　やつだ"
-	dex
-
-DrowzeeDexEntry:
-	db "さいみん@"
-	db 10
-	dw 324
-	db   "ねむらせては　ユメを　たべる<GA>"
-	next "わるい　ユメばかり　たべてると"
-	next "おなかを　こわすこと<GA>あるらしい"
-	dex
-
-GolemDexEntry:
-	db "メガトン@"
-	db 14
-	dw 3000
-	db   "がんせきのような　かたい　からだで"
-	next "できている。ダイナマイトで"
-	next "ばくはしても　ダメージを　うけない"
-	dex
-
-MagmarDexEntry:
-	db "ひふき@"
-	db 13
-	dw 445
-	db   "みずから　オレンジいろに　もえていて"
-	next "ほのおの　なかに　かくれると"
-	next "まったく　みわけ<GA>つかなくなる"
-	dex
-
-ElectabuzzDexEntry:
-	db "でんげき@"
-	db 11
-	dw 300
-	db   "はつでんしょ　ふきんから　すがたを"
-	next "けしたとき　まちに　だいていでんが"
-	next "おこると　いわれている"
-	dex
-
-MagnetonDexEntry:
-	db "じしゃく@"
-	db 10
-	dw 600
-	db   "れんけつした　タイプの　コイルは"
-	next "たいようの　こくてん<GA>おおいとき"
-	next "たくさん　あらわれると　いわれる"
-	dex
-
-KoffingDexEntry:
-	db "どくガス@"
-	db 6
-	dw 10
-	db   "たいないに　いろいろな　どくガスが"
-	next "たまっているため　ときどき"
-	next "だいばくはつを　おこすことも"
-	dex
-
-MankeyDexEntry:
-	db "ぶたざる@"
-	db 5
-	dw 280
-	db   "ふだんは　きげん<GA>よくても"
-	next "ちょっとした　ことで　いきなり"
-	next "あばれだすから　こわいのだ"
-	dex
-
-SeelDexEntry:
-	db "あしか@"
-	db 11
-	dw 900
-	db   "あたまに　でっぱり<GA>あって"
-	next "ひじょうに　かたい。ずつきで"
-	next "ひょうざんを　わって　すすむ"
-	dex
-
-DiglettDexEntry:
-	db "もぐら@"
-	db 2
-	dw 8
-	db   "ちか１メートルくらいを　ほりすすみ"
-	next "きのねっこなどを　かじって　いきる。"
-	next "たまに　ちじょうに　かおをだす"
-	dex
-
-TaurosDexEntry:
-	db "あばれうし@"
-	db 14
-	dw 884
-	db   "えものに　ねらいを　つけると"
-	next "しっぽで　からだを　たたきながら"
-	next "まっすぐ　つっこんでくる"
-	dex
-
-FarfetchdDexEntry:
-	db "かるがも@"
-	db 8
-	dw 150
-	db   "もっている　クキは　たいせつな"
-	next "ぶきでもあり　かたなを　ふるように"
-	next "いろんなものを　きること<GA>できる"
-	dex
-
-VenonatDexEntry:
-	db "こんちゅう@"
-	db 10
-	dw 300
-	db   "おおきな　きのしたに　すんでいて"
-	next "むしなどを　たべて　いるらしい。"
-	next "よるは　あかりのそばに　やってくる"
-	dex
-
-DragoniteDexEntry:
-	db "ドラゴン@"
-	db 22
-	dw 2100
-	db   "すがたを　みたひとは　すくないが"
-	next "じつざいする　うみのけしん。ちのうも"
-	next "にんげんに　ひってき　するらしい"
-	dex
-
-DoduoDexEntry:
-	db "ふたごどり@"
-	db 14
-	dw 392
-	db   "とぶのは　にがてだ<GA>はしるのは　"
-	next "はやい。きょだいな　あしあとを"
-	next "のこして　だいちを　かけぬける"
-	dex
-
-PoliwagDexEntry:
-	db "おたま@"
-	db 6
-	dw 124
-	db   "まだ　あし<GA>はえた　ばかりで"
-	next "うまく　あるけない。みずの　なかを"
-	next "およいでる　ほう<GA>すきなようだ"
-	dex
-
-JynxDexEntry:
-	db "ひとがた@"
-	db 14
-	dw 406
-	db   "こしを　ふるように　あるいている。"
-	next "ゆだんをすると　おもわず　つられて"
-	next "おどって　しまうという"
-	dex
-
-MoltresDexEntry:
-	db "かえん@"
-	db 20
-	dw 600
-	db   "むかしから　ひのとりでんせつとして"
-	next "しられる。　はばたくたびに　はねが"
-	next "あかるく　もえあがり　うつくしい"
-	dex
-
-ArticunoDexEntry:
-	db "れいとう@"
-	db 17
-	dw 554
-	db   "ゆきやまで　さむくて　しにそうなとき"
-	next "めのまえに　あらわれるといわれる"
-	next "でんせつの　れいとうポケモン"
-	dex
-
-ZapdosDexEntry:
-	db "でんげき@"
-	db 16
-	dw 526
-	db   "くもの　うえから　きょだいな"
-	next "いなづまを　おとしながら　あらわれる"
-	next "でんせつの　とり#である"
-	dex
-
-DittoDexEntry:
-	db "へんしん@"
-	db 3
-	dw 40
-	db   "さいぼうそしきを　いっしゅんで"
-	next "コピーして　あいて　そっくりに"
-	next "へんしんする　のうりょくがある"
-	dex
-
-MeowthDexEntry:
-	db "ばけねこ@"
-	db 4
-	dw 42
-	db   "まるいもの<GA>だいすき。よなよな"
-	next "でかけては　おちている　コインを"
-	next "ひろい　あつめて　かえってくる"
-	dex
-
-KrabbyDexEntry:
-	db "さわがに@"
-	db 4
-	dw 65
-	db   "ハサミは　きょうりょくな　ぶきであり"
-	next "よこに　あるくとき　からだの"
-	next "バランスをとる　やくめも　はたす"
-	dex
-
-VulpixDexEntry:
-	db "きつね@"
-	db 6
 	dw 99
-	db   "うまれたとき　しっぽは　まっしろで"
-	next "１ぽんしかない。そだつと　やがて"
-	next "さき<GA>わかれて　しっぽ<GA>ふえる"
+	db   "みをまもるため　ひたすら　カラを"
+	next "かたくしても　つよい　しょうげきを"
+	next "うけると　なかみ<GA>でてしまう"
 	dex
 
-NinetalesDexEntry:
-	db "きつね@"
+ButterfreeDexEntry:
+	db "ちょうちょ@"
 	db 11
-	dw 199
-	db   "あたまがよくて　しゅうねんぶかい。"
-	next "ふざけて　しっぽを　つかむと"
-	next "１０００ねん　たたられるという"
+	dw 320
+	db   "ハネの　もうどくの　りんぷんには"
+	next "みずをはじく　せいしつが　あるので"
+	next "あめのひ　でも　とびまわれる"
 	dex
 
-PikachuDexEntry:
-	db "ねずみ@"
-	db 4
-	dw 60
-	db   "なんびきか<GA>あつまっていると"
-	next "そこに　もうれつな　でんき<GA>たまり"
-	next "いなづま<GA>おちることがあるという"
-	dex
-
-RaichuDexEntry:
-	db "ねずみ@"
-	db 8
-	dw 300
-	db   "ながい　しっぽ<GA>アースになって"
-	next "みを　まもるため　じぶんじしんは"
-	next "こうでんあつにも　しびれないのだ"
-	dex
-
-DratiniDexEntry:
-	db "ドラゴン@"
-	db 18
-	dw 33
-	db   "ながいあいだ　まぼろしの　#と"
-	next "よばれた。わずかだ<GA>すいちゅうに"
-	next "すんでいること<GA>わかった"
-	dex
-
-DragonairDexEntry:
-	db "ドラゴン@"
-	db 40
-	dw 165
-	db   "オーラに　つつまれる　しんせいな"
-	next "いきものらしい。てんきを　かえる　"
-	next "ちからを　もつと　いわれている"
-	dex
-
-KabutoDexEntry:
-	db "こうら@"
-	db 5
-	dw 115
-	db   "とおい　むかしに　うみだった"
-	next "ちそうから　かせき<GA>はっけんされ"
-	next "ふっかつ　させた　ポケモンである"
-	dex
-
-KabutopsDexEntry:
-	db "こうら@"
-	db 13
-	dw 405
-	db   "やせてるので　およぐのが　はやい。"
-	next "えものを　カマで　きりさき"
-	next "たいえきを　のこらず　すいだす"
-	dex
-
-HorseaDexEntry:
-	db "ドラゴン@"
-	db 4
-	dw 80
-	db   "すいめんから　いきおいよく　スミを"
-	next "はっしゃして　とんでいる　ムシを"
-	next "うちおとす　こと<GA>あるという"
-	dex
-
-SeadraDexEntry:
-	db "ドラゴン@"
-	db 12
-	dw 250
-	db   "ハネと　しっぽを　すばやく　うごかし"
-	next "まえを　むいたまま　うしろへ"
-	next "およぐことも　できる　ポケモン"
-	dex
-
-SandshrewDexEntry:
-	db "ねずみ@"
-	db 6
-	dw 120
-	db   "みずけの　すくない　ばしょに"
-	next "ふかい　あなを　ほって　かくれる。"
-	next "えものを　ねらうときは　でてくる"
-	dex
-
-SandslashDexEntry:
-	db "ねずみ@"
-	db 10
-	dw 295
-	db   "せなかを　まるめると　トゲトゲの"
-	next "ボールみたいだ。そのまま　ころがって"
-	next "ぶつかってきたり　にげたりする。　@"
-
-OmanyteDexEntry:
-	db "うずまき@"
-	db 4
-	dw 75
-	db   "ぜつめつした　#だ<GA>まれに"
-	next "かせき<GA>はっけんされ　そこから"
-	next "いきかえらせること<GA>できる"
-	dex
-
-OmastarDexEntry:
-	db "うずまき@"
-	db 10
-	dw 350
-	db   "するどい　キバと　しょくしゅを"
-	next "もちながら　カラ<GA>おおきすぎて"
-	next "エサを　とれず　ぜつめつしたらしい"
-	dex
-
-JigglypuffDexEntry:
-	db "ふうせん@"
-	db 5
-	dw 55
-	db   "つぶらな　ひとみ<GA>ゆれるとき"
-	next "ねむたくなるような　ふしぎで"
-	next "きもちのいい　うたを　うたう"
-	dex
-
-WigglytuffDexEntry:
-	db "ふうせん@"
-	db 10
-	dw 120
-	db   "ボディーに　だんりょくせい<GA>あり"
-	next "おこらせると　いきを　すいこんで"
-	next "どんどん　おおきく　ふくらむ"
-	dex
-
-EeveeDexEntry:
-	db "しんか@"
-	db 3
-	dw 65
-	db   "ふきそくな　いでんしを　もつ。"
-	next "いしからでる　ほうしゃせんによって"
-	next "からだ<GA>とつぜんへんいを　おこす"
-	dex
-
-FlareonDexEntry:
-	db "ほのお@"
-	db 9
-	dw 250
-	db   "からだに　ほのおを　ためてるとき"
-	next "たいおん<GA>９００ど　いじょうに"
-	next "あがるので　ひじょうに　きけん"
-	dex
-
-JolteonDexEntry:
-	db "かみなり@"
-	db 8
-	dw 245
-	db   "くうきちゅうの　マイナスイオンを"
-	next "すいこんで　やく１００００ボルトの"
-	next "でんきを　はきだすことができる"
-	dex
-
-VaporeonDexEntry:
-	db "あわはき@"
-	db 10
-	dw 290
-	db   "みずべに　すむ<GA>しっぽには"
-	next "さかなのような　ひれ<GA>のこっていて"
-	next "にんぎょと　まちがう　ひともいる"
-	dex
-
-MachopDexEntry:
-	db "かいりき@"
-	db 8
-	dw 195
-	db   "きんにくを　きたえるのが　だいすきで"
-	next "さまざまな　かくとうぎに　いどみ"
-	next "ますます　つよく　そだっていく"
-	dex
-
-ZubatDexEntry:
-	db "こうもり@"
-	db 8
-	dw 75
-	db   "くらい　ばしょに　しゅうだんで"
-	next "はっせいする。ちょうおんぱを　だして"
-	next "ターゲットに　ちかづいていく"
-	dex
-
-EkansDexEntry:
-	db "へび@"
-	db 20
-	dw 69
-	db   "まったく　けはいを　かんじさせずに"
-	next "いどうする。ポッポや　オニスズメの"
-	next "たまごを　まるのみ　してしまう"
-	dex
-
-ParasDexEntry:
-	db "きのこ@"
-	db 3
-	dw 54
-	db   "あなを　ほって　きのねっこを　すう。"
-	next "せなかの　キノコは　からだから"
-	next "エキスを　もらい　せいちょうする"
-	dex
-
-PoliwhirlDexEntry:
-	db "おたま@"
-	db 10
-	dw 200
-	db   "りくでも　すいちゅうでも　くらせる。"
-	next "ちじょうでは　いつも　あせをかき"
-	next "ひふを　ぬめぬめ　させている"
-	dex
-
-PoliwrathDexEntry:
-	db "おたま@"
-	db 13
-	dw 540
-	db   "クロールや　バタフライが　とくいで"
-	next "オリンピックの　せんしゅでも　"
-	next "ぐんぐんと　おいぬいていく"
-	dex
 
 WeedleDexEntry:
 	db "けむし@"
 	db 3
 	dw 32
-	db   "もりに　おおく　ハッパを　たべる。"
-	next "あたまに　するどい　ハリをもち"
-	next "さされると　どくに　おかされる"
+	db   "あたまに　するどい　ハリを　もつ。"
+	next "もりや　くさちの　しげみに　かくれ"
+	next "ひたすら　ハッパを　たべている"
 	dex
 
 KakunaDexEntry:
@@ -1047,502 +319,512 @@ KakunaDexEntry:
 	db 6
 	dw 100
 	db   "じぶんでは　ほとんど　うごけないが"
-	next "あぶないときは　かたくなって"
-	next "みを　まもっているようだ"
+	next "あぶなくなると　ハリをだして"
+	next "どくを　あたえることも　あるらしい"
 	dex
 
 BeedrillDexEntry:
 	db "どくばち@"
 	db 10
 	dw 295
-	db   "こうそくで　とんでくると　りょうてと"
-	next "おしりにある　おおきな　どくばりを"
-	next "つかって　あいてを　せめる"
+	db   "りょうてと　おしりにある　３ぼんの"
+	next "どくバりで　あいてを　さして　さして"
+	next "さしまくって　こうげきする"
 	dex
 
-DodrioDexEntry:
-	db "みつごどり@"
-	db 18
-	dw 852
-	db   "３つの　あたまで　こうどな"
-	next "さくせんを　あやつる。ねるときも"
-	next "どれか　１つは　おきているという"
-	dex
-
-PrimeapeDexEntry:
-	db "ぶたざる@"
-	db 10
-	dw 320
-	db   "なぜか　もうれつに　おこって"
-	next "にげても　にげても　どこまでも"
-	next "おいかけてくる　せいかくだ"
-	dex
-
-DugtrioDexEntry:
-	db "もぐら@"
-	db 7
-	dw 333
-	db   "チームワークに　すぐれた　３つごの"
-	next "ディグダ。ちか　１００キロまで"
-	next "ほって　じしんを　おこすこともある"
-	dex
-
-VenomothDexEntry:
-	db "どくが@"
-	db 15
-	dw 125
-	db   "ハネを　おおっている　りんぷんは　"
-	next "いろの　ちがいに　よって　さまざまな"
-	next "どくを　もっている　らしい"
-	dex
-
-DewgongDexEntry:
-	db "あしか@"
-	db 17
-	dw 1200
-	db   "さむさに　かつため　からだの　なかに"
-	next "ねつ　エネルギーを　たくわえる。"
-	next "さむい　うみも　８ノットで　すすむ"
-	dex
-
-CaterpieDexEntry:
-	db "いもむし@"
+PidgeyDexEntry:
+	db "ことり@"
 	db 3
-	dw 29
-	db   "あしは　みじかい<GA>きゅうばんに"
-	next "なっているので　さかでも　かべでも"
-	next "くたびれることなく　すすんでいく"
-	dex
-
-MetapodDexEntry:
-	db "さなぎ@"
-	db 7
-	dw 99
-	db   "カラ<GA>かたくなるまえに"
-	next "つよい　しょうげきを　うけると"
-	next "なかみ<GA>でてしまうので　ちゅうい"
-	dex
-
-ButterfreeDexEntry:
-	db "ちょうちょ@"
-	db 11
-	dw 320
-	db   "こまかく　はやく　はばたいたら"
-	next "もうどくの　りんぷんが"
-	next "かぜに　のって　とんでくるぞ"
-	dex
-
-MachampDexEntry:
-	db "かいりき@"
-	db 16
-	dw 1300
-	db   "スーパー　パワフルな　パンチを"
-	next "くらった　ものは　ちへいせんまで"
-	next "ふっとんで　いってしまうという"
-	dex
-
-GolduckDexEntry:
-	db "あひる@"
-	db 17
-	dw 766
-	db   "ゆうがた　みずうみの　ほとりを"
-	next "かれいに　およぐ　すがたを"
-	next "カッパと　まちがえる　ひとがいる"
-	dex
-
-HypnoDexEntry:
-	db "さいみん@"
-	db 16
-	dw 756
-	db   "あいてと　め<GA>あったときに"
-	next "さいみんじゅつなど　かずかずの"
-	next "ちょうのうりょくを　つかうという"
-	dex
-
-GolbatDexEntry:
-	db "こうもり@"
-	db 16
-	dw 550
-	db   "かみついたら　さいご。しぬほど"
-	next "ちを　すいまくるので　おもたくなって"
-	next "じぶんで　とべなくなることもある"
-	dex
-
-MewtwoDexEntry:
-	db "いでんし@"
-	db 20
-	dw 1220
-	db   "ひとりの　かがくしゃ<GA>なんねんも"
-	next "おそろしい　いでんし　けんきゅうを"
-	next "つづけた　けっか　たんじょうした"
-	dex
-
-SnorlaxDexEntry:
-	db "いねむり@"
-	db 21
-	dw 4600
-	db   "ぐうたらで　たべては　ねるだけ。"
-	next "だから　どんどん　ふとっていき"
-	next "ますます　なまけてしまうらしい"
-	dex
-
-MagikarpDexEntry:
-	db "さかな@"
-	db 9
-	dw 100
-	db   "おおむかしは　まだ　もうすこし"
-	next "つよかったらしい。しかし　いまは"
-	next "かなしい　くらいに　よわいのだ"
-	dex
-
-MukDexEntry:
-	db "ヘドロ@"
-	db 12
-	dw 300
-	db   "きたない　ヘドロ<GA>ぜんしんに"
-	next "まとわりつく。あしあとに"
-	next "さわっただけで　どくに　おかされる"
-	dex
-
-KinglerDexEntry:
-	db "はさみ@"
-	db 13
-	dw 600
-	db   "ハサミは　１まんばりきの"
-	next "スーパーパワーを　ひめているのだが"
-	next "おおきすぎて　うまく　うごかない"
-	dex
-
-CloysterDexEntry:
-	db "２まいがい@"
-	db 15
-	dw 1325
-	db   "こうげきを　うけると　ひょうめんの"
-	next "トゲ<GA>つぎつぎと　とんでくる。"
-	next "ないぶの　しょうたいは　ふめい"
-	dex
-
-ElectrodeDexEntry:
-	db "ボール@"
-	db 12
-	dw 666
-	db   "ぼうだいな　エレクトン　エネルギーを"
-	next "ためこんでおり　ちょっとした"
-	next "しげきで　だいばくはつを　おこす"
-	dex
-
-ClefableDexEntry:
-	db "ようせい@"
-	db 13
-	dw 400
-	db   "ようせいの　なかまで　めったに"
-	next "ひとまえに　でてこない。けはいを"
-	next "かんじて　すぐ　にげてしまうようだ"
-	dex
-
-WeezingDexEntry:
-	db "どくガス@"
-	db 12
-	dw 95
-	db   "２つの　どくガスの　せいぶんが"
-	next "ながい　じかん　ふきだまる　ばしょで"
-	next "ふたごの　ドガース<GA>でるらしい"
-	dex
-
-PersianDexEntry:
-	db "シャムネコ@"
-	db 10
-	dw 320
-	db   "けなみ<GA>うつくしく　ペットに"
-	next "したがる　ひとも　おおい<GA>すぐ"
-	next "ひっかいたり　するので　てごわいぞ"
-	dex
-
-MarowakDexEntry:
-	db "ほねずき@"
-	db 10
-	dw 450
-	db   "ほねは　だいじな　ぶき　である。"
-	next "ブーメランの　ように　なげて"
-	next "えものに　ぶつけ　きぜつ　させる"
-	dex
-
-HaunterDexEntry:
-	db "ガスじょう@"
-	db 16
-	dw 1
-	db   "ブロックの　かべも　すりぬけるので"
-	next "いじげん　くうかんの　じゅうにん"
-	next "ではないかと　うわさに　なっている"
-	dex
-
-AbraDexEntry:
-	db "ねんりき@"
-	db 9
-	dw 195
-	db   "あいての　かんがえてる　ことを"
-	next "よみとって　ピンチに　なるまえに"
-	next "テレポートで　にげてしまう"
-	dex
-
-AlakazamDexEntry:
-	db "ねんりき@"
-	db 15
-	dw 480
-	db   "スーパーコンピュータより　すばやく"
-	next "けいさんする　ずのうを　もつ。"
-	next "ちのうしすうは　だいたい５０００"
+	dw 18
+	db   "おとなしい　せいかくで　おそわれても"
+	next "はんげき　せずに　すなを　かけて"
+	next "みを　まもること<GA>おおい"
 	dex
 
 PidgeottoDexEntry:
 	db "とり@"
 	db 11
 	dw 300
-	db   "ひろい　なわばりを　もっており"
-	next "しんにゅうする　じゃまものは"
-	next "てっていてきに　つつかれてしまう"
+	db   "ありあまる　たいりょくの　もちぬしで"
+	next "ひろい　なわばりを　とびまわり"
+	next "とおくまで　エサを　さがしにいく"
 	dex
 
 PidgeotDexEntry:
 	db "とり@"
 	db 15
 	dw 395
-	db   "エサを　さがすとき　すいめん"
-	next "すれすれを　すべるように　とんで"
-	next "コイキングなどを　わしづかみにする"
-	dex
-
-StarmieDexEntry:
-	db "なぞの@"
-	db 11
-	dw 800
-	db   "まんなかの　コアとよばれる　ぶぶんは"
-	next "なないろに　かがやく。これを"
-	next "ほうせきにする　ひとも　いるという"
-	dex
-
-BulbasaurDexEntry:
-	db "たね@"
-	db 7
-	dw 69
-	db   "うまれたときから　せなかに"
-	next "ふしぎな　タネ<GA>うえてあって"
-	next "からだと　ともに　そだつという"
-	dex
-
-VenusaurDexEntry:
-	db "たね@"
-	db 20
-	dw 1000
-	db   "たいようエネルギーを　えいようにして"
-	next "おおきなハナ<GA>ひらく。ひなたに"
-	next "ひきよせられるように　いどうする"
-	dex
-
-TentacruelDexEntry:
-	db "くらげ@"
-	db 16
-	dw 550
-	db   "しょくしゅは　ふだん　みじかくて"
-	next "えものを　さすときに　ながく"
-	next "のびて　からみつくのだ"
-	dex
-
-GoldeenDexEntry:
-	db "きんぎょ@"
-	db 6
-	dw 150
-	db   "およぐとき　おビレ<GA>ドレスのように"
-	next "しなやかに　ゆれるので"
-	next "すいちゅうの　じょおうと　よばれる"
-	dex
-
-SeakingDexEntry:
-	db "きんぎょ@"
-	db 13
-	dw 390
-	db   "あき<GA>くると　さんらんの　ために"
-	next "ながれに　さからって　ちからづよく"
-	next "かわを　およぐ　すがたが　みられる"
-	dex
-
-PonytaDexEntry:
-	db "ひのうま@"
-	db 10
-	dw 300
-	db   "あしの　ヒヅメは　ダイヤモンドの"
-	next "１０ばい　かたい。どんな　ものでも　"
-	next "ペチャンコに　ふみつぶしてしまう"
-	dex
-
-RapidashDexEntry:
-	db "ひのうま@"
-	db 17
-	dw 950
-	db   "はやく　うごく　ぶったいを　みると"
-	next "きょうそう　したくなり　もうれつな"
-	next "スピードで　おいかけ　はじめる"
+	db   "マッハ２で　ひこうし　エサをさがす。"
+	next "その　おおきな　ツメは"
+	next "ぶきと　しても　おそれられている"
 	dex
 
 RattataDexEntry:
 	db "ねずみ@"
 	db 3
 	dw 35
-	db   "なんでも　かじって　こうげき。"
-	next "ちいさいうえに　うごきが　すばやく"
-	next "いろんな　ところに　しゅつぼつする"
+	db   "キバ<GA>２つ。とにかく　なんでも"
+	next "かじってみる。１ぴき　みつけたら"
+	next "４０ぴきは　そこに　すんでるはず"
 	dex
 
 RaticateDexEntry:
 	db "ねずみ@"
 	db 7
 	dw 185
-	db   "ヒゲで　からだの　バランスを"
-	next "とっているので　もし　きられると"
-	next "うごき<GA>のろく　なるらしい"
+	db   "うしろあしにある　ちいさな"
+	next "みずかきで　かわを　およぐのは"
+	next "みずのなかの　エサを　とるためだ"
 	dex
 
-NidorinoDexEntry:
+SpearowDexEntry:
+	db "ことり@"
+	db 3
+	dw 20
+	db   "たかく　とぶのは　にがて。"
+	next "なわばりを　まもるために"
+	next "もうスピードで　とびまわっている"
+	dex
+
+FearowDexEntry:
+	db "くちばし@"
+	db 12
+	dw 380
+	db   "むかしから　すんでいる　#。"
+	next "すこしでも　きけんを　かんじると"
+	next "そらたかく　とんで　いってしまう"
+	dex
+
+EkansDexEntry:
+	db "へび@"
+	db 20
+	dw 69
+	db   "そだつほどに　どんどん　ながくなる。"
+	next "そして　よなかは　きのえだに"
+	next "グルグルと　からまって　やすむ"
+	dex
+
+ArbokDexEntry:
+	db "コブラ@"
+	db 35
+	dw 650
+	db   "おそろしげな　おなかの　もようは"
+	next "けんきゅうのけっか　６しゅるいほど"
+	next "パターン<GA>かくにんされている"
+	dex
+
+PikachuDexEntry:
+	db "ねずみ@"
+	db 4
+	dw 60
+	db   "しっぽをたてて　まわりのけはいを"
+	next "かんじとっている。だから　むやみに"
+	next "しっぽを　ひっぱると　かみつくよ"
+	dex
+
+RaichuDexEntry:
+	db "ねずみ@"
+	db 8
+	dw 300
+	db   "からだに　でんき<GA>たまってくると"
+	next "こうげきてきな　せいかくにかわる。"
+	next "くらいところで　ひかってみえる"
+	dex
+
+SandshrewDexEntry:
+	db "ねずみ@"
+	db 6
+	dw 120
+	db   "からだは　かわいている。しかし"
+	next "よなか　きおん<GA>さがったときは"
+	next "ひふに　しずく<GA>つくという"
+	dex
+
+SandslashDexEntry:
+	db "ねずみ@"
+	db 10
+	dw 295
+	db   "ツメで　ひっかくの<GA>とくいだが"
+	next "たたかっているうち　おれることも。"
+	next "つぎのひには　また　のびてくるぞ"
+	dex
+
+NidoranFDexEntry:
 	db "どくばり@"
-	db 9
-	dw 195
-	db   "すぐに　おこって　たたかおうとする。"
-	next "しかも　あたまの　ツノは　ささると"
-	next "きょうれつな　どくそをだす　しくみ"
+	db 4
+	dw 70
+	db   "やさしい　せいかくで　たたかいは"
+	next "このまない<GA>ちいさな　ツノからは"
+	next "どく<GA>でるので　ようちゅうい"
 	dex
 
 NidorinaDexEntry:
 	db "どくばり@"
 	db 8
 	dw 200
-	db   "メスなので　ツノのそだち<GA>おそい。"
-	next "ひっかいたり　かみついたりと"
-	next "にくだんせんを　このむ"
+	db   "すあなの　おくに　いるときは"
+	next "かならず　トゲトゲ<GA>ひっこむ。"
+	next "リラックスしている　しょうこだ"
 	dex
 
-GeodudeDexEntry:
-	db "がんせき@"
-	db 4
-	dw 20 ; BUG, should be 200
-	db   "そうげんや　やまに　せいそくする。"
-	next "いしころに　にていて　きがつかずに"
-	next "ふんだり　つまずいたり　してしまう"
+NidoqueenDexEntry:
+	db "ドリル@"
+	db 13
+	dw 600
+	db   "かたい　ウロコに　おおわれた"
+	next "がんじょうな　からだの　もちぬし。"
+	next "ウロコは　はえかわるらしい"
 	dex
 
-PorygonDexEntry:
-	db "バーチャル@"
-	db 8
-	dw 365
-	db   "からだ<GA>プログラムで　できている。"
-	next "でんしくうかんを　じゆうじざいに"
-	next "いどうできる　のうりょくをもつ"
-	dex
-
-AerodactylDexEntry:
-	db "かせき@"
-	db 18
-	dw 590
-	db   "のこぎりのような　かたちの　キバで"
-	next "あいての　のどを　かみきってしまう。"
-	next "きょうぼうな　こだいの　#だ"
-	dex
-
-MagnemiteDexEntry:
-	db "じしゃく@"
-	db 3
-	dw 60
-	db   "はんじゅうりょくで　ういてるらしい。"
-	next "どこから　ともなく　あらわれて"
-	next "でんじはなどを　ほうしゃする"
-	dex
-
-CharmanderDexEntry:
-	db "とかげ@"
-	db 6
-	dw 85
-	db   "あついものを　このむ　せいかく。"
-	next "あめに　ぬれると　しっぽの　さきから"
-	next "けむり<GA>でるという"
-	dex
-
-SquirtleDexEntry:
-	db "かめのこ@"
+NidoranMDexEntry:
+	db "どくばり@"
 	db 5
 	dw 90
-	db   "うまれたあと　せなか<GA>ふくらみ"
-	next "かたい　こうら<GA>できる。くちから"
-	next "きょうりょくな　あわを　だす"
+	db   "いつも　おおきな　みみを　たてて"
+	next "まわりの　けはいを　さぐる。きけんを"
+	next "かんじたときは　どくバリを　つかう"
 	dex
 
-CharmeleonDexEntry:
-	db "かえん@"
+NidorinoDexEntry:
+	db "どくばり@"
+	db 9
+	dw 195
+	db   "あたまにある　ツノの　どくそは"
+	next "つきさしたときの　しょうげきで"
+	next "にじみでる　しくみだ"
+	dex
+
+NidokingDexEntry:
+	db "ドリル@"
+	db 14
+	dw 620
+	db   "はがねのような　ひふを　いかした"
+	next "たいあたりは　きょうりょく。"
+	next "ツノは　ダイヤモンドも　つきさす"
+	dex
+
+ClefairyDexEntry:
+	db "ようせい@"
+	db 6
+	dw 75
+	db   "すがたや　しぐさ<GA>あいくるしく"
+	next "にんきだ<GA>かず<GA>すくないのか"
+	next "なかなか　はっけん　できない"
+	dex
+
+ClefableDexEntry:
+	db "ようせい@"
+	db 13
+	dw 400
+	db   "じぶんたちの　せかいを　だいじに"
+	next "しているらしく　めったに　ひとまえに"
+	next "でてこない　ようせいの　なかま"
+	dex
+
+VulpixDexEntry:
+	db "きつね@"
+	db 6
+	dw 99
+	db   "けなみや　シッポ<GA>うつくしい。"
+	next "おおきくなると　シッポの　さきが"
+	next "わかれて　ふえていく"
+	dex
+
+NinetalesDexEntry:
+	db "きつね@"
 	db 11
-	dw 190
-	db   "もえる　シッポを　ふりまわすと"
-	next "まわりの　おんど<GA>どんどん"
-	next "あがって　あいてを　くるしめる"
+	dw 199
+	db   "９にんの　せいじゃ<GA>がったいして"
+	next "この#に　うまれかわったと"
+	next "いいつたえに　のこっている"
 	dex
 
-WartortleDexEntry:
-	db "かめ@"
+JigglypuffDexEntry:
+	db "ふうせん@"
+	db 5
+	dw 55
+	db   "つぶらな　ひとみで　あいてを"
+	next "みつめたあと　ふしぎで　ここちよい"
+	next "うたを　きかせて　ねむらせてしまう"
+	dex
+
+WigglytuffDexEntry:
+	db "ふうせん@"
 	db 10
-	dw 225
-	db   "しばしば　すいちゅうに　かくれ"
-	next "えものを　ねらう。はやく　およぐとき"
-	next "みみを　うごかして　バランスをとる"
+	dw 120
+	db   "だんりょくせいに　すぐれた　からだは"
+	next "おおきく　いきを　すいこむと"
+	next "どこまでも　ふくらんでいく"
 	dex
 
-CharizardDexEntry:
-	db "かえん@"
-	db 17
-	dw 905
-	db   "がんせきも　やけるような　"
-	next "しゃくねつの　ほのおを　はいて"
-	next "やまかじを　おこすことが　ある"
+ZubatDexEntry:
+	db "こうもり@"
+	db 8
+	dw 75
+	db   "くちから　ちょうおんぱを　だしながら"
+	next "とぶのは　まえに　なにが　あるのか"
+	next "しらべながら　とんでいるからだ"
+	dex
+
+GolbatDexEntry:
+	db "こうもり@"
+	db 16
+	dw 550
+	db   "どこから　ともなく　ちかづいてくる。"
+	next "するどいキバを　つかって　かみつくと"
+	next "どうじに　ちを　すいまくる"
 	dex
 
 OddishDexEntry:
 	db "ざっそう@"
 	db 5
 	dw 54
-	db   "ひるまは　かおを　じめんに　うめて"
-	next "あまり　うごかない。よるに　なると"
-	next "たねを　まきながら　あるきまわる"
+	db   "ただの　くさだと　おもって"
+	next "ひきぬこうとすると　なきごえがする。"
+	next "なぜか　とても　おそろしいきぶん"
 	dex
 
 GloomDexEntry:
 	db "ざっそう@"
 	db 8
 	dw 86
-	db   "すこしずつ　しみだしてくるのは"
-	next "よだれではない。みつのようなしるで"
-	next "えものを　おびきよせているのだ"
+	db   "もうれつな　クサさ！　それなのに"
+	next "１０００にんに　ひとりぐらい"
+	next "これを　このんで　かぐひとがいる"
 	dex
 
 VileplumeDexEntry:
 	db "フラワー@"
 	db 12
 	dw 186
-	db   "はなびら<GA>おおきいほど　たくさん"
-	next "かふんを　だす<GA>あたまが"
-	next "おもたくて　つかれてしまうという"
+	db   "どくの　かふんを　ふりまくために"
+	next "おおきな　はなびらを　ゆらすと"
+	next "ものすごい　おとも　ひびきわたる"
+	dex
+
+
+ParasDexEntry:
+	db "きのこ@"
+	db 3
+	dw 54
+	db   "あなをほり　きのねっこ　から"
+	next "えいようを　とる<GA>ほとんどは"
+	next "せなかの　キノコに　うばわれる"
+	dex
+
+ParasectDexEntry:
+	db "きのこ@"
+	db 10
+	dw 295
+	db   "ずっと　エキスを　すいつづけられ"
+	next "もはや　ムシではなく　せなかの"
+	next "キノコ<GA>かんがえているようだ"
+	dex
+
+VenonatDexEntry:
+	db "こんちゅう@"
+	db 10
+	dw 300
+	db   "レーダーになる　おおきな　めは"
+	next "あかるいところでは　ちいさな　めが"
+	next "あつまって　できているの<GA>わかる"
+	dex
+
+VenomothDexEntry:
+	db "どくが@"
+	db 15
+	dw 125
+	db   "ハネの　りんぷんは　からだにつくと"
+	next "なかなか　とれない。しかも　そこから"
+	next "どくの　せいぶん<GA>しみこんでくる"
+	dex
+
+DiglettDexEntry:
+	db "もぐら@"
+	db 2
+	dw 8
+	db   "くらいところを　このむ。ほとんど"
+	next "ちちゅうですごす<GA>どうくつでは"
+	next "よく　かおを　だしている"
+	dex
+
+DugtrioDexEntry:
+	db "もぐら@"
+	db 7
+	dw 333
+	db   "みつごのパワーで　ちか１００キロまで"
+	next "ほりすすむので　じしんの　げんいんに"
+	next "なるとの　ほうこくも　されている"
+	dex
+
+MeowthDexEntry:
+	db "ばけねこ@"
+	db 4
+	dw 42
+	db   "よるのほう<GA>げんきがあるようだ。"
+	next "まるくて　ひかるもの<GA>すきで"
+	next "みつけると　ひろわずに　いられない"
+	dex
+
+PersianDexEntry:
+	db "シャムネコ@"
+	db 10
+	dw 320
+	db   "ひたいの　ほうせき<GA>かがやく！"
+	next "また　あるくすがたも　しなやかで"
+	next "おうじょのような　はなやかさがある"
+	dex
+
+PsyduckDexEntry:
+	db "あひる@"
+	db 8
+	dw 196
+	db   "いつも　ずつうに　なやまされている。"
+	next "ねんりきを　つかう<GA>じぶんの"
+	next "いしか　どうか　わからない"
+	dex
+
+GolduckDexEntry:
+	db "あひる@"
+	db 17
+	dw 766
+	db   "すらりとした　ながい　てあしと"
+	next "はったつした　おおきな　みずかきで"
+	next "みずうみを　ゆうがに　およぐ"
+	dex
+
+MankeyDexEntry:
+	db "ぶたざる@"
+	db 5
+	dw 280
+	db   "みがるで　きのうえで　せいかつする。"
+	next "ふとしたことで　きげんが　わるくなり"
+	next "まわりに　いるものに　とびかかる"
+	dex
+
+PrimeapeDexEntry:
+	db "ぶたざる@"
+	db 10
+	dw 320
+	db   "まわりに　だれも　いないときだけは"
+	next "おこるのを　やめている。しかし"
+	next "それをみるのは　むずかしい"
+	dex
+
+GrowlitheDexEntry:
+	db "こいぬ@"
+	db 7
+	dw 190
+	db   "ひとなつっこい　せいかくだが"
+	next "なわばりに　はいってきた　てきに"
+	next "たいしては　はげしく　ほえる"
+	dex
+
+ArcanineDexEntry:
+	db "でんせつ@"
+	db 19
+	dw 1550
+	db   "ちゅうごくで　でんせつの　#。"
+	next "かろやかに　はしる　そのすがたに"
+	next "とりこに　される　ものも　おおい"
+	dex
+
+PoliwagDexEntry:
+	db "おたま@"
+	db 6
+	dw 124
+	db   "うずまきの　むきは　うまれた"
+	next "ちほうに　よって　ちがうらしい。"
+	next "あるくより　およぐほうが　じょうず"
+	dex
+
+PoliwhirlDexEntry:
+	db "おたま@"
+	db 10
+	dw 200
+	db   "おそわれそうに　なると　おなかの"
+	next "うずまきを　つかって　あいてを"
+	next "ねむらせ　そのすきに　にげるらしい"
+	dex
+
+PoliwrathDexEntry:
+	db "おたま@"
+	db 13
+	dw 540
+	db   "ぜんしんの　きんにくを　つかった"
+	next "ちからづよい　およぎで　オリンピック"
+	next "せんしゅも　おいぬいていく"
+	dex
+
+AbraDexEntry:
+	db "ねんりき@"
+	db 9
+	dw 195
+	db   "１にちに　１８じかん　ねむる。"
+	next "きけん<GA>せまると　ねたままでも"
+	next "テレポートして　にげる"
+	dex
+
+KadabraDexEntry:
+	db "ねんりき@"
+	db 13
+	dw 565
+	db   "ユンゲラー<GA>ちかくに　いると"
+	next "とけい<GA>ぎゃくかいてん　したり"
+	next "おかしなこと<GA>おこるらしい"
+	dex
+
+AlakazamDexEntry:
+	db "ねんりき@"
+	db 15
+	dw 480
+	db   "なんでも　おぼえることができる。"
+	next "たいけんした　あらゆることを"
+	next "わすれないので　あたまがいいのだ"
+	dex
+
+MachopDexEntry:
+	db "かいりき@"
+	db 8
+	dw 195
+	db   "ちいさな　からだ　だ<GA>ちからもち。"
+	next "そのうえ　いろいろな　かくとうぎを"
+	next "マスターしていて　とても　つよい"
+	dex
+
+MachokeDexEntry:
+	db "かいりき@"
+	db 15
+	dw 705
+	db   "こしにまいた　パワーセーブベルトを"
+	next "はずした　ゴーリキーの　いきおいを"
+	next "とめることは　だれにも　ふかのうだ"
+	dex
+
+MachampDexEntry:
+	db "かいりき@"
+	db 16
+	dw 1300
+	db   "１ぽんでも　やまを　うごかせる"
+	next "ちからをもった　うでを　４ほんすべて"
+	next "つかって　すごいパンチを　くりだす"
 	dex
 
 BellsproutDexEntry:
 	db "フラワー@"
 	db 7
 	dw 40
-	db   "ちいさい　むしを　とらえて　たべる。"
-	next "あしの　ねっこを　つかい　すいぶんを"
-	next "ほきゅうすることも　あるらしい"
+	db   "おんど<GA>たかく　しつどの　ある"
+	next "ところを　このむ。ツルを　つかって"
+	next "ちいさなムシを　とらえて　たべる"
 	dex
 
 WeepinbellDexEntry:
 	db "ハエとり@"
 	db 10
 	dw 64
-	db   "まず　どくのこなを　はき　あいての"
-	next "うごきを　とめて　しまってから　"
+	db   "おなか<GA>へると　てあたりしだいに"
+	next "うごくものを　のみこんでは"
 	next "ようかいえきで　とどめを　さす"
 	dex
 
@@ -1550,9 +832,729 @@ VictreebelDexEntry:
 	db "ハエとり@"
 	db 17
 	dw 155
-	db   "ジャングルの　おくちに　ウツボット"
-	next "ばかり　いる　ちたい<GA>あって"
-	next "いったら　２どと　かえってこれない"
+	db   "ミツの　かおりで　えものを　さそう。"
+	next "くちのなかに　いれたものは　１にちで"
+	next "ホネまで　とかしてしまうという"
+	dex
+
+TentacoolDexEntry:
+	db "くらげ@"
+	db 9
+	dw 455
+	db   "なみうちぎわに　ひからびた　すがたを"
+	next "はっけん　することも　あるが"
+	next "みずに　つけてやれば　ふっかつする"
+	dex
+
+TentacruelDexEntry:
+	db "くらげ@"
+	db 16
+	dw 550
+	db   "８０ぽんの　しょくしゅを　じゆうに"
+	next "のびちぢみさせ　えものに　まきつき"
+	next "どくを　あたえて　よわらせる"
+	dex
+
+GeodudeDexEntry:
+	db "がんせき@"
+	db 4
+	dw 200
+	db   "やまみち　などに　おおく　せいそく。"
+	next "きづかずに　ふみつけると"
+	next "おこりだすので　ようちゅういだ"
+	dex
+
+GravelerDexEntry:
+	db "がんせき@"
+	db 10
+	dw 1050
+	db   "やまみちを　よく　ころがっている。"
+	next "とおりみちに　なに<GA>あろうと"
+	next "いっさい　きに　していない"
+	dex
+
+GolemDexEntry:
+	db "メガトン@"
+	db 14
+	dw 3000
+	db   "だっぴ　したてのときは　ぜんたいが"
+	next "しろっぽく　やわらかいが　すぐに"
+	next "くうきに　ふれて　かたくなる"
+	dex
+
+PonytaDexEntry:
+	db "ひのうま@"
+	db 10
+	dw 300
+	db   "ものすごい　ジャンプの　あとの"
+	next "ちゃくちの　しょうげきは　ヒヅメと"
+	next "あしの　きんにくで　やわらげる"
+	dex
+
+RapidashDexEntry:
+	db "ひのうま@"
+	db 17
+	dw 950
+	db   "とにかく　はしるの<GA>だいすきで"
+	next "じぶんより　はやいものを　みつけると"
+	next "ぜんそくりょくで　おいかける"
+	dex
+
+SlowpokeDexEntry:
+	db "まぬけ@"
+	db 12
+	dw 360
+	db   "とても　まぬけで　うごきも　にぶい。"
+	next "じかんの　ながれを　きにすることなく"
+	next "のんびりと　いきている"
+	dex
+
+SlowbroDexEntry:
+	db "やどかり@"
+	db 16
+	dw 785
+	db   "うみのちかくで　のんびり　くらす。"
+	next "もし　シッポの　シェルダーが"
+	next "はずれてしまうと　ヤドンにもどる"
+	dex
+
+MagnemiteDexEntry:
+	db "じしゃく@"
+	db 3
+	dw 60
+	db   "うまれつき　じゅうりょくを　さえぎる"
+	next "のうりょくを　もち　でんじはを"
+	next "だしながら　くうちゅうを　いどう"
+	dex
+
+MagnetonDexEntry:
+	db "じしゃく@"
+	db 10
+	dw 600
+	db   "なぞのでんぱを　はっしんしており"
+	next "はんけい　１キロのはんいでは"
+	next "きおん<GA>２ど　あがる"
+	dex
+
+FarfetchdDexEntry:
+	db "かるがも@"
+	db 8
+	dw 150
+	db   "クキ<GA>はえている　ところに　すむ。"
+	next "めずらしく　かずも　すくないので"
+	next "カモネギも　へってきた　らしい"
+	dex
+
+DoduoDexEntry:
+	db "ふたごどり@"
+	db 14
+	dw 392
+	db   "はねは　みじかく　そらをとぶのは"
+	next "にがてだ<GA>そのかわり　はったつした"
+	next "あしで　はやく　かけることができる"
+	dex
+
+DodrioDexEntry:
+	db "みつごどり@"
+	db 18
+	dw 852
+	db   "ドードーの　どちらかの　あたまが"
+	next "ぶんれつした　へんしゅ。そうげんを"
+	next "じそく　６０キロで　はしっていく"
+	dex
+
+SeelDexEntry:
+	db "あしか@"
+	db 11
+	dw 900
+	db   "こおるほど　さむいところ<GA>すき。"
+	next "ひょうてんか　１０ど　くらいで"
+	next "きもちよく　およいでいる"
+	dex
+
+DewgongDexEntry:
+	db "あしか@"
+	db 17
+	dw 1200
+	db   "ぜんしん　ゆきのように　まっしろ。"
+	next "さむさに　つよく　こおり<GA>うかぶ"
+	next "うみも　げんきよく　およぎまわる"
+	dex
+
+GrimerDexEntry:
+	db "ヘドロ@"
+	db 9
+	dw 300
+	db   "ヘドロ<GA>かたまって　うまれた。"
+	next "くさくて　さわること<GA>できないし"
+	next "とおったあとには　くさも　はえない"
+	dex
+
+MukDexEntry:
+	db "ヘドロ@"
+	db 12
+	dw 300
+	db   "とっても　くさい！　きぜつするほど"
+	next "きょうれつだ<GA>ベトベトンは　はなが"
+	next "たいかして　においを　かんじない"
+	dex
+
+ShellderDexEntry:
+	db "２まいがい@"
+	db 3
+	dw 40
+	db   "どんな　こうげきにも　たえる"
+	next "かたいカラだ<GA>ひらくと　やわらかい"
+	next "なかみ<GA>むきだしになる"
+	dex
+
+CloysterDexEntry:
+	db "２まいがい@"
+	db 15
+	dw 1325
+	db   "ダイヤモンドよりも　かたいカラで"
+	next "まもるだけでなく　ついている　トゲを"
+	next "とばしてくるので　かなり　てごわい"
+	dex
+
+GastlyDexEntry:
+	db "ガスじょう@"
+	db 13
+	dw 1
+	db   "ふるくなって　だれも　すまなくなった"
+	next "たてものに　はっせいするらしい。"
+	next "かたちは　あいまいで　ガスのよう"
+	dex
+
+HaunterDexEntry:
+	db "ガスじょう@"
+	db 16
+	dw 1
+	db   "なめられると　いのちを　すわれる。"
+	next "からだ<GA>ふるえて　とまらなくなり"
+	next "やがては　し　に　いたるという"
+	dex
+
+GengarDexEntry:
+	db "シャドー@"
+	db 15
+	dw 405
+	db   "とつぜん　さむけを　かんじるとき"
+	next "ゲンガー<GA>ちかくにいる。もしかして"
+	next "のろいを　かけるかも　しれない"
+	dex
+
+OnixDexEntry:
+	db "いわへび@"
+	db 88
+	dw 2100
+	db   "ちちゅうを　ものすごい　いきおいで"
+	next "ほりすすみ　エサを　さがす。とおった"
+	next "あとは　ディグダの　すみかになる"
+	dex
+
+DrowzeeDexEntry:
+	db "さいみん@"
+	db 10
+	dw 324
+	db   "いつも　いっしょに　ねむってみると"
+	next "ときどき　むかし　たべたユメを"
+	next "みせてくれる　よるがある"
+	dex
+
+HypnoDexEntry:
+	db "さいみん@"
+	db 16
+	dw 756
+	db   "うっかり　であったときは　めを"
+	next "そらさないと　きけん。てに　もった"
+	next "ふりこで　ねむらされてしまう"
+	dex
+
+KrabbyDexEntry:
+	db "さわがに@"
+	db 4
+	dw 65
+	db   "きょうりょくな　ぶきとなる　ハサミは"
+	next "こうげきのとき　まれに　もげるが"
+	next "あとから　すぐに　はえてくる"
+	dex
+
+KinglerDexEntry:
+	db "はさみ@"
+	db 13
+	dw 600
+	db   "かたほうだけ　きょだいか　した"
+	next "ハサミは　こうてつの　かたさと"
+	next "１まんばりきを　もつ<GA>おもすぎる"
+	dex
+
+VoltorbDexEntry:
+	db "ボール@"
+	db 5
+	dw 104
+	db   "モンスターボールに　にているのは"
+	next "ほごしょくの　ためだと　いわれるが"
+	next "いがいと　かんたんに　じばくする"
+	dex
+
+ElectrodeDexEntry:
+	db "ボール@"
+	db 12
+	dw 666
+	db   "すこしでも　しょうげきを　あたえると"
+	next "たいないの　エレクトンエネルギーが"
+	next "あふれて　ばくはつ　してしまう"
+	dex
+
+ExeggcuteDexEntry:
+	db "たまご@"
+	db 4
+	dw 25
+	db   "タマの　ひとつひとつ<GA>おたがいに"
+	next "ひきあって　かいてんしている。"
+	next "６つでないと　あんていしないのだ"
+	dex
+
+ExeggutorDexEntry:
+	db "やしのみ@"
+	db 20
+	dw 1200
+	db   "なきごえ<GA>にぎやかなのは"
+	next "３つある　あたま<GA>それぞれ"
+	next "すきなことを　かんがえているからだ"
+	dex
+
+CuboneDexEntry:
+	db "こどく@"
+	db 4
+	dw 65
+	db   "しんだ　ははおやの　ホネを　かぶる。"
+	next "なきごえは　ホネのなかで　ひびいて"
+	next "ものがなしい　メロディになる"
+	dex
+
+MarowakDexEntry:
+	db "ほねずき@"
+	db 10
+	dw 450
+	db   "からだは　ちいさく　よわかったが"
+	next "ホネを　うまく　つかって　たたかう"
+	next "きょうぼうな　せいかくに　なった"
+	dex
+
+HitmonleeDexEntry:
+	db "キック@"
+	db 15
+	dw 498
+	db   "キックがあたる　しゅんかん！"
+	next "あしのウラ<GA>ダイヤモンドのように"
+	next "かたくなって　あいてを　はかいする"
+	dex
+
+HitmonchanDexEntry:
+	db "パンチ@"
+	db 14
+	dw 502
+	db   "ねじりこむような　パンチこうげき！"
+	next "コンクリートのかべ<GA>ドリルじょうに"
+	next "けずられて　やがて　あな<GA>あく"
+	dex
+
+LickitungDexEntry:
+	db "なめまわし@"
+	db 12
+	dw 655
+	db   "２メートルもある　ながい　したは"
+	next "まえあしより　きように　うごかせる。"
+	next "なめられると　なぜか　しびれてくる"
+	dex
+
+KoffingDexEntry:
+	db "どくガス@"
+	db 6
+	dw 10
+	db   "あついところ　では　からだのなかの"
+	next "ガス<GA>ふくらんで　はれつする"
+	next "きけんせいも　あるので　ちゅういだ"
+	dex
+
+WeezingDexEntry:
+	db "どくガス@"
+	db 12
+	dw 95
+	db   "ゴミのなかに　ふくまれている"
+	next "どくガス　バイきん　ほこりを"
+	next "きゅうしゅうして　いきている"
+	dex
+
+RhyhornDexEntry:
+	db "とげとげ@"
+	db 10
+	dw 1150
+	db   "たんさいぼうで　ひとつの　ことしか"
+	next "かんがえられない。とっしんを"
+	next "はじめると　ねむるまで　とまらない"
+	dex
+
+RhydonDexEntry:
+	db "ドリル@"
+	db 19
+	dw 1200
+	db   "うしろあしだけで　あるくようになり"
+	next "ちのう<GA>はったつした。よろいの"
+	next "ような　ひふは　マグマにも　たえる"
+	dex
+
+ChanseyDexEntry:
+	db "たまご@"
+	db 11
+	dw 346
+	db   "きずついた　ものを　みかけると"
+	next "えいようまんてんの　タマゴを"
+	next "わけあたえる　やさしい　#"
+	dex
+
+TangelaDexEntry:
+	db "ツルじょう@"
+	db 10
+	dw 350
+	db   "からだ<GA>あおいツルに　おおわれて"
+	next "しょうたいは　わからない。"
+	next "ツルは　ずっと　のびつづけるという"
+	dex
+
+KangaskhanDexEntry:
+	db "おやこ@"
+	db 22
+	dw 800
+	db   "おなかのふくろで　こどもをそだてる。"
+	next "こどもを　まもるためになら　どんな"
+	next "あいてにも　たちむかっていく"
+	dex
+
+HorseaDexEntry:
+	db "ドラゴン@"
+	db 4
+	dw 80
+	db   "みに　きけんを　かんじたときは"
+	next "くちから　みずや　とくしゅなスミを"
+	next "いきおいよく　はきだす"
+	dex
+
+SeadraDexEntry:
+	db "ドラゴン@"
+	db 12
+	dw 250
+	db   "せびれに　さわると　しびれてしまう。"
+	next "ねむるときは　ながされないように"
+	next "シッポを　さんごに　まきつける"
+	dex
+
+GoldeenDexEntry:
+	db "きんぎょ@"
+	db 6
+	dw 150
+	db   "タマゴをうむ　じきになると　かわや"
+	next "たきを　のぼってくる　トサキントの"
+	next "しゅうだんの　すがた<GA>みられる"
+	dex
+
+SeakingDexEntry:
+	db "きんぎょ@"
+	db 13
+	dw 390
+	db   "あたまのツノで　かわぞこにある"
+	next "いわを　くりぬき　すを　つくるのは"
+	next "オスの　やくめ　だ"
+	dex
+
+StaryuDexEntry:
+	db "ほしがた@"
+	db 8
+	dw 345
+	db   "からだの　ちゅうしんぶぶん　さえ"
+	next "のこっていれば　どんなに　こまかく"
+	next "きられても　さいせいするという"
+	dex
+
+StarmieDexEntry:
+	db "なぞの@"
+	db 11
+	dw 800
+	db   "コアと　よばれる　ちゅうしんぶぶんが"
+	next "なないろに　かがやくのは　つうしん"
+	next "しているからだと　いわれている"
+	dex
+
+MrMimeDexEntry:
+	db "バリアー@"
+	db 13
+	dw 545
+	db   "パントマイム<GA>とくいで　いつでも"
+	next "れんしゅう　している。ないものでも"
+	next "そこに　あると　しんじこませる"
+	dex
+
+ScytherDexEntry:
+	db "かまきり@"
+	db 15
+	dw 560
+	db   "くさむらから　いきなり　とびだして"
+	next "するどいカマで　きりさく　すがたは"
+	next "まるで　ニンジャの　ようだ"
+	dex
+
+JynxDexEntry:
+	db "ひとがた@"
+	db 14
+	dw 406
+	db   "どくとくの　リズムを　もつらしく"
+	next "おどるように　かろやかに　うごき"
+	next "こしをふる　ようにして　あるく"
+	dex
+
+ElectabuzzDexEntry:
+	db "でんげき@"
+	db 11
+	dw 300
+	db   "おおきな　ていでん<GA>おきたときは"
+	next "エレブー<GA>はつでんしょの"
+	next "でんきを　たべたに　ちがいない"
+	dex
+
+MagmarDexEntry:
+	db "ひふき@"
+	db 13
+	dw 445
+	db   "かざんの　ふんかこうから　うまれた。"
+	next "ぜんしん<GA>もえているため"
+	next "ひのたまと　みわけ<GA>つかない"
+	dex
+
+PinsirDexEntry:
+	db "くわがた@"
+	db 15
+	dw 550
+	db   "ツノで　はさんで　パワーぜんかい！"
+	next "さむくなると　うごけなくなるから"
+	next "あたたかい　ところに　すんでいる"
+	dex
+
+TaurosDexEntry:
+	db "あばれうし@"
+	db 14
+	dw 884
+	db   "スタミナに　あふれた　あばれんぼう。"
+	next "はしりだすと　たいあたりするまで"
+	next "どこまでも　ひたすら　つきすすむ"
+	dex
+
+MagikarpDexEntry:
+	db "さかな@"
+	db 9
+	dw 100
+	db   "たよりないので　ゆうめいな#。"
+	next "うみ　かわ　いけ　みずたまり"
+	next "いたるところを　およいでいる"
+	dex
+
+GyaradosDexEntry:
+	db "きょうあく@"
+	db 65
+	dw 2350
+	db   "やばんで　はかいてきな　せいかく。"
+	next "おおむかし　まちを　やきつくした"
+	next "きろくがある　きょうふの#"
+	dex
+
+LaprasDexEntry:
+	db "のりもの@"
+	db 25
+	dw 2200
+	db   "にんげんの　ことばを　りかいする"
+	next "やさしい　こころの　もちぬしだ。"
+	next "せなかに　のせて　うみをゆく"
+	dex
+
+DittoDexEntry:
+	db "へんしん@"
+	db 3
+	dw 40
+	db   "あいてをみた　しゅんかん　からだが"
+	next "とけるように　へんかを　はじめる。"
+	next "ほぼ　おなじかたちに　へんしんする"
+	dex
+
+EeveeDexEntry:
+	db "しんか@"
+	db 3
+	dw 65
+	db   "アンバランスな　いでんしによって"
+	next "しんかの　かのうせいに　あふれる。"
+	next "ただ　せいぞんすう<GA>すくない"
+	dex
+
+VaporeonDexEntry:
+	db "あわはき@"
+	db 10
+	dw 290
+	db   "さいぼうそしき<GA>みずの　ぶんしに"
+	next "にているため　みずに　とけると　"
+	next "すがた<GA>みえなく　なってしまう"
+	dex
+
+JolteonDexEntry:
+	db "かみなり@"
+	db 8
+	dw 245
+	db   "ちょっとした　しげきで　ないたり"
+	next "おこったりする。また　かんじょうが"
+	next "かわるたびに　でんきがたまる"
+	dex
+
+FlareonDexEntry:
+	db "ほのお@"
+	db 9
+	dw 250
+	db   "たいないに　ほのおぶくろ<GA>あって"
+	next "すいこんだ　いきを　１７００どの"
+	next "ほのおにして　くちから　はきだす"
+	dex
+
+PorygonDexEntry:
+	db "バーチャル@"
+	db 8
+	dw 365
+	db   "ゆいいつ　うちゅうまで　とんでいける"
+	next "#と　きたい　されているが"
+	next "いまだに　せいこうれいは　ない"
+	dex
+
+OmanyteDexEntry:
+	db "うずまき@"
+	db 4
+	dw 75
+	db   "１０ぽんのあしを　うまく　くねらせて"
+	next "こだいの　うみを　ただよっていた"
+	next "#の　かせきを　ふくげんした"
+	dex
+
+OmastarDexEntry:
+	db "うずまき@"
+	db 10
+	dw 350
+	db   "するどい　キバを　もっていたが"
+	next "カラ<GA>おおきすぎて　うまく"
+	next "うごけず　ぜつめつ　したらしい"
+	dex
+
+KabutoDexEntry:
+	db "こうら@"
+	db 5
+	dw 115
+	db   "かせきから　さいせいした　#。"
+	next "かいていに　かくれては　せなかの"
+	next "めで　あたりを　みていたようだ"
+	dex
+
+KabutopsDexEntry:
+	db "こうら@"
+	db 13
+	dw 405
+	db   "ほそい　からだで　すばやく　およぐ。"
+	next "とらえた　えものは　カマで　きりさき"
+	next "たいえきを　すっていたらしい"
+	dex
+
+AerodactylDexEntry:
+	db "かせき@"
+	db 18
+	dw 590
+	db   "コハクから　とりだされた　いでんしを"
+	next "けんきゅうして　ふっかつさせた"
+	next "おおむかしの　どうもうな　#"
+	dex
+
+SnorlaxDexEntry:
+	db "いねむり@"
+	db 21
+	dw 4600
+	db   "たしょう　カビ<GA>はえていても"
+	next "きにしないで　たべまくる。"
+	next "おなかを　こわしたりもしない"
+	dex
+
+ArticunoDexEntry:
+	db "れいとう@"
+	db 17
+	dw 554
+	db   "ふゆぞらの　くうきに　ふくまれる"
+	next "すいぶんを　こおらせて　ゆきを"
+	next "ふらせる　でんせつの　とり#"
+	dex
+
+ZapdosDexEntry:
+	db "でんげき@"
+	db 16
+	dw 526
+	db   "そら<GA>くらくなり　いなづまが"
+	next "れんぞくして　おちていく　はてに"
+	next "でんせつの　#は　あらわれる"
+	dex
+
+MoltresDexEntry:
+	db "かえん@"
+	db 20
+	dw 600
+	db   "よぞら　さえも　あかく　するほど"
+	next "はげしく　もえあがる　つばさで"
+	next "はばたく　でんせつの　とり#"
+	dex
+
+DratiniDexEntry:
+	db "ドラゴン@"
+	db 18
+	dw 33
+	db   "ながらく　まぼろしと　されていたが"
+	next "さいきん　つりあげられて"
+	next "その　そんざい<GA>かくにんされた"
+	dex
+
+DragonairDexEntry:
+	db "ドラゴン@"
+	db 40
+	dw 165
+	db   "もくげきした　ひとの　はなしによると"
+	next "からだからは　オーラ<GA>だされて"
+	next "しんぴてきだった　という"
+	dex
+
+DragoniteDexEntry:
+	db "ドラゴン@"
+	db 22
+	dw 2100
+	db   "ひろい　うみの　どこかを　すみかにし"
+	next "とんで　いどうすると　いわれているが"
+	next "あくまで　うわさに　すぎない"
+	dex
+
+MewtwoDexEntry:
+	db "いでんし@"
+	db 20
+	dw 1220
+	db   "ミュウの　いでんしと　ほとんど"
+	next "おなじ。だ<GA>おおきさも　せいかくも"
+	next "おそろしいほど　ちがっている"
+	dex
+
+MewDexEntry:
+	db "しんしゅ@"
+	db 4
+	dw 40
+	db   "けんびきょうで　のぞいてみたら"
+	next "ひじょうに　みじかくて　ほそい"
+	next "こまやかな　たいもう<GA>はえていた"
 	dex
 
 MissingNoDexEntry:

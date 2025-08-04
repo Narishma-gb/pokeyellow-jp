@@ -31,59 +31,10 @@ MACRO set_bank_offset
 	ENDC
 ENDM
 
-; WRAM
-; add Range wPikachuOverworldStateFlags - wd49b
-; add wPrinterData - wcbec
-; Check if all labels are used in ROM
 
 INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
-;INCLUDE "data/maps/map_header_pointers.asm"
-;INCLUDE "data/maps/songs.asm"
-;INCLUDE "data/maps/map_header_banks.asm"
-;INCLUDE "data/tilesets/collision_tile_ids.asm"
-;INCLUDE "engine/events/black_out.asm"
-;INCLUDE "data/pokemon/mew.asm"
-;INCLUDE "engine/debug/debug_menu.asm"
-;INCLUDE "engine/overworld/field_move_messages.asm"
-;INCLUDE "engine/items/inventory.asm"
-;INCLUDE "engine/overworld/turn_sprite.asm"
-;INCLUDE "engine/battle/get_trainer_name.asm"
-;INCLUDE "engine/math/random.asm"
-;INCLUDE "engine/overworld/emotion_bubbles.asm"
-;INCLUDE "engine/events/evolve_trade.asm"
-;INCLUDE "engine/battle/move_effects/focus_energy.asm"
-;INCBIN "gfx/player/redb.pic"
-;INCBIN "gfx/battle/oldmanb.pic"
-;INCLUDE "gfx/trainer_card.asm"
-;INCLUDE "engine/battle/move_effects/pay_day.asm"
-;INCLUDE "engine/battle/move_effects/mist.asm"
-;INCLUDE "engine/battle/move_effects/one_hit_ko.asm"
-;INCLUDE "engine/battle/link_battle_versus_text.asm"
-;INCLUDE "engine/math/multiply_divide.asm"
-;INCLUDE "engine/battle/unused_stats_functions.asm"
-;INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
-;INCLUDE "engine/battle/move_effects/heal.asm"
-;INCLUDE "engine/battle/move_effects/transform.asm"
-;INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
-;INCLUDE "engine/battle/init_battle.asm"
-
-
-SECTION "rom16", ROMX
-; ROM $10 : $40000 - $43FFF
-	set_bank_offset 16
-
-	dr ShowPokedexMenu, 16, $4000
-	dr ShowPokedexData, 16, $42F8
-	dr IndexToPokedex, 16, $6819
-	dr EmotionBubble, 16, $68EB
-	dr InternalClockTradeAnim, 16, $6B61
-	dr ExternalClockTradeAnim, 16, $6B72
-	dr PlayIntro, 16, $7175
-	dr DisplayOptionMenu_, 16, $745D
-
-	dr_end 16
 
 SECTION "rom17", ROMX
 ; ROM $11 : $44000 - $47FFF
@@ -178,6 +129,7 @@ SECTION "rom28", ROMX
 ; ROM $1c : $70000 - $73FFF
 	set_bank_offset 28
 
+	dr AnimateShootingStar, 28, $4044
 	dr AnimateHealingMachine, 28, $448E
 	dr EnterMapAnim, 28, $4561
 	dr _LeaveMapAnim, 28, $460F
@@ -495,6 +447,7 @@ SECTION "rom58", ROMX
 	set_bank_offset 58
 
 	dr PrinterSerial_, 58, $42D1
+	dr PrintPokedexEntry, 58, $43E7
 	dr PrintPCBox, 58, $453A
 	dr PrinterDebug, 58, $467C
 
@@ -579,6 +532,8 @@ INCLUDE "engine/predefs.asm"
 SECTION "rom62", ROMX
 ; ROM $3e : $F8000 - $FBFFF
 	set_bank_offset 62
+
+	dr PlayIntroScene, 62, $57C7
 
 	dr_end 62
 

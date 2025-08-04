@@ -103,7 +103,8 @@ ROMX $f
 	"Battle Core"
 	"Garbage 15"
 ROMX $10
-	"rom16"
+	"bank10"
+	"Garbage 16"
 ROMX $11
 	"rom17"
 ROMX $12
@@ -206,9 +207,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $10
-; 	"bank10"
-; 	"Garbage 16"
 ; ROMX $11
 ; 	"Maps 5"
 ; 	"Pokédex Rating"

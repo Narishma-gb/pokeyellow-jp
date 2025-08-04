@@ -181,12 +181,14 @@ INCLUDE "engine/battle/core.asm"
 INCLUDE "engine/battle/effects.asm"
 
 
-;SECTION "bank10", ROMX
+SECTION "bank10", ROMX
 
-;INCLUDE "engine/menus/pokedex.asm"
-;INCLUDE "engine/movie/trade.asm"
-;INCLUDE "engine/movie/intro.asm"
-;INCLUDE "engine/movie/trade2.asm"
+INCLUDE "engine/menus/pokedex.asm"
+INCLUDE "engine/overworld/emotion_bubbles.asm"
+INCLUDE "engine/movie/trade.asm"
+INCLUDE "engine/movie/intro.asm"
+INCLUDE "engine/movie/trade2.asm"
+INCLUDE "engine/menus/options.asm"
 
 
 ;SECTION "Pokédex Rating", ROMX

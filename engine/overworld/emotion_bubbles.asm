@@ -1,13 +1,16 @@
 EmotionBubble:
 	ld a, [wWhichEmotionBubble]
+	and $f
+	swap a
 	ld c, a
 	ld b, 0
-	ld hl, EmotionBubblesPointerTable
+	ld hl, EmotionBubbles
+	add hl, bc ; each emotion bubble is 16 bytes, so calculate the offset directly instead of with a pointer table
 	add hl, bc
 	add hl, bc
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
+	add hl, bc
+	ld e, l
+	ld d, h
 	ld hl, vChars1 tile $78
 	lb bc, BANK(EmotionBubbles), 4
 	call CopyVideoData
@@ -59,13 +62,8 @@ EmotionBubble:
 	pop af
 	ld [wUpdateSpritesEnabled], a
 	call DelayFrame
-	jp UpdateSprites
-
-EmotionBubblesPointerTable:
-; entries correspond to *_BUBBLE constants
-	dw ShockEmote
-	dw QuestionEmote
-	dw HappyEmote
+	call UpdateSprites
+	ret
 
 EmotionBubblesOAMBlock:
 ; tile ID, attributes
@@ -78,3 +76,8 @@ EmotionBubbles:
 ShockEmote:    INCBIN "gfx/emotes/shock.2bpp"
 QuestionEmote: INCBIN "gfx/emotes/question.2bpp"
 HappyEmote:    INCBIN "gfx/emotes/happy.2bpp"
+SkullEmote:    INCBIN "gfx/emotes/skull.2bpp"
+HeartEmote:    INCBIN "gfx/emotes/heart.2bpp"
+BoltEmote:     INCBIN "gfx/emotes/bolt.2bpp"
+ZzzEmote:      INCBIN "gfx/emotes/zzz.2bpp"
+FishEmote:     INCBIN "gfx/emotes/fish.2bpp"
