@@ -16,8 +16,10 @@ CeruleanCaveB1F_ScriptPointers:
 CeruleanCaveB1F_TextPointers:
 	def_text_pointers
 	dw_const CeruleanCaveB1FMewtwoText, TEXT_CERULEANCAVEB1F_MEWTWO
-	dw_const PickUpItemText,            TEXT_CERULEANCAVEB1F_ULTRA_BALL
+	dw_const PickUpItemText,            TEXT_CERULEANCAVEB1F_ULTRA_BALL1
+	dw_const PickUpItemText,            TEXT_CERULEANCAVEB1F_ULTRA_BALL2
 	dw_const PickUpItemText,            TEXT_CERULEANCAVEB1F_MAX_REVIVE
+	dw_const PickUpItemText,            TEXT_CERULEANCAVEB1F_MAX_ELIXER
 
 	def_trainers CeruleanCaveB1F
 	battlemon EVENT_BEAT_MEWTWO, Mewtwo

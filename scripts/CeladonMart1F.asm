@@ -1,5 +1,6 @@
 CeladonMart1F_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ret
 
 CeladonMart1F_TextPointers:
 	def_text_pointers

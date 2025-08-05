@@ -106,7 +106,11 @@ ROMX $10
 	"bank10"
 	"Garbage 16"
 ROMX $11
-	"rom17"
+	"Maps 5"
+	"Pokédex Rating"
+	"Maps 6"
+	"Dungeon Warps"
+	"Garbage 17"
 ROMX $12
 	"rom18"
 ROMX $13
@@ -207,12 +211,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $11
-; 	"Maps 5"
-; 	"Pokédex Rating"
-; 	"Maps 6"
-; 	"Hidden Objects Core"
-; 	"Garbage 17"
 ; ROMX $12
 ; 	"Maps 7"
 ; 	"Screen Effects"

@@ -158,5 +158,5 @@ RocketHideoutB1FRocket5BattleText:
 
 RocketHideoutB1FRocket5AfterBattleText:
 	text "あれ？　いまの　さわぎで"
-	line "とびらが　あいた　しまった"
+	line "とびらが　あいて　しまった"
 	done

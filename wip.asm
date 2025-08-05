@@ -36,15 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom17", ROMX
-; ROM $11 : $44000 - $47FFF
-	set_bank_offset 17
-
-	dr DisplayDexRating, 17, $428E
-	dr LoadSpinnerArrowTiles, 17, $58D9
-
-	dr_end 17
-
 SECTION "rom18", ROMX
 ; ROM $12 : $48000 - $4BFFF
 	set_bank_offset 18
@@ -98,7 +89,10 @@ SECTION "rom22", ROMX
 	set_bank_offset 22
 
 	dr Route6_Blocks, 22, $4079
+	dr Route8_Blocks, 22, $41C6
+	dr Route10_Blocks, 22, $4356
 	dr Route11_Blocks, 22, $455F
+	dr Route12_Blocks, 22, $4710
 	dr Route15_Blocks, 22, $49CC
 	dr Route16_Blocks, 22, $4B84
 	dr Route18_Blocks, 22, $4C9C
@@ -172,6 +166,7 @@ SECTION "rom29", ROMX
 	dr CeruleanHideRocket, 29, $40AF
 	dr VendingMachineMenu, 29, $4E42
 	dr PKMNLeaguePC, 29, $7AB2
+	dr ShakeElevator, 29, $7BE0
 
 	dr_end 29
 
@@ -211,6 +206,7 @@ Music_TitleScreen::
 Music_GameCorner::
 Music_Surfing::
 
+	dr PlayPokedexRatingSfx, 31, $50D6
 	dr Audio3_PlaySound, 31, $510D
 
 	dr_end 31
@@ -288,6 +284,8 @@ SECTION "rom39", ROMX
 SECTION "rom40", ROMX
 ; ROM $28 : $A0000 - $A3FFF
 	set_bank_offset 40
+
+Music_MeetJessieJames::
 
 	dr_end 40
 

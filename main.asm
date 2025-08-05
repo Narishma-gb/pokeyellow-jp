@@ -191,9 +191,14 @@ INCLUDE "engine/movie/trade2.asm"
 INCLUDE "engine/menus/options.asm"
 
 
-;SECTION "Pokédex Rating", ROMX
+SECTION "Pokédex Rating", ROMX
 
-;INCLUDE "engine/events/pokedex_rating.asm"
+INCLUDE "engine/events/pokedex_rating.asm"
+
+
+SECTION "Dungeon Warps", ROMX
+
+INCLUDE "engine/overworld/dungeon_warps.asm"
 
 
 ;SECTION "Hidden Objects Core", ROMX
