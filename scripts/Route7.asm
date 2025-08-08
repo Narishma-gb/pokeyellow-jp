@@ -1,5 +1,6 @@
 Route7_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ret
 
 Route7_TextPointers:
 	def_text_pointers

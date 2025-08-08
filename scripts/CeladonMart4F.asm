@@ -9,7 +9,8 @@ CeladonMart4F_TextPointers:
 	dw_const CeladonMart4FCurrentFloorSignText, TEXT_CELADONMART4F_CURRENT_FLOOR_SIGN
 
 CeladonMart4FSuperNerdText:
-	text "かのじょに　プレゼントを　かうんだ"
+	text "ヤマブキの　モノマネむすめ　に"
+	line "プレゼントを　かうんだ"
 
 	para "やっぱり　ピッピにんぎょう　だな！"
 	line "にんき　あるんだよね！"

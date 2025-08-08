@@ -43,42 +43,37 @@ MtMoon1F_TextPointers:
 MtMoon1FHikerText:
 	text_asm
 	ld hl, MtMoon1F_TrainerHeader0
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr MtMoon1TalkToTrainer
 
 MtMoon1FYoungster1Text:
 	text_asm
 	ld hl, MtMoon1F_TrainerHeader1
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr MtMoon1TalkToTrainer
 
 MtMoon1FCooltrainerF1Text:
 	text_asm
 	ld hl, MtMoon1F_TrainerHeader2
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr MtMoon1TalkToTrainer
 
 MtMoon1FSuperNerdText:
 	text_asm
 	ld hl, MtMoon1F_TrainerHeader3
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr MtMoon1TalkToTrainer
 
 MtMoon1FCooltrainerF2Text:
 	text_asm
 	ld hl, MtMoon1F_TrainerHeader4
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr MtMoon1TalkToTrainer
 
 MtMoon1FYoungster2Text:
 	text_asm
 	ld hl, MtMoon1F_TrainerHeader5
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr MtMoon1TalkToTrainer
 
 MtMoon1FYoungster3Text:
 	text_asm
 	ld hl, MtMoon1F_TrainerHeader6
+MtMoon1TalkToTrainer:
 	call TalkToTrainer
 	jp TextScriptEnd
 

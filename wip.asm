@@ -36,20 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom18", ROMX
-; ROM $12 : $48000 - $4BFFF
-	set_bank_offset 18
-
-	dr Route7_Blocks, 18, $4051
-
-	dr_end 18
-
-SECTION "rom19", ROMX
-; ROM $13 : $4C000 - $4FFFF
-	set_bank_offset 19, $7E79
-
-	dr_end 19
-
 SECTION "rom20", ROMX
 ; ROM $14 : $50000 - $53FFF
 	set_bank_offset 20
@@ -57,6 +43,7 @@ SECTION "rom20", ROMX
 	dr Route22_Blocks, 20, $403D
 	dr Route20_Blocks, 20, $417D
 	dr Route24_Blocks, 20, $46ED
+	dr SaffronCity_Blocks, 20, $4A98
 	dr PrintCardKeyText, 20, $77F3
 	dr CeladonPrizeMenu, 20, $78BF
 
@@ -75,6 +62,7 @@ SECTION "rom21", ROMX
 	dr Route19_Blocks, 21, $4F01
 	dr Route21_Blocks, 21, $507D
 	dr GainExperience, 21, $525F
+	dr DisplayDiploma, 21, $7CE7
 	dr _GetSpritePosition1, 21, $7D18
 	dr _GetSpritePosition2, 21, $7D38
 	dr _SetSpritePosition1, 21, $7D5C
@@ -347,6 +335,7 @@ SECTION "rom48", ROMX
 	dr HallOfFamePC, 48, $4698
 	dr ViridianCityMovePikachu, 48, $4CE8
 	dr OaksLabPikachuMovementScript, 48, $4CF6
+	dr GameCornerPikachuMovementScript, 48, $4D27
 	dr Func_f250b, 48, $4D35
 
 	dr_end 48
@@ -446,6 +435,7 @@ SECTION "rom58", ROMX
 
 	dr PrinterSerial_, 58, $42D1
 	dr PrintPokedexEntry, 58, $43E7
+	dr PrintDiploma, 58, $44B6
 	dr PrintPCBox, 58, $453A
 	dr PrinterDebug, 58, $467C
 
@@ -462,9 +452,21 @@ SECTION "rom60", ROMX
 ; ROM $3c : $F0000 - $F3FFF
 	set_bank_offset 60, $4FD0
 
-	dr ViridianSchoolHousePrintLittleGirlText_cpy, 60, $5346
+	dr RedsHouse1FPrintMomText_cpy, 60, $51EE
+INCLUDE "scripts/RedsHouse1F_2.asm"
 INCLUDE "scripts/ViridianSchoolHouse_2.asm"
 	set_bank_offset 60, $539C
+
+	dr CeladonMart3FPrintClerkText_cpy, 60, $57F4
+INCLUDE "scripts/CeladonMart3F_2.asm"
+INCLUDE "scripts/CeladonMansion1F_2.asm"
+INCLUDE "scripts/CeladonMansion3F_2.asm"
+INCLUDE "scripts/CeladonDiner_2.asm"
+	set_bank_offset 60, $5B98
+
+	dr MagikarpSalesman_cpy, 60, $60A1
+INCLUDE "scripts/MtMoonPokecenter_2.asm"
+	set_bank_offset 60, $619C
 
 	dr BillsHousePrintBillPokemonText_cpy, 60, $659A
 INCLUDE "scripts/BillsHouse_2.asm"
@@ -548,6 +550,7 @@ SECTION "rom63", ROMX
 	dr SetPikachuSpawnBackOutside, 63, $469A
 	dr SpawnPikachu_, 63, $46D5
 	dr IsPikachuRightNextToPlayer, 63, $4B01
+	dr GetPikachuFacingDirectionAndReturnToE, 63, $4B4D
 	dr Func_fcc08, 63, $4C08
 	dr IsStarterPikachuInOurParty, 63, $4DB8
 	dr IsThisPartymonStarterPikachu_Box, 63, $4E0D
@@ -568,6 +571,7 @@ SECTION "rom63", ROMX
 	dr IsPlayerPikachuAsleepInParty, 63, $50D0
 	dr PikachuWalksToNurseJoy, 63, $5252
 	dr ApplyPikachuMovementData_, 63, $529A
+	dr LoadPikachuShadowIntoVRAM, 63, $582A
 	dr OfficerJennySprite, 63, $6662
 	dr PikachuSprite, 63, $67E2
 	dr SandshrewSprite, 63, $6962

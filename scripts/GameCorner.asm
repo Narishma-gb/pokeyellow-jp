@@ -72,8 +72,12 @@ GameCornerRocketBattleScript:
 .not_direct_movement
 	ld a, [wXCoord]
 	cp 8
-	jr nz, .got_rocket_movement
+	jr nz, .pikachu
 	ld de, GameCornerMovement_Rocket_WalkDirect
+	jr .got_rocket_movement
+.pikachu
+	callfar GameCornerPikachuMovementScript
+	ld de, GameCornerMovement_Rocket_WalkAroundPlayer
 .got_rocket_movement
 	ld a, GAMECORNER_ROCKET
 	ldh [hSpriteIndex], a
@@ -86,8 +90,8 @@ GameCornerMovement_Rocket_WalkAroundPlayer:
 	db NPC_MOVEMENT_DOWN
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
-	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_RIGHT
+	db NPC_MOVEMENT_UP
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
 	db NPC_MOVEMENT_RIGHT
@@ -120,15 +124,15 @@ GameCornerRocketExitScript:
 GameCorner_TextPointers:
 	def_text_pointers
 	dw_const GameCornerBeauty1Text,           TEXT_GAMECORNER_BEAUTY1
-	dw_const GameCornerClerk1Text,            TEXT_GAMECORNER_CLERK1
-	dw_const GameCornerMiddleAgedMan1Text,    TEXT_GAMECORNER_MIDDLE_AGED_MAN
+	dw_const GameCornerClerkText,             TEXT_GAMECORNER_CLERK
+	dw_const GameCornerMiddleAgedMan1Text,    TEXT_GAMECORNER_MIDDLE_AGED_MAN1
 	dw_const GameCornerBeauty2Text,           TEXT_GAMECORNER_BEAUTY2
-	dw_const GameCornerFishingGuruText,       TEXT_GAMECORNER_FISHING_GURU
+	dw_const GameCornerFishingGuru1Text,      TEXT_GAMECORNER_FISHING_GURU1
 	dw_const GameCornerMiddleAgedWomanText,   TEXT_GAMECORNER_MIDDLE_AGED_WOMAN
 	dw_const GameCornerGymGuideText,          TEXT_GAMECORNER_GYM_GUIDE
 	dw_const GameCornerGamblerText,           TEXT_GAMECORNER_GAMBLER
-	dw_const GameCornerClerk2Text,            TEXT_GAMECORNER_CLERK2
-	dw_const GameCornerGentlemanText,         TEXT_GAMECORNER_GENTLEMAN
+	dw_const GameCornerMiddleAgedMan2Text,    TEXT_GAMECORNER_MIDDLE_AGED_MAN2
+	dw_const GameCornerFishingGuru2Text,      TEXT_GAMECORNER_FISHING_GURU2
 	dw_const GameCornerRocketText,            TEXT_GAMECORNER_ROCKET
 	dw_const GameCornerPosterText,            TEXT_GAMECORNER_POSTER
 	dw_const GameCornerRocketAfterBattleText, TEXT_GAMECORNER_ROCKET_AFTER_BATTLE
@@ -141,7 +145,7 @@ GameCornerBeauty1Text:
 	cont "すきな　けいひんと　かえてね！"
 	done
 
-GameCornerClerk1Text:
+GameCornerClerkText:
 	text_asm
 	; Show player's coins
 	call GameCornerDrawCoinBox
@@ -253,7 +257,7 @@ GameCornerBeauty2Text:
 	line "スロットが　あるようね"
 	done
 
-GameCornerFishingGuruText:
+GameCornerFishingGuru1Text:
 	text_asm
 	CheckEvent EVENT_GOT_10_COINS
 	jr nz, .alreadyGotNpcCoins
@@ -355,7 +359,7 @@ GameCornerGamblerText:
 	cont "むちゅうに　なっちまう！"
 	done
 
-GameCornerClerk2Text:
+GameCornerMiddleAgedMan2Text:
 	text_asm
 	CheckEvent EVENT_GOT_20_COINS_2
 	jr nz, .alreadyGotNpcCoins
@@ -410,7 +414,7 @@ GameCornerClerk2Text:
 	line "ほしい　けいひんが　あるのに"
 	done
 
-GameCornerGentlemanText:
+GameCornerFishingGuru2Text:
 	text_asm
 	CheckEvent EVENT_GOT_20_COINS
 	jr nz, .alreadyGotNpcCoins
@@ -544,13 +548,11 @@ GameCornerDrawCoinBox:
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	hlcoord 11, 0
-	ld b, 5
-	ld c, 7
+	lb bc, 5, 7
 	call TextBoxBorder
 	call UpdateSprites
 	hlcoord 12, 1
-	ld b, 4
-	ld c, 7
+	lb bc, 4, 7
 	call ClearScreenArea
 	hlcoord 12, 2
 	ld de, GameCornerMoneyText

@@ -112,10 +112,13 @@ ROMX $11
 	"Dungeon Warps"
 	"Garbage 17"
 ROMX $12
-	"rom18"
+	"Maps 7"
+	"Maps 8"
+	"Garbage 18"
 ROMX $13
 	"Pics 6"
-	"rom19"
+	"Maps 9"
+	"Garbage 19"
 ROMX $14
 	"rom20"
 ROMX $15
@@ -211,16 +214,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $12
-; 	"Maps 7"
-; 	"Screen Effects"
-; 	"Maps 8"
-; 	"Garbage 18"
-; ROMX $13
-; 	"Pics 6"
-; 	"Maps 9"
-; 	"Predefs"
-; 	"Garbage 19"
 ; ROMX $14
 ; 	"Maps 10"
 ; 	"Battle Engine 8"

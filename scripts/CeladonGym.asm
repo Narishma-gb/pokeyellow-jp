@@ -158,17 +158,17 @@ CeladonGymErikaText:
 	para "さすが"
 	line "とのがたは　おつよい　ですわ"
 
-	para "この　レインボーバッジ"
-	line "さしあげ　なくては　なりませんね"
+	para "この　レインボーバッジを"
+	line "さしあげ　なくては　なりませんわね"
 	prompt
 
 .PostBattleAdviceText:
 	text "あら　まあ<⋯>"
 	line "ずかんを　つくって　ますのね"
-	cont "ほんとに　えらいわ"
+	cont "ほんとに　えらいですわ"
 
 	para "わたし　でしたら"
-	line "きれいな　#しか"
+	line "きれいな　ポケモンしか"
 	cont "ほしく　なりません　もの"
 	done
 
@@ -178,7 +178,7 @@ CeladonGymRainbowBadgeInfoText:
 	cont "おとなしく　いうこと　きき　ます"
 
 	para "そして<⋯>　かいりきの　わざが"
-	line "たたかって　なくても　つかえます"
+	line "たたかって　なくても　つかえますの"
 
 	para "それから<⋯>"
 	line "よろしかったら"
@@ -202,7 +202,7 @@ CeladonGymReceivedTM21Text:
 	done
 
 CeladonGymTM21NoRoomText:
-	text "おにもつ　いっぱい"
+	text "おにもつ　いっぱい　ですわ"
 	done
 
 CeladonGymCooltrainerF1Text:

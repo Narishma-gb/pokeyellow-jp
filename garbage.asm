@@ -73,12 +73,12 @@ SECTION "Garbage 17", ROMX
 INCBIN "garbage/garbage_17.bin"
 
 
-;SECTION "Garbage 18", ROMX
-;INCBIN "garbage/garbage_18.bin"
+SECTION "Garbage 18", ROMX
+INCBIN "garbage/garbage_18.bin"
 
 
-;SECTION "Garbage 19", ROMX
-;	db $38, $FF
+SECTION "Garbage 19", ROMX
+INCBIN "garbage/garbage_19.bin"
 
 
 ;SECTION "Garbage 20", ROMX

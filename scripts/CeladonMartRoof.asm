@@ -1,5 +1,6 @@
 CeladonMartRoof_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ret
 
 CeladonMartRoofScript_GetDrinksInBag:
 ; construct a list of all drinks in the player's bag
@@ -126,13 +127,16 @@ CeladonMartRoofScript_GiveDrinkToGirl:
 	ret
 .bagFull
 	ld hl, CeladonMartRoofLittleGirlNoRoomText
-	jp PrintText
+	call PrintText
+	ret
 .alreadyGaveDrink
 	ld hl, CeladonMartRoofLittleGirlImNotThirstyText
-	jp PrintText
+	call PrintText
+	ret
 
 RemoveItemByIDBank12:
-	farjp RemoveItemByID
+	farcall RemoveItemByID
+	ret
 
 CeladonMartRoofLittleGirlGiveHerWhichDrinkText:
 	text "どれを　あげますか？"
@@ -217,10 +221,7 @@ CeladonMartRoofLittleGirlReceivedTM49Text:
 	text_start
 
 	para "<TM>４９の　なかは"
-	line "トライアタック　なの！"
-
-	para "たまに　あいてを"
-	line "まひ　させる　ことが　あるわ@"
+	line "トライアタック　なの！@"
 	text_waitbutton
 	text_end
 

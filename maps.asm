@@ -395,197 +395,198 @@ INCLUDE "data/maps/objects/SeafoamIslandsB4F.asm"
 SeafoamIslandsB4F_Blocks: INCBIN "maps/SeafoamIslandsB4F.blk"
 
 
-;SECTION "Maps 7", ROMX
+SECTION "Maps 7", ROMX
 
-;INCLUDE "data/maps/headers/Route7.asm"
-;INCLUDE "data/maps/objects/Route7.asm"
-;Route7_Blocks: INCBIN "maps/Route7.blk"
+INCLUDE "data/maps/headers/Route7.asm"
+INCLUDE "data/maps/objects/Route7.asm"
+Route7_Blocks: INCBIN "maps/Route7.blk"
 
-;CeladonPokecenter_Blocks:
-;RockTunnelPokecenter_Blocks:
-;MtMoonPokecenter_Blocks: INCBIN "maps/_Pokecenter.blk"
+CeladonPokecenter_Blocks:
+RockTunnelPokecenter_Blocks:
+MtMoonPokecenter_Blocks: INCBIN "maps/_Pokecenter.blk"
 
-;Route18Gate1F_Blocks:
-;Route15Gate1F_Blocks:
-;Route11Gate1F_Blocks: INCBIN "maps/_RouteGate1F.blk"
+Route18Gate1F_Blocks:
+Route15Gate1F_Blocks:
+Route11Gate1F_Blocks: INCBIN "maps/_RouteGate1F.blk"
 
-;Route18Gate2F_Blocks:
-;Route16Gate2F_Blocks:
-;Route15Gate2F_Blocks:
-;Route12Gate2F_Blocks:
-;Route11Gate2F_Blocks: INCBIN "maps/_RouteGate2F.blk"
-
-
-;SECTION "Maps 8", ROMX
-
-;INCLUDE "scripts/Route7.asm"
-
-;INCLUDE "data/maps/headers/RedsHouse1F.asm"
-;INCLUDE "scripts/RedsHouse1F.asm"
-;INCLUDE "data/maps/objects/RedsHouse1F.asm"
-;RedsHouse1F_Blocks: INCBIN "maps/_House1F.blk"
-
-;INCLUDE "data/maps/headers/CeladonMart3F.asm"
-;INCLUDE "scripts/CeladonMart3F.asm"
-;INCLUDE "data/maps/objects/CeladonMart3F.asm"
-;CeladonMart3F_Blocks: INCBIN "maps/CeladonMart3F.blk"
-
-;INCLUDE "data/maps/headers/CeladonMart4F.asm"
-;INCLUDE "scripts/CeladonMart4F.asm"
-;INCLUDE "data/maps/objects/CeladonMart4F.asm"
-;CeladonMart4F_Blocks: INCBIN "maps/CeladonMart4F.blk"
-
-;INCLUDE "data/maps/headers/CeladonMartRoof.asm"
-;INCLUDE "scripts/CeladonMartRoof.asm"
-;INCLUDE "data/maps/objects/CeladonMartRoof.asm"
-;CeladonMartRoof_Blocks: INCBIN "maps/CeladonMartRoof.blk"
-
-;INCLUDE "data/maps/headers/CeladonMartElevator.asm"
-;INCLUDE "scripts/CeladonMartElevator.asm"
-;INCLUDE "data/maps/objects/CeladonMartElevator.asm"
-;CeladonMartElevator_Blocks: INCBIN "maps/_Elevator.blk"
-
-;INCLUDE "data/maps/headers/CeladonMansion1F.asm"
-;INCLUDE "scripts/CeladonMansion1F.asm"
-;INCLUDE "data/maps/objects/CeladonMansion1F.asm"
-;CeladonMansion1F_Blocks: INCBIN "maps/CeladonMansion1F.blk"
-
-;INCLUDE "data/maps/headers/CeladonMansion2F.asm"
-;INCLUDE "scripts/CeladonMansion2F.asm"
-;INCLUDE "data/maps/objects/CeladonMansion2F.asm"
-;CeladonMansion2F_Blocks: INCBIN "maps/CeladonMansion2F.blk"
-
-;INCLUDE "data/maps/headers/CeladonMansion3F.asm"
-;INCLUDE "scripts/CeladonMansion3F.asm"
-;INCLUDE "data/maps/objects/CeladonMansion3F.asm"
-;CeladonMansion3F_Blocks: INCBIN "maps/CeladonMansion3F.blk"
-
-;INCLUDE "data/maps/headers/CeladonMansionRoof.asm"
-;INCLUDE "scripts/CeladonMansionRoof.asm"
-;INCLUDE "data/maps/objects/CeladonMansionRoof.asm"
-;CeladonMansionRoof_Blocks: INCBIN "maps/CeladonMansionRoof.blk"
-
-;INCLUDE "data/maps/headers/CeladonPokecenter.asm"
-;INCLUDE "scripts/CeladonPokecenter.asm"
-;INCLUDE "data/maps/objects/CeladonPokecenter.asm"
-
-;INCLUDE "data/maps/headers/CeladonGym.asm"
-;INCLUDE "scripts/CeladonGym.asm"
-;INCLUDE "data/maps/objects/CeladonGym.asm"
-;CeladonGym_Blocks: INCBIN "maps/CeladonGym.blk"
-
-;INCLUDE "data/maps/headers/GameCorner.asm"
-;INCLUDE "scripts/GameCorner.asm"
-;INCLUDE "data/maps/objects/GameCorner.asm"
-;GameCorner_Blocks: INCBIN "maps/GameCorner.blk"
-
-;INCLUDE "data/maps/headers/CeladonMart5F.asm"
-;INCLUDE "scripts/CeladonMart5F.asm"
-;INCLUDE "data/maps/objects/CeladonMart5F.asm"
-;CeladonMart5F_Blocks: INCBIN "maps/CeladonMart5F.blk"
-
-;INCLUDE "data/maps/headers/GameCornerPrizeRoom.asm"
-;INCLUDE "scripts/GameCornerPrizeRoom.asm"
-;INCLUDE "data/maps/objects/GameCornerPrizeRoom.asm"
-;GameCornerPrizeRoom_Blocks: INCBIN "maps/GameCornerPrizeRoom.blk"
-
-;INCLUDE "data/maps/headers/CeladonDiner.asm"
-;INCLUDE "scripts/CeladonDiner.asm"
-;INCLUDE "data/maps/objects/CeladonDiner.asm"
-;CeladonDiner_Blocks: INCBIN "maps/CeladonDiner.blk"
-
-;INCLUDE "data/maps/headers/CeladonChiefHouse.asm"
-;INCLUDE "scripts/CeladonChiefHouse.asm"
-;INCLUDE "data/maps/objects/CeladonChiefHouse.asm"
-;CeladonChiefHouse_Blocks: INCBIN "maps/CeladonChiefHouse.blk"
-
-;INCLUDE "data/maps/headers/CeladonHotel.asm"
-;INCLUDE "scripts/CeladonHotel.asm"
-;INCLUDE "data/maps/objects/CeladonHotel.asm"
-;CeladonHotel_Blocks: INCBIN "maps/CeladonHotel.blk"
-
-;INCLUDE "data/maps/headers/MtMoonPokecenter.asm"
-;INCLUDE "scripts/MtMoonPokecenter.asm"
-;INCLUDE "data/maps/objects/MtMoonPokecenter.asm"
-
-;INCLUDE "data/maps/headers/RockTunnelPokecenter.asm"
-;INCLUDE "scripts/RockTunnelPokecenter.asm"
-;INCLUDE "data/maps/objects/RockTunnelPokecenter.asm"
-
-;INCLUDE "data/maps/headers/Route11Gate1F.asm"
-;INCLUDE "scripts/Route11Gate1F.asm"
-;INCLUDE "data/maps/objects/Route11Gate1F.asm"
-
-;INCLUDE "data/maps/headers/Route11Gate2F.asm"
-;INCLUDE "scripts/Route11Gate2F.asm"
-;INCLUDE "data/maps/objects/Route11Gate2F.asm"
-
-;INCLUDE "data/maps/headers/Route12Gate1F.asm"
-;INCLUDE "scripts/Route12Gate1F.asm"
-;INCLUDE "data/maps/objects/Route12Gate1F.asm"
-;Route12Gate1F_Blocks: INCBIN "maps/Route12Gate1F.blk"
-
-;INCLUDE "data/maps/headers/Route12Gate2F.asm"
-;INCLUDE "scripts/Route12Gate2F.asm"
-;INCLUDE "data/maps/objects/Route12Gate2F.asm"
-
-;INCLUDE "data/maps/headers/Route15Gate1F.asm"
-;INCLUDE "scripts/Route15Gate1F.asm"
-;INCLUDE "data/maps/objects/Route15Gate1F.asm"
-
-;INCLUDE "data/maps/headers/Route15Gate2F.asm"
-;INCLUDE "scripts/Route15Gate2F.asm"
-;INCLUDE "data/maps/objects/Route15Gate2F.asm"
-
-;INCLUDE "data/maps/headers/Route16Gate1F.asm"
-;INCLUDE "scripts/Route16Gate1F.asm"
-;INCLUDE "data/maps/objects/Route16Gate1F.asm"
-;Route16Gate1F_Blocks: INCBIN "maps/Route16Gate1F.blk"
-
-;INCLUDE "data/maps/headers/Route16Gate2F.asm"
-;INCLUDE "scripts/Route16Gate2F.asm"
-;INCLUDE "data/maps/objects/Route16Gate2F.asm"
-
-;INCLUDE "data/maps/headers/Route18Gate1F.asm"
-;INCLUDE "scripts/Route18Gate1F.asm"
-;INCLUDE "data/maps/objects/Route18Gate1F.asm"
-
-;INCLUDE "data/maps/headers/Route18Gate2F.asm"
-;INCLUDE "scripts/Route18Gate2F.asm"
-;INCLUDE "data/maps/objects/Route18Gate2F.asm"
-
-;INCLUDE "data/maps/headers/MtMoon1F.asm"
-;INCLUDE "scripts/MtMoon1F.asm"
-;INCLUDE "data/maps/objects/MtMoon1F.asm"
-;MtMoon1F_Blocks: INCBIN "maps/MtMoon1F.blk"
-
-;INCLUDE "data/maps/headers/MtMoonB2F.asm"
-;INCLUDE "scripts/MtMoonB2F.asm"
-;INCLUDE "data/maps/objects/MtMoonB2F.asm"
-;MtMoonB2F_Blocks: INCBIN "maps/MtMoonB2F.blk"
-
-;INCLUDE "data/maps/headers/SafariZoneWest.asm"
-;INCLUDE "scripts/SafariZoneWest.asm"
-;INCLUDE "data/maps/objects/SafariZoneWest.asm"
-;SafariZoneWest_Blocks: INCBIN "maps/SafariZoneWest.blk"
-
-;INCLUDE "data/maps/headers/SafariZoneSecretHouse.asm"
-;INCLUDE "scripts/SafariZoneSecretHouse.asm"
-;INCLUDE "data/maps/objects/SafariZoneSecretHouse.asm"
-;SafariZoneSecretHouse_Blocks: INCBIN "maps/SafariZoneSecretHouse.blk"
+Route18Gate2F_Blocks:
+Route16Gate2F_Blocks:
+Route15Gate2F_Blocks:
+Route12Gate2F_Blocks:
+Route11Gate2F_Blocks: INCBIN "maps/_RouteGate2F.blk"
 
 
-;SECTION "Maps 9", ROMX
+SECTION "Maps 8", ROMX
 
-;INCLUDE "data/maps/headers/TradeCenter.asm"
-;INCLUDE "scripts/TradeCenter.asm"
-;INCLUDE "data/maps/objects/TradeCenter.asm"
-;TradeCenter_Blocks: INCBIN "maps/TradeCenter.blk"
+INCLUDE "scripts/Route7.asm"
 
-;INCLUDE "data/maps/headers/Colosseum.asm"
-;INCLUDE "scripts/Colosseum.asm"
-;INCLUDE "data/maps/objects/Colosseum.asm"
-;Colosseum_Blocks: INCBIN "maps/Colosseum.blk"
+INCLUDE "data/maps/headers/RedsHouse1F.asm"
+INCLUDE "scripts/RedsHouse1F.asm"
+INCLUDE "data/maps/objects/RedsHouse1F.asm"
+RedsHouse1F_Blocks: INCBIN "maps/_House1F.blk"
+
+INCLUDE "data/maps/headers/CeladonMart3F.asm"
+INCLUDE "scripts/CeladonMart3F.asm"
+INCLUDE "data/maps/objects/CeladonMart3F.asm"
+CeladonMart3F_Blocks: INCBIN "maps/CeladonMart3F.blk"
+
+INCLUDE "data/maps/headers/CeladonMart4F.asm"
+INCLUDE "scripts/CeladonMart4F.asm"
+INCLUDE "data/maps/objects/CeladonMart4F.asm"
+CeladonMart4F_Blocks: INCBIN "maps/CeladonMart4F.blk"
+
+INCLUDE "data/maps/headers/CeladonMartRoof.asm"
+INCLUDE "scripts/CeladonMartRoof.asm"
+INCLUDE "data/maps/objects/CeladonMartRoof.asm"
+CeladonMartRoof_Blocks: INCBIN "maps/CeladonMartRoof.blk"
+
+INCLUDE "data/maps/headers/CeladonMartElevator.asm"
+INCLUDE "scripts/CeladonMartElevator.asm"
+INCLUDE "data/maps/objects/CeladonMartElevator.asm"
+CeladonMartElevator_Blocks: INCBIN "maps/_Elevator.blk"
+
+INCLUDE "data/maps/headers/CeladonMansion1F.asm"
+INCLUDE "scripts/CeladonMansion1F.asm"
+INCLUDE "data/maps/objects/CeladonMansion1F.asm"
+CeladonMansion1F_Blocks: INCBIN "maps/CeladonMansion1F.blk"
+
+INCLUDE "data/maps/headers/CeladonMansion2F.asm"
+INCLUDE "scripts/CeladonMansion2F.asm"
+INCLUDE "data/maps/objects/CeladonMansion2F.asm"
+CeladonMansion2F_Blocks: INCBIN "maps/CeladonMansion2F.blk"
+
+INCLUDE "data/maps/headers/CeladonMansion3F.asm"
+INCLUDE "scripts/CeladonMansion3F.asm"
+INCLUDE "data/maps/objects/CeladonMansion3F.asm"
+CeladonMansion3F_Blocks: INCBIN "maps/CeladonMansion3F.blk"
+
+INCLUDE "data/maps/headers/CeladonMansionRoof.asm"
+INCLUDE "scripts/CeladonMansionRoof.asm"
+INCLUDE "data/maps/objects/CeladonMansionRoof.asm"
+CeladonMansionRoof_Blocks: INCBIN "maps/CeladonMansionRoof.blk"
+
+INCLUDE "data/maps/headers/CeladonPokecenter.asm"
+INCLUDE "scripts/CeladonPokecenter.asm"
+INCLUDE "data/maps/objects/CeladonPokecenter.asm"
+
+INCLUDE "data/maps/headers/CeladonGym.asm"
+INCLUDE "scripts/CeladonGym.asm"
+INCLUDE "data/maps/objects/CeladonGym.asm"
+CeladonGym_Blocks: INCBIN "maps/CeladonGym.blk"
+
+INCLUDE "data/maps/headers/GameCorner.asm"
+INCLUDE "scripts/GameCorner.asm"
+INCLUDE "data/maps/objects/GameCorner.asm"
+GameCorner_Blocks: INCBIN "maps/GameCorner.blk"
+
+INCLUDE "data/maps/headers/CeladonMart5F.asm"
+INCLUDE "scripts/CeladonMart5F.asm"
+INCLUDE "data/maps/objects/CeladonMart5F.asm"
+CeladonMart5F_Blocks: INCBIN "maps/CeladonMart5F.blk"
+
+INCLUDE "data/maps/headers/GameCornerPrizeRoom.asm"
+INCLUDE "scripts/GameCornerPrizeRoom.asm"
+INCLUDE "data/maps/objects/GameCornerPrizeRoom.asm"
+GameCornerPrizeRoom_Blocks: INCBIN "maps/GameCornerPrizeRoom.blk"
+
+INCLUDE "data/maps/headers/CeladonDiner.asm"
+INCLUDE "scripts/CeladonDiner.asm"
+INCLUDE "data/maps/objects/CeladonDiner.asm"
+CeladonDiner_Blocks: INCBIN "maps/CeladonDiner.blk"
+
+INCLUDE "data/maps/headers/CeladonChiefHouse.asm"
+INCLUDE "scripts/CeladonChiefHouse.asm"
+INCLUDE "data/maps/objects/CeladonChiefHouse.asm"
+CeladonChiefHouse_Blocks: INCBIN "maps/CeladonChiefHouse.blk"
+
+INCLUDE "data/maps/headers/CeladonHotel.asm"
+INCLUDE "scripts/CeladonHotel.asm"
+INCLUDE "data/maps/objects/CeladonHotel.asm"
+CeladonHotel_Blocks: INCBIN "maps/CeladonHotel.blk"
+
+INCLUDE "data/maps/headers/MtMoonPokecenter.asm"
+INCLUDE "scripts/MtMoonPokecenter.asm"
+INCLUDE "data/maps/objects/MtMoonPokecenter.asm"
+
+INCLUDE "data/maps/headers/RockTunnelPokecenter.asm"
+INCLUDE "scripts/RockTunnelPokecenter.asm"
+INCLUDE "data/maps/objects/RockTunnelPokecenter.asm"
+
+INCLUDE "data/maps/headers/Route11Gate1F.asm"
+INCLUDE "scripts/Route11Gate1F.asm"
+INCLUDE "data/maps/objects/Route11Gate1F.asm"
+
+INCLUDE "data/maps/headers/Route11Gate2F.asm"
+INCLUDE "scripts/Route11Gate2F.asm"
+INCLUDE "data/maps/objects/Route11Gate2F.asm"
+
+INCLUDE "data/maps/headers/Route12Gate1F.asm"
+INCLUDE "scripts/Route12Gate1F.asm"
+INCLUDE "data/maps/objects/Route12Gate1F.asm"
+Route12Gate1F_Blocks: INCBIN "maps/Route12Gate1F.blk"
+
+INCLUDE "data/maps/headers/Route12Gate2F.asm"
+INCLUDE "scripts/Route12Gate2F.asm"
+INCLUDE "data/maps/objects/Route12Gate2F.asm"
+
+INCLUDE "data/maps/headers/Route15Gate1F.asm"
+INCLUDE "scripts/Route15Gate1F.asm"
+INCLUDE "data/maps/objects/Route15Gate1F.asm"
+
+INCLUDE "data/maps/headers/Route15Gate2F.asm"
+INCLUDE "scripts/Route15Gate2F.asm"
+INCLUDE "data/maps/objects/Route15Gate2F.asm"
+
+INCLUDE "data/maps/headers/Route16Gate1F.asm"
+INCLUDE "scripts/Route16Gate1F.asm"
+INCLUDE "data/maps/objects/Route16Gate1F.asm"
+Route16Gate1F_Blocks: INCBIN "maps/Route16Gate1F.blk"
+
+INCLUDE "data/maps/headers/Route16Gate2F.asm"
+INCLUDE "scripts/Route16Gate2F.asm"
+INCLUDE "data/maps/objects/Route16Gate2F.asm"
+
+INCLUDE "data/maps/headers/Route18Gate1F.asm"
+INCLUDE "scripts/Route18Gate1F.asm"
+INCLUDE "data/maps/objects/Route18Gate1F.asm"
+
+INCLUDE "data/maps/headers/Route18Gate2F.asm"
+INCLUDE "scripts/Route18Gate2F.asm"
+INCLUDE "data/maps/objects/Route18Gate2F.asm"
+
+INCLUDE "data/maps/headers/MtMoon1F.asm"
+INCLUDE "scripts/MtMoon1F.asm"
+INCLUDE "data/maps/objects/MtMoon1F.asm"
+MtMoon1F_Blocks: INCBIN "maps/MtMoon1F.blk"
+
+INCLUDE "data/maps/headers/MtMoonB2F.asm"
+INCLUDE "scripts/MtMoonB2F.asm"
+INCLUDE "data/maps/objects/MtMoonB2F.asm"
+MtMoonB2F_Blocks: INCBIN "maps/MtMoonB2F.blk"
+INCLUDE "scripts/MtMoonB2F_2.asm"
+
+INCLUDE "data/maps/headers/SafariZoneWest.asm"
+INCLUDE "scripts/SafariZoneWest.asm"
+INCLUDE "data/maps/objects/SafariZoneWest.asm"
+SafariZoneWest_Blocks: INCBIN "maps/SafariZoneWest.blk"
+
+INCLUDE "data/maps/headers/SafariZoneSecretHouse.asm"
+INCLUDE "scripts/SafariZoneSecretHouse.asm"
+INCLUDE "data/maps/objects/SafariZoneSecretHouse.asm"
+SafariZoneSecretHouse_Blocks: INCBIN "maps/SafariZoneSecretHouse.blk"
+
+
+SECTION "Maps 9", ROMX
+
+INCLUDE "data/maps/headers/TradeCenter.asm"
+INCLUDE "scripts/TradeCenter.asm"
+INCLUDE "data/maps/objects/TradeCenter.asm"
+TradeCenter_Blocks: INCBIN "maps/TradeCenter.blk"
+
+INCLUDE "data/maps/headers/Colosseum.asm"
+INCLUDE "scripts/Colosseum.asm"
+INCLUDE "data/maps/objects/Colosseum.asm"
+Colosseum_Blocks: INCBIN "maps/Colosseum.blk"
 
 
 ;SECTION "Maps 10", ROMX
