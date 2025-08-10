@@ -87,6 +87,7 @@ Route24_TextPointers:
 	dw_const Route24CooltrainerF2Text, TEXT_ROUTE24_COOLTRAINER_F2
 	dw_const Route24Youngster2Text,    TEXT_ROUTE24_YOUNGSTER2
 	dw_const PickUpItemText,           TEXT_ROUTE24_TM_THUNDER_WAVE
+	dw_const Route24CooltrainerM4Text, TEXT_ROUTE24_COOLTRAINER_M4
 
 	def_trainers Route24, 2
 	trainer EVENT_BEAT_ROUTE_24_TRAINER_0, 4, CooltrainerM2
@@ -153,7 +154,7 @@ Route24CooltrainerM1Text:
 	line "@"
 	text_ram wStringBuffer
 	text "を　もらった！@"
-	sound_get_item_1
+	sound_get_key_item
 	text_promptbutton
 	text_end
 
@@ -320,4 +321,69 @@ Route24Youngster2EndBattleText:
 Route24Youngster2AfterBattleText:
 	text "ベストを　つくしたんだ"
 	line "くいは　ない！"
+	done
+
+Route24CooltrainerM4Text:
+	text_asm
+	CheckEvent EVENT_54F
+	jr nz, .asm_515d5
+	ld hl, Route24Text_515de
+	call PrintText
+	call YesNoChoice
+	ld a, [wCurrentMenuItem]
+	and a
+	jr nz, .asm_515d0
+	ld a, CHARMANDER
+	ld [wNamedObjectIndex], a
+	ld [wCurPartySpecies], a
+	call GetMonName
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	lb bc, CHARMANDER, 10
+	call GivePokemon
+	jp nc, TextScriptEnd
+	ld a, [wAddedToParty]
+	and a
+	call z, WaitForTextScrollButtonPress
+	ld a, $1
+	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	ld hl, Route24Text_515e3
+	call PrintText
+	SetEvent EVENT_54F
+	jp TextScriptEnd
+
+.asm_515d0
+	ld hl, Route24Text_515e9
+	jr .asm_515d8
+
+.asm_515d5
+	ld hl, Route24Text_515ee
+.asm_515d8
+	call PrintText
+	jp TextScriptEnd
+
+Route24Text_515de:
+	text "おれ<⋯>"
+	line "#　そだてるの　へた　なんだ"
+
+	para "この　ヒトカゲも　よわいままで　"
+	line "かわいそう　だから"
+	cont "にがしてやろうと　おもってる<⋯>"
+
+	para "ちゃんと　そだてて　くれるなら　"
+	line "きみに　あげるけど？"
+	done
+
+Route24Text_515e3:
+	text "それじゃ　おねがい　するよ！@"
+	text_waitbutton
+	text_end
+
+Route24Text_515e9:
+	text "そうか<⋯>"
+	line "じゃ　どこに　にがそうかな<⋯>"
+	done
+
+Route24Text_515ee:
+	text "あのときの　ヒトカゲ　そだってる？"
 	done

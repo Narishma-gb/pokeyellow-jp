@@ -243,7 +243,7 @@ Route20CooltrainerMEndBattleText:
 	prompt
 
 Route20CooltrainerMAfterBattleText:
-	text "とりが　へばちゃって　もどれないぞ"
+	text "とりが　へばっちゃって　もどれないぞ"
 	line "<⋯>　どうしよう"
 	done
 

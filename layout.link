@@ -120,7 +120,9 @@ ROMX $13
 	"Maps 9"
 	"Garbage 19"
 ROMX $14
-	"rom20"
+	"Maps 10"
+	"Hidden Objects 2"
+	"Garbage 20"
 ROMX $15
 	"Trainer Sight"
 	"rom21"
@@ -214,11 +216,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $14
-; 	"Maps 10"
-; 	"Battle Engine 8"
-; 	"Hidden Objects 2"
-; 	"Garbage 20"
 ; ROMX $15
 ; 	"Maps 11"
 ; 	"Battle Engine 9"

@@ -1,14 +1,21 @@
 Route25_Script:
-	call Route25ShowHideBillScript
 	call EnableAutoTextBoxDrawing
 	ld hl, Route25_TrainerHeaders
 	ld de, Route25_ScriptPointers
 	ld a, [wRoute25CurScript]
 	call ExecuteCurMapScriptInTable
 	ld [wRoute25CurScript], a
+	call Route25ShowHideBillScript
 	ret
 
 Route25ShowHideBillScript:
+	ld hl, wd492
+	res 2, [hl]
+	res 3, [hl]
+	res 4, [hl]
+	res 7, [hl]
+	xor a
+	ld [wBillsHouseCurScript], a
 	ld hl, wCurrentMapScriptFlags
 	bit BIT_CUR_MAP_LOADED_2, [hl]
 	res BIT_CUR_MAP_LOADED_2, [hl]
@@ -20,10 +27,11 @@ Route25ShowHideBillScript:
 	ResetEventReuseHL EVENT_BILL_SAID_USE_CELL_SEPARATOR
 	ld a, HS_BILL_POKEMON
 	ld [wMissableObjectIndex], a
-	predef_jump ShowObject
+	predef ShowObject
+	jr .done
 .met_bill
 	CheckEventAfterBranchReuseHL EVENT_GOT_SS_TICKET, EVENT_MET_BILL_2
-	ret z
+	jr z, .done
 	SetEventReuseHL EVENT_LEFT_BILLS_HOUSE_AFTER_HELPING
 	ld a, HS_NUGGET_BRIDGE_GUY
 	ld [wMissableObjectIndex], a
@@ -33,7 +41,9 @@ Route25ShowHideBillScript:
 	predef HideObject
 	ld a, HS_BILL_2
 	ld [wMissableObjectIndex], a
-	predef_jump ShowObject
+	predef ShowObject
+.done
+	ret
 
 Route25_ScriptPointers:
 	def_script_pointers

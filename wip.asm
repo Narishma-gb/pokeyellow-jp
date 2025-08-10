@@ -36,19 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom20", ROMX
-; ROM $14 : $50000 - $53FFF
-	set_bank_offset 20
-
-	dr Route22_Blocks, 20, $403D
-	dr Route20_Blocks, 20, $417D
-	dr Route24_Blocks, 20, $46ED
-	dr SaffronCity_Blocks, 20, $4A98
-	dr PrintCardKeyText, 20, $77F3
-	dr CeladonPrizeMenu, 20, $78BF
-
-	dr_end 20
-
 SECTION "Trainer Sight", ROMX
 SECTION "rom21", ROMX
 ; ROM $15 : $54000 - $57FFF
@@ -450,11 +437,6 @@ SECTION "rom59", ROMX
 
 SECTION "rom60", ROMX
 ; ROM $3c : $F0000 - $F3FFF
-	set_bank_offset 60, $4FD0
-
-	dr RedsHouse1FPrintMomText_cpy, 60, $51EE
-INCLUDE "scripts/RedsHouse1F_2.asm"
-INCLUDE "scripts/ViridianSchoolHouse_2.asm"
 	set_bank_offset 60, $539C
 
 	dr CeladonMart3FPrintClerkText_cpy, 60, $57F4

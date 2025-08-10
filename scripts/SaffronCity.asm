@@ -134,7 +134,7 @@ SaffronCityGymSignText:
 SaffronCityTrainerTips1Text:
 	text "<⋯>　おとくな　けいじばん！"
 
-	para "なんでも　なおしは"
+	para "なんでもなおしは"
 	line "ねむり　どく　やけど　こおり<⋯>"
 	cont "なんでも　なおします！"
 

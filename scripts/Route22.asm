@@ -22,17 +22,18 @@ Route22SetDefaultScript:
 Route22NoopScript:
 	ret
 
-Route22GetRivalTrainerNoByStarterScript:
+Route22Script_50ed6:
+	ld a, OPP_RIVAL1
+	ld [wCurOpponent], a
+	ld a, $2
+	ld [wTrainerNo], a
+	ret
+
+Route22Script_50ee1:
+	ld a, OPP_RIVAL2
+	ld [wCurOpponent], a
 	ld a, [wRivalStarter]
-	ld b, a
-.next_trainer_no
-	ld a, [hli]
-	cp b
-	jr z, .got_trainer_no
-	inc hl
-	jr .next_trainer_no
-.got_trainer_no
-	ld a, [hl]
+	add 7
 	ld [wTrainerNo], a
 	ret
 
@@ -89,9 +90,7 @@ Route22FirstRivalBattleScript:
 	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .walking
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 .walking
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
@@ -132,24 +131,35 @@ Route22Rival1StartBattleScript:
 	ld hl, Route22Rival1DefeatedText
 	ld de, Route22Rival1VictoryText
 	call SaveEndBattleTextPointers
-	ld a, OPP_RIVAL1
-	ld [wCurOpponent], a
-	ld hl, .StarterTable
-	call Route22GetRivalTrainerNoByStarterScript
+	call Route22Script_50ed6
 	ld a, SCRIPT_ROUTE22_RIVAL1_AFTER_BATTLE
 	ld [wRoute22CurScript], a
 	ret
 
-.StarterTable:
-; starter the rival picked, rival trainer number
-	db STARTER2, 4
-	db STARTER3, 5
-	db STARTER1, 6
+Route22Rival1DefeatedText:
+	text "あーッ！"
+	line "こいつ　なめた　マネを！"
+	prompt
+
+Route22Rival1VictoryText:
+	text "<RIVAL>『なんだ？"
+	line "#　２ひきも"
+	cont "もってるの　なぜか　だって？"
+
+	para "おまえも"
+	line "つかまえれば　いい　じゃん！"
+	prompt
 
 Route22Rival1AfterBattleScript:
 	ld a, [wIsInBattle]
 	cp $ff
 	jp z, Route22SetDefaultScript
+	ld a, [wRivalStarter]
+	cp RIVAL_STARTER_FLAREON
+	jr nz, .keep_rival_starter
+	ld a, RIVAL_STARTER_JOLTEON
+	ld [wRivalStarter], a
+.keep_rival_starter
 	ld a, [wSpritePlayerStateData1FacingDirection]
 	and a ; cp SPRITE_FACING_DOWN
 	jr nz, .not_facing_down
@@ -168,9 +178,7 @@ Route22Rival1AfterBattleScript:
 	ld a, TEXT_ROUTE22_RIVAL1
 	ldh [hTextID], a
 	call DisplayTextID
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	farcall Music_RivalAlternateStart
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, lower entry in Route22DefaultScript.Route22RivalBattleCoords
@@ -242,13 +250,9 @@ Route22SecondRivalBattleScript:
 	ld a, [wWalkBikeSurfState]
 	and a
 	jr z, .walking
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 .walking
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	farcall Music_RivalAlternateTempo
 	ld a, ROUTE22_RIVAL2
 	ldh [hSpriteIndex], a
@@ -288,18 +292,27 @@ Route22Rival2StartBattleScript:
 	ld hl, Route22Rival2DefeatedText
 	ld de, Route22Rival2VictoryText
 	call SaveEndBattleTextPointers
-	ld a, OPP_RIVAL2
-	ld [wCurOpponent], a
-	ld hl, .StarterTable
-	call Route22GetRivalTrainerNoByStarterScript
+	call Route22Script_50ee1
 	ld a, SCRIPT_ROUTE22_RIVAL2_AFTER_BATTLE
 	ld [wRoute22CurScript], a
 	ret
 
-.StarterTable:
-	db STARTER2, 10
-	db STARTER3, 11
-	db STARTER1, 12
+Route22Rival2DefeatedText:
+	text "あ　こら！"
+
+	para "おれが　ちょっと"
+	line "ゆだん　した　すきに<⋯>　くそう！"
+	prompt
+
+Route22Rival2VictoryText:
+	text "<RIVAL>『ひゃははッ　<PLAYER>ー！"
+	line "それで　がんばってるのかよ！"
+	cont "おれの　さいのうに　くらべりゃ"
+	cont "<PLAYER>は　まだまだ　だな！"
+
+	para "もっと　れんしゅう　こいよ！"
+	line "あははーッ！"
+	prompt
 
 Route22Rival2AfterBattleScript:
 	ld a, [wIsInBattle]
@@ -327,9 +340,7 @@ Route22Rival2AfterBattleScript:
 	ld a, TEXT_ROUTE22_RIVAL2
 	ldh [hTextID], a
 	call DisplayTextID
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	farcall Music_RivalAlternateStartAndTempo
 	ld a, [wSavedCoordIndex]
 	cp 1 ; index of second, lower entry in Route22DefaultScript.Route22RivalBattleCoords
@@ -385,126 +396,15 @@ Route22_TextPointers:
 
 Route22Rival1Text:
 	text_asm
-	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_1ST_BATTLE
-	jr z, .before_battle
-	ld hl, Route22RivalAfterBattleText1
-	call PrintText
-	jr .text_script_end
-.before_battle
-	ld hl, Route22RivalBeforeBattleText1
-	call PrintText
-.text_script_end
+	farcall Route22PrintRival1Text
 	jp TextScriptEnd
 
 Route22Rival2Text:
 	text_asm
-	CheckEvent EVENT_BEAT_ROUTE22_RIVAL_2ND_BATTLE
-	jr z, .before_battle
-	ld hl, Route22RivalAfterBattleText2
-	call PrintText
-	jr .text_script_end
-.before_battle
-	ld hl, Route22RivalBeforeBattleText2
-	call PrintText
-.text_script_end
+	farcall Route22PrintRival2Text
 	jp TextScriptEnd
 
-Route22RivalBeforeBattleText1:
-	text "<RIVAL>『あーッ！　<PLAYER>！"
-
-	para "#　リーグに　いくのか？"
-	line "やめとけ！"
-
-	para "おまえ　どうせ"
-	line "バッジ　もってねーだろ？"
-
-	para "みはりの　おっさんが"
-	line "とおして　くれねーよ！"
-
-	para "<⋯>　それよりさあ！"
-	line "おまえの　#"
-	cont "すこしは　つよく　なったかよ？"
-	done
-
-Route22RivalAfterBattleText1:
-	text "どうやら　#　リーグには"
-	line "つよくて　すごい　<TRAINER>が"
-	cont "ウジャウジャ　いるらしいぜ"
-
-	para "どうにか"
-	line "あそこを　とおりぬける"
-	cont "ほうほうを　かんがえなきゃな！"
-
-	para "おまえも　いつまでも"
-	line "ここらに　いないで"
-	cont "とっとと　さきに　すすめよ！"
-	done
-
-Route22Rival1DefeatedText:
-	text "あーッ！"
-	line "こいつ　なめた　マネを！"
-	prompt
-
-Route22Rival1VictoryText:
-	text "<RIVAL>『なんだ？"
-	line "#　２ひきも"
-	cont "もってるの　なぜか　だって？"
-
-	para "おまえも"
-	line "つかまえれば　いい　じゃん！"
-	prompt
-
-Route22RivalBeforeBattleText2:
-	text "<RIVAL>『なんだ？　<PLAYER>！"
-	line "こんな　ところで　あうとは"
-	cont "またまた　ぐうぜんだ！"
-
-	para "じゃあ<⋯>　おまえも"
-	line "#　リーグに　いく　わけ？"
-
-	para "バッジも"
-	line "ぜんぶ　あつまったのか！"
-	cont "あ　そう<⋯>　やるじゃん！"
-
-	para "それじゃ　#　リーグ"
-	line "いくまえに　<PLAYER>で"
-	cont "ウォーミング　アップと　いくか！"
-
-	para "かかって　きな！"
-	done
-
-Route22RivalAfterBattleText2:
-	text "からだも　ほぐれたし<⋯>！"
-	line "いよいよ　#　リーグ"
-	cont "せいはに　むかうと　するか！"
-
-	para "<PLAYER>は<⋯>"
-	line "もっと　れんしゅう　したほうが"
-	cont "いいんじゃないの！"
-
-	para "おっと！　おせっかい　だったか！"
-	line "とにかく<⋯>　おれは　さき　いくぜ"
-	cont "じゃあ！<⋯>　あーばよ！"
-	done
-
-Route22Rival2DefeatedText:
-	text "あ　こら！"
-
-	para "おれが　ちょっと"
-	line "ゆだん　した　すきに<⋯>　くそう！"
-	prompt
-
-Route22Rival2VictoryText:
-	text "<RIVAL>『ひゃははッ　<PLAYER>ー！"
-	line "それで　がんばってるのかよ！"
-	cont "おれの　さいのうに　くらべりゃ"
-	cont "<PLAYER>は　まだまだ　だな！"
-
-	para "もっと　れんしゅう　こいよ！"
-	line "あははーッ！"
-	prompt
-
 Route22PokemonLeagueSignText:
-	text "ここは　#　リーグ"
-	line "しょうめん　ゲート"
-	done
+	text_asm
+	farcall Route22PrintPokemonLeagueSignText
+	jp TextScriptEnd

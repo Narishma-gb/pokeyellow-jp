@@ -227,16 +227,15 @@ Route23PrintOhThatsTheBadgeTextScript: ; unreferenced
 	jp PrintText
 
 Route23YouDontHaveTheBadgeYetText:
-	text "ここから　さきは<⋯>"
-	line "@"
+	text "ここから　さきは　@"
 	text_ram wNameBuffer
-	text "　バッジを"
-	cont "もった　もの　だけが　すすめる！"
+	text "バッジを"
+	line "もった　もの　だけが　すすめる！"
 
 	para "きみは　まだ"
 	line "@"
 	text_ram wNameBuffer
-	text "　バッジを　もって　いない"
+	text "バッジを　もって　いない"
 
 	para "#　リーグを　めざす　なら"
 	line "でなおして　きなさい@"
@@ -247,16 +246,15 @@ Route23YouDontHaveTheBadgeYetText:
 	jp TextScriptEnd
 
 Route23OhThatIsTheBadgeText:
-	text "ここから　さきは<⋯>"
-	line "@"
+	text "ここから　さきは　@"
 	text_ram wNameBuffer
-	text "　バッジを"
-	cont "もった　もの　だけが　すすめる！"
+	text "バッジを"
+	line "もった　もの　だけが　すすめる！"
 
 	para "むむッ<⋯>！"
 	line "それは　@"
 	text_ram wNameBuffer
-	text "　バッジ！@"
+	text "バッジ！@"
 	sound_get_item_1
 	text_start
 

@@ -131,9 +131,7 @@ SilphCo7FDefaultScript:
 	ld [wJoyIgnore], a
 	ld a, PLAYER_DIR_DOWN
 	ld [wPlayerMovingDirection], a
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -187,21 +185,11 @@ SilphCo7FRivalStartBattleScript:
 	ld a, OPP_RIVAL2
 	ld [wCurOpponent], a
 	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .not_starter_2
-	ld a, $7
-	jr .set_trainer_no
-.not_starter_2
-	cp STARTER3
-	jr nz, .no_starter_3
-	ld a, $8
-	jr .set_trainer_no
-.no_starter_3
-	ld a, $9
-.set_trainer_no
+	add 4
 	ld [wTrainerNo], a
 	ld a, SCRIPT_SILPHCO7F_RIVAL_AFTER_BATTLE
-	jp SilphCo7FSetCurScript
+	call SilphCo7FSetCurScript
+	ret
 
 SilphCo7FRivalAfterBattleScript:
 	ld a, [wIsInBattle]
@@ -220,9 +208,7 @@ SilphCo7FRivalAfterBattleScript:
 	ld a, TEXT_SILPHCO7F_RIVAL_GOOD_LUCK_TO_YOU
 	ldh [hTextID], a
 	call DisplayTextID
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	farcall Music_RivalAlternateStart
 	ld de, .RivalWalkAroundPlayerMovement
 	ld a, [wSavedCoordIndex]

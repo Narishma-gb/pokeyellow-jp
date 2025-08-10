@@ -201,30 +201,13 @@ SECTION "Dungeon Warps", ROMX
 INCLUDE "engine/overworld/dungeon_warps.asm"
 
 
-;SECTION "Hidden Objects Core", ROMX
+SECTION "Hidden Objects 2", ROMX
 
-;INCLUDE "engine/overworld/hidden_objects.asm"
-
-
-;SECTION "Predefs", ROMX
-
-;INCLUDE "engine/events/give_pokemon.asm"
-;INCLUDE "engine/predefs.asm"
-
-
-;SECTION "Battle Engine 8", ROMX
-
-;INCLUDE "engine/battle/init_battle_variables.asm"
-;INCLUDE "engine/battle/move_effects/paralyze.asm"
-
-
-;SECTION "Hidden Objects 2", ROMX
-
-;INCLUDE "engine/events/card_key.asm"
-;INCLUDE "engine/events/prize_menu.asm"
-;INCLUDE "engine/events/hidden_objects/school_notebooks.asm"
-;INCLUDE "engine/events/hidden_objects/fighting_dojo.asm"
-;INCLUDE "engine/events/hidden_objects/indigo_plateau_hq.asm"
+INCLUDE "engine/events/card_key.asm"
+INCLUDE "engine/events/prize_menu.asm"
+INCLUDE "engine/events/hidden_objects/school_notebooks.asm"
+INCLUDE "engine/events/hidden_objects/fighting_dojo.asm"
+INCLUDE "engine/events/hidden_objects/indigo_plateau_hq.asm"
 
 
 ;SECTION "Battle Engine 9", ROMX

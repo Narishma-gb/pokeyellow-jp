@@ -24,6 +24,8 @@ PrintCardKeyText:
 	ld b, CARD_KEY
 	call IsItemInBag
 	jr z, .noCardKey
+	xor a
+	ld [wPlayerMovingDirection], a
 	tx_pre_id CardKeySuccessText
 	ldh [hTextID], a
 	call PrintPredefTextID

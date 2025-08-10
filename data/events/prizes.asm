@@ -3,31 +3,28 @@ PrizeDifferentMenuPtrs:
 	dw PrizeMenuMon2Entries, PrizeMenuMon2Cost
 	dw PrizeMenuTMsEntries,  PrizeMenuTMsCost
 
-NoThanksText:
-	db "いらない@"
-
 PrizeMenuMon1Entries:
 	db ABRA
-	db PIKACHU
-	db HORSEA
+	db VULPIX
+	db WIGGLYTUFF
 	db "@"
 
 PrizeMenuMon1Cost:
-	bcd2 150
-	bcd2 620
+	bcd2 230
 	bcd2 1000
+	bcd2 2680
 	db "@"
 
 PrizeMenuMon2Entries:
-	db CLEFABLE
-	db DRAGONAIR
+	db SCYTHER
+	db PINSIR
 	db PORYGON
 	db "@"
 
 PrizeMenuMon2Cost:
-	bcd2 2880
-	bcd2 5400
-	bcd2 8300
+	bcd2 6500
+	bcd2 6500
+	bcd2 9999
 	db "@"
 
 PrizeMenuTMsEntries:

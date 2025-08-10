@@ -13,7 +13,7 @@
 	const_export SAFFRONCITY_PIDGEOT
 	const_export SAFFRONCITY_ROCKER
 	const_export SAFFRONCITY_ROCKET8
-	const_export SAFFRONCITY_ROCKET9
+	const_export SAFFRONCITY_ROCKET9 ; removed in yellow, but still referenced in data/maps/hide_show_data.asm
 
 SaffronCity_Object:
 	db $f ; border block
@@ -55,6 +55,5 @@ SaffronCity_Object:
 	object_event 31, 12, SPRITE_BIRD, STAY, DOWN, TEXT_SAFFRONCITY_PIDGEOT
 	object_event 18,  8, SPRITE_ROCKER, STAY, UP, TEXT_SAFFRONCITY_ROCKER
 	object_event 18, 22, SPRITE_ROCKET, STAY, DOWN, TEXT_SAFFRONCITY_ROCKET8
-	object_event 19, 22, SPRITE_ROCKET, STAY, DOWN, TEXT_SAFFRONCITY_ROCKET9
 
 	def_warps_to SAFFRON_CITY
