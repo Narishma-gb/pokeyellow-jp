@@ -250,7 +250,7 @@ Route13CooltrainerM3EndBattleText:
 
 Route13CooltrainerM3AfterBattleText:
 	text "あーあ<⋯>　ぼくも"
-	line "ポッポや　ビジョンの　ように"
+	line "ポッポや　ピジョンの　ように"
 	cont "そらを　とんで　いきたい"
 	done
 

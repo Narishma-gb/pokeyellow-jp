@@ -207,7 +207,7 @@ Route21Fisher3AfterBattleText:
 	done
 
 Route21Fisher4BattleText:
-	text "アタリが　くるまで"
+	text "あたりが　くるまで"
 	line "おまえの　あいてでも　してよう"
 	done
 

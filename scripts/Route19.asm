@@ -29,7 +29,7 @@ Route19_TextPointers:
 
 	def_trainers Route19
 	trainer EVENT_BEAT_ROUTE_19_TRAINER_0, 4, CooltrainerM1
-	trainer EVENT_BEAT_ROUTE_19_TRAINER_1, 3, CooltrainerM2
+	trainer EVENT_BEAT_ROUTE_19_TRAINER_1, 4, CooltrainerM2
 	trainer EVENT_BEAT_ROUTE_19_TRAINER_2, 3, Swimmer1
 	trainer EVENT_BEAT_ROUTE_19_TRAINER_3, 4, Swimmer2
 	trainer EVENT_BEAT_ROUTE_19_TRAINER_4, 4, Swimmer3
@@ -43,60 +43,52 @@ Route19_TextPointers:
 Route19CooltrainerM1Text:
 	text_asm
 	ld hl, Route19_TrainerHeader0
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr Route19_TalkToTrainer
 
 Route19CooltrainerM2Text:
 	text_asm
 	ld hl, Route19_TrainerHeader1
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr Route19_TalkToTrainer
 
 Route19Swimmer1Text:
 	text_asm
 	ld hl, Route19_TrainerHeader2
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr Route19_TalkToTrainer
 
 Route19Swimmer2Text:
 	text_asm
 	ld hl, Route19_TrainerHeader3
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr Route19_TalkToTrainer
 
 Route19Swimmer3Text:
 	text_asm
 	ld hl, Route19_TrainerHeader4
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr Route19_TalkToTrainer
 
 Route19Swimmer4Text:
 	text_asm
 	ld hl, Route19_TrainerHeader5
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr Route19_TalkToTrainer
 
 Route19Swimmer5Text:
 	text_asm
 	ld hl, Route19_TrainerHeader6
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr Route19_TalkToTrainer
 
 Route19Swimmer6Text:
 	text_asm
 	ld hl, Route19_TrainerHeader7
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr Route19_TalkToTrainer
 
 Route19Swimmer7Text:
 	text_asm
 	ld hl, Route19_TrainerHeader8
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr Route19_TalkToTrainer
 
 Route19Swimmer8Text:
 	text_asm
 	ld hl, Route19_TrainerHeader9
+Route19_TalkToTrainer:
 	call TalkToTrainer
 	jp TextScriptEnd
 

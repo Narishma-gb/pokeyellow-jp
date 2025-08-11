@@ -36,29 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "Trainer Sight", ROMX
-SECTION "rom21", ROMX
-; ROM $15 : $54000 - $57FFF
-	set_bank_offset 21
-
-	dr Route2_Blocks, 21, $4086
-	dr Route3_Blocks, 21, $425D
-	dr Route4_Blocks, 21, $43F4
-	dr Route5_Blocks, 21, $45DA
-	dr Route9_Blocks, 21, $4706
-	dr Route19_Blocks, 21, $4F01
-	dr Route21_Blocks, 21, $507D
-	dr GainExperience, 21, $525F
-	dr DisplayDiploma, 21, $7CE7
-	dr _GetSpritePosition1, 21, $7D18
-	dr _GetSpritePosition2, 21, $7D38
-	dr _SetSpritePosition1, 21, $7D5C
-	dr _SetSpritePosition2, 21, $7D7C
-	dr TrainerWalkUpToPlayer, 21, $7DA0
-	dr TrainerEngage, 21, $7E2E
-
-	dr_end 21
-
 SECTION "rom22", ROMX
 ; ROM $16 : $58000 - $5BFFF
 	set_bank_offset 22
@@ -425,6 +402,7 @@ SECTION "rom58", ROMX
 	dr PrintDiploma, 58, $44B6
 	dr PrintPCBox, 58, $453A
 	dr PrinterDebug, 58, $467C
+	dr _DisplayDiploma, 58, $5190
 
 	dr_end 58
 

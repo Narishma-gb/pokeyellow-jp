@@ -16,7 +16,7 @@ Route9_ScriptPointers:
 Route9_TextPointers:
 	def_text_pointers
 	dw_const Route9CooltrainerF1Text, TEXT_ROUTE9_COOLTRAINER_F1
-	dw_const Route9CooltrainerM1Text, TEXT_ROUTE9_COOLTRAINER_M1
+	dw_const Route9AJText,            TEXT_ROUTE9_COOLTRAINER_M1
 	dw_const Route9CooltrainerM2Text, TEXT_ROUTE9_COOLTRAINER_M2
 	dw_const Route9CooltrainerF2Text, TEXT_ROUTE9_COOLTRAINER_F2
 	dw_const Route9Hiker1Text,        TEXT_ROUTE9_HIKER1
@@ -29,7 +29,7 @@ Route9_TextPointers:
 
 	def_trainers Route9
 	trainer EVENT_BEAT_ROUTE_9_TRAINER_0, 3, CooltrainerF1
-	trainer EVENT_BEAT_ROUTE_9_TRAINER_1, 2, CooltrainerM1
+	trainer EVENT_BEAT_ROUTE_9_TRAINER_1, 2, AJ
 	trainer EVENT_BEAT_ROUTE_9_TRAINER_2, 4, CooltrainerM2
 	trainer EVENT_BEAT_ROUTE_9_TRAINER_3, 2, CooltrainerF2
 	trainer EVENT_BEAT_ROUTE_9_TRAINER_4, 2, Hiker1
@@ -44,7 +44,7 @@ Route9CooltrainerF1Text:
 	ld hl, Route9_TrainerHeader0
 	jr Route9TalkToTrainer
 
-Route9CooltrainerM1Text:
+Route9AJText:
 	text_asm
 	ld hl, Route9_TrainerHeader1
 	jr Route9TalkToTrainer
@@ -101,18 +101,19 @@ Route9CooltrainerF1AfterBattleText:
 	cont "あかりが　ないと　すすめ　ないわ"
 	done
 
-Route9CooltrainerM1BattleText:
-	text "だれだ？"
-	line "よさげな　#　もって"
-	cont "ふらふら　あるいとる　おまえは？"
+Route9AJBattleText:
+	text "おれの　もくひょうは"
+	line "きゅうきょくの　トレーナーだ！"
 	done
 
-Route9CooltrainerM1EndBattleText:
-	text "まけよった"
+Route9AJEndBattleText:
+	text "オレの"
+	line "サンドが　まけるなんて<⋯>"
 	prompt
 
-Route9CooltrainerM1AfterBattleText:
-	text "くやしくて　なみだも　でん"
+Route9AJAfterBattleText:
+	text "サンドとの　コンビで"
+	line "また　１００れんしょうを　めざすぜ！"
 	done
 
 Route9CooltrainerM2BattleText:

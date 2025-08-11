@@ -210,19 +210,19 @@ INCLUDE "engine/events/hidden_objects/fighting_dojo.asm"
 INCLUDE "engine/events/hidden_objects/indigo_plateau_hq.asm"
 
 
-;SECTION "Battle Engine 9", ROMX
+SECTION "Battle Engine 7", ROMX
 
-;INCLUDE "engine/battle/experience.asm"
-
-
-;SECTION "Diploma", ROMX
-
-;INCLUDE "engine/events/diploma.asm"
+INCLUDE "engine/battle/experience.asm"
 
 
-;SECTION "Trainer Sight", ROMX
+SECTION "Diploma", ROMX
 
-;INCLUDE "engine/overworld/trainer_sight.asm"
+INCLUDE "engine/events/diploma.asm"
+
+
+SECTION "Trainer Sight", ROMX
+
+INCLUDE "engine/overworld/trainer_sight.asm"
 
 
 ;SECTION "Battle Engine 10", ROMX
