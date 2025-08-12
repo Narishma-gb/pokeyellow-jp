@@ -109,7 +109,7 @@ WalkToLance:
 	ret
 
 WalkToLance_RLEList:
-	db D_UP, 12
+	db D_UP, 13
 	db D_LEFT, 12
 	db D_DOWN, 7
 	db D_LEFT, 6

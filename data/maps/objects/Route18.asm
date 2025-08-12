@@ -8,9 +8,9 @@ Route18_Object:
 
 	def_warp_events
 	warp_event 33,  8, ROUTE_18_GATE_1F, 1
-	warp_event 33,  9, ROUTE_18_GATE_1F, 2
+	warp_event 33,  9, ROUTE_18_GATE_1F, 1
 	warp_event 40,  8, ROUTE_18_GATE_1F, 3
-	warp_event 40,  9, ROUTE_18_GATE_1F, 4
+	warp_event 40,  9, ROUTE_18_GATE_1F, 3
 
 	def_bg_events
 	bg_event 43,  7, TEXT_ROUTE18_SIGN

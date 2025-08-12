@@ -225,16 +225,16 @@ SECTION "Trainer Sight", ROMX
 INCLUDE "engine/overworld/trainer_sight.asm"
 
 
-;SECTION "Battle Engine 10", ROMX
+SECTION "Battle Engine 10", ROMX
 
-;INCLUDE "engine/battle/common_text.asm"
-;INCLUDE "engine/pokemon/experience.asm"
-;INCLUDE "engine/events/oaks_aide.asm"
+INCLUDE "engine/pokemon/experience.asm"
+INCLUDE "engine/pokemon/status_ailments.asm"
+INCLUDE "engine/events/oaks_aide.asm"
 
 
-;SECTION "Saffron Guards", ROMX
+SECTION "Saffron Guards", ROMX
 
-;INCLUDE "engine/events/saffron_guards.asm"
+INCLUDE "engine/events/saffron_guards.asm"
 
 
 ;SECTION "Starter Dex", ROMX
@@ -310,7 +310,6 @@ INCLUDE "gfx/version.asm"
 ;SECTION "bank1E", ROMX
 
 ;INCLUDE "engine/battle/play_animation.asm"
-;INCLUDE "engine/pokemon/status_ailments.asm"
 ;INCLUDE "engine/battle/load_animation_tiles.asm"
 ;INCLUDE "engine/battle/animations.asm"
 ;INCLUDE "engine/overworld/cut2.asm"

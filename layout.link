@@ -131,7 +131,11 @@ ROMX $15
 	"Trainer Sight"
 	"Garbage 21"
 ROMX $16
-	"rom22"
+	"Maps 13"
+	"Battle Engine 10"
+	"Maps 14"
+	"Saffron Guards"
+	"Garbage 22"
 ROMX $17
 	"rom23"
 ROMX $18
@@ -220,12 +224,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $16
-; 	"Maps 13"
-; 	"Battle Engine 10"
-; 	"Maps 14"
-; 	"Saffron Guards"
-; 	"Garbage 22"
 ; ROMX $17
 ; 	"Maps 15"
 ; 	"Starter Dex"

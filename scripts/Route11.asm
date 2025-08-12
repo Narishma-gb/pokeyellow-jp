@@ -218,7 +218,7 @@ Route11SuperNerd2Text:
 	jp TextScriptEnd
 
 Route11SuperNerd2BattleText:
-	text "オッース！"
+	text "オーッス！"
 	line "でんきの　けしわすれ　して　ないか"
 	done
 

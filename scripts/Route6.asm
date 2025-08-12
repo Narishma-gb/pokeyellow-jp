@@ -39,18 +39,17 @@ Route6CooltrainerM1Text:
 	jp TextScriptEnd
 
 Route6CooltrainerM1BattleText:
-	text "だれだ！"
-	line "ぼくらの　ひそひそ　ばなしを"
-	cont "ぬすみ　ぎき　してる　やつは！"
+	text "これは　あいの　とっくん　なんだ"
+	line "じゃま　しないでよ"
 	done
 
 Route6CooltrainerM1EndBattleText:
-	text "なぜか　かてないんだ"
+	text "ば　ばかな<⋯>"
 	prompt
 
-Route6CooltrainerM1AfterBattleText: ; used by both COOLTRAINER_M1 and COOLTRAINER_F1
-Route6CooltrainerF1AfterBattleText:
-	text "<⋯>　<⋯>　ひそ　ひそ<⋯>"
+Route6CooltrainerM1AfterBattleText:
+	text "これじゃ"
+	line "かのじょに　きらわれちゃう<⋯>"
 	done
 
 Route6CooltrainerF1Text:
@@ -60,15 +59,19 @@ Route6CooltrainerF1Text:
 	jp TextScriptEnd
 
 Route6CooltrainerF1BattleText:
-	text "ちょっと　そこの　きみ！"
-	line "ひとの　たち　ばなしを"
-	cont "ぬすみ　ぎき　するもんじゃないわ"
+	text "あいの　とっくんを　してるの"
+	line "じゃま　しないで！"
 	done
 
 Route6CooltrainerF1EndBattleText:
-	text "やん！"
-	line "やられる　なんて　なさけないわ"
+	text "そんな<⋯>"
+	line "きょうかしょに　のってなかったわ"
 	prompt
+
+Route6CooltrainerF1AfterBattleText:
+	text "けいさん　だけが　すべてじゃない"
+	line "わかった　きが　するわ"
+	done
 
 Route6Youngster1Text:
 	text_asm

@@ -36,26 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom22", ROMX
-; ROM $16 : $58000 - $5BFFF
-	set_bank_offset 22
-
-	dr Route6_Blocks, 22, $4079
-	dr Route8_Blocks, 22, $41C6
-	dr Route10_Blocks, 22, $4356
-	dr Route11_Blocks, 22, $455F
-	dr Route12_Blocks, 22, $4710
-	dr Route15_Blocks, 22, $49CC
-	dr Route16_Blocks, 22, $4B84
-	dr Route18_Blocks, 22, $4C9C
-	dr CalcLevelFromExperience, 22, $4D99
-	dr CalcExperience, 22, $4DC0
-	dr PrintStatusAilment, 22, $4E8B
-	dr OaksAideScript, 22, $4EC6
-	dr RemoveGuardDrink, 22, $7F6B
-
-	dr_end 22
-
 SECTION "rom23", ROMX
 ; ROM $17 : $5C000 - $5FFFF
 	set_bank_offset 23
@@ -401,6 +381,7 @@ SECTION "rom58", ROMX
 	dr PrintPokedexEntry, 58, $43E7
 	dr PrintDiploma, 58, $44B6
 	dr PrintPCBox, 58, $453A
+	dr PrintFanClubPortrait, 58, $4627
 	dr PrinterDebug, 58, $467C
 	dr _DisplayDiploma, 58, $5190
 

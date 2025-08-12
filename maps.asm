@@ -747,84 +747,84 @@ INCLUDE "data/maps/objects/SilphCo8F.asm"
 SilphCo8F_Blocks: INCBIN "maps/SilphCo8F.blk"
 
 
-;SECTION "Maps 13", ROMX
+SECTION "Maps 13", ROMX
 
-;INCLUDE "data/maps/headers/Route6.asm"
-;INCLUDE "data/maps/objects/Route6.asm"
-;Route6_Blocks: INCBIN "maps/Route6.blk"
+INCLUDE "data/maps/headers/Route6.asm"
+INCLUDE "data/maps/objects/Route6.asm"
+Route6_Blocks: INCBIN "maps/Route6.blk"
 
-;INCLUDE "data/maps/headers/Route8.asm"
-;INCLUDE "data/maps/objects/Route8.asm"
-;Route8_Blocks: INCBIN "maps/Route8.blk"
+INCLUDE "data/maps/headers/Route8.asm"
+INCLUDE "data/maps/objects/Route8.asm"
+Route8_Blocks: INCBIN "maps/Route8.blk"
 
-;INCLUDE "data/maps/headers/Route10.asm"
-;INCLUDE "data/maps/objects/Route10.asm"
-;Route10_Blocks: INCBIN "maps/Route10.blk"
+INCLUDE "data/maps/headers/Route10.asm"
+INCLUDE "data/maps/objects/Route10.asm"
+Route10_Blocks: INCBIN "maps/Route10.blk"
 
-;INCLUDE "data/maps/headers/Route11.asm"
-;INCLUDE "data/maps/objects/Route11.asm"
-;Route11_Blocks: INCBIN "maps/Route11.blk"
+INCLUDE "data/maps/headers/Route11.asm"
+INCLUDE "data/maps/objects/Route11.asm"
+Route11_Blocks: INCBIN "maps/Route11.blk"
 
-;INCLUDE "data/maps/headers/Route12.asm"
-;INCLUDE "data/maps/objects/Route12.asm"
-;Route12_Blocks: INCBIN "maps/Route12.blk"
+INCLUDE "data/maps/headers/Route12.asm"
+INCLUDE "data/maps/objects/Route12.asm"
+Route12_Blocks: INCBIN "maps/Route12.blk"
 
-;INCLUDE "data/maps/headers/Route15.asm"
-;INCLUDE "data/maps/objects/Route15.asm"
-;Route15_Blocks: INCBIN "maps/Route15.blk"
+INCLUDE "data/maps/headers/Route15.asm"
+INCLUDE "data/maps/objects/Route15.asm"
+Route15_Blocks: INCBIN "maps/Route15.blk"
 
-;INCLUDE "data/maps/headers/Route16.asm"
-;INCLUDE "data/maps/objects/Route16.asm"
-;Route16_Blocks: INCBIN "maps/Route16.blk"
+INCLUDE "data/maps/headers/Route16.asm"
+INCLUDE "data/maps/objects/Route16.asm"
+Route16_Blocks: INCBIN "maps/Route16.blk"
 
-;INCLUDE "data/maps/headers/Route18.asm"
-;INCLUDE "data/maps/objects/Route18.asm"
-;Route18_Blocks: INCBIN "maps/Route18.blk"
+INCLUDE "data/maps/headers/Route18.asm"
+INCLUDE "data/maps/objects/Route18.asm"
+Route18_Blocks: INCBIN "maps/Route18.blk"
 
-;; Unreferenced Pokecenter Copy
-;INCBIN "maps/_Pokecenter.blk"
+; Unreferenced Pokecenter Copy
+INCBIN "maps/_Pokecenter.blk"
 
 
-;SECTION "Maps 14", ROMX
+SECTION "Maps 14", ROMX
 
-;INCLUDE "scripts/Route6.asm"
-;INCLUDE "scripts/Route8.asm"
-;INCLUDE "scripts/Route10.asm"
-;INCLUDE "scripts/Route11.asm"
-;INCLUDE "scripts/Route12.asm"
-;INCLUDE "scripts/Route15.asm"
-;INCLUDE "scripts/Route16.asm"
-;INCLUDE "scripts/Route18.asm"
+INCLUDE "scripts/Route6.asm"
+INCLUDE "scripts/Route8.asm"
+INCLUDE "scripts/Route10.asm"
+INCLUDE "scripts/Route11.asm"
+INCLUDE "scripts/Route12.asm"
+INCLUDE "scripts/Route15.asm"
+INCLUDE "scripts/Route16.asm"
+INCLUDE "scripts/Route18.asm"
 
-;INCLUDE "data/maps/headers/PokemonFanClub.asm"
-;INCLUDE "scripts/PokemonFanClub.asm"
-;INCLUDE "data/maps/objects/PokemonFanClub.asm"
-;PokemonFanClub_Blocks: INCBIN "maps/PokemonFanClub.blk"
+INCLUDE "data/maps/headers/PokemonFanClub.asm"
+INCLUDE "scripts/PokemonFanClub.asm"
+INCLUDE "data/maps/objects/PokemonFanClub.asm"
+PokemonFanClub_Blocks: INCBIN "maps/PokemonFanClub.blk"
 
-;INCLUDE "data/maps/headers/SilphCo2F.asm"
-;INCLUDE "scripts/SilphCo2F.asm"
-;INCLUDE "data/maps/objects/SilphCo2F.asm"
-;SilphCo2F_Blocks: INCBIN "maps/SilphCo2F.blk"
+INCLUDE "data/maps/headers/SilphCo2F.asm"
+INCLUDE "scripts/SilphCo2F.asm"
+INCLUDE "data/maps/objects/SilphCo2F.asm"
+SilphCo2F_Blocks: INCBIN "maps/SilphCo2F.blk"
 
-;INCLUDE "data/maps/headers/SilphCo3F.asm"
-;INCLUDE "scripts/SilphCo3F.asm"
-;INCLUDE "data/maps/objects/SilphCo3F.asm"
-;SilphCo3F_Blocks: INCBIN "maps/SilphCo3F.blk"
+INCLUDE "data/maps/headers/SilphCo3F.asm"
+INCLUDE "scripts/SilphCo3F.asm"
+INCLUDE "data/maps/objects/SilphCo3F.asm"
+SilphCo3F_Blocks: INCBIN "maps/SilphCo3F.blk"
 
-;INCLUDE "data/maps/headers/SilphCo10F.asm"
-;INCLUDE "scripts/SilphCo10F.asm"
-;INCLUDE "data/maps/objects/SilphCo10F.asm"
-;SilphCo10F_Blocks: INCBIN "maps/SilphCo10F.blk"
+INCLUDE "data/maps/headers/SilphCo10F.asm"
+INCLUDE "scripts/SilphCo10F.asm"
+INCLUDE "data/maps/objects/SilphCo10F.asm"
+SilphCo10F_Blocks: INCBIN "maps/SilphCo10F.blk"
 
-;INCLUDE "data/maps/headers/LancesRoom.asm"
-;INCLUDE "scripts/LancesRoom.asm"
-;INCLUDE "data/maps/objects/LancesRoom.asm"
-;LancesRoom_Blocks: INCBIN "maps/LancesRoom.blk"
+INCLUDE "data/maps/headers/LancesRoom.asm"
+INCLUDE "scripts/LancesRoom.asm"
+INCLUDE "data/maps/objects/LancesRoom.asm"
+LancesRoom_Blocks: INCBIN "maps/LancesRoom.blk"
 
-;INCLUDE "data/maps/headers/HallOfFame.asm"
-;INCLUDE "scripts/HallOfFame.asm"
-;INCLUDE "data/maps/objects/HallOfFame.asm"
-;HallOfFame_Blocks: INCBIN "maps/HallOfFame.blk"
+INCLUDE "data/maps/headers/HallOfFame.asm"
+INCLUDE "scripts/HallOfFame.asm"
+INCLUDE "data/maps/objects/HallOfFame.asm"
+HallOfFame_Blocks: INCBIN "maps/HallOfFame.blk"
 
 
 ;SECTION "Maps 15", ROMX
