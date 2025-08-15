@@ -4,7 +4,7 @@ PrintRedSNESText:
 
 RedBedroomSNESText::
 	text "<PLAYER>は"
-	line "ファミコンを　してる！"
+	line "スーパーファミコンを　してる！"
 	cont "<⋯>　<⋯>　よし！"
 	cont "そろそろ　でかけよう！"
 	done

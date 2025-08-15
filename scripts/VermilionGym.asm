@@ -144,21 +144,21 @@ VermilionGymLTSurgeText:
 	jp TextScriptEnd
 
 .PreBattleText:
-	text "ヘーイ！"
-	line "プア　リトル　ボーイ！"
+	text "ウエルカム　トウー　クチバジム！"
 
-	para "ユーの　ハンパな　パワーでは"
-	line "せんじょうじゃ　いき　のこれないネ"
+	para "ハーイ　ベイビー"
+	line "ユーが　チャレンジャー？"
 
-	para "ミーは　せんそうで"
-	line "エレクトリック　#　つかって"
-	cont "いき　のびたネ！"
+	para "ハッハー！"
+	line "そんな　ハンパな　パワーで"
+	cont "ミーに　しょうぶを　いどむとは"
+	cont "いい　どきょう　ネー！"
 
-	para "みんな　ビリビリ　シビレて"
-	line "うごけナーイ！"
+	para "ポケモン　バトル"
+	line "そんなに　あまく　ナーイ！"
 
-	para "ユーも　おなじ　みち　たどる"
-	line "ちがい　ナーイ！"
+	para "みんな　ビリビリ　シビれさせて"
+	line "あげ　マース！"
 	done
 
 .PostBattleAdviceText:

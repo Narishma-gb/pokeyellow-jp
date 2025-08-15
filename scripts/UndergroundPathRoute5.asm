@@ -12,7 +12,7 @@ UndergroundPathRoute5_TextPointers:
 
 UndergroundPathRoute5LittleGirlText:
 	text_asm
-	ld a, TRADE_FOR_SPOT
+	ld a, TRADE_FOR_RICKY
 	ld [wWhichTrade], a
 	predef DoInGameTradeDialogue
 	ld hl, UndergroundPathEntranceRoute5_TextScriptEndingText

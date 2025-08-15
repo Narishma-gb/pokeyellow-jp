@@ -168,7 +168,7 @@ SaffronGymSabrinaText:
 SaffronGymSabrinaMarshBadgeInfoText:
 	text "ゴールド　バッジで"
 	line "レベル７０　までの　#が"
-	cont "いうことを　ききます！"
+	cont "いうことを　きくように　なります"
 
 	para "それ　いじょう"
 	line "つよい　#は"
@@ -176,10 +176,10 @@ SaffronGymSabrinaMarshBadgeInfoText:
 	cont "あつかいが　たいへん　です！"
 
 	para "だけど　そだて　すぎなきゃ"
-	line "そういう　しんぱいは　むようよ！"
+	line "そういう　しんぱいは　ないわ！"
 
 	para "それから<⋯>！"
-	line "<TM>を　もって　いって"
+	line "わざマシンを　もって　いって"
 	done
 
 SaffronGymSabrinaReceivedTM46Text:
@@ -323,8 +323,8 @@ SaffronGymChanneler2EndBattleText:
 
 SaffronGymChanneler2AfterBattleText:
 	text "わたしも　まだ　まだ　だ<⋯>"
-	line "サイコキネシス　マスター　して"
-	cont "#に　おしえて　なくては！"
+	line "サイコキネシスを　マスター　して"
+	cont "#に　おしえ　なくては！"
 	done
 
 SaffronGymYoungster2BattleText:
@@ -383,7 +383,7 @@ SaffronGymYoungster3AfterBattleText:
 
 SaffronGymYoungster4BattleText:
 	text "ヤマブキ　ジム！"
-	cont "またの　なを"
+	line "またの　なを"
 	cont "エスパー　ようせい　じょ"
 	cont "おまえ<⋯>"
 

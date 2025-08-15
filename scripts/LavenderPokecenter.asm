@@ -8,6 +8,7 @@ LavenderPokecenter_TextPointers:
 	dw_const LavenderPokecenterGentlemanText,        TEXT_LAVENDERPOKECENTER_GENTLEMAN
 	dw_const LavenderPokecenterLittleGirlText,       TEXT_LAVENDERPOKECENTER_LITTLE_GIRL
 	dw_const LavenderPokecenterLinkReceptionistText, TEXT_LAVENDERPOKECENTER_LINK_RECEPTIONIST
+	dw_const LavenderPokecenterChanseyText,          TEXT_LAVENDERPOKECENTER_CHANSEY
 
 LavenderPokecenterLinkReceptionistText:
 	script_cable_club_receptionist
@@ -28,3 +29,8 @@ LavenderPokecenterLittleGirlText:
 
 	para "にげる　とちゅうで　ころされたわ"
 	done
+
+LavenderPokecenterChanseyText:
+	text_asm
+	callfar PokecenterChanseyText
+	jp TextScriptEnd

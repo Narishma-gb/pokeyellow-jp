@@ -36,15 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom23", ROMX
-; ROM $17 : $5C000 - $5FFFF
-	set_bank_offset 23
-
-	dr StarterDex, 23, $40D4
-	dr SetPartyMonTypes, 23, $769E
-
-	dr_end 23
-
 SECTION "rom24", ROMX
 ; ROM $18 : $60000 - $63FFF
 	set_bank_offset 24
@@ -137,6 +128,7 @@ Music_MeetEvilTrainer::
 Music_TitleScreen::
 Music_GameCorner::
 Music_Surfing::
+Music_JigglypuffSong::
 
 	dr PlayPokedexRatingSfx, 31, $50D6
 	dr Audio3_PlaySound, 31, $510D
@@ -396,13 +388,6 @@ SECTION "rom59", ROMX
 
 SECTION "rom60", ROMX
 ; ROM $3c : $F0000 - $F3FFF
-	set_bank_offset 60, $539C
-
-	dr CeladonMart3FPrintClerkText_cpy, 60, $57F4
-INCLUDE "scripts/CeladonMart3F_2.asm"
-INCLUDE "scripts/CeladonMansion1F_2.asm"
-INCLUDE "scripts/CeladonMansion3F_2.asm"
-INCLUDE "scripts/CeladonDiner_2.asm"
 	set_bank_offset 60, $5B98
 
 	dr MagikarpSalesman_cpy, 60, $60A1
@@ -414,6 +399,7 @@ INCLUDE "scripts/BillsHouse_2.asm"
 	set_bank_offset 60, $6886
 
 	dr CheckForHiddenObject, 60, $6AEA
+	dr Yellow_SampleSecondTrashCan, 60, $71FE
 
 	dr_end 60
 

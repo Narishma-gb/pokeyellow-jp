@@ -237,19 +237,21 @@ SECTION "Saffron Guards", ROMX
 INCLUDE "engine/events/saffron_guards.asm"
 
 
-;SECTION "Starter Dex", ROMX
+SECTION "Starter Dex", ROMX
 
-;INCLUDE "engine/events/starter_dex.asm"
+INCLUDE "engine/events/starter_dex.asm"
 
 
-;SECTION "Hidden Objects 3", ROMX
+SECTION "Hidden Objects 3", ROMX
 
-;INCLUDE "engine/pokemon/set_types.asm"
-;INCLUDE "engine/events/hidden_objects/reds_room.asm"
-;INCLUDE "engine/events/hidden_objects/route_15_binoculars.asm"
-;INCLUDE "engine/events/hidden_objects/museum_fossils.asm"
-;INCLUDE "engine/events/hidden_objects/school_blackboard.asm"
-;INCLUDE "engine/events/hidden_objects/vermilion_gym_trash.asm"
+INCLUDE "engine/pokemon/set_types.asm"
+INCLUDE "engine/events/hidden_objects/reds_room.asm"
+INCLUDE "engine/events/hidden_objects/route_15_binoculars.asm"
+INCLUDE "engine/events/hidden_objects/museum_fossils.asm"
+INCLUDE "engine/events/hidden_objects/fanclub_pictures.asm"
+INCLUDE "engine/events/hidden_objects/museum_fossils2.asm"
+INCLUDE "engine/events/hidden_objects/school_blackboard.asm"
+INCLUDE "engine/events/hidden_objects/vermilion_gym_trash.asm"
 
 
 ;SECTION "Cinnabar Lab Fossils", ROMX

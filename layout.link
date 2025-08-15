@@ -137,7 +137,11 @@ ROMX $16
 	"Saffron Guards"
 	"Garbage 22"
 ROMX $17
-	"rom23"
+	"Maps 15"
+	"Starter Dex"
+	"Maps 16"
+	"Hidden Objects 3"
+	"Garbage 23"
 ROMX $18
 	"rom24"
 ROMX $19
@@ -224,12 +228,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $17
-; 	"Maps 15"
-; 	"Starter Dex"
-; 	"Maps 16"
-; 	"Hidden Objects 3"
-; 	"Garbage 23"
 ; ROMX $18
 ; 	"Maps 17"
 ; 	"Cinnabar Lab Fossils"

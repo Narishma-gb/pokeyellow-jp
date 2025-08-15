@@ -27,8 +27,7 @@ LinkCableHelp::
 	ld hl, wStatusFlags5
 	set BIT_NO_TEXT_DELAY, [hl]
 	hlcoord 0, 0
-	ld b, 8
-	ld c, 12
+	lb bc, 8, 12
 	call TextBoxBorder
 	hlcoord 2, 2
 	ld de, HowToLinkText
@@ -84,7 +83,7 @@ LinkCableInfoTexts:
 LinkCableInfoText1:
 	text "ともだちの　ゲームボーイと"
 	line "ケーブルで　つないだら"
-	cont "#　センター　みぎがわの"
+	cont "ポケモンセンター　みぎがわの"
 	cont "カウンターの　おねえさんが"
 	cont "あんない　してくれます"
 	prompt
@@ -240,7 +239,7 @@ ViridianBlackboardPrlzText:
 
 	para "たたかい　おわっても"
 	line "マヒは　のこります"
-	cont "また　マヒなおしで　なおります"
+	cont "また　まひなおしで　なおります"
 	prompt
 
 ViridianBlackboardBurnText:

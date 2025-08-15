@@ -14,7 +14,8 @@ PewterGym_Script:
 .LoadNames:
 	ld hl, .CityName
 	ld de, .LeaderName
-	jp LoadGymLeaderAndCityName
+	call LoadGymLeaderAndCityName
+	ret
 
 .CityName:
 	db "ニビ@"
@@ -149,16 +150,19 @@ PewterGymBrockText:
 	done
 
 .PostBattleAdviceText:
-	text "この　ひろい　せかいでは"
-	line "いろんな　やつが　#で"
-	cont "たたかいを　くりひろげてる！"
+	text "この　ひろい　せかいには"
+	line "いろんな　やつが　いる！"
+	cont "#を"
+	cont "たたかわせたり　そだてたり<⋯>"
 
-	para "きみには"
-	line "#　<TRAINER>の"
-	cont "さいのうが　ある　ようだ！"
+	para "おれは　ここで"
+	line "#を　そだてる　ブリーダーの"
+	cont "しゅぎょうを　しているんだ！"
 
-	para "ハナダ　シティの　ジムにも　いき"
-	line "きみの　ちからを"
+	para "きみも　つよい"
+	line "#　トレーナーを　めざすなら"
+	cont "ハナダ　シティの　ジムにも　いき"
+	cont "きみの　ちからを"
 	cont "ためして　みると　いい"
 	done
 
@@ -203,7 +207,7 @@ PewterGymBrockReceivedBoulderBadgeText:
 
 	para "<PLAYER>は　タケシから"
 	line "グレー　バッジを　もらった！@"
-	sound_level_up ; probably supposed to play SFX_GET_ITEM_1 but the wrong music bank is loaded
+	sound_get_item_1
 	text_start
 
 	para "グレー　バッジを　つけてると"
@@ -254,6 +258,9 @@ PewterGymGuideText:
 	ld a, [wCurrentMenuItem]
 	and a
 	jr nz, .PewterGymGuideBeginAdviceText
+	ld a, [wd471]
+	bit 7, a
+	jp nz, .asm_5c3fa
 	ld hl, PewterGymGuideBeginAdviceText
 	call PrintText
 	jr .PewterGymGuideAdviceText
@@ -268,6 +275,10 @@ PewterGymGuideText:
 	ld hl, PewterGymGuidePostBattleText
 	call PrintText
 .done
+	jp TextScriptEnd
+.asm_5c3fa
+	ld hl, PewterGymText_5c41c
+	call PrintText
 	jp TextScriptEnd
 
 PewterGymGuidePreAdviceText:
@@ -308,4 +319,17 @@ PewterGymGuidePostBattleText:
 	text "さすがだな！"
 	line "この　ちょうしで　めざせ！"
 	cont "#　チャンピオン！"
+	done
+
+PewterGymText_5c41c:
+	text "よっしゃーッ！"
+	line "じゃ　さっそく<⋯>！"
+
+	para "んー　きみの　ピカチュウじゃ"
+	line "このジムを　かちぬくのは"
+	cont "かなり　きびしいぜ！"
+
+	para "タケシが　つかう　じめん#には"
+	line "でんきこうげきは"
+	cont "まったく　つうじないからな！"
 	done

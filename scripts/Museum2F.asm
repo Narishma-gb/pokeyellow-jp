@@ -1,5 +1,6 @@
 Museum2F_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ret
 
 Museum2F_TextPointers:
 	def_text_pointers
@@ -42,8 +43,43 @@ Museum2FBrunetteGirlText:
 	done
 
 Museum2FHikerText:
+	text_asm
+	ld a, [wd471]
+	bit 7, a
+	jr nz, .asm_5c1f6
+	ld hl, Museum2FText_5c20e
+	call PrintText
+	jr .asm_5c20b
+
+.asm_5c1f6
+	ld a, [wPikachuHappiness]
+	cp 101
+	jr c, .asm_5c205
+	ld hl, Museum2FText_5c218
+	call PrintText
+	jr .asm_5c20b
+
+.asm_5c205
+	ld hl, Museum2FText_5c213
+	call PrintText
+.asm_5c20b
+	jp TextScriptEnd
+
+Museum2FText_5c20e:
 	text "はい　はい！"
 	line "ピカチュウだな！　こんどな！"
+	done
+
+Museum2FText_5c213:
+	text "きみの　ピカチュウ"
+	line "なついてないようだが　よかったら"
+	cont "むすめに　ゆずって　くれないか？"
+	done
+
+Museum2FText_5c218:
+	text "きみの　ピカチュウが　ほしいんだが"
+	line "そんなに　なついてちゃ"
+	cont "もらうわけには　いかないなぁ<⋯>"
 	done
 
 Museum2FSpaceShuttleSignText:

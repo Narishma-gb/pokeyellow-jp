@@ -122,20 +122,20 @@ CeruleanGymMistyText:
 	jp TextScriptEnd
 
 .PreBattleText:
-	text "あのね　きみ！"
+	text "きみ！"
 
-	para "#　そだてる　にも"
-	line "ポリシーが　ある　やつ　だけが"
-	cont "プロに　なれるの！"
-
-	para "あなたは　#　つかまえて"
-	line "そだてる　とき"
-	cont "なにを　かんがえてる？"
+	para "きみは　ポケモン　そだてる　とき"
+	line "なにか　ポリシーが　ある？"
 
 	para "わたしの　ポリシーはね<⋯>"
+	line "みず　タイプ　ポケモンで　せめて"
+	cont "せめて　<⋯>せめまくる　ことよ！"
 
-	para "みず　タイプ　#で　せめて"
-	line "せめて　<⋯>せめまくる　ことよ！"
+	para "さあ！　せかいの　びしょうじょ"
+	line "カスミさまが　あいてに　なるわ！"
+
+	para "いくわよ！"
+	line "マーイ　ステディ！"
 	done
 
 .TM11ExplanationText:
@@ -175,16 +175,13 @@ CeruleanGymMistyTM11NoRoomText:
 	done
 
 CeruleanGymMistyReceivedCascadeBadgeText:
-	text "うーん<⋯>！"
-	line "わたしの　まけね"
+	text "えー！わたしの　まけ！？"
 
 	para "しょうが　ない！"
 
 	para "わたしに　かった　しょうこに"
-	line "ブルー　バッジを　あげる！@"
-	sound_get_key_item ; actually plays the second channel of SFX_BALL_POOF due to the wrong music bank being loaded
-	text_promptbutton
-	text_end
+	line "ブルー　バッジを　あげる！"
+	prompt
 
 CeruleanGymCooltrainerFText:
 	text_asm

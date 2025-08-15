@@ -1,5 +1,6 @@
 ViridianForestSouthGate_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ret
 
 ViridianForestSouthGate_TextPointers:
 	def_text_pointers
@@ -13,7 +14,9 @@ ViridianForestSouthGateGirlText:
 	done
 
 ViridianForestSouthGateLittleGirlText:
-	text "コラッタは　ちっちゃい　けど"
-	line "まえばの　いちげきは　あなどれない"
-	cont "もう　つかまえた　かしら？"
+	text "いろんな　#を　あつめるなら"
+	line "いろんな　ところを　あるかないとね"
+
+	para "トキワのもり　いがいだと"
+	line "また　べつの#が　みつかるわ"
 	done

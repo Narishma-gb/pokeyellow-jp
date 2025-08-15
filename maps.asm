@@ -827,157 +827,157 @@ INCLUDE "data/maps/objects/HallOfFame.asm"
 HallOfFame_Blocks: INCBIN "maps/HallOfFame.blk"
 
 
-;SECTION "Maps 15", ROMX
+SECTION "Maps 15", ROMX
 
-;SaffronMart_Blocks:
-;LavenderMart_Blocks:
-;CeruleanMart_Blocks:
-;VermilionMart_Blocks: INCBIN "maps/_Mart.blk"
+SaffronMart_Blocks:
+LavenderMart_Blocks:
+CeruleanMart_Blocks:
+VermilionMart_Blocks: INCBIN "maps/_Mart.blk"
 
-;CopycatsHouse2F_Blocks:
-;RedsHouse2F_Blocks: INCBIN "maps/_House2F.blk"
+CopycatsHouse2F_Blocks:
+RedsHouse2F_Blocks: INCBIN "maps/_House2F.blk"
 
-;Museum1F_Blocks: INCBIN "maps/Museum1F.blk"
+Museum1F_Blocks: INCBIN "maps/Museum1F.blk"
 
-;Museum2F_Blocks: INCBIN "maps/Museum2F.blk"
+Museum2F_Blocks: INCBIN "maps/Museum2F.blk"
 
-;SaffronPokecenter_Blocks:
-;VermilionPokecenter_Blocks:
-;LavenderPokecenter_Blocks:
-;PewterPokecenter_Blocks: INCBIN "maps/_Pokecenter.blk"
+SaffronPokecenter_Blocks:
+VermilionPokecenter_Blocks:
+LavenderPokecenter_Blocks:
+PewterPokecenter_Blocks: INCBIN "maps/_Pokecenter.blk"
 
-;UndergroundPathRoute7_Blocks:
-;UndergroundPathRoute7Copy_Blocks:
-;UndergroundPathRoute6_Blocks:
-;UndergroundPathRoute5_Blocks: INCBIN "maps/_UndergroundPathEntrance.blk"
+UndergroundPathRoute7_Blocks:
+UndergroundPathRoute7Copy_Blocks:
+UndergroundPathRoute6_Blocks:
+UndergroundPathRoute5_Blocks: INCBIN "maps/_UndergroundPathEntrance.blk"
 
-;Route2Gate_Blocks:
-;ViridianForestSouthGate_Blocks:
-;ViridianForestNorthGate_Blocks: INCBIN "maps/_ForestGate.blk"
+Route2Gate_Blocks:
+ViridianForestSouthGate_Blocks:
+ViridianForestNorthGate_Blocks: INCBIN "maps/_ForestGate.blk"
 
-;INCLUDE "data/maps/headers/RedsHouse2F.asm"
-;INCLUDE "scripts/RedsHouse2F.asm"
-;INCLUDE "data/maps/objects/RedsHouse2F.asm"
+INCLUDE "data/maps/headers/RedsHouse2F.asm"
+INCLUDE "scripts/RedsHouse2F.asm"
+INCLUDE "data/maps/objects/RedsHouse2F.asm"
 
 
-;SECTION "Maps 16", ROMX
+SECTION "Maps 16", ROMX
 
-;INCLUDE "data/maps/headers/Museum1F.asm"
-;INCLUDE "scripts/Museum1F.asm"
-;INCLUDE "data/maps/objects/Museum1F.asm"
+INCLUDE "data/maps/headers/Museum1F.asm"
+INCLUDE "scripts/Museum1F.asm"
+INCLUDE "data/maps/objects/Museum1F.asm"
 
-;INCLUDE "data/maps/headers/Museum2F.asm"
-;INCLUDE "scripts/Museum2F.asm"
-;INCLUDE "data/maps/objects/Museum2F.asm"
+INCLUDE "data/maps/headers/Museum2F.asm"
+INCLUDE "scripts/Museum2F.asm"
+INCLUDE "data/maps/objects/Museum2F.asm"
 
-;INCLUDE "data/maps/headers/PewterGym.asm"
-;INCLUDE "scripts/PewterGym.asm"
-;INCLUDE "data/maps/objects/PewterGym.asm"
-;PewterGym_Blocks: INCBIN "maps/PewterGym.blk"
+INCLUDE "data/maps/headers/PewterGym.asm"
+INCLUDE "scripts/PewterGym.asm"
+INCLUDE "data/maps/objects/PewterGym.asm"
+PewterGym_Blocks: INCBIN "maps/PewterGym.blk"
 
-;INCLUDE "data/maps/headers/PewterPokecenter.asm"
-;INCLUDE "scripts/PewterPokecenter.asm"
-;INCLUDE "data/maps/objects/PewterPokecenter.asm"
+INCLUDE "data/maps/headers/PewterPokecenter.asm"
+INCLUDE "scripts/PewterPokecenter.asm"
+INCLUDE "data/maps/objects/PewterPokecenter.asm"
 
-;INCLUDE "data/maps/headers/CeruleanPokecenter.asm"
-;INCLUDE "scripts/CeruleanPokecenter.asm"
-;INCLUDE "data/maps/objects/CeruleanPokecenter.asm"
-;CeruleanPokecenter_Blocks: INCBIN "maps/_Pokecenter.blk"
+INCLUDE "data/maps/headers/CeruleanPokecenter.asm"
+INCLUDE "scripts/CeruleanPokecenter.asm"
+INCLUDE "data/maps/objects/CeruleanPokecenter.asm"
+CeruleanPokecenter_Blocks: INCBIN "maps/_Pokecenter.blk"
 
-;INCLUDE "data/maps/headers/CeruleanGym.asm"
-;INCLUDE "scripts/CeruleanGym.asm"
-;INCLUDE "data/maps/objects/CeruleanGym.asm"
-;CeruleanGym_Blocks: INCBIN "maps/CeruleanGym.blk"
+INCLUDE "data/maps/headers/CeruleanGym.asm"
+INCLUDE "scripts/CeruleanGym.asm"
+INCLUDE "data/maps/objects/CeruleanGym.asm"
+CeruleanGym_Blocks: INCBIN "maps/CeruleanGym.blk"
 
-;INCLUDE "data/maps/headers/CeruleanMart.asm"
-;INCLUDE "scripts/CeruleanMart.asm"
-;INCLUDE "data/maps/objects/CeruleanMart.asm"
+INCLUDE "data/maps/headers/CeruleanMart.asm"
+INCLUDE "scripts/CeruleanMart.asm"
+INCLUDE "data/maps/objects/CeruleanMart.asm"
 
-;INCLUDE "data/maps/headers/LavenderPokecenter.asm"
-;INCLUDE "scripts/LavenderPokecenter.asm"
-;INCLUDE "data/maps/objects/LavenderPokecenter.asm"
+INCLUDE "data/maps/headers/LavenderPokecenter.asm"
+INCLUDE "scripts/LavenderPokecenter.asm"
+INCLUDE "data/maps/objects/LavenderPokecenter.asm"
 
-;INCLUDE "data/maps/headers/LavenderMart.asm"
-;INCLUDE "scripts/LavenderMart.asm"
-;INCLUDE "data/maps/objects/LavenderMart.asm"
+INCLUDE "data/maps/headers/LavenderMart.asm"
+INCLUDE "scripts/LavenderMart.asm"
+INCLUDE "data/maps/objects/LavenderMart.asm"
 
-;INCLUDE "data/maps/headers/VermilionPokecenter.asm"
-;INCLUDE "scripts/VermilionPokecenter.asm"
-;INCLUDE "data/maps/objects/VermilionPokecenter.asm"
+INCLUDE "data/maps/headers/VermilionPokecenter.asm"
+INCLUDE "scripts/VermilionPokecenter.asm"
+INCLUDE "data/maps/objects/VermilionPokecenter.asm"
 
-;INCLUDE "data/maps/headers/VermilionMart.asm"
-;INCLUDE "scripts/VermilionMart.asm"
-;INCLUDE "data/maps/objects/VermilionMart.asm"
+INCLUDE "data/maps/headers/VermilionMart.asm"
+INCLUDE "scripts/VermilionMart.asm"
+INCLUDE "data/maps/objects/VermilionMart.asm"
 
-;INCLUDE "data/maps/headers/VermilionGym.asm"
-;INCLUDE "scripts/VermilionGym.asm"
-;INCLUDE "data/maps/objects/VermilionGym.asm"
-;VermilionGym_Blocks: INCBIN "maps/VermilionGym.blk"
+INCLUDE "data/maps/headers/VermilionGym.asm"
+INCLUDE "scripts/VermilionGym.asm"
+INCLUDE "data/maps/objects/VermilionGym.asm"
+VermilionGym_Blocks: INCBIN "maps/VermilionGym.blk"
 
-;INCLUDE "data/maps/headers/CopycatsHouse2F.asm"
-;INCLUDE "scripts/CopycatsHouse2F.asm"
-;INCLUDE "data/maps/objects/CopycatsHouse2F.asm"
+INCLUDE "data/maps/headers/CopycatsHouse2F.asm"
+INCLUDE "scripts/CopycatsHouse2F.asm"
+INCLUDE "data/maps/objects/CopycatsHouse2F.asm"
 
-;INCLUDE "data/maps/headers/FightingDojo.asm"
-;INCLUDE "scripts/FightingDojo.asm"
-;INCLUDE "data/maps/objects/FightingDojo.asm"
-;FightingDojo_Blocks: INCBIN "maps/FightingDojo.blk"
+INCLUDE "data/maps/headers/FightingDojo.asm"
+INCLUDE "scripts/FightingDojo.asm"
+INCLUDE "data/maps/objects/FightingDojo.asm"
+FightingDojo_Blocks: INCBIN "maps/FightingDojo.blk"
 
-;INCLUDE "data/maps/headers/SaffronGym.asm"
-;INCLUDE "scripts/SaffronGym.asm"
-;INCLUDE "data/maps/objects/SaffronGym.asm"
-;SaffronGym_Blocks: INCBIN "maps/SaffronGym.blk"
+INCLUDE "data/maps/headers/SaffronGym.asm"
+INCLUDE "scripts/SaffronGym.asm"
+INCLUDE "data/maps/objects/SaffronGym.asm"
+SaffronGym_Blocks: INCBIN "maps/SaffronGym.blk"
 
-;INCLUDE "data/maps/headers/SaffronMart.asm"
-;INCLUDE "scripts/SaffronMart.asm"
-;INCLUDE "data/maps/objects/SaffronMart.asm"
+INCLUDE "data/maps/headers/SaffronMart.asm"
+INCLUDE "scripts/SaffronMart.asm"
+INCLUDE "data/maps/objects/SaffronMart.asm"
 
-;INCLUDE "data/maps/headers/SilphCo1F.asm"
-;INCLUDE "scripts/SilphCo1F.asm"
-;INCLUDE "data/maps/objects/SilphCo1F.asm"
-;SilphCo1F_Blocks: INCBIN "maps/SilphCo1F.blk"
+INCLUDE "data/maps/headers/SilphCo1F.asm"
+INCLUDE "scripts/SilphCo1F.asm"
+INCLUDE "data/maps/objects/SilphCo1F.asm"
+SilphCo1F_Blocks: INCBIN "maps/SilphCo1F.blk"
 
-;INCLUDE "data/maps/headers/SaffronPokecenter.asm"
-;INCLUDE "scripts/SaffronPokecenter.asm"
-;INCLUDE "data/maps/objects/SaffronPokecenter.asm"
+INCLUDE "data/maps/headers/SaffronPokecenter.asm"
+INCLUDE "scripts/SaffronPokecenter.asm"
+INCLUDE "data/maps/objects/SaffronPokecenter.asm"
 
-;INCLUDE "data/maps/headers/ViridianForestNorthGate.asm"
-;INCLUDE "scripts/ViridianForestNorthGate.asm"
-;INCLUDE "data/maps/objects/ViridianForestNorthGate.asm"
+INCLUDE "data/maps/headers/ViridianForestNorthGate.asm"
+INCLUDE "scripts/ViridianForestNorthGate.asm"
+INCLUDE "data/maps/objects/ViridianForestNorthGate.asm"
 
-;INCLUDE "data/maps/headers/Route2Gate.asm"
-;INCLUDE "scripts/Route2Gate.asm"
-;INCLUDE "data/maps/objects/Route2Gate.asm"
+INCLUDE "data/maps/headers/Route2Gate.asm"
+INCLUDE "scripts/Route2Gate.asm"
+INCLUDE "data/maps/objects/Route2Gate.asm"
 
-;INCLUDE "data/maps/headers/ViridianForestSouthGate.asm"
-;INCLUDE "scripts/ViridianForestSouthGate.asm"
-;INCLUDE "data/maps/objects/ViridianForestSouthGate.asm"
+INCLUDE "data/maps/headers/ViridianForestSouthGate.asm"
+INCLUDE "scripts/ViridianForestSouthGate.asm"
+INCLUDE "data/maps/objects/ViridianForestSouthGate.asm"
 
-;INCLUDE "data/maps/headers/UndergroundPathRoute5.asm"
-;INCLUDE "scripts/UndergroundPathRoute5.asm"
-;INCLUDE "data/maps/objects/UndergroundPathRoute5.asm"
+INCLUDE "data/maps/headers/UndergroundPathRoute5.asm"
+INCLUDE "scripts/UndergroundPathRoute5.asm"
+INCLUDE "data/maps/objects/UndergroundPathRoute5.asm"
 
-;INCLUDE "data/maps/headers/UndergroundPathRoute6.asm"
-;INCLUDE "scripts/UndergroundPathRoute6.asm"
-;INCLUDE "data/maps/objects/UndergroundPathRoute6.asm"
+INCLUDE "data/maps/headers/UndergroundPathRoute6.asm"
+INCLUDE "scripts/UndergroundPathRoute6.asm"
+INCLUDE "data/maps/objects/UndergroundPathRoute6.asm"
 
-;INCLUDE "data/maps/headers/UndergroundPathRoute7.asm"
-;INCLUDE "scripts/UndergroundPathRoute7.asm"
-;INCLUDE "data/maps/objects/UndergroundPathRoute7.asm"
+INCLUDE "data/maps/headers/UndergroundPathRoute7.asm"
+INCLUDE "scripts/UndergroundPathRoute7.asm"
+INCLUDE "data/maps/objects/UndergroundPathRoute7.asm"
 
-;INCLUDE "data/maps/headers/UndergroundPathRoute7Copy.asm"
-;INCLUDE "scripts/UndergroundPathRoute7Copy.asm"
-;INCLUDE "data/maps/objects/UndergroundPathRoute7Copy.asm"
+INCLUDE "data/maps/headers/UndergroundPathRoute7Copy.asm"
+INCLUDE "scripts/UndergroundPathRoute7Copy.asm"
+INCLUDE "data/maps/objects/UndergroundPathRoute7Copy.asm"
 
-;INCLUDE "data/maps/headers/SilphCo9F.asm"
-;INCLUDE "scripts/SilphCo9F.asm"
-;INCLUDE "data/maps/objects/SilphCo9F.asm"
-;SilphCo9F_Blocks: INCBIN "maps/SilphCo9F.blk"
+INCLUDE "data/maps/headers/SilphCo9F.asm"
+INCLUDE "scripts/SilphCo9F.asm"
+INCLUDE "data/maps/objects/SilphCo9F.asm"
+SilphCo9F_Blocks: INCBIN "maps/SilphCo9F.blk"
 
-;INCLUDE "data/maps/headers/VictoryRoad1F.asm"
-;INCLUDE "scripts/VictoryRoad1F.asm"
-;INCLUDE "data/maps/objects/VictoryRoad1F.asm"
-;VictoryRoad1F_Blocks: INCBIN "maps/VictoryRoad1F.blk"
+INCLUDE "data/maps/headers/VictoryRoad1F.asm"
+INCLUDE "scripts/VictoryRoad1F.asm"
+INCLUDE "data/maps/objects/VictoryRoad1F.asm"
+VictoryRoad1F_Blocks: INCBIN "maps/VictoryRoad1F.blk"
 
 
 ;SECTION "Maps 17", ROMX
@@ -1233,14 +1233,12 @@ INCLUDE "scripts/Route1_2.asm"
 INCLUDE "scripts/Route22_2.asm"
 INCLUDE "scripts/RedsHouse1F_2.asm"
 INCLUDE "scripts/ViridianSchoolHouse_2.asm"
-;INCLUDE "scripts/Museum1F_2.asm"
-;INCLUDE "scripts/PewterPokecenter_2.asm"
-;INCLUDE "scripts/PokemonTower2F_2.asm"
-;INCLUDE "scripts/CeladonMart3F_2.asm"
-;INCLUDE "scripts/CeladonMansion1F_2.asm"
-;INCLUDE "scripts/CeladonMansion3F_2.asm"
-;INCLUDE "scripts/GameCorner_2.asm"
-;INCLUDE "scripts/CeladonDiner_2.asm"
+INCLUDE "scripts/Museum1F_2.asm"
+INCLUDE "scripts/PewterPokecenter_2.asm"
+INCLUDE "scripts/CeladonMart3F_2.asm"
+INCLUDE "scripts/CeladonMansion1F_2.asm"
+INCLUDE "scripts/CeladonMansion3F_2.asm"
+INCLUDE "scripts/CeladonDiner_2.asm"
 ;INCLUDE "scripts/SafariZoneGate_2.asm"
 ;INCLUDE "scripts/CinnabarGym_3.asm"
 ;INCLUDE "scripts/MtMoonPokecenter_2.asm"
