@@ -19,10 +19,12 @@ ViridianForest_TextPointers:
 	dw_const ViridianForestYoungster2Text,      TEXT_VIRIDIANFOREST_YOUNGSTER2
 	dw_const ViridianForestYoungster3Text,      TEXT_VIRIDIANFOREST_YOUNGSTER3
 	dw_const ViridianForestYoungster4Text,      TEXT_VIRIDIANFOREST_YOUNGSTER4
-	dw_const PickUpItemText,                    TEXT_VIRIDIANFOREST_ANTIDOTE
-	dw_const PickUpItemText,                    TEXT_VIRIDIANFOREST_POTION
-	dw_const PickUpItemText,                    TEXT_VIRIDIANFOREST_POKE_BALL
+	dw_const ViridianForestCooltrainerFText,    TEXT_VIRIDIANFOREST_COOLTRAINER_F
 	dw_const ViridianForestYoungster5Text,      TEXT_VIRIDIANFOREST_YOUNGSTER5
+	dw_const PickUpItemText,                    TEXT_VIRIDIANFOREST_POTION1
+	dw_const PickUpItemText,                    TEXT_VIRIDIANFOREST_POTION2
+	dw_const PickUpItemText,                    TEXT_VIRIDIANFOREST_POKE_BALL
+	dw_const ViridianForestYoungster6Text,      TEXT_VIRIDIANFOREST_YOUNGSTER6
 	dw_const ViridianForestTrainerTips1Text,    TEXT_VIRIDIANFOREST_TRAINER_TIPS1
 	dw_const ViridianForestUseAntidoteSignText, TEXT_VIRIDIANFOREST_USE_ANTIDOTE_SIGN
 	dw_const ViridianForestTrainerTips2Text,    TEXT_VIRIDIANFOREST_TRAINER_TIPS2
@@ -34,6 +36,8 @@ ViridianForest_TextPointers:
 	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_0, 4, Youngster2
 	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_1, 4, Youngster3
 	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_2, 1, Youngster4
+	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_3, 0, CooltrainerF
+	trainer EVENT_BEAT_VIRIDIAN_FOREST_TRAINER_4, 4, Youngster5
 	db -1 ; end
 
 ViridianForestYoungster1Text:
@@ -47,18 +51,27 @@ ViridianForestYoungster1Text:
 ViridianForestYoungster2Text:
 	text_asm
 	ld hl, ViridianForest_TrainerHeader0
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr ViridianForestTalkToTrainer
 
 ViridianForestYoungster3Text:
 	text_asm
 	ld hl, ViridianForest_TrainerHeader1
-	call TalkToTrainer
-	jp TextScriptEnd
+	jr ViridianForestTalkToTrainer
 
 ViridianForestYoungster4Text:
 	text_asm
 	ld hl, ViridianForest_TrainerHeader2
+	jr ViridianForestTalkToTrainer
+
+ViridianForestCooltrainerFText:
+	text_asm
+	ld hl, ViridianForest_TrainerHeader3
+	jr ViridianForestTalkToTrainer
+
+ViridianForestYoungster5Text:
+	text_asm
+	ld hl, ViridianForest_TrainerHeader4
+ViridianForestTalkToTrainer:
 	call TalkToTrainer
 	jp TextScriptEnd
 
@@ -112,9 +125,39 @@ ViridianForestYoungster4AfterBattleText:
 	line "きみも　さがして　みて　くれる？"
 	done
 
-ViridianForestYoungster5Text:
+ViridianForestCooltrainerFBattleText:
+	text "ねえ　ねえ"
+	line "あなた　ピカチュウ　もってる？"
+	done
+
+ViridianForestCooltrainerFEndBattleText:
+	text "うそでしょー！？"
+	prompt
+
+ViridianForestCooltrainerFAfterBattleText:
+	text "こんなに　さがしても　ピカチュウ"
+	line "ぜんぜん　みつからないの"
+	cont "きっと　ここには　いないのよ！"
+	done
+
+ViridianForestYoungster5BattleText:
+	text "さいきょうの　<TRAINER>を　めざす"
+	line "ぼくに　かてるかな？"
+	done
+
+ViridianForestYoungster5EndBattleText:
+	text "<⋯>　せっかく"
+	line "キャタピーから　そだてたのに"
+	prompt
+
+ViridianForestYoungster5AfterBattleText:
+	text "かたくて　こうげき　できる"
+	line "トランセルって　さいこうだよ！"
+	done
+
+ViridianForestYoungster6Text:
 	text "#　とろうとして"
-	line "モンスター　ボール　なげてたら"
+	line "モンスターボール　なげてたら"
 	cont "すぐ　なくなっちゃった"
 
 	para "きみも　おおめに"
@@ -122,46 +165,34 @@ ViridianForestYoungster5Text:
 	done
 
 ViridianForestTrainerTips1Text:
-	text "<⋯>　おとくな　けいじばん！"
-
-	para "もってる　#が　よわって　きて"
-	line "たたかわせたく　ない　ときは"
-	cont "くさむらを　よけて　かえろう！"
-	done
+	text_asm
+	ld hl, ViridianForestPrintTrainerTips1Text
+	jp ViridianForestSign_Common
 
 ViridianForestUseAntidoteSignText:
-	text "どくを　くらったら　どくけし！"
-	line "フレンドリィ　ショップで！"
-	done
+	text_asm
+	ld hl, ViridianForestPrintUseAntidoteSignText
+	jp ViridianForestSign_Common
 
 ViridianForestTrainerTips2Text:
-	text "<⋯>　おとくな　けいじばん！"
-
-	para "#ずかんは"
-	line "<PC>つうしんで"
-	cont "オーキドはかせに　みてもらえる！"
-	done
+	text_asm
+	ld hl, ViridianForestPrintTrainerTips2Text
+	jp ViridianForestSign_Common
 
 ViridianForestTrainerTips3Text:
-	text "<⋯>　おとくな　けいじばん！"
-
-	para "ひとの　#は　ひとの　もの！"
-	line "やせいの　#に　だけ"
-	cont "モンスターボールを　なげて"
-	cont "つかまえよう！"
-	done
+	text_asm
+	ld hl, ViridianForestPrintTrainerTips3Text
+	jp ViridianForestSign_Common
 
 ViridianForestTrainerTips4Text:
-	text "<⋯>　おとくな　けいじばん！"
-
-	para "#を　つかまえる　ときは"
-	line "なるべく　よわらせてから！"
-
-	para "#が　げんきだと"
-	line "にげるかも　しれないよ！"
-	done
+	text_asm
+	ld hl, ViridianForestPrintTrainerTips4Text
+	jp ViridianForestSign_Common
 
 ViridianForestLeavingSignText:
-	text "トキワの　もり　<⋯>　でぐち"
-	line "このさき　ニビ　シティ"
-	done
+	text_asm
+	ld hl, ViridianForestPrintTrainerTips1Text ; supposed to be ViridianForestPrintLeavingSignText
+ViridianForestSign_Common:
+	ld b, BANK(ViridianForestPrintTrainerTips1Text)
+	call Bankswitch
+	jp TextScriptEnd

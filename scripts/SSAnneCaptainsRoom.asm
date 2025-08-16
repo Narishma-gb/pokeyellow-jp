@@ -3,7 +3,7 @@ SSAnneCaptainsRoom_Script:
 	jp EnableAutoTextBoxDrawing
 
 SSAnneCaptainsRoomEventScript:
-	CheckEvent EVENT_RUBBED_CAPTAINS_BACK
+	CheckEvent EVENT_GOT_HM01
 	ret nz
 	ld hl, wStatusFlags3
 	set BIT_NO_NPC_FACE_PLAYER, [hl]
@@ -29,6 +29,8 @@ SSAnneCaptainsRoomCaptainText:
 	ld hl, SSAnneCaptainsRoomCaptainReceivedHM01Text
 	call PrintText
 	SetEvent EVENT_GOT_HM01
+	ld hl, wStatusFlags3
+	res BIT_NO_NPC_FACE_PLAYER, [hl]
 	jr .done
 .bag_full
 	ld hl, SSAnneCaptainsRoomCaptainHM01NoRoomText
@@ -55,9 +57,7 @@ SSAnneCaptainsRoomRubCaptainsBackText:
 	cp BANK("Audio Engine 3")
 	ld [wAudioSavedROMBank], a
 	jr nz, .not_audio_engine_3
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	ld a, BANK(Music_PkmnHealed)
 	ld [wAudioROMBank], a
 .not_audio_engine_3

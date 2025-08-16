@@ -1,5 +1,6 @@
 PokemonTower1F_Script:
-	jp EnableAutoTextBoxDrawing
+	call EnableAutoTextBoxDrawing
+	ret
 
 PokemonTower1F_TextPointers:
 	def_text_pointers

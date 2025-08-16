@@ -1,8 +1,5 @@
 SSAnne2FRooms_Script:
-	ld a, 1 << BIT_NO_AUTO_TEXT_BOX
-	ld [wAutoTextBoxDrawingControl], a
-	xor a
-	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
+	call DisableAutoTextBoxDrawing
 	ld hl, SSAnne2FRooms_TrainerHeaders
 	ld de, SSAnne2FRooms_ScriptPointers
 	ld a, [wSSAnne2FRoomsCurScript]
@@ -107,52 +104,23 @@ SSAnne2FRoomsGrampsText:
 
 SSAnne2FRoomsGentleman5Text:
 	text_asm
-	ld hl, .Text
-	call PrintText
+	farcall SSAnne2FRoomsPrintGentleman5Text
 	jp TextScriptEnd
-
-.Text:
-	text "セキチク　シティ　サファリ　ゾーン"
-	line "いった　こと　あるかね？"
-
-	para "あそこは　めずらしい　#が"
-	line "たくさん　いた！"
-	done
 
 SSAnne2FRoomsLittleBoyText:
 	text_asm
-	ld hl, .Text
-	call PrintText
+	farcall SSAnne2FRoomsPrintLittleBoyText
 	jp TextScriptEnd
-
-.Text:
-	text "パパも　ぼくも"
-	line "サファリ　ゾーン　だいすき！"
-	cont "また　あそびに　いきたいな！"
-	done
 
 SSAnne2FRoomsBrunetteGirlText:
 	text_asm
-	ld hl, .Text
-	call PrintText
+	farcall SSAnne2FRoomsPrintBrunetteGirlText
 	jp TextScriptEnd
-
-.Text:
-	text "せんちょうさん　みたんだけど"
-	line "ぐあい　わるいって"
-	cont "まっさおな　かお　してたよ！"
-	done
 
 SSAnne2FRoomsBeautyText:
 	text_asm
-	ld hl, .Text
-	call PrintText
+	farcall SSAnne2FRoomsPrintBeautyText
 	jp TextScriptEnd
-
-.Text:
-	text "けっこう　おおい　らしいわ！"
-	line "ふなよい　する　ひと！"
-	done
 
 SSAnne2FRoomsGentleman1BattleText:
 	text "わかもの　との　しょうぶ　こそ"

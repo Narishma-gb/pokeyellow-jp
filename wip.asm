@@ -36,12 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom24", ROMX
-; ROM $18 : $60000 - $63FFF
-	set_bank_offset 24
-
-	dr_end 24
-
 SECTION "rom28", ROMX
 ; ROM $1c : $70000 - $73FFF
 	set_bank_offset 28
@@ -118,6 +112,7 @@ SECTION "rom30", ROMX
 
 	dr_end 30
 
+SECTION "Audio Engine 3", ROMX
 SECTION "rom31", ROMX
 ; ROM $1f : $7C000 - $7FFFF
 	set_bank_offset 31
@@ -271,6 +266,7 @@ SECTION "rom48", ROMX
 	dr HallOfFamePC, 48, $4698
 	dr ViridianCityMovePikachu, 48, $4CE8
 	dr OaksLabPikachuMovementScript, 48, $4CF6
+	dr PokemonTower2FPikachuMovementScript, 48, $4D19
 	dr GameCornerPikachuMovementScript, 48, $4D27
 	dr Func_f250b, 48, $4D35
 
@@ -396,9 +392,12 @@ INCLUDE "scripts/MtMoonPokecenter_2.asm"
 
 	dr BillsHousePrintBillPokemonText_cpy, 60, $659A
 INCLUDE "scripts/BillsHouse_2.asm"
-	set_bank_offset 60, $6886
+INCLUDE "scripts/ViridianForest_2.asm"
+INCLUDE "scripts/SSAnne2FRooms_2.asm"
+INCLUDE "scripts/SilphCo11F_2.asm"
+	set_bank_offset 60, $6AEA
+CheckForHiddenObject::
 
-	dr CheckForHiddenObject, 60, $6AEA
 	dr Yellow_SampleSecondTrashCan, 60, $71FE
 
 	dr_end 60

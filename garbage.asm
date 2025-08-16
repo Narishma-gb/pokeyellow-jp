@@ -97,8 +97,8 @@ SECTION "Garbage 23", ROMX
 INCBIN "garbage/garbage_23.bin"
 
 
-;SECTION "Garbage 24", ROMX
-;INCBIN "garbage/garbage_24.bin"
+SECTION "Garbage 24", ROMX
+INCBIN "garbage/garbage_24.bin"
 
 
 SECTION "Garbage 26", ROMX

@@ -23,9 +23,7 @@ PokemonTower2FDefaultScript:
 	ld hl, PokemonTower2FRivalEncounterEventCoords
 	call ArePlayerCoordsInArray
 	ret nc
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	ld c, BANK(Music_MeetRival)
 	ld a, MUSIC_MEET_RIVAL
 	call PlayMusic
@@ -76,14 +74,13 @@ PokemonTower2FDefeatedRivalScript:
 	ld de, PokemonTower2FRivalDownThenRightMovement
 	CheckEvent EVENT_POKEMON_TOWER_RIVAL_ON_LEFT
 	jr nz, .got_movement
+	callfar PokemonTower2FPikachuMovementScript
 	ld de, PokemonTower2FRivalRightThenDownMovement
 .got_movement
 	ld a, POKEMONTOWER2F_RIVAL
 	ldh [hSpriteIndex], a
 	call MoveSprite
-	ld a, SFX_STOP_ALL_MUSIC
-	ld [wNewSoundID], a
-	call PlaySound
+	call StopAllMusic
 	farcall Music_RivalAlternateStart
 	ld a, SCRIPT_POKEMONTOWER2F_RIVAL_EXITS
 	ld [wPokemonTower2FCurScript], a
@@ -150,21 +147,8 @@ PokemonTower2FRivalText:
 	call SaveEndBattleTextPointers
 	ld a, OPP_RIVAL2
 	ld [wCurOpponent], a
-
-	; select which team to use during the encounter
 	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotSquirtle
-	ld a, $4
-	jr .done
-.NotSquirtle
-	cp STARTER3
-	jr nz, .Charmander
-	ld a, $5
-	jr .done
-.Charmander
-	ld a, $6
-.done
+	add $1
 	ld [wTrainerNo], a
 
 	ld a, SCRIPT_POKEMONTOWER2F_DEFEATED_RIVAL
@@ -201,7 +185,7 @@ PokemonTower2FRivalText:
 
 .HowsYourDexText:
 	text "おい　ところで<⋯>！"
-	cont "#ずかんは　どうだよ？"
+	line "#ずかんは　どうだよ？"
 	cont "おれなんか　カラカラ"
 	cont "みつけた　もんね！"
 
