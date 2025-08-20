@@ -91,7 +91,7 @@ PartyMonSpeeds:
 LoadMonPartySpriteGfx:
 ; Load mon party sprite tile patterns into VRAM during V-blank.
 	ld hl, MonPartySpritePointers
-	ld a, $1c
+	ld a, $1e
 
 LoadAnimSpriteGfx:
 ; Load animated sprite tile patterns into VRAM during V-blank. hl is the address
@@ -130,7 +130,7 @@ LoadMonPartySpriteGfxWithLCDDisabled:
 ; LCD.
 	call DisableLCD
 	ld hl, MonPartySpritePointers
-	ld a, $1c
+	ld a, $1e
 	ld bc, $0
 .loop
 	push af
@@ -151,7 +151,7 @@ LoadMonPartySpriteGfxWithLCDDisabled:
 	inc hl
 	ld d, [hl]
 	pop hl
-	call FarCopyData2
+	call FarCopyData
 	pop hl
 	pop bc
 	ld a, $6
@@ -170,6 +170,8 @@ WriteMonPartySpriteOAMByPartyIndex:
 	push de
 	push bc
 	ldh a, [hPartyMonIndex]
+	cp $ff
+	jr z, .asm_7191f
 	ld hl, wPartySpecies
 	ld e, a
 	ld d, 0
@@ -178,6 +180,16 @@ WriteMonPartySpriteOAMByPartyIndex:
 	call GetPartyMonSpriteID
 	ld [wOAMBaseTile], a
 	call WriteMonPartySpriteOAM
+	pop bc
+	pop de
+	pop hl
+	ret
+
+.asm_7191f
+	ld hl, wShadowOAM
+	ld de, wMonPartySpritesSavedOAM
+	ld bc, $60
+	call CopyData
 	pop bc
 	pop de
 	pop hl
@@ -204,7 +216,7 @@ UnusedPartyMonSpriteFunction:
 	ld hl, vSprites tile $00
 	call .LoadTilePatterns
 	pop af
-	add $54
+	add $5A
 	ld hl, vSprites tile $04
 	call .LoadTilePatterns
 	xor a

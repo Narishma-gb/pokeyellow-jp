@@ -13,7 +13,6 @@ EnterMapAnim::
 	call PlaySound
 	ld hl, wStatusFlags6
 	bit BIT_DUNGEON_WARP, [hl]
-	res BIT_DUNGEON_WARP, [hl]
 	pop hl
 	jr nz, .dungeonWarpAnimation
 	call PlayerSpinWhileMovingDown
@@ -34,23 +33,22 @@ EnterMapAnim::
 	ld [hl], $ff ; wPlayerSpinInPlaceAnimSoundID
 	ld hl, wFacingDirectionList
 	call PlayerSpinInPlace
+	ld a, $1
+	ld [wPikachuSpawnState], a
 .restoreDefaultMusic
 	call PlayDefaultMusic
 .done
+	call Func_151d
 	jp RestoreFacingDirectionAndYScreenPos
 .dungeonWarpAnimation
 	ld c, 50
 	call DelayFrames
 	call PlayerSpinWhileMovingDown
+	ld a, $0
+	ld [wPikachuSpawnState], a
 	jr .done
 .flyAnimation
 	pop hl
-	; these 4 instructions seem redundant, as LoadBirdSpriteGraphics runs them again
-	ld de, BirdSprite
-	ld hl, vNPCSprites
-	lb bc, BANK(BirdSprite), $0c
-	call CopyVideoData
-
 	call LoadBirdSpriteGraphics
 	ld a, SFX_FLY
 	call PlaySound
@@ -63,6 +61,8 @@ EnterMapAnim::
 	ld de, FlyAnimationEnterScreenCoords
 	call DoFlyAnimation
 	call LoadPlayerSpriteGraphics
+	ld a, $1
+	ld [wPikachuSpawnState], a
 	jr .restoreDefaultMusic
 
 FlyAnimationEnterScreenCoords:
@@ -93,6 +93,7 @@ PlayerSpinWhileMovingDown:
 	jp PlayerSpinWhileMovingUpOrDown
 
 _LeaveMapAnim::
+	call Func_1510
 	call InitFacingDirectionList
 	call IsPlayerStandingOnWarpPadOrHole
 	ld a, b
@@ -251,12 +252,14 @@ DoFlyAnimation:
 
 LoadBirdSpriteGraphics:
 	ld de, BirdSprite
+	ld b, BANK(BirdSprite)
+	ld c, 12
 	ld hl, vNPCSprites
-	lb bc, BANK(BirdSprite), 12
 	call CopyVideoData
 	ld de, BirdSprite tile 12 ; moving animation sprite
+	ld b, BANK(BirdSprite)
+	ld c, 12
 	ld hl, vNPCSprites2
-	lb bc, BANK(BirdSprite), 12
 	jp CopyVideoData
 
 InitFacingDirectionList:
@@ -382,9 +385,10 @@ FishingAnim:
 	call DelayFrames
 	ld hl, wMovementFlags
 	set BIT_LEDGE_OR_FISHING, [hl]
+	ld hl, vNPCSprites
 	ld de, RedSprite
-	ld hl, vNPCSprites tile $00
-	lb bc, BANK(RedSprite), 12
+	ld b, BANK(RedSprite)
+	ld c, 12
 	call CopyVideoData
 	ld a, $4
 	ld hl, RedFishingTiles

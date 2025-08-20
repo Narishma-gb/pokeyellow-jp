@@ -86,9 +86,9 @@ BlkPacket_Slots:
 
 BlkPacket_Titlescreen:
 	ATTR_BLK 3
-	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,07 ; pokemon logo: pal 0
-	ATTR_BLK_DATA %010, 1,1,0, 00,08, 19,09 ; version text: pal 1
-	ATTR_BLK_DATA %011, 2,2,0, 00,10, 19,17 ; player, mon, copyright text: pal 2
+	ATTR_BLK_DATA %011, 0,0,0, 00,00, 19,07 ; pokemon logo, version text: pal 0
+	ATTR_BLK_DATA %011, 2,2,0, 00,08, 19,17 ; pikachu, copyright text: pal 2
+	ATTR_BLK_DATA %010, 0,0,0, 09,08, 10,08 ; pika bubble: pal 0
 	ds 12, 0
 
 BlkPacket_NidorinoIntro:
@@ -115,8 +115,8 @@ BlkPacket_TrainerCard:
 	ATTR_BLK_DATA %010, 1,1,0, 07,12, 08,13 ; Cascade Badge
 	ATTR_BLK_DATA %010, 3,3,0, 11,12, 12,13 ; Thunder Badge
 	ATTR_BLK_DATA %010, 2,2,0, 16,11, 17,12 ; Rainbow Badge
-	ATTR_BLK_DATA %010, 1,1,0, 14,13, 15,14 ; Rainbow Badge
-	ATTR_BLK_DATA %010, 3,3,0, 16,13, 17,14 ; Rainbow Badge
+	ATTR_BLK_DATA %010, 1,1,0, 14,13, 15,13 ; Rainbow Badge
+	ATTR_BLK_DATA %010, 3,3,0, 16,13, 17,13 ; Rainbow Badge
 	ATTR_BLK_DATA %010, 2,2,0, 03,15, 04,16 ; Soul Badge
 	ATTR_BLK_DATA %010, 3,3,0, 07,15, 08,16 ; Marsh Badge
 	ATTR_BLK_DATA %010, 2,2,0, 11,15, 12,16 ; Volcano Badge
@@ -142,6 +142,7 @@ PalPacket_TrainerCard:    PAL_SET PAL_MEWMON, PAL_BADGE, PAL_REDMON, PAL_YELLOWM
 PalPacket_Generic:        PAL_SET PAL_MEWMON, 0, 0, 0
 PalPacket_NidorinoIntro:  PAL_SET PAL_PURPLEMON, PAL_BLACK, 0, 0
 PalPacket_GameFreakIntro: PAL_SET PAL_GAMEFREAK, PAL_REDMON, PAL_VIRIDIAN, PAL_BLUEMON
+PalPacket_PikachusBeach:  PAL_SET PAL_PIKACHUS_BEACH, PAL_PIKACHUS_BEACH, PAL_PIKACHUS_BEACH, PAL_PIKACHUS_BEACH
 
 PalTrnPacket:  PAL_TRN
 MltReq1Packet: MLT_REQ 1

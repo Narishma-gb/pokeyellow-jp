@@ -58,8 +58,7 @@ AnimateHallOfFame:
 	ld c, 80
 	call DelayFrames
 	hlcoord 2, 13
-	ld b, 3
-	ld c, 14
+	lb bc, 3, 14
 	call TextBoxBorder
 	hlcoord 3, 15
 	ld de, HallOfFameText
@@ -77,7 +76,7 @@ AnimateHallOfFame:
 	ld bc, HOF_MON
 	call AddNTimes
 	ld [hl], $ff
-	call SaveHallOfFameTeams
+	callfar SaveHallOfFameTeams ; useless since in same bank
 	xor a
 	ld [wHoFMonSpecies], a
 	inc a
@@ -154,12 +153,27 @@ HoFDisplayAndRecordMonInfo:
 	ld hl, wPartyMonNicks
 	call GetPartyMonName
 	call HoFDisplayMonInfo
+	ld a, [wHoFPartyMonIndex]
+	ld [wWhichPokemon], a
+	callfar IsThisPartymonStarterPikachu_Party
+	jr nc, .asm_70336
+	ldpikacry e, PikachuCry35
+	callfar PlayPikachuSoundClip
+	jr .asm_7033c
+.asm_70336
+	ld a, [wHoFMonSpecies]
+	call PlayCry
+.asm_7033c
 	jp HoFRecordMonInfo
+
+Func_7033f:
+	call HoFDisplayMonInfo
+	ld a, [wHoFMonSpecies]
+	jp PlayCry
 
 HoFDisplayMonInfo:
 	hlcoord 0, 3
-	ld b, 8
-	ld c, 9
+	lb bc, 8, 9
 	call TextBoxBorder
 	hlcoord 1, 7
 	ld de, HoFMonInfoText
@@ -174,8 +188,7 @@ HoFDisplayMonInfo:
 	ld [wCurSpecies], a
 	hlcoord 6, 9
 	predef PrintMonType
-	ld a, [wHoFMonSpecies]
-	jp PlayCry
+	ret
 
 HoFMonInfoText:
 	db   "　レベル／"
@@ -186,10 +199,13 @@ HoFLoadPlayerPics:
 	ld de, RedPicFront
 	ld a, BANK(RedPicFront)
 	call UncompressSpriteFromDE
+	ld a, $0
+	call OpenSRAM
 	ld hl, sSpriteBuffer1
 	ld de, sSpriteBuffer0
 	ld bc, $310
 	call CopyData
+	call CloseSRAM
 	ld de, vFrontPic
 	call InterlaceMergeSpriteBuffers
 	ld de, RedPicBack
@@ -210,12 +226,10 @@ HoFDisplayPlayerStats:
 	SetEvent EVENT_HALL_OF_FAME_DEX_RATING
 	predef DisplayDexRating
 	hlcoord 0, 4
-	ld b, 6
-	ld c, 10
+	lb bc, 6, 10
 	call TextBoxBorder
 	hlcoord 5, 0
-	ld b, 2
-	ld c, 8
+	lb bc, 2, 8
 	call TextBoxBorder
 	hlcoord 7, 2
 	ld de, wPlayerName

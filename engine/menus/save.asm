@@ -27,15 +27,13 @@ LoadSAV:
 	ret
 
 FileDataDestroyedText:
-	text "フアイルの　データが"
+	text "ファイルの　データが"
 	line "こわれています！"
 	prompt
 
 LoadSAV0:
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
+	call EnableSRAM
+	ld a, BANK("Save Data")
 	ld [MBC1SRamBank], a
 ; This vc_hook does not have to be in any particular location.
 ; It is defined here because it refers to the same labels as the two lines below.
@@ -82,10 +80,8 @@ LoadSAV0:
 	jp SAVGoodChecksum
 
 LoadSAV1:
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
+	call EnableSRAM
+	ld a, BANK("Save Data")
 	ld [MBC1SRamBank], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
@@ -102,10 +98,8 @@ LoadSAV1:
 	jp SAVGoodChecksum
 
 LoadSAV2:
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
+	call EnableSRAM
+	ld a, BANK("Save Data")
 	ld [MBC1SRamBank], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
@@ -129,9 +123,7 @@ SAVBadCheckSum:
 	scf
 
 SAVGoodChecksum:
-	ld a, $0
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	call DisableSRAM
 	ret
 
 LoadSAVIgnoreBadCheckSum:
@@ -142,14 +134,16 @@ LoadSAVIgnoreBadCheckSum:
 
 SaveSAV:
 	farcall PrintSaveScreenText
+	ld c, 10
+	call DelayFrames
 	ld hl, WouldYouLikeToSaveText
 	call SaveSAVConfirm
 	and a   ;|0 = Yes|1 = No|
 	ret nz
-	ld c, 40
+	ld c, 10
 	call DelayFrames
 	ld a, [wSaveFileStatus]
-	dec a
+	cp $1
 	jr z, .save
 	call SAVCheckRandomID
 	jr z, .save
@@ -158,16 +152,21 @@ SaveSAV:
 	and a
 	ret nz
 .save
+	call SaveSAVtoSRAM
+	ld hl, SavingText
+	call PrintText
+	ld c, 128
+	call DelayFrames
 	ld hl, GameSavedText
 	call PrintText
-	call SaveSAVtoSRAM
 	ld c, 10
 	call DelayFrames
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
 	call WaitForSoundToFinish
 	ld c, 30
-	jp DelayFrames
+	call DelayFrames
+	ret
 
 SaveSAVConfirm:
 	call PrintText
@@ -184,6 +183,10 @@ WouldYouLikeToSaveText:
 	line "#レポートに　かきこみますか？"
 	done
 
+SavingText:
+	text "#レポートに　かきこんでいます"
+	done
+
 GameSavedText:
 	text "<PLAYER>は"
 	line "レポートに　しっかり　かきのこした！"
@@ -196,10 +199,8 @@ OlderFileWillBeErasedText:
 	done
 
 SaveSAVtoSRAM0:
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
+	call EnableSRAM
+	ld a, BANK("Save Data")
 	ld [MBC1SRamBank], a
 	ld hl, wPlayerName
 	ld de, sPlayerName
@@ -223,17 +224,13 @@ SaveSAVtoSRAM0:
 	ld bc, sGameDataEnd - sGameData
 	call SAVCheckSum
 	ld [sMainDataCheckSum], a
-	xor a
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	call DisableSRAM
 	ret
 
 SaveSAVtoSRAM1:
 ; stored pokémon
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
+	call EnableSRAM
+	ld a, BANK("Save Data")
 	ld [MBC1SRamBank], a
 	ld hl, wBoxDataStart
 	ld de, sCurBoxData
@@ -243,16 +240,12 @@ SaveSAVtoSRAM1:
 	ld bc, sGameDataEnd - sGameData
 	call SAVCheckSum
 	ld [sMainDataCheckSum], a
-	xor a
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	call DisableSRAM
 	ret
 
 SaveSAVtoSRAM2:
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
+	call EnableSRAM
+	ld a, BANK("Save Data")
 	ld [MBC1SRamBank], a
 	ld hl, wPartyDataStart
 	ld de, sPartyData
@@ -262,13 +255,18 @@ SaveSAVtoSRAM2:
 	ld de, sMainData
 	ld bc, wPokedexSeenEnd - wPokedexOwned
 	call CopyData
+	ld hl, wPikachuHappiness
+	ld de, sMainData + $174
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, [hl]
+	ld [de], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call SAVCheckSum
 	ld [sMainDataCheckSum], a
-	xor a
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	call DisableSRAM
 	ret
 
 SaveSAVtoSRAM::
@@ -372,10 +370,7 @@ WhenYouChangeBoxText:
 CopyBoxToOrFromSRAM:
 ; copy an entire box from hl to de with b as the SRAM bank
 	push hl
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
+	call EnableSRAM
 	ld a, b
 	ld [MBC1SRamBank], a
 	ld bc, wBoxDataEnd - wBoxDataStart
@@ -394,9 +389,7 @@ CopyBoxToOrFromSRAM:
 	; BUG: the checked data area contains the Checksum byte at sBank2AllBoxesChecksum.
 	; This will alter the checked data when the Checksum byte is written.
 	ld [sBank2AllBoxesChecksum], a ; sBank3AllBoxesChecksum
-	xor a
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	call DisableSRAM
 	ret
 
 DisplayChangeBoxMenu:
@@ -417,14 +410,12 @@ DisplayChangeBoxMenu:
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	hlcoord 0, 0
-	ld b, 2
-	ld c, 9
+	lb bc, 2, 9
 	call TextBoxBorder
 	ld hl, ChooseABoxText
 	call PrintText
 	hlcoord 11, 0
-	ld b, 16
-	ld c, 7
+	lb bc, 16, 7
 	call TextBoxBorder
 	hlcoord 13, 2
 	ld de, BoxNames
@@ -478,19 +469,14 @@ BoxNoText:
 EmptyAllSRAMBoxes:
 ; marks all boxes in SRAM as empty (initialisation for the first time the
 ; player changes the box)
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
-	ld a, 2
+	call EnableSRAM
+	ld a, BANK("Saved Boxes 1")
 	ld [MBC1SRamBank], a
 	call EmptySRAMBoxesInBank
-	ld a, 3
+	ld a, BANK("Saved Boxes 2")
 	ld [MBC1SRamBank], a
 	call EmptySRAMBoxesInBank
-	xor a
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	call DisableSRAM
 	ret
 
 EmptySRAMBoxesInBank:
@@ -503,7 +489,7 @@ EmptySRAMBoxesInBank:
 	call EmptySRAMBox
 	ld hl, sBox4 ; sBox8
 	call EmptySRAMBox
-	ld hl, sBox1 ; sBox7
+	ld hl, sBox1 ; sBox5
 	ld bc, sBank2AllBoxesChecksum + 1 - sBox1
 	; BUG: the checked data area contains the Checksum byte at sBank2AllBoxesChecksum.
 	; This will alter the checked data when the Checksum byte is written.
@@ -521,19 +507,14 @@ EmptySRAMBox:
 GetMonCountsForAllBoxes:
 	ld hl, wBoxMonCounts
 	push hl
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
-	ld a, $2
+	call EnableSRAM
+	ld a, BANK("Saved Boxes 1")
 	ld [MBC1SRamBank], a
 	call GetMonCountsForBoxesInBank
-	ld a, $3
+	ld a, BANK("Saved Boxes 2")
 	ld [MBC1SRamBank], a
 	call GetMonCountsForBoxesInBank
-	xor a
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	call DisableSRAM
 	pop hl
 
 ; copy the count for the current box from WRAM
@@ -562,10 +543,8 @@ SAVCheckRandomID:
 ; checks if Sav file is the same by checking player's name 1st letter
 ; and the two random numbers generated at game beginning
 ; (which are stored at wPlayerID)s
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $01
-	ld [MBC1SRamBankingMode], a
+	call EnableSRAM
+	ld a, BANK("Save Data")
 	ld [MBC1SRamBank], a
 	ld a, [sPlayerName]
 	and a
@@ -587,7 +566,7 @@ SAVCheckRandomID:
 	ld a, [wPlayerID + 1]
 	cp h
 .next
-	ld a, $00
+	ld a, SRAM_DISABLE
 	ld [MBC1SRamBankingMode], a
 	ld [MBC1SRamEnable], a
 	ret
@@ -628,34 +607,23 @@ LoadHallOfFameTeams:
 	; fallthrough
 
 HallOfFame_Copy:
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
+	call EnableSRAM
 	xor a
 	ld [MBC1SRamBank], a
 	call CopyData
-	xor a
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	call DisableSRAM
 	ret
 
 ClearSAV:
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
-	ld a, $1
-	ld [MBC1SRamBankingMode], a
-	xor a
+	call EnableSRAM
+	ld a, $4
+.loop
+	dec a
+	push af
 	call PadSRAM_FF
-	ld a, $1
-	call PadSRAM_FF
-	ld a, $2
-	call PadSRAM_FF
-	ld a, $3
-	call PadSRAM_FF
-	xor a
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	pop af
+	jr nz, .loop
+	call DisableSRAM
 	ret
 
 PadSRAM_FF:
@@ -664,3 +632,16 @@ PadSRAM_FF:
 	ld bc, SIZEOF(SRAM)
 	ld a, $ff
 	jp FillMemory
+
+EnableSRAM:
+	ld a, SRAM_BANKING_MODE
+	ld [MBC1SRamBankingMode], a
+	ld a, SRAM_ENABLE
+	ld [MBC1SRamEnable], a
+	ret
+
+DisableSRAM:
+	ld a, SRAM_DISABLE
+	ld [MBC1SRamBankingMode], a
+	ld [MBC1SRamEnable], a
+	ret

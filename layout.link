@@ -157,7 +157,8 @@ ROMX $1a
 ROMX $1b
 	"Tilesets 3"
 ROMX $1c
-	"rom28"
+	"bank1C"
+	"Garbage 28"
 ROMX $1d
 	"rom29"
 ROMX $1e
@@ -233,9 +234,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $1C
-; 	"bank1C"
-; 	"Garbage 28"
 ; ROMX $1D
 ; 	"Maps 19"
 ; 	"Itemfinder 1"

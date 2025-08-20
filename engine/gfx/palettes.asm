@@ -30,11 +30,17 @@ SetPal_Battle:
 	ld de, wPalPacket
 	ld bc, $10
 	call CopyData
-	ld a, [wPlayerBattleStatus3]
 	ld hl, wBattleMonSpecies
+	ld a, [hl]
+	and a
+	jr z, .asm_71ef9
+	ld hl, wPartyMon1
+	ld a, [wPlayerMonNumber]
+	ld bc, wPartyMon2 - wPartyMon1
+	call AddNTimes
+.asm_71ef9
 	call DeterminePaletteID
 	ld b, a
-	ld a, [wEnemyBattleStatus3]
 	ld hl, wEnemyMonSpecies2
 	call DeterminePaletteID
 	ld c, a
@@ -155,6 +161,10 @@ SetPal_Overworld:
 	jr z, .Lorelei
 	cp BRUNOS_ROOM
 	jr z, .caveOrBruno
+	cp TRADE_CENTER
+	jr z, .trade_center_colosseum
+	cp COLOSSEUM
+	jr z, .trade_center_colosseum
 .normalDungeonOrBuilding
 	ld a, [wLastMap] ; town or route that current dungeon or building is located
 .townOrRoute
@@ -177,6 +187,9 @@ SetPal_Overworld:
 	jr .town
 .Lorelei
 	xor a
+	jr .town
+.trade_center_colosseum
+	ld a, PAL_GRAYMON - 1
 	jr .town
 
 ; used when a Pokemon is the only thing on the screen
@@ -240,6 +253,11 @@ SetPal_TrainerCard:
 	ld de, wTrainerCardBlkPacket
 	ret
 
+SetPal_PikachusBeach::
+	ld hl, PalPacket_PikachusBeach
+	ld de, BlkPacket_WholeScreen
+	ret
+
 SetPalFunctions:
 ; entries correspond to SET_PAL_* constants
 	dw SetPal_BattleBlack
@@ -256,6 +274,7 @@ SetPalFunctions:
 	dw SetPal_PokemonWholeScreen
 	dw SetPal_GameFreakIntro
 	dw SetPal_TrainerCard
+	dw SetPal_PikachusBeach
 
 ; The length of the blk data of each badge on the Trainer Card.
 ; The Rainbow Badge has 3 entries because of its many colors.
@@ -270,9 +289,6 @@ BadgeBlkDataLengths:
 	db 6     ; Earth Badge
 
 DeterminePaletteID:
-	bit TRANSFORMED, a ; a is battle status 3
-	ld a, PAL_GRAYMON  ; if the mon has used Transform, use Ditto's palette
-	ret nz
 	ld a, [hl]
 DeterminePaletteIDOutOfBattle:
 	ld [wPokedexNum], a
@@ -289,6 +305,97 @@ DeterminePaletteIDOutOfBattle:
 	add hl, de
 	ld a, [hl]
 	ret
+
+YellowIntroPaletteAction::
+	ld a, e
+	and a
+	jr nz, .asm_720bd
+	ld hl, PalPacket_Generic
+	jp SendSGBPacket
+
+.asm_720bd
+	ld hl, PalPacket_PikachusBeach
+	jp SendSGBPacket
+
+LoadOverworldPikachuFrontpicPalettes::
+	ld hl, PalPacket_Empty
+	ld de, wPalPacket
+	ld bc, $10
+	call CopyData
+	call GetPal_Pikachu
+	ld hl, wPartyMenuBlkPacket
+	ld [hl], a
+	ld hl, wPartyMenuBlkPacket + 2
+	ld a, PAL_PIKACHU_PORTRAIT
+	ld [hl], a
+	ld hl, wPalPacket
+	call SendSGBPacket
+	ld hl, BlkPacket_WholeScreen
+	ld de, wPalPacket
+	ld bc, $10
+	call CopyData
+	ld hl, wPartyMenuBlkPacket + 2
+	ld a, $5
+	ld [hli], a
+	ld a, $7
+	ld [hli], a
+	ld a, $6
+	ld [hli], a
+	ld a, $b
+	ld [hli], a
+	ld a, $a
+	ld [hl], a
+	ld hl, wPalPacket
+	call SendSGBPacket
+	ret
+
+GetPal_Pikachu::
+; similar to SetPal_Overworld
+	ld a, [wCurMapTileset]
+	cp CEMETERY
+	jr z, .PokemonTowerOrAgatha
+	cp CAVERN
+	jr z, .caveOrBruno
+	ld a, [wCurMap]
+	cp REDS_HOUSE_1F
+	jr c, .townOrRoute
+	cp CERULEAN_CAVE_2F
+	jr c, .normalDungeonOrBuilding
+	cp NAME_RATERS_HOUSE
+	jr c, .caveOrBruno
+	cp LORELEIS_ROOM
+	jr z, .Lorelei
+	cp BRUNOS_ROOM
+	jr z, .caveOrBruno
+	cp TRADE_CENTER
+	jr z, .battleOrTradeCenter
+	cp COLOSSEUM
+	jr z, .battleOrTradeCenter
+.normalDungeonOrBuilding
+	ld a, [wLastMap] ; town or route that current dungeon or building is located
+.townOrRoute
+	cp SAFFRON_CITY + 1
+	jr c, .town
+	ld a, PAL_ROUTE - 1
+.town
+	inc a ; a town's pallete ID is its map ID + 1
+	ret
+
+.PokemonTowerOrAgatha
+	ld a, PAL_GRAYMON - 1
+	jr .town
+
+.caveOrBruno
+	ld a, PAL_CAVE - 1
+	jr .town
+
+.Lorelei
+	xor a ; PAL_PALLET - 1
+	jr .town
+
+.battleOrTradeCenter
+	ld a, PAL_GRAYMON - 1
+	jr .town
 
 InitPartyMenuBlkPacket:
 	ld hl, BlkPacket_PartyMenu

@@ -36,45 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom28", ROMX
-; ROM $1c : $70000 - $73FFF
-	set_bank_offset 28
-
-	dr AnimateShootingStar, 28, $4044
-	dr AnimateHealingMachine, 28, $448E
-	dr EnterMapAnim, 28, $4561
-	dr _LeaveMapAnim, 28, $460F
-	dr IsPlayerStandingOnWarpPadOrHole, 28, $47E1
-	dr FishingAnim, 28, $4810
-	dr _HandleMidJump, 28, $48F4
-	dr BattleTransition, 28, $49E3
-	dr FlashScreen, 28, $4BD3
-	dr DisplayTownMap, 28, $4EB4
-	dr LoadTownMap_Nest, 28, $4FE4
-	dr LoadTownMap_Fly, 28, $5014
-	dr TownMapSpriteBlinkingAnimation, 28, $56AA
-	dr AnimatePartyMon_ForceSpeed1, 28, $56DB
-	dr AnimatePartyMon, 28, $56E3
-	dr LoadMonPartySpriteGfx, 28, $5750
-	dr LoadMonPartySpriteGfxWithLCDDisabled, 28, $5775
-	dr WriteMonPartySpriteOAMByPartyIndex, 28, $5858
-	dr WriteMonPartySpriteOAMBySpecies, 28, $5886
-	dr DoInGameTradeDialogue, 28, $5ADD
-	dr _RunPaletteCommand, 28, $5F2E
-	dr InitPartyMenuBlkPacket, 28, $61B7
-	dr LoadSGB, 28, $6225
-	dr LoadSAV, 28, $751F
-	dr LoadSAV2, 28, $75FA
-	dr SaveSAV, 28, $763D
-	dr SaveSAVtoSRAM0, 28, $7718
-	dr SaveSAVtoSRAM1, 28, $7765
-	dr SaveSAVtoSRAM2, 28, $7789
-	dr SaveSAVtoSRAM, 28, $77C4
-	dr ChangeBox, 28, $7801
-	dr ClearSAV, 28, $7A79
-
-	dr_end 28
-
 SECTION "rom29", ROMX
 ; ROM $1d : $74000 - $77FFF
 	set_bank_offset 29
@@ -101,6 +62,7 @@ SECTION "rom30", ROMX
 	dr AnimationSubstitute, 30, $5703
 	dr HideSubstituteShowMonAnim, 30, $576A
 	dr ReshowSubstituteAnim, 30, $5806
+	dr ChangeMonPic, 30, $5828
 	dr Func_79929, 30, $587D
 	dr GetIntroMoveSound, 30, $5919
 	dr CopyDownscaledMonTiles, 30, $5B6A
@@ -108,6 +70,10 @@ SECTION "rom30", ROMX
 	dr AnimCut, 30, $5F39
 	dr AnimateBoulderDust, 30, $5FF7
 	dr LoadSmokeTileFourTimes, 30, $6063
+	dr RedFishingTilesFront, 30, $6090
+	dr RedFishingTilesBack, 30, $60B0
+	dr RedFishingTilesSide, 30, $60D0
+	dr RedFishingRodTiles, 30, $60F0
 	dr EvolveMon, 30, $7E87
 
 	dr_end 30
@@ -124,6 +90,7 @@ Music_TitleScreen::
 Music_GameCorner::
 Music_Surfing::
 Music_JigglypuffSong::
+Music_HallOfFame::
 
 	dr PlayPokedexRatingSfx, 31, $50D6
 	dr Audio3_PlaySound, 31, $510D
