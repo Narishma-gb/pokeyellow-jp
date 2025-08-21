@@ -4,8 +4,7 @@ ShakeElevator::
 	ld de, SCREEN_HEIGHT * $20
 	call ShakeElevatorRedrawRow
 	call Delay3
-	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	call StopAllMusic
 	ldh a, [hSCY]
 	ld d, a
 	ld e, $1
@@ -27,8 +26,7 @@ ShakeElevator::
 	jr nz, .shakeLoop
 	ld a, d
 	ldh [hSCY], a
-	ld a, SFX_STOP_ALL_MUSIC
-	call PlaySound
+	call StopAllMusic
 	ld c, BANK(SFX_Safari_Zone_PA)
 	ld a, SFX_SAFARI_ZONE_PA
 	call PlayMusic

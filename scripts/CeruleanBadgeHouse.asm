@@ -28,6 +28,7 @@ CeruleanBadgeHouseMiddleAgedManText:
 	ld [wListPointer + 1], a
 	xor a
 	ld [wPrintItemPrices], a
+	ld [wMenuItemToSwap], a
 	ld a, SPECIALLISTMENU
 	ld [wListMenuID], a
 	call DisplayListMenuID

@@ -17,13 +17,13 @@ CinnabarLabTradeRoomSuperNerdText:
 
 CinnabarLabTradeRoomGrampsText:
 	text_asm
-	ld a, TRADE_FOR_DORIS
+	ld a, TRADE_FOR_BUFFY
 	ld [wWhichTrade], a
 	jr CinnabarLabTradeRoomDoTrade
 
 CinnabarLabTradeRoomBeautyText:
 	text_asm
-	ld a, TRADE_FOR_CRINKLES
+	ld a, TRADE_FOR_CEZANNE
 	ld [wWhichTrade], a
 CinnabarLabTradeRoomDoTrade:
 	predef DoInGameTradeDialogue

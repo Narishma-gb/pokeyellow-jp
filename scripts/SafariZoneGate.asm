@@ -2,7 +2,8 @@ SafariZoneGate_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, SafariZoneGate_ScriptPointers
 	ld a, [wSafariZoneGateCurScript]
-	jp CallFunctionInTable
+	call CallFunctionInTable
+	ret
 
 SafariZoneGate_ScriptPointers:
 	def_script_pointers
@@ -87,6 +88,8 @@ SafariZoneGateLeavingSafariScript:
 	call DisplayTextID
 	xor a
 	ld [wNumSafariBalls], a
+	ld [wSafariSteps], a
+	ld [wSafariSteps], a ; ?????
 	ld a, D_DOWN
 	ld c, 3
 	call SafariZoneEntranceAutoWalk
@@ -146,98 +149,9 @@ SafariZoneGateSafariZoneWorker1Text:
 	done
 
 SafariZoneGateSafariZoneWorker1WouldYouLikeToJoinText:
-	text "この　ひろい　サファリで"
-	line "いろんな　#　とりほうだいの"
-	cont "ゲームが　たった　５００円！"
-
-	para "さっそく　やりますか？@"
 	text_asm
-	ld a, MONEY_BOX
-	ld [wTextBoxID], a
-	call DisplayTextBoxID
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	jp nz, .PleaseComeAgain
-	xor a
-	ldh [hMoney], a
-	ldh [hMoney + 2], a
-	ld a, $05
-	ldh [hMoney + 1], a
-	call HasEnoughMoney
-	jr nc, .success
-	ld hl, .NotEnoughMoneyText
-	call PrintText
-	jr .CantPayWalkDown
-
-.success
-	xor a
-	ld [wPriceTemp], a
-	ld [wPriceTemp + 2], a
-	ld a, $05
-	ld [wPriceTemp + 1], a
-	ld hl, wPriceTemp + 2
-	ld de, wPlayerMoney + 2
-	ld c, 3
-	predef SubBCDPredef
-	ld a, MONEY_BOX
-	ld [wTextBoxID], a
-	call DisplayTextBoxID
-	ld hl, .MakePaymentText
-	call PrintText
-	ld a, 30
-	ld [wNumSafariBalls], a
-	ld a, HIGH(502)
-	ld [wSafariSteps], a
-	ld a, LOW(502)
-	ld [wSafariSteps + 1], a
-	ld a, D_UP
-	ld c, 3
-	call SafariZoneEntranceAutoWalk
-	SetEvent EVENT_IN_SAFARI_ZONE
-	ResetEventReuseHL EVENT_SAFARI_GAME_OVER
-	ld a, SCRIPT_SAFARIZONEGATE_PLAYER_MOVING
-	ld [wSafariZoneGateCurScript], a
-	jr .done
-
-.PleaseComeAgain
-	ld hl, .PleaseComeAgainText
-	call PrintText
-.CantPayWalkDown
-	ld a, D_DOWN
-	ld c, 1
-	call SafariZoneEntranceAutoWalk
-	ld a, SCRIPT_SAFARIZONEGATE_PLAYER_MOVING_DOWN
-	ld [wSafariZoneGateCurScript], a
-.done
+	callfar SafariZoneGatePrintSafariZoneWorker1WouldYouLikeToJoinText
 	jp TextScriptEnd
-
-.MakePaymentText
-	text "それでは<⋯>！"
-	line "５００円　いただきまーす！"
-
-	para "ここでは　サファリ　せんようの"
-	line "モンスターボールを　つかいます！"
-	cont "<⋯>　これです！"
-
-	para "<PLAYER>は　うけつけ　から"
-	line "サファリボール　３０こ　もらった！@"
-	sound_get_item_1
-	text_start
-
-	para "のこり　じかんが　なくなるか！"
-	line "サファリボールが　なくなったら"
-	cont "メガホンで　しらせます！"
-	cont "では<⋯>！　ぐっど　らっく！"
-	done
-
-.PleaseComeAgainText
-	text "そうか<⋯>！　また　きて　ください"
-	done
-
-.NotEnoughMoneyText
-	text "あッ　おかねが　たりない！"
-	done
 
 SafariZoneGateSafariZoneWorker1LeavingEarlyText:
 	text "もう　おわりに　する？@"
@@ -289,38 +203,5 @@ SafariZoneGateSafariZoneWorker1GoodHaulComeAgainText:
 
 SafariZoneGateSafariZoneWorker2Text:
 	text_asm
-	ld hl, .FirstTimeHereText
-	call PrintText
-	call YesNoChoice
-	ld a, [wCurrentMenuItem]
-	and a
-	ld hl, .YoureARegularHereText
-	jr nz, .print_text
-	ld hl, .SafariZoneExplanationText
-.print_text
-	call PrintText
+	callfar SafariZoneGatePrintSafariZoneWorker2Text
 	jp TextScriptEnd
-
-.FirstTimeHereText
-	text "こんちわ！"
-	line "サファリ　ゲームは　はじめて？"
-	done
-
-.SafariZoneExplanationText
-	text "サファリ　ゲームは"
-	line "４つの　ゾーンに　わかれてます！"
-
-	para "それぞれに　めずらしい　#が"
-	line "せいそく　してますから"
-	cont "せんようの　サファリボールで"
-	cont "つかまえて　ください！"
-
-	para "ただし　じかんが　なくなるか"
-	line "サファリボールを　ぜんぶ　なげたら"
-	cont "ゲームは　おわり　だよ！"
-	done
-
-.YoureARegularHereText
-	text "おっと　しつれい！"
-	line "じょうれん　さん　だったね！"
-	done

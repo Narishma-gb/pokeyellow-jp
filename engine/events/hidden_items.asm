@@ -9,7 +9,7 @@ HiddenItems:
 	predef FlagActionPredef
 	ld a, c
 	and a
-	ret nz
+	jr nz, .itemAlreadyFound
 	call EnableAutoTextBoxDrawing
 	ld a, 1
 	ld [wDoNotWaitForButtonPressAfterDisplayingText], a
@@ -17,6 +17,11 @@ HiddenItems:
 	ld [wNamedObjectIndex], a
 	call GetItemName
 	tx_pre_jump FoundHiddenItemText
+
+.itemAlreadyFound
+	ld a, $ff
+	ldh [hItemAlreadyFound], a
+	ret
 
 INCLUDE "data/events/hidden_item_coords.asm"
 
@@ -58,7 +63,7 @@ HiddenCoins:
 	predef GetQuantityOfItemInBag
 	ld a, b
 	and a
-	ret z
+	jr z, .doNotPickUpCoins
 	ld hl, HiddenCoinCoords
 	call FindHiddenItemOrCoinsIndex
 	ld [wHiddenItemOrCoinsIndex], a
@@ -69,7 +74,7 @@ HiddenCoins:
 	predef FlagActionPredef
 	ld a, c
 	and a
-	ret nz
+	jr nz, .doNotPickUpCoins
 	xor a
 	ldh [hUnusedCoinsByte], a
 	ldh [hCoins], a
@@ -83,6 +88,12 @@ HiddenCoins:
 	cp 40
 	jr z, .bcd20 ; should be bcd40
 	jr .bcd100
+
+.doNotPickUpCoins
+	ld a, $ff
+	ldh [hItemAlreadyFound], a
+	ret
+
 .bcd10
 	ld a, $10
 	ldh [hCoins + 1], a

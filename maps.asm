@@ -1098,130 +1098,131 @@ INCLUDE "data/maps/objects/SilphCo11F.asm"
 SilphCo11F_Blocks: INCBIN "maps/SilphCo11F.blk"
 
 
-;SECTION "Maps 19", ROMX
+SECTION "Maps 19", ROMX
 
-;CopycatsHouse1F_Blocks: INCBIN "maps/_House1F.blk"
+CopycatsHouse1F_Blocks: INCBIN "maps/_House1F.blk"
 
-;CinnabarMart_Blocks:
-;PewterMart_Blocks: INCBIN "maps/_Mart.blk"
+CinnabarMart_Blocks:
+PewterMart_Blocks: INCBIN "maps/_Mart.blk"
 
-;FuchsiaBillsGrandpasHouse_Blocks: INCBIN "maps/_House1.blk"
+FuchsiaBillsGrandpasHouse_Blocks: INCBIN "maps/_House1.blk"
 
-;CinnabarPokecenter_Blocks:
-;FuchsiaPokecenter_Blocks: INCBIN "maps/_Pokecenter.blk"
+CinnabarPokecenter_Blocks:
+FuchsiaPokecenter_Blocks: INCBIN "maps/_Pokecenter.blk"
 
-;CeruleanBadgeHouse_Blocks: INCBIN "maps/_House3.blk"
-
-
-;SECTION "Maps 20", ROMX
-
-;INCLUDE "scripts/CeruleanCity_2.asm"
-
-;INCLUDE "data/maps/headers/ViridianGym.asm"
-;INCLUDE "scripts/ViridianGym.asm"
-;INCLUDE "data/maps/objects/ViridianGym.asm"
-;ViridianGym_Blocks: INCBIN "maps/ViridianGym.blk"
-
-;INCLUDE "data/maps/headers/PewterMart.asm"
-;INCLUDE "scripts/PewterMart.asm"
-;INCLUDE "data/maps/objects/PewterMart.asm"
-
-;INCLUDE "data/maps/headers/CeruleanCave1F.asm"
-;INCLUDE "scripts/CeruleanCave1F.asm"
-;INCLUDE "data/maps/objects/CeruleanCave1F.asm"
-;CeruleanCave1F_Blocks: INCBIN "maps/CeruleanCave1F.blk"
-
-;INCLUDE "data/maps/headers/CeruleanBadgeHouse.asm"
-;INCLUDE "scripts/CeruleanBadgeHouse.asm"
-;INCLUDE "data/maps/objects/CeruleanBadgeHouse.asm"
+CeruleanBadgeHouse_Blocks: INCBIN "maps/_House3.blk"
 
 
-;SECTION "Maps 21", ROMX
+SECTION "Maps 20", ROMX
 
-;INCLUDE "data/maps/headers/FuchsiaBillsGrandpasHouse.asm"
-;INCLUDE "scripts/FuchsiaBillsGrandpasHouse.asm"
-;INCLUDE "data/maps/objects/FuchsiaBillsGrandpasHouse.asm"
+INCLUDE "scripts/CeruleanCity_2.asm"
 
-;INCLUDE "data/maps/headers/FuchsiaPokecenter.asm"
-;INCLUDE "scripts/FuchsiaPokecenter.asm"
-;INCLUDE "data/maps/objects/FuchsiaPokecenter.asm"
+INCLUDE "data/maps/headers/ViridianGym.asm"
+INCLUDE "scripts/ViridianGym.asm"
+INCLUDE "data/maps/objects/ViridianGym.asm"
+ViridianGym_Blocks: INCBIN "maps/ViridianGym.blk"
 
-;INCLUDE "data/maps/headers/WardensHouse.asm"
-;INCLUDE "scripts/WardensHouse.asm"
-;INCLUDE "data/maps/objects/WardensHouse.asm"
-;WardensHouse_Blocks: INCBIN "maps/WardensHouse.blk"
+INCLUDE "data/maps/headers/PewterMart.asm"
+INCLUDE "scripts/PewterMart.asm"
+INCLUDE "data/maps/objects/PewterMart.asm"
 
-;INCLUDE "data/maps/headers/SafariZoneGate.asm"
-;INCLUDE "scripts/SafariZoneGate.asm"
-;INCLUDE "data/maps/objects/SafariZoneGate.asm"
-;SafariZoneGate_Blocks: INCBIN "maps/_RouteGate1.blk"
+INCLUDE "data/maps/headers/CeruleanCave1F.asm"
+INCLUDE "scripts/CeruleanCave1F.asm"
+INCLUDE "data/maps/objects/CeruleanCave1F.asm"
+CeruleanCave1F_Blocks: INCBIN "maps/CeruleanCave1F.blk"
 
-;INCLUDE "data/maps/headers/FuchsiaGym.asm"
-;INCLUDE "scripts/FuchsiaGym.asm"
-;INCLUDE "data/maps/objects/FuchsiaGym.asm"
-;FuchsiaGym_Blocks: INCBIN "maps/FuchsiaGym.blk"
+INCLUDE "data/maps/headers/CeruleanBadgeHouse.asm"
+INCLUDE "scripts/CeruleanBadgeHouse.asm"
+INCLUDE "data/maps/objects/CeruleanBadgeHouse.asm"
 
-;INCLUDE "data/maps/headers/FuchsiaMeetingRoom.asm"
-;INCLUDE "scripts/FuchsiaMeetingRoom.asm"
-;INCLUDE "data/maps/objects/FuchsiaMeetingRoom.asm"
-;FuchsiaMeetingRoom_Blocks: INCBIN "maps/FuchsiaMeetingRoom.blk"
 
-;INCLUDE "data/maps/headers/CinnabarGym.asm"
-;INCLUDE "scripts/CinnabarGym.asm"
-;INCLUDE "data/maps/objects/CinnabarGym.asm"
-;CinnabarGym_Blocks: INCBIN "maps/CinnabarGym.blk"
+SECTION "Maps 21", ROMX
 
-;INCLUDE "data/maps/headers/CinnabarLab.asm"
-;INCLUDE "scripts/CinnabarLab.asm"
-;INCLUDE "data/maps/objects/CinnabarLab.asm"
-;CinnabarLab_Blocks: INCBIN "maps/CinnabarLab.blk"
+INCLUDE "data/maps/headers/FuchsiaBillsGrandpasHouse.asm"
+INCLUDE "scripts/FuchsiaBillsGrandpasHouse.asm"
+INCLUDE "data/maps/objects/FuchsiaBillsGrandpasHouse.asm"
 
-;INCLUDE "data/maps/headers/CinnabarLabTradeRoom.asm"
-;INCLUDE "scripts/CinnabarLabTradeRoom.asm"
-;INCLUDE "data/maps/objects/CinnabarLabTradeRoom.asm"
-;CinnabarLabTradeRoom_Blocks: INCBIN "maps/CinnabarLabTradeRoom.blk"
+INCLUDE "data/maps/headers/FuchsiaPokecenter.asm"
+INCLUDE "scripts/FuchsiaPokecenter.asm"
+INCLUDE "data/maps/objects/FuchsiaPokecenter.asm"
 
-;INCLUDE "data/maps/headers/CinnabarLabMetronomeRoom.asm"
-;INCLUDE "scripts/CinnabarLabMetronomeRoom.asm"
-;INCLUDE "data/maps/objects/CinnabarLabMetronomeRoom.asm"
-;CinnabarLabMetronomeRoom_Blocks: INCBIN "maps/CinnabarLabMetronomeRoom.blk"
+INCLUDE "data/maps/headers/WardensHouse.asm"
+INCLUDE "scripts/WardensHouse.asm"
+INCLUDE "data/maps/objects/WardensHouse.asm"
+WardensHouse_Blocks: INCBIN "maps/WardensHouse.blk"
 
-;INCLUDE "data/maps/headers/CinnabarLabFossilRoom.asm"
-;INCLUDE "scripts/CinnabarLabFossilRoom.asm"
-;INCLUDE "data/maps/objects/CinnabarLabFossilRoom.asm"
-;CinnabarLabFossilRoom_Blocks: INCBIN "maps/CinnabarLabFossilRoom.blk"
+INCLUDE "data/maps/headers/SafariZoneGate.asm"
+INCLUDE "data/maps/objects/SafariZoneGate.asm"
+SafariZoneGate_Blocks: INCBIN "maps/_RouteGate1.blk"
+INCLUDE "scripts/SafariZoneGate.asm"
 
-;INCLUDE "data/maps/headers/CinnabarPokecenter.asm"
-;INCLUDE "scripts/CinnabarPokecenter.asm"
-;INCLUDE "data/maps/objects/CinnabarPokecenter.asm"
+INCLUDE "data/maps/headers/FuchsiaGym.asm"
+INCLUDE "scripts/FuchsiaGym.asm"
+INCLUDE "data/maps/objects/FuchsiaGym.asm"
+FuchsiaGym_Blocks: INCBIN "maps/FuchsiaGym.blk"
 
-;INCLUDE "data/maps/headers/CinnabarMart.asm"
-;INCLUDE "scripts/CinnabarMart.asm"
-;INCLUDE "data/maps/objects/CinnabarMart.asm"
+INCLUDE "data/maps/headers/FuchsiaMeetingRoom.asm"
+INCLUDE "scripts/FuchsiaMeetingRoom.asm"
+INCLUDE "data/maps/objects/FuchsiaMeetingRoom.asm"
+FuchsiaMeetingRoom_Blocks: INCBIN "maps/FuchsiaMeetingRoom.blk"
 
-;INCLUDE "data/maps/headers/CopycatsHouse1F.asm"
-;INCLUDE "scripts/CopycatsHouse1F.asm"
-;INCLUDE "data/maps/objects/CopycatsHouse1F.asm"
+INCLUDE "data/maps/headers/CinnabarGym.asm"
+INCLUDE "scripts/CinnabarGym.asm"
+INCLUDE "data/maps/objects/CinnabarGym.asm"
+CinnabarGym_Blocks: INCBIN "maps/CinnabarGym.blk"
+INCLUDE "scripts/CinnabarGym_2.asm"
 
-;INCLUDE "data/maps/headers/ChampionsRoom.asm"
-;INCLUDE "scripts/ChampionsRoom.asm"
-;INCLUDE "data/maps/objects/ChampionsRoom.asm"
-;ChampionsRoom_Blocks: INCBIN "maps/ChampionsRoom.blk"
+INCLUDE "data/maps/headers/CinnabarLab.asm"
+INCLUDE "scripts/CinnabarLab.asm"
+INCLUDE "data/maps/objects/CinnabarLab.asm"
+CinnabarLab_Blocks: INCBIN "maps/CinnabarLab.blk"
 
-;INCLUDE "data/maps/headers/LoreleisRoom.asm"
-;INCLUDE "scripts/LoreleisRoom.asm"
-;INCLUDE "data/maps/objects/LoreleisRoom.asm"
-;LoreleisRoom_Blocks: INCBIN "maps/LoreleisRoom.blk"
+INCLUDE "data/maps/headers/CinnabarLabTradeRoom.asm"
+INCLUDE "scripts/CinnabarLabTradeRoom.asm"
+INCLUDE "data/maps/objects/CinnabarLabTradeRoom.asm"
+CinnabarLabTradeRoom_Blocks: INCBIN "maps/CinnabarLabTradeRoom.blk"
 
-;INCLUDE "data/maps/headers/BrunosRoom.asm"
-;INCLUDE "scripts/BrunosRoom.asm"
-;INCLUDE "data/maps/objects/BrunosRoom.asm"
-;BrunosRoom_Blocks: INCBIN "maps/BrunosRoom.blk"
+INCLUDE "data/maps/headers/CinnabarLabMetronomeRoom.asm"
+INCLUDE "scripts/CinnabarLabMetronomeRoom.asm"
+INCLUDE "data/maps/objects/CinnabarLabMetronomeRoom.asm"
+CinnabarLabMetronomeRoom_Blocks: INCBIN "maps/CinnabarLabMetronomeRoom.blk"
 
-;INCLUDE "data/maps/headers/AgathasRoom.asm"
-;INCLUDE "scripts/AgathasRoom.asm"
-;INCLUDE "data/maps/objects/AgathasRoom.asm"
-;AgathasRoom_Blocks: INCBIN "maps/AgathasRoom.blk"
+INCLUDE "data/maps/headers/CinnabarLabFossilRoom.asm"
+INCLUDE "scripts/CinnabarLabFossilRoom.asm"
+INCLUDE "data/maps/objects/CinnabarLabFossilRoom.asm"
+CinnabarLabFossilRoom_Blocks: INCBIN "maps/CinnabarLabFossilRoom.blk"
+
+INCLUDE "data/maps/headers/CinnabarPokecenter.asm"
+INCLUDE "scripts/CinnabarPokecenter.asm"
+INCLUDE "data/maps/objects/CinnabarPokecenter.asm"
+
+INCLUDE "data/maps/headers/CinnabarMart.asm"
+INCLUDE "scripts/CinnabarMart.asm"
+INCLUDE "data/maps/objects/CinnabarMart.asm"
+
+INCLUDE "data/maps/headers/CopycatsHouse1F.asm"
+INCLUDE "scripts/CopycatsHouse1F.asm"
+INCLUDE "data/maps/objects/CopycatsHouse1F.asm"
+
+INCLUDE "data/maps/headers/ChampionsRoom.asm"
+INCLUDE "scripts/ChampionsRoom.asm"
+INCLUDE "data/maps/objects/ChampionsRoom.asm"
+ChampionsRoom_Blocks: INCBIN "maps/ChampionsRoom.blk"
+
+INCLUDE "data/maps/headers/LoreleisRoom.asm"
+INCLUDE "scripts/LoreleisRoom.asm"
+INCLUDE "data/maps/objects/LoreleisRoom.asm"
+LoreleisRoom_Blocks: INCBIN "maps/LoreleisRoom.blk"
+
+INCLUDE "data/maps/headers/BrunosRoom.asm"
+INCLUDE "scripts/BrunosRoom.asm"
+INCLUDE "data/maps/objects/BrunosRoom.asm"
+BrunosRoom_Blocks: INCBIN "maps/BrunosRoom.blk"
+
+INCLUDE "data/maps/headers/AgathasRoom.asm"
+INCLUDE "scripts/AgathasRoom.asm"
+INCLUDE "data/maps/objects/AgathasRoom.asm"
+AgathasRoom_Blocks: INCBIN "maps/AgathasRoom.blk"
 
 
 SECTION "Maps 22", ROMX
@@ -1239,9 +1240,9 @@ INCLUDE "scripts/CeladonMart3F_2.asm"
 INCLUDE "scripts/CeladonMansion1F_2.asm"
 INCLUDE "scripts/CeladonMansion3F_2.asm"
 INCLUDE "scripts/CeladonDiner_2.asm"
-;INCLUDE "scripts/SafariZoneGate_2.asm"
-;INCLUDE "scripts/CinnabarGym_3.asm"
-;INCLUDE "scripts/MtMoonPokecenter_2.asm"
+INCLUDE "scripts/SafariZoneGate_2.asm"
+INCLUDE "scripts/CinnabarGym_3.asm"
+INCLUDE "scripts/MtMoonPokecenter_2.asm"
 
 ;INCLUDE "data/maps/headers/SummerBeachHouse.asm"
 ;INCLUDE "scripts/SummerBeachHouse.asm"

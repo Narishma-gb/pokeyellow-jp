@@ -136,21 +136,21 @@ FuchsiaGymKogaText:
 
 	para "こわっぱ　ごときが"
 	line "せっしゃに　たたかいを　いどむとは"
-	cont "かたはら　いたいわ！"
+	cont "かたはら　いたいで　ござる！"
 
 	para "<⋯>　どくを　くらったら　じめつ！"
 	line "ねむって　しまったら　むていこう"
 
 	para "<⋯>　しのびの　わざの　ごくいを"
-	line "うけて　みるが　よい！"
+	line "うけて　みよ！"
 	done
 
 .ReceivedSoulBadgeText:
-	text "ふん<⋯>！"
-	line "おぬし　やりおるな！"
+	text "ほう<⋯>！"
+	line "おぬし　やるで　ござるな"
 
-	para "そら！"
-	line "ピンク　バッジを　うけとれ！"
+	para "そら！　この"
+	line "ピンク　バッジを　うけとるが　よい！"
 	prompt
 
 .PostBattleAdviceText:
@@ -159,7 +159,7 @@ FuchsiaGymKogaText:
 	cont "ダメージが　おおきく　なる！"
 
 	para "これは　あいてに"
-	line "きょうふを　あたえる　わざ　なのだ！"
+	line "きょうふを　あたえる　わざで　ござる"
 	done
 
 FuchsiaGymKogaSoulBadgeInfoText:
@@ -190,7 +190,7 @@ FuchsiaGymKogaReceivedTM06Text:
 	done
 
 FuchsiaGymKogaTM06NoRoomText:
-	text "にもつが　いっぱいだ"
+	text "にもつが　いっぱいで　ござる"
 	done
 
 FuchsiaGymRocker1Text:

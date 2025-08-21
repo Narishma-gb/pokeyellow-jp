@@ -287,20 +287,21 @@ INCLUDE "engine/gfx/palettes.asm"
 INCLUDE "engine/menus/save.asm"
 
 
-;SECTION "Itemfinder 1", ROMX
+SECTION "Itemfinder 1", ROMX
 
-;INCLUDE "engine/items/itemfinder.asm"
-
-
-;SECTION "Vending Machine", ROMX
-
-;INCLUDE "engine/events/vending_machine.asm"
+INCLUDE "engine/items/itemfinder.asm"
 
 
-;SECTION "Itemfinder 2", ROMX
+SECTION "Vending Machine", ROMX
 
-;INCLUDE "engine/menus/league_pc.asm"
-;INCLUDE "engine/events/hidden_items.asm"
+INCLUDE "engine/events/vending_machine.asm"
+
+
+SECTION "Itemfinder 2", ROMX
+
+INCLUDE "engine/menus/league_pc.asm"
+INCLUDE "engine/overworld/elevator.asm"
+INCLUDE "engine/events/hidden_items.asm"
 
 
 ;SECTION "bank1E", ROMX
@@ -315,7 +316,6 @@ INCLUDE "engine/menus/save.asm"
 ;INCLUDE "data/battle_anims/subanimations.asm"
 ;INCLUDE "data/battle_anims/frame_blocks.asm"
 ;INCLUDE "engine/movie/evolution.asm"
-;INCLUDE "engine/overworld/elevator.asm"
 ;INCLUDE "engine/items/tm_prices.asm"
 
 

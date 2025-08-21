@@ -36,18 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom29", ROMX
-; ROM $1d : $74000 - $77FFF
-	set_bank_offset 29
-
-	dr HiddenItemNear, 29, $405C
-	dr CeruleanHideRocket, 29, $40AF
-	dr VendingMachineMenu, 29, $4E42
-	dr PKMNLeaguePC, 29, $7AB2
-	dr ShakeElevator, 29, $7BE0
-
-	dr_end 29
-
 SECTION "rom30", ROMX
 ; ROM $1e : $78000 - $7BFFF
 	set_bank_offset 30
@@ -351,10 +339,6 @@ SECTION "rom59", ROMX
 
 SECTION "rom60", ROMX
 ; ROM $3c : $F0000 - $F3FFF
-	set_bank_offset 60, $5B98
-
-	dr MagikarpSalesman_cpy, 60, $60A1
-INCLUDE "scripts/MtMoonPokecenter_2.asm"
 	set_bank_offset 60, $619C
 
 	dr BillsHousePrintBillPokemonText_cpy, 60, $659A

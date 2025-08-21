@@ -160,7 +160,13 @@ ROMX $1c
 	"bank1C"
 	"Garbage 28"
 ROMX $1d
-	"rom29"
+	"Maps 19"
+	"Itemfinder 1"
+	"Maps 20"
+	"Vending Machine"
+	"Maps 21"
+	"Itemfinder 2"
+	"Garbage 29"
 ROMX $1e
 	"rom30"
 ROMX $1f
@@ -234,14 +240,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $1D
-; 	"Maps 19"
-; 	"Itemfinder 1"
-; 	"Maps 20"
-; 	"Vending Machine"
-; 	"Maps 21"
-; 	"Itemfinder 2"
-; 	"Garbage 29"
 ; ROMX $1E
 ; 	"bank1E"
 ; 	"Garbage 30"

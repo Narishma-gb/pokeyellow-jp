@@ -2,7 +2,8 @@ ChampionsRoom_Script:
 	call EnableAutoTextBoxDrawing
 	ld hl, ChampionsRoom_ScriptPointers
 	ld a, [wChampionsRoomCurScript]
-	jp CallFunctionInTable
+	call CallFunctionInTable
+	ret
 
 ResetRivalScript:
 	xor a ; SCRIPT_CHAMPIONSROOM_DEFAULT
@@ -70,18 +71,7 @@ ChampionsRoomRivalReadyToBattleScript:
 
 	; select which team to use during the encounter
 	ld a, [wRivalStarter]
-	cp STARTER2
-	jr nz, .NotStarter2
-	ld a, $1
-	jr .saveTrainerId
-.NotStarter2
-	cp STARTER3
-	jr nz, .NotStarter3
-	ld a, $2
-	jr .saveTrainerId
-.NotStarter3
-	ld a, $3
-.saveTrainerId
+	add $0 ; Wow GameFreak
 	ld [wTrainerNo], a
 
 	xor a

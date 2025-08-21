@@ -87,7 +87,7 @@ WardensHouseWardenText:
 
 .ThanksText:
 	text "えんちょう『すんまへん！"
-	cont "ほんま　たすかったわあ！"
+	line "ほんま　たすかったわあ！"
 	cont "だれに　なに　いうても"
 	cont "ぜんぜん　つうじへんし"
 
