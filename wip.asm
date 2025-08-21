@@ -36,36 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom30", ROMX
-; ROM $1e : $78000 - $7BFFF
-	set_bank_offset 30
-
-	dr MoveAnimationTiles1, 30, $46EE
-	dr SlotMachineTiles2, 30, $4BDE
-	dr MoveAnimation, 30, $4D5E
-	dr Func_78e98, 30, $4E53
-	dr AnimationSlideMonOff, 30, $52D2
-	dr AnimationSlideEnemyMonOff, 30, $52DC
-	dr AnimationMinimizeMon, 30, $55C2
-	dr AnimationSubstitute, 30, $5703
-	dr HideSubstituteShowMonAnim, 30, $576A
-	dr ReshowSubstituteAnim, 30, $5806
-	dr ChangeMonPic, 30, $5828
-	dr Func_79929, 30, $587D
-	dr GetIntroMoveSound, 30, $5919
-	dr CopyDownscaledMonTiles, 30, $5B6A
-	dr CopyTileIDsFromList, 30, $5E7D
-	dr AnimCut, 30, $5F39
-	dr AnimateBoulderDust, 30, $5FF7
-	dr LoadSmokeTileFourTimes, 30, $6063
-	dr RedFishingTilesFront, 30, $6090
-	dr RedFishingTilesBack, 30, $60B0
-	dr RedFishingTilesSide, 30, $60D0
-	dr RedFishingRodTiles, 30, $60F0
-	dr EvolveMon, 30, $7E87
-
-	dr_end 30
-
 SECTION "Audio Engine 3", ROMX
 SECTION "rom31", ROMX
 ; ROM $1f : $7C000 - $7FFFF

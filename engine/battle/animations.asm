@@ -23,7 +23,7 @@ MoveAnimation:
 	jr nz, .animationsDisabled
 	call ShareMoveAnimations
 	call PlayAnimation
-	vc_hook Stop_reducing_move_anim_flashing_Blizzard_Bubblebeam_Rock_Slide
+;	vc_hook Stop_reducing_move_anim_flashing_Blizzard_Bubblebeam_Rock_Slide
 	jr .next
 .animationsDisabled
 	ld c, 30
@@ -169,6 +169,26 @@ SetAnimationPalette:
 	ldh [rOBP0], a
 	ld a, $6c
 	ldh [rOBP1], a
+	ret
+
+Func_78e98:
+	call SaveScreenTilesToBuffer2
+	xor a
+	ldh [hAutoBGTransferEnabled], a
+	call ClearScreen
+	ld h, HIGH(vBGMap0)
+	call WriteLowerByteOfBGMapAndEnableBGTransfer
+	call Delay3
+	xor a
+	ldh [hAutoBGTransferEnabled], a
+	call LoadScreenTilesFromBuffer2
+	ld h, HIGH(vBGMap1)
+
+WriteLowerByteOfBGMapAndEnableBGTransfer:
+	ld l, LOW(vBGMap0)
+	call BattleAnimCopyTileMapToVRAM
+	ld a, $1
+	ldh [hAutoBGTransferEnabled], a
 	ret
 
 PlaySubanimation:
@@ -387,17 +407,24 @@ DoRockSlideSpecialEffects:
 	ld b, 1
 	predef_jump PredefShakeScreenVertically ; shake vertically
 
-FlashScreenEveryTwoFrameBlocks:
+FlashScreenEveryEightFrameBlocks:
 	ld a, [wSubAnimCounter]
-	srl a ; is the subanimation counter an odd value?
-	call c, AnimationFlashScreen ; if so, flash the screen
+	and 7 ; is the subanimation counter exactly 8?
+	call z, AnimationFlashScreen ; if so, flash the screen
+	ret
+
+; flashes the screen if the subanimation counter is divisible by 4
+FlashScreenEveryFourFrameBlocks:
+	ld a, [wSubAnimCounter]
+	and 3
+	call z, AnimationFlashScreen
 	ret
 
 ; used for Explosion and Selfdestruct
 DoExplodeSpecialEffects:
 	ld a, [wSubAnimCounter]
 	cp 1 ; is it the end of the subanimation?
-	jp nz, AnimationFlashScreen
+	jr nz, FlashScreenEveryFourFrameBlocks
 ; if it's the end of the subanimation, make the attacking pokemon disappear
 	hlcoord 1, 5
 	jp AnimationHideMonPic ; make pokemon disappear
@@ -552,7 +579,7 @@ CallWithTurnFlipped:
 
 ; flashes the screen for an extended period (48 frames)
 AnimationFlashScreenLong:
-	ld a, 4 ; cycle through the palettes 4 times
+	ld a, 3 ; cycle through the palettes 4 times
 	ld [wFlashScreenLongCounter], a
 	ld a, [wOnSGB] ; running on SGB?
 	and a
@@ -608,19 +635,17 @@ FlashScreenLongSGB:
 	dc 3, 2, 1, 0
 	db 1 ; end
 
-; causes a delay of 4 frames for the first cycle, 3 frames for the second cycle, 
-; 2 frames for the third cycle and 1 frame for the fourth cycle
+; causes a delay of 2 frames for the first cycle
+; causes a delay of 1 frame for the second and third cycles
 FlashScreenLongDelay:
 	ld a, [wFlashScreenLongCounter]
-	cp 4
+	cp 4 ; never true since [wFlashScreenLongCounter] starts at 3
 	ld c, 4
 	jr z, .delayFrames
 	cp 3
-	ld c, 3
-	jr z, .delayFrames
-	cp 2
 	ld c, 2
 	jr z, .delayFrames
+	cp 2 ; nothing is done with this
 	ld c, 1
 .delayFrames
 	jp DelayFrames
@@ -1423,10 +1448,8 @@ _AnimationSlideMonOff:
 .PlayerNextTile
 	ld a, [hl]
 	add 7
-; This is a bug. The lower right corner tile of the mon back pic is blanked
-; while the mon is sliding off the screen. It should compare with the max tile
-; plus one instead.
-	cp $61
+; bugfix: compares against the max tile + 1 as opposed to the max tile
+	cp $62
 	ret c
 	ld a, "　"
 	ret
@@ -1563,18 +1586,24 @@ AnimationSubstitute:
 CopyMonsterSpriteData:
 	ld bc, 1 tiles
 	ld a, BANK(MonsterSprite)
-	jp FarCopyData2
+	jp FarCopyData
 
 HideSubstituteShowMonAnim:
 	ldh a, [hWhoseTurn]
 	and a
 	ld hl, wPlayerMonMinimized
+	ld de, wPlayerBattleStatus1
+	ld bc, wPlayerMoveNum
 	ld a, [wPlayerBattleStatus2]
 	jr z, .next1
 	ld hl, wEnemyMonMinimized
+	ld de, wEnemyBattleStatus1
+	ld bc, wEnemyMoveNum
 	ld a, [wEnemyBattleStatus2]
 .next1
 	push hl
+	push de
+	push bc
 ; if the substitute broke, slide it down, else slide it offscreen horizontally
 	bit HAS_SUBSTITUTE_UP, a
 	jr nz, .substituteStillUp
@@ -1583,12 +1612,65 @@ HideSubstituteShowMonAnim:
 .substituteStillUp
 	call AnimationSlideMonOff
 .next2
+	pop bc
+	pop de
+	ld a, [de]
+	bit INVULNERABLE, a
 	pop hl
+	jr nz, .invulnerable
+	ld a, [bc]
+	cp FLY
+	jr z, .flyOrDig
+	cp DIG
+	jr z, .flyOrDig
+.invulnerable
 	ld a, [hl]
 	and a
 	jp nz, AnimationMinimizeMon
 	call AnimationFlashMonPic
 	jp AnimationShowMonPic
+.flyOrDig
+	ldh a, [hWhoseTurn]
+	and a
+	jr nz, .enemy
+	ld a, [wPlayerMonMinimized]
+	and a
+	jr nz, .monIsMinimized
+	ld a, [wBattleMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	call GetMonHeader
+	predef LoadMonBackPic
+	ret
+.enemy
+	ld a, [wEnemyMonMinimized]
+	and a
+	jr nz, .monIsMinimized
+	ld a, [wEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	call GetMonHeader
+	ld de, vFrontPic
+	jp LoadMonFrontSprite
+.monIsMinimized
+	ld hl, wTempPic
+	push hl
+	xor a
+	ld bc, 7 * 7 * $10
+	call FillMemory
+	pop hl
+	ld de, $194
+	add hl, de
+	ld de, MinimizedMonSprite
+	ld c, MinimizedMonSpriteEnd - MinimizedMonSprite
+.loop
+	ld a, [de]
+	ld [hli], a
+	ld [hli], a
+	inc de
+	dec c
+	jr nz, .loop
+	jp CopyTempPicToMonPic
 
 ReshowSubstituteAnim:
 	call AnimationSlideMonOff
@@ -1656,6 +1738,23 @@ AnimationHideEnemyMonPic:
 	ldh [hAutoBGTransferEnabled], a
 	jp Delay3
 
+Func_79929:
+	ld hl, wPlayerMonMinimized
+	ldh a, [hWhoseTurn]
+	and a
+	jr z, .playerTurn
+	ld hl, wEnemyMonMinimized
+.playerTurn
+	ld a, [hl]
+	and a
+	jr z, .notMinimized
+	call AnimationMinimizeMon
+	ret
+.notMinimized
+	call AnimationFlashMonPic
+	call AnimationShowMonPic
+	ret
+
 InitMultipleObjectsOAM:
 ; Writes c OAM entries with tile d.
 ; Sets their Y coordinates to sequential multiples of 8, starting from 0.
@@ -1676,6 +1775,8 @@ InitMultipleObjectsOAM:
 	dec c
 	jr nz, .loop
 	ret
+
+	ret ; unreferenced
 
 AnimationHideMonPic:
 ; Hides the mon's sprite.
@@ -1777,8 +1878,7 @@ AnimCopyRowRight:
 	jr nz, AnimCopyRowRight
 	ret
 
-; only used by the unreferenced PlayIntroMoveSound
-GetIntroMoveSound:
+GetIntroMoveSound: ; unreferenced
 	ld a, b
 	call GetMoveSound
 	ld b, a

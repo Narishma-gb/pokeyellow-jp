@@ -14,11 +14,11 @@ AnimationIdSpecialEffects:
 	anim_special_effect DISABLE,               AnimationFlashScreen
 	anim_special_effect BLIZZARD,              DoBlizzardSpecialEffects
 	anim_special_effect BUBBLEBEAM,            AnimationFlashScreen
-	anim_special_effect HYPER_BEAM,            AnimationFlashScreen
-	anim_special_effect THUNDERBOLT,           FlashScreenEveryTwoFrameBlocks
+	anim_special_effect HYPER_BEAM,            FlashScreenEveryFourFrameBlocks
+	anim_special_effect THUNDERBOLT,           FlashScreenEveryEightFrameBlocks
 	anim_special_effect REFLECT,               AnimationFlashScreen
 	anim_special_effect SELFDESTRUCT,          DoExplodeSpecialEffects
-	anim_special_effect SPORE,                 AnimationFlashScreen
+	anim_special_effect SPORE,                 FlashScreenEveryFourFrameBlocks
 	anim_special_effect EXPLOSION,             DoExplodeSpecialEffects
 	anim_special_effect ROCK_SLIDE,            DoRockSlideSpecialEffects
 	anim_special_effect TRADE_BALL_DROP_ANIM,  TradeHidePokemon

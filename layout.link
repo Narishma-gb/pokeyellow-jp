@@ -168,7 +168,8 @@ ROMX $1d
 	"Itemfinder 2"
 	"Garbage 29"
 ROMX $1e
-	"rom30"
+	"bank1E"
+	"Garbage 30"
 ROMX $1f
 	"Audio Engine 3"
 	"rom31"
@@ -240,9 +241,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $1E
-; 	"bank1E"
-; 	"Garbage 30"
 ; ROMX $1F
 ; 	"Sound Effect Headers 3"
 ; 	"Music Headers 3"

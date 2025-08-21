@@ -204,7 +204,6 @@ AttackAnimationPointers:
 	dw ThrowRockAnim
 	dw ThrowBaitAnim
 	assert_table_length NUM_ATTACK_ANIMS
-	dw ZigZagScreenAnim
 
 ; each animation is a list of subanimations
 ; and/or special effects, terminated by -1
@@ -227,10 +226,6 @@ ENDM
 
 ; The 0 or 1 in the name of a subanim indicates whether to use tileset 0 or 1.
 ; "Both" indicates either can be used for different images using the same animation.
-
-ZigZagScreenAnim:
-	battle_anim NO_MOVE, SE_WAVY_SCREEN
-	db -1 ; end
 
 PoundAnim:
 StruggleAnim:
