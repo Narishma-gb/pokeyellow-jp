@@ -8,7 +8,7 @@
 	audio_header Music_BikeRiding,        1, 2, 3, 4
 	audio_header Music_Surfing,           1, 2, 3
 	audio_header Music_GameCorner,        1, 2, 3
-	audio_header Music_IntroBattle,       1, 2, 3, 4
+	audio_header Music_YellowIntro,       1, 2, 3
 	audio_header Music_Dungeon1,          1, 2, 3, 4 ; Power Plant, Cerulean Cave, Rocket HQ
 	audio_header Music_Dungeon2,          1, 2, 3, 4 ; Viridian Forest, Seafoam Islands
 	audio_header Music_Dungeon3,          1, 2, 3, 4 ; Mt. Moon, Rock Tunnel, Victory Road

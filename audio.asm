@@ -202,98 +202,99 @@ INCLUDE "audio/music/defeated_wild_mon.asm"
 INCLUDE "audio/music/defeated_gym_leader.asm"
 
 
-;; Audio Engine 3 (Bank $1F)
-;	audio_def 3
+; Audio Engine 3 (Bank $1F)
+	audio_def 3
 
-;SECTION "Audio Engine 3", ROMX
+SECTION "Sound Effect Headers 3", ROMX
 
-;INCLUDE "audio/pokedex_rating_sfx.asm"
-;INCLUDE "audio/engine_3.asm"
-
-
-;SECTION "Sound Effect Headers 3", ROMX
-
-;INCLUDE "audio/headers/sfx_headers_common.asm"
-;INCLUDE "audio/headers/sfx_headers_1_3.asm"
-;INCLUDE "audio/headers/sfx_headers_3.asm"
+INCLUDE "audio/headers/sfx_headers_common.asm"
+INCLUDE "audio/headers/sfx_headers_1_3.asm"
+INCLUDE "audio/headers/sfx_headers_3.asm"
 
 
-;SECTION "Music Headers 3", ROMX
+SECTION "Music Headers 3", ROMX
 
-;INCLUDE "audio/headers/music_headers_3.asm"
-
-
-;SECTION "Sound Effects 3", ROMX
-
-;INCLUDE "audio/noise_wave_common.asm"
-
-;INCLUDE "audio/sfx/start_menu.asm"
-;INCLUDE "audio/sfx/cut.asm"
-;INCLUDE "audio/sfx/go_inside.asm"
-;INCLUDE "audio/sfx/swap.asm"
-;INCLUDE "audio/sfx/tink.asm"
-;INCLUDE "audio/sfx/59.asm"
-;INCLUDE "audio/sfx/purchase.asm"
-;INCLUDE "audio/sfx/collision.asm"
-;INCLUDE "audio/sfx/go_outside.asm"
-;INCLUDE "audio/sfx/press_ab.asm"
-;INCLUDE "audio/sfx/save.asm"
-;INCLUDE "audio/sfx/heal_hp.asm"
-;INCLUDE "audio/sfx/poisoned.asm"
-;INCLUDE "audio/sfx/heal_ailment.asm"
-;INCLUDE "audio/sfx/trade_machine.asm"
-;INCLUDE "audio/sfx/turn_on_pc.asm"
-;INCLUDE "audio/sfx/turn_off_pc.asm"
-;INCLUDE "audio/sfx/enter_pc.asm"
-;INCLUDE "audio/sfx/shrink.asm"
-;INCLUDE "audio/sfx/switch.asm"
-;INCLUDE "audio/sfx/healing_machine.asm"
-;INCLUDE "audio/sfx/teleport_exit1.asm"
-;INCLUDE "audio/sfx/teleport_enter1.asm"
-;INCLUDE "audio/sfx/teleport_exit2.asm"
-;INCLUDE "audio/sfx/ledge.asm"
-;INCLUDE "audio/sfx/teleport_enter2.asm"
-;INCLUDE "audio/sfx/fly.asm"
-;INCLUDE "audio/sfx/denied.asm"
-;INCLUDE "audio/sfx/arrow_tiles.asm"
-;INCLUDE "audio/sfx/push_boulder.asm"
-;INCLUDE "audio/sfx/ss_anne_horn.asm"
-;INCLUDE "audio/sfx/withdraw_deposit.asm"
-;INCLUDE "audio/sfx/intro_lunge.asm"
-;INCLUDE "audio/sfx/intro_hip.asm"
-;INCLUDE "audio/sfx/intro_hop.asm"
-;INCLUDE "audio/sfx/intro_raise.asm"
-;INCLUDE "audio/sfx/intro_crash.asm"
-;INCLUDE "audio/sfx/intro_whoosh.asm"
-;INCLUDE "audio/sfx/slots_stop_wheel.asm"
-;INCLUDE "audio/sfx/slots_reward.asm"
-;INCLUDE "audio/sfx/slots_new_spin.asm"
-;INCLUDE "audio/sfx/shooting_star.asm"
-
-;INCLUDE "audio/cry_common.asm"
+INCLUDE "audio/headers/music_headers_3.asm"
 
 
-;SECTION "Music 3", ROMX
+SECTION "Sound Effects 3", ROMX
 
-;INCLUDE "audio/music/bike_riding.asm"
-;INCLUDE "audio/music/dungeon_1.asm"
-;INCLUDE "audio/music/game_corner.asm"
-;INCLUDE "audio/music/title_screen.asm"
-;INCLUDE "audio/sfx/get_item1.asm"
-;INCLUDE "audio/music/dungeon_2.asm"
-;INCLUDE "audio/music/dungeon_3.asm"
-;INCLUDE "audio/music/cinnabar_mansion.asm"
-;INCLUDE "audio/sfx/pokedex_rating.asm"
-;INCLUDE "audio/sfx/get_item2.asm"
-;INCLUDE "audio/sfx/get_key_item.asm"
-;INCLUDE "audio/music/oaks_lab.asm"
-;INCLUDE "audio/music/pokemon_tower.asm"
-;INCLUDE "audio/music/silph_co.asm"
-;INCLUDE "audio/music/meet_evil_trainer.asm"
-;INCLUDE "audio/music/meet_female_trainer.asm"
-;INCLUDE "audio/music/meet_male_trainer.asm"
-;INCLUDE "audio/music/intro_battle.asm"
-;INCLUDE "audio/music/surfing.asm"
-;INCLUDE "audio/music/jigglypuff_song.asm"
-;INCLUDE "audio/music/hall_of_fame.asm"
-;INCLUDE "audio/music/credits.asm"
+INCLUDE "audio/noise_common.asm"
+
+INCLUDE "audio/sfx/start_menu.asm"
+INCLUDE "audio/sfx/cut.asm"
+INCLUDE "audio/sfx/go_inside.asm"
+INCLUDE "audio/sfx/swap.asm"
+INCLUDE "audio/sfx/tink.asm"
+INCLUDE "audio/sfx/59.asm"
+INCLUDE "audio/sfx/purchase.asm"
+INCLUDE "audio/sfx/collision.asm"
+INCLUDE "audio/sfx/go_outside.asm"
+INCLUDE "audio/sfx/press_ab.asm"
+INCLUDE "audio/sfx/save.asm"
+INCLUDE "audio/sfx/heal_hp.asm"
+INCLUDE "audio/sfx/poisoned.asm"
+INCLUDE "audio/sfx/heal_ailment.asm"
+INCLUDE "audio/sfx/trade_machine.asm"
+INCLUDE "audio/sfx/turn_on_pc.asm"
+INCLUDE "audio/sfx/turn_off_pc.asm"
+INCLUDE "audio/sfx/enter_pc.asm"
+INCLUDE "audio/sfx/shrink.asm"
+INCLUDE "audio/sfx/switch.asm"
+INCLUDE "audio/sfx/healing_machine.asm"
+INCLUDE "audio/sfx/teleport_exit1.asm"
+INCLUDE "audio/sfx/teleport_enter1.asm"
+INCLUDE "audio/sfx/teleport_exit2.asm"
+INCLUDE "audio/sfx/ledge.asm"
+INCLUDE "audio/sfx/teleport_enter2.asm"
+INCLUDE "audio/sfx/fly.asm"
+INCLUDE "audio/sfx/denied.asm"
+INCLUDE "audio/sfx/arrow_tiles.asm"
+INCLUDE "audio/sfx/push_boulder.asm"
+INCLUDE "audio/sfx/ss_anne_horn.asm"
+INCLUDE "audio/sfx/withdraw_deposit.asm"
+INCLUDE "audio/sfx/intro_lunge.asm"
+INCLUDE "audio/sfx/intro_hip.asm"
+INCLUDE "audio/sfx/intro_hop.asm"
+INCLUDE "audio/sfx/intro_raise.asm"
+INCLUDE "audio/sfx/intro_crash.asm"
+INCLUDE "audio/sfx/intro_whoosh.asm"
+INCLUDE "audio/sfx/slots_stop_wheel.asm"
+INCLUDE "audio/sfx/slots_reward.asm"
+INCLUDE "audio/sfx/slots_new_spin.asm"
+INCLUDE "audio/sfx/shooting_star.asm"
+
+INCLUDE "audio/cry_common.asm"
+
+
+SECTION "Audio Engine 3", ROMX
+
+INCLUDE "audio/pokedex_rating_sfx.asm"
+INCLUDE "audio/engine_3.asm"
+
+
+SECTION "Music 3", ROMX
+
+INCLUDE "audio/music/bike_riding.asm"
+INCLUDE "audio/music/dungeon_1.asm"
+INCLUDE "audio/music/game_corner.asm"
+INCLUDE "audio/music/title_screen.asm"
+INCLUDE "audio/sfx/get_item1.asm"
+INCLUDE "audio/music/dungeon_2.asm"
+INCLUDE "audio/music/dungeon_3.asm"
+INCLUDE "audio/music/cinnabar_mansion.asm"
+INCLUDE "audio/sfx/pokedex_rating.asm"
+INCLUDE "audio/sfx/get_item2.asm"
+INCLUDE "audio/sfx/get_key_item.asm"
+INCLUDE "audio/music/oaks_lab.asm"
+INCLUDE "audio/music/pokemon_tower.asm"
+INCLUDE "audio/music/silph_co.asm"
+INCLUDE "audio/music/meet_evil_trainer.asm"
+INCLUDE "audio/music/meet_female_trainer.asm"
+INCLUDE "audio/music/meet_male_trainer.asm"
+INCLUDE "audio/music/intro_battle.asm"
+INCLUDE "audio/music/surfing.asm"
+INCLUDE "audio/music/jigglypuff_song.asm"
+INCLUDE "audio/music/hall_of_fame.asm"
+INCLUDE "audio/music/credits.asm"
+INCLUDE "audio/music/yellowintro.asm"

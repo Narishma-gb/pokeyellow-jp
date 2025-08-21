@@ -171,8 +171,12 @@ ROMX $1e
 	"bank1E"
 	"Garbage 30"
 ROMX $1f
+	"Sound Effect Headers 3"
+	"Music Headers 3"
+	"Sound Effects 3"
 	"Audio Engine 3"
-	"rom31"
+	"Music 3"
+	"Garbage 31"
 ROMX $20
 	"rom32"
 ROMX $21
@@ -241,13 +245,6 @@ ROMX $3e
 	"rom62"
 ROMX $3f
 	"rom63"
-; ROMX $1F
-; 	"Sound Effect Headers 3"
-; 	"Music Headers 3"
-; 	"Sound Effects 3"
-; 	"Audio Engine 3"
-; 	"Music 3"
-; 	"Garbage 31"
 WRAM0
 	"Audio RAM"
 	org $c100

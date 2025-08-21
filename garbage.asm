@@ -117,5 +117,5 @@ SECTION "Garbage 30", ROMX
 INCBIN "garbage/garbage_30.bin"
 
 
-;SECTION "Garbage 31", ROMX
-;	db $0D, $0A, $4A, $40, $98 ; final byte is $00, same as padding byte
+SECTION "Garbage 31", ROMX
+INCBIN "garbage/garbage_31.bin"

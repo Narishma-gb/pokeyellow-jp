@@ -36,30 +36,9 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "Audio Engine 3", ROMX
-SECTION "rom31", ROMX
-; ROM $1f : $7C000 - $7FFFF
-	set_bank_offset 31
-
-SFX_Shooting_Star::
-Music_BikeRiding::
-Music_MeetEvilTrainer::
-Music_TitleScreen::
-Music_GameCorner::
-Music_Surfing::
-Music_JigglypuffSong::
-Music_HallOfFame::
-
-	dr PlayPokedexRatingSfx, 31, $50D6
-	dr Audio3_PlaySound, 31, $510D
-
-	dr_end 31
-
 SECTION "rom32", ROMX
 ; ROM $20 : $80000 - $83FFF
 	set_bank_offset 32
-
-	dr Audio4_PlaySound, 32, $4F14
 
 	dr_end 32
 
@@ -127,9 +106,10 @@ SECTION "rom39", ROMX
 
 SECTION "rom40", ROMX
 ; ROM $28 : $A0000 - $A3FFF
+Music_MeetJessieJames::
 	set_bank_offset 40
 
-Music_MeetJessieJames::
+	dr Audio4_PlaySound, 40, $4F14
 
 	dr_end 40
 

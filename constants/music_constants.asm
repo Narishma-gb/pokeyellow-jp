@@ -40,24 +40,24 @@ ENDM
 
 	; AUDIO_3
 	audio_def 3
-;	music_const MUSIC_TITLE_SCREEN,        Music_TitleScreen
-;	music_const MUSIC_CREDITS,             Music_Credits
-;	music_const MUSIC_HALL_OF_FAME,        Music_HallOfFame
-;	music_const MUSIC_OAKS_LAB,            Music_OaksLab
-;	music_const MUSIC_JIGGLYPUFF_SONG,     Music_JigglypuffSong
-;	music_const MUSIC_BIKE_RIDING,         Music_BikeRiding
-;	music_const MUSIC_SURFING,             Music_Surfing
-;	music_const MUSIC_GAME_CORNER,         Music_GameCorner
-;	music_const MUSIC_INTRO_BATTLE,        Music_IntroBattle
-;	music_const MUSIC_DUNGEON1,            Music_Dungeon1
-;	music_const MUSIC_DUNGEON2,            Music_Dungeon2
-;	music_const MUSIC_DUNGEON3,            Music_Dungeon3
-;	music_const MUSIC_CINNABAR_MANSION,    Music_CinnabarMansion
-;	music_const MUSIC_POKEMON_TOWER,       Music_PokemonTower
-;	music_const MUSIC_SILPH_CO,            Music_SilphCo
-;	music_const MUSIC_MEET_EVIL_TRAINER,   Music_MeetEvilTrainer
-;	music_const MUSIC_MEET_FEMALE_TRAINER, Music_MeetFemaleTrainer
-;	music_const MUSIC_MEET_MALE_TRAINER,   Music_MeetMaleTrainer
+	music_const MUSIC_TITLE_SCREEN,        Music_TitleScreen
+	music_const MUSIC_CREDITS,             Music_Credits
+	music_const MUSIC_HALL_OF_FAME,        Music_HallOfFame
+	music_const MUSIC_OAKS_LAB,            Music_OaksLab
+	music_const MUSIC_JIGGLYPUFF_SONG,     Music_JigglypuffSong
+	music_const MUSIC_BIKE_RIDING,         Music_BikeRiding
+	music_const MUSIC_SURFING,             Music_Surfing
+	music_const MUSIC_GAME_CORNER,         Music_GameCorner
+	music_const MUSIC_YELLOW_INTRO,        Music_YellowIntro
+	music_const MUSIC_DUNGEON1,            Music_Dungeon1
+	music_const MUSIC_DUNGEON2,            Music_Dungeon2
+	music_const MUSIC_DUNGEON3,            Music_Dungeon3
+	music_const MUSIC_CINNABAR_MANSION,    Music_CinnabarMansion
+	music_const MUSIC_POKEMON_TOWER,       Music_PokemonTower
+	music_const MUSIC_SILPH_CO,            Music_SilphCo
+	music_const MUSIC_MEET_EVIL_TRAINER,   Music_MeetEvilTrainer
+	music_const MUSIC_MEET_FEMALE_TRAINER, Music_MeetFemaleTrainer
+	music_const MUSIC_MEET_MALE_TRAINER,   Music_MeetMaleTrainer
 
 	; AUDIO_1 AUDIO_2 AUDIO_3
 	audio_def 1
@@ -235,16 +235,16 @@ DEF MAX_SFX_ID_2 EQUS "SFX_SILPH_SCOPE"
 
 	; AUDIO_3
 	audio_def 3
-;	music_const SFX_INTRO_LUNGE,        SFX_Intro_Lunge
-;	music_const SFX_INTRO_HIP,          SFX_Intro_Hip
-;	music_const SFX_INTRO_HOP,          SFX_Intro_Hop
-;	music_const SFX_INTRO_RAISE,        SFX_Intro_Raise
-;	music_const SFX_INTRO_CRASH,        SFX_Intro_Crash
-;	music_const SFX_INTRO_WHOOSH,       SFX_Intro_Whoosh
-;	music_const SFX_SLOTS_STOP_WHEEL,   SFX_Slots_Stop_Wheel
-;	music_const SFX_SLOTS_REWARD,       SFX_Slots_Reward
-;	music_const SFX_SLOTS_NEW_SPIN,     SFX_Slots_New_Spin
-;	music_const SFX_SHOOTING_STAR,      SFX_Shooting_Star
+	music_const SFX_INTRO_LUNGE,        SFX_Intro_Lunge
+	music_const SFX_INTRO_HIP,          SFX_Intro_Hip
+	music_const SFX_INTRO_HOP,          SFX_Intro_Hop
+	music_const SFX_INTRO_RAISE,        SFX_Intro_Raise
+	music_const SFX_INTRO_CRASH,        SFX_Intro_Crash
+	music_const SFX_INTRO_WHOOSH,       SFX_Intro_Whoosh
+	music_const SFX_SLOTS_STOP_WHEEL,   SFX_Slots_Stop_Wheel
+	music_const SFX_SLOTS_REWARD,       SFX_Slots_Reward
+	music_const SFX_SLOTS_NEW_SPIN,     SFX_Slots_New_Spin
+	music_const SFX_SHOOTING_STAR,      SFX_Shooting_Star
 DEF MAX_SFX_ID_3 EQUS "SFX_SHOOTING_STAR"
 
 DEF SFX_STOP_ALL_MUSIC EQU $ff
