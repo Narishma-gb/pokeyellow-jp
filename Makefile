@@ -12,6 +12,7 @@ rom_obj := \
 	wip.o \
 	maps.o \
 	ram.o \
+	gfx/minigame.o \
 	gfx/pics.o \
 	gfx/sprites.o \
 	gfx/tilesets.o
@@ -56,6 +57,9 @@ clean: tidy
 	     \( -iname '*.1bpp' \
 	        -o -iname '*.2bpp' \
 	        -o -iname '*.pic' \) \
+	     -delete
+	find audio/pikachu_cries \
+	     \( -iname '*.pcm' \) \
 	     -delete
 
 tidy:
@@ -161,6 +165,8 @@ gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
 
 gfx/sgb/border.2bpp: tools/gfx += --trim-whitespace
 
+gfx/surfing_pikachu/surfing_pikachu_1c.2bpp: tools/gfx += --trim-whitespace
+
 
 ### Catch-all graphics rules
 
@@ -178,3 +184,11 @@ gfx/sgb/border.2bpp: tools/gfx += --trim-whitespace
 
 %.pic: %.2bpp
 	tools/pkmncompress $< $@
+
+
+### Catch-all audio rules
+
+%.wav: ;
+
+%.pcm: %.wav
+	tools/pcm $< $@

@@ -178,21 +178,27 @@ ROMX $1f
 	"Music 3"
 	"Garbage 31"
 ROMX $20
-	"rom32"
+	"Surfing Minigame Graphics"
+	"Garbage 32"
 ROMX $21
-	"rom33"
+	"Pikachu Cries 1"
+	"Garbage 33"
 ROMX $22
-	"rom34"
+	"Pikachu Cries 2"
+	"Garbage 34"
 ROMX $23
-	"rom35"
+	"Pikachu Cries 3"
+	"Garbage 35"
 ROMX $24
-	"rom36"
+	"Pikachu Cries 4"
+	"Garbage 36"
 ROMX $25
-	"rom37"
+	"Pikachu Cries 5"
+	"Garbage 37"
 ROMX $26
-	"rom38"
+	"Garbage 38"
 ROMX $27
-	"rom39"
+	"Garbage 39"
 ROMX $28
 	"rom40"
 ROMX $29

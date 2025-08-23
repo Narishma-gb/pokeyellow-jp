@@ -298,3 +298,7 @@ INCLUDE "audio/music/jigglypuff_song.asm"
 INCLUDE "audio/music/hall_of_fame.asm"
 INCLUDE "audio/music/credits.asm"
 INCLUDE "audio/music/yellowintro.asm"
+
+
+; Pikachu cries are in different banks
+INCLUDE "audio/pikachu_cries.asm"

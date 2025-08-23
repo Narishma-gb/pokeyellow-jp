@@ -119,3 +119,35 @@ INCBIN "garbage/garbage_30.bin"
 
 SECTION "Garbage 31", ROMX
 INCBIN "garbage/garbage_31.bin"
+
+
+SECTION "Garbage 32", ROMX
+INCBIN "garbage/garbage_32.bin"
+
+
+SECTION "Garbage 33", ROMX
+INCBIN "garbage/garbage_33.bin"
+
+
+SECTION "Garbage 34", ROMX
+INCBIN "garbage/garbage_34.bin"
+
+
+SECTION "Garbage 35", ROMX
+INCBIN "garbage/garbage_35.bin"
+
+
+SECTION "Garbage 36", ROMX
+INCBIN "garbage/garbage_36.bin"
+
+
+SECTION "Garbage 37", ROMX
+INCBIN "garbage/garbage_37.bin"
+
+
+SECTION "Garbage 38", ROMX
+INCBIN "garbage/bank_38.bin"
+
+
+SECTION "Garbage 39", ROMX
+INCBIN "garbage/bank_39.bin"
