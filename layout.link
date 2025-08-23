@@ -200,7 +200,12 @@ ROMX $26
 ROMX $27
 	"Garbage 39"
 ROMX $28
-	"rom40"
+	"Sound Effect Headers 4"
+	"Music Headers 4"
+	"Sound Effects 4"
+	"Audio Engine 4"
+	"Music 4"
+	"Garbage 40"
 ROMX $29
 	"rom41"
 ROMX $2a

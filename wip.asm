@@ -36,15 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom40", ROMX
-; ROM $28 : $A0000 - $A3FFF
-Music_MeetJessieJames::
-	set_bank_offset 40
-
-	dr Audio4_PlaySound, 40, $4F14
-
-	dr_end 40
-
 SECTION "rom41", ROMX
 ; ROM $29 : $A4000 - $A7FFF
 	set_bank_offset 41

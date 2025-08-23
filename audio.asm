@@ -297,7 +297,57 @@ INCLUDE "audio/music/surfing.asm"
 INCLUDE "audio/music/jigglypuff_song.asm"
 INCLUDE "audio/music/hall_of_fame.asm"
 INCLUDE "audio/music/credits.asm"
-INCLUDE "audio/music/yellowintro.asm"
+INCLUDE "audio/music/yellow_intro.asm"
+
+
+; Audio Engine 4 (Bank $28)
+	audio_def 4
+
+SECTION "Sound Effect Headers 4", ROMX
+
+INCLUDE "audio/headers/sfx_headers_common.asm"
+INCLUDE "audio/headers/sfx_headers_4.asm"
+
+
+SECTION "Music Headers 4", ROMX
+
+INCLUDE "audio/headers/music_headers_4.asm"
+
+
+SECTION "Sound Effects 4", ROMX
+
+INCLUDE "audio/noise_common.asm"
+
+INCLUDE "audio/sfx/press_ab.asm"
+INCLUDE "audio/sfx/start_menu.asm"
+INCLUDE "audio/sfx/heal_ailment.asm"
+INCLUDE "audio/sfx/heal_hp.asm"
+INCLUDE "audio/sfx/tink.asm"
+INCLUDE "audio/sfx/surfing_jump.asm"
+INCLUDE "audio/sfx/surfing_flip.asm"
+INCLUDE "audio/sfx/unknown_802cc.asm"
+INCLUDE "audio/sfx/surfing_land.asm"
+INCLUDE "audio/sfx/surfing_crash.asm"
+INCLUDE "audio/sfx/get_item2_copy.asm"
+
+INCLUDE "audio/cry_common.asm"
+
+INCLUDE "audio/music/printer.asm"
+INCLUDE "audio/sfx/get_item1.asm"
+INCLUDE "audio/sfx/get_item1_copy.asm"
+INCLUDE "audio/sfx/get_item2.asm"
+
+
+SECTION "Audio Engine 4", ROMX
+
+INCLUDE "audio/engine_4.asm"
+
+
+SECTION "Music 4", ROMX
+
+INCLUDE "audio/music/surfing_pikachu.asm"
+INCLUDE "audio/music/yellow_unused_song.asm"
+INCLUDE "audio/music/meet_jessie_james.asm"
 
 
 ; Pikachu cries are in different banks

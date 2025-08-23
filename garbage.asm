@@ -151,3 +151,7 @@ INCBIN "garbage/bank_38.bin"
 
 SECTION "Garbage 39", ROMX
 INCBIN "garbage/bank_39.bin"
+
+
+SECTION "Garbage 40", ROMX
+INCBIN "garbage/garbage_40.bin"
