@@ -36,54 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom41", ROMX
-; ROM $29 : $A4000 - $A7FFF
-	set_bank_offset 41
-
-	dr LoadYellowTitleScreenGFX, 41, $4000
-	dr TitleScreen_PlacePokemonLogo, 41, $402B
-	dr TitleScreen_PlacePikaSpeechBubble, 41, $4047
-	dr TitleScreen_PlacePikachu, 41, $4065
-	dr ReadSuperRodData, 41, $4C47
-
-	dr_end 41
-
-SECTION "rom42", ROMX
-; ROM $2a : $A8000 - $ABFFF
-	set_bank_offset 42
-
-	dr_end 42
-
-SECTION "rom43", ROMX
-; ROM $2b : $AC000 - $AFFFF
-	set_bank_offset 43
-
-	dr_end 43
-
-SECTION "rom44", ROMX
-; ROM $2c : $B0000 - $B3FFF
-	set_bank_offset 44
-
-	dr_end 44
-
-SECTION "rom45", ROMX
-; ROM $2d : $B4000 - $B7FFF
-	set_bank_offset 45
-
-	dr_end 45
-
-SECTION "rom46", ROMX
-; ROM $2e : $B8000 - $BBFFF
-	set_bank_offset 46
-
-	dr_end 46
-
-SECTION "rom47", ROMX
-; ROM $2f : $BC000 - $BFFFF
-	set_bank_offset 47
-
-	dr_end 47
-
 SECTION "rom48", ROMX
 ; ROM $30 : $C0000 - $C3FFF
 	set_bank_offset 48

@@ -6,6 +6,9 @@
 *.2bpp
 *.pic
 
+# compiled audio
+*.pcm
+
 # compiled roms
 *.gbc
 *.gb

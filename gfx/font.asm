@@ -1,4 +1,4 @@
-PokemonLogoGraphics: INCBIN "gfx/title/pokemon_logo.2bpp"
+PokemonLogoGraphicsUnused: INCBIN "gfx/title/pokemon_logo_unused.2bpp" ; Unreferenced
 FontGraphics:: INCBIN "gfx/font/font.1bpp"
 FontGraphicsEnd::
 

@@ -132,7 +132,7 @@ ROMX $15
 	"Garbage 21"
 ROMX $16
 	"Maps 13"
-	"Battle Engine 10"
+	"Battle Engine 8"
 	"Maps 14"
 	"Saffron Guards"
 	"Garbage 22"
@@ -207,19 +207,20 @@ ROMX $28
 	"Music 4"
 	"Garbage 40"
 ROMX $29
-	"rom41"
+	"Battle Engine 9"
+	"Garbage 41"
 ROMX $2a
-	"rom42"
+	"Garbage 42"
 ROMX $2b
-	"rom43"
+	"Garbage 43"
 ROMX $2c
-	"rom44"
+	"Garbage 44"
 ROMX $2d
-	"rom45"
+	"Garbage 45"
 ROMX $2e
-	"rom46"
+	"Garbage 46"
 ROMX $2f
-	"rom47"
+	"Garbage 47"
 ROMX $30
 	"rom48"
 ROMX $31

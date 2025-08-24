@@ -225,7 +225,7 @@ SECTION "Trainer Sight", ROMX
 INCLUDE "engine/overworld/trainer_sight.asm"
 
 
-SECTION "Battle Engine 10", ROMX
+SECTION "Battle Engine 8", ROMX
 
 INCLUDE "engine/pokemon/experience.asm"
 INCLUDE "engine/pokemon/status_ailments.asm"
@@ -316,6 +316,13 @@ INCLUDE "data/moves/animations.asm"
 INCLUDE "data/battle_anims/subanimations.asm"
 INCLUDE "data/battle_anims/frame_blocks.asm"
 INCLUDE "engine/movie/evolution.asm"
+
+
+SECTION "Battle Engine 9", ROMX
+
+INCLUDE "engine/movie/title_yellow.asm"
+INCLUDE "engine/items/super_rod.asm"
+INCLUDE "engine/slots/slots_payout.asm"
 
 
 SECTION "Pikachu PCM", ROMX

@@ -155,3 +155,31 @@ INCBIN "garbage/bank_39.bin"
 
 SECTION "Garbage 40", ROMX
 INCBIN "garbage/garbage_40.bin"
+
+
+SECTION "Garbage 41", ROMX
+INCBIN "garbage/garbage_41.bin"
+
+
+SECTION "Garbage 42", ROMX
+INCBIN "garbage/bank_42.bin"
+
+
+SECTION "Garbage 43", ROMX
+INCBIN "garbage/bank_43.bin"
+
+
+SECTION "Garbage 44", ROMX
+INCBIN "garbage/bank_44.bin"
+
+
+SECTION "Garbage 45", ROMX
+INCBIN "garbage/bank_45.bin"
+
+
+SECTION "Garbage 46", ROMX
+INCBIN "garbage/bank_46.bin"
+
+
+SECTION "Garbage 47", ROMX
+INCBIN "garbage/bank_47.bin"
