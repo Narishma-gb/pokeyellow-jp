@@ -1227,6 +1227,15 @@ AgathasRoom_Blocks: INCBIN "maps/AgathasRoom.blk"
 
 SECTION "Maps 22", ROMX
 
+INCLUDE "scripts/ViridianCity_3.asm"
+INCLUDE "scripts/OaksLab_2.asm"
+INCLUDE "scripts/PokemonTower2F_2.asm"
+INCLUDE "scripts/GameCorner_2.asm"
+INCLUDE "scripts/BillsHouse_3.asm"
+
+
+SECTION "Maps 23", ROMX
+
 INCLUDE "scripts/ViridianCity_2.asm"
 INCLUDE "scripts/VermilionCity_2.asm"
 INCLUDE "scripts/CeladonCity_2.asm"

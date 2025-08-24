@@ -222,7 +222,11 @@ ROMX $2e
 ROMX $2f
 	"Garbage 47"
 ROMX $30
-	"rom48"
+	"bank30"
+	"Pikachu Graphics 1"
+	"Credits"
+	"Maps 22"
+	"Garbage 48"
 ROMX $31
 	"rom49"
 ROMX $32
@@ -249,7 +253,7 @@ ROMX $3b
 ROMX $3c
 	"Tilesets 4"
 	"bank3C"
-	"Maps 22"
+	"Maps 23"
 	"rom60"
 ROMX $3d
 	"rom61"

@@ -183,3 +183,7 @@ INCBIN "garbage/bank_46.bin"
 
 SECTION "Garbage 47", ROMX
 INCBIN "garbage/bank_47.bin"
+
+
+SECTION "Garbage 48", ROMX
+INCBIN "garbage/garbage_48.bin"

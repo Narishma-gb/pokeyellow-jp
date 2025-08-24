@@ -325,6 +325,19 @@ INCLUDE "engine/items/super_rod.asm"
 INCLUDE "engine/slots/slots_payout.asm"
 
 
+SECTION "bank30", ROMX
+
+INCLUDE "engine/overworld/advance_player_sprite.asm"
+INCLUDE "engine/events/black_out.asm"
+INCLUDE "engine/overworld/specific_script_flags.asm"
+INCLUDE "engine/events/try_pikachu_movement.asm"
+
+
+SECTION "Credits", ROMX
+
+INCLUDE "engine/movie/credits.asm"
+
+
 SECTION "Pikachu PCM", ROMX
 
 INCLUDE "engine/pikachu/pikachu_pcm.asm"

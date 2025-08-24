@@ -36,22 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom48", ROMX
-; ROM $30 : $C0000 - $C3FFF
-	set_bank_offset 48
-
-	dr _AdvancePlayerSprite, 48, $4000
-	dr ResetStatusAndHalveMoneyOnBlackout, 48, $4168
-	dr SetMapSpecificScriptFlagsOnMapReload, 48, $41CE
-	dr HallOfFamePC, 48, $4698
-	dr ViridianCityMovePikachu, 48, $4CE8
-	dr OaksLabPikachuMovementScript, 48, $4CF6
-	dr PokemonTower2FPikachuMovementScript, 48, $4D19
-	dr GameCornerPikachuMovementScript, 48, $4D27
-	dr Func_f250b, 48, $4D35
-
-	dr_end 48
-
 SECTION "rom49", ROMX
 ; ROM $31 : $C4000 - $C7FFF
 	set_bank_offset 49
@@ -253,6 +237,7 @@ SECTION "rom63", ROMX
 	dr SpawnPikachu_, 63, $46D5
 	dr IsPikachuRightNextToPlayer, 63, $4B01
 	dr GetPikachuFacingDirectionAndReturnToE, 63, $4B4D
+	dr RefreshPikachuFollow, 63, $4BA1
 	dr Func_fcc08, 63, $4C08
 	dr IsStarterPikachuInOurParty, 63, $4DB8
 	dr IsThisPartymonStarterPikachu_Box, 63, $4E0D

@@ -15,3 +15,7 @@ CreditsMons:
 	db VILEPLUME
 	db NIDOKING
 	db PARASECT
+
+REPT 9
+	db GENGAR
+ENDR

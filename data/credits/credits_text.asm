@@ -7,7 +7,7 @@ CreditsTextPointers:
 	dw .CredMorimoto
 	dw .CredWatanabe
 	dw .CredMasuda
-	dw .CredNisino
+	dw .CredNishino
 	dw .CredSugimori
 	dw .CredNishida
 	dw .CredMiyamoto
@@ -29,7 +29,7 @@ CreditsTextPointers:
 	dw .CredTsuchiya
 	dw .CredNakamura
 	dw .CredYuda
-	dw .CredMon
+	dw .CredPokemon
 	dw .CredDirector
 	dw .CredProgrammers
 	dw .CredCharDesign
@@ -37,10 +37,10 @@ CreditsTextPointers:
 	dw .CredSoundEffects
 	dw .CredGameDesign
 	dw .CredMonsterDesign
-	dw .CredGameScene
+	dw .CredScenario
 	dw .CredParam
-	dw .CredMap
-	dw .CredTest
+	dw .CredMapDesign
+	dw .CredDebugPlay
 	dw .CredSpecial
 	dw .CredProducers
 	dw .CredExecutive
@@ -48,10 +48,27 @@ CreditsTextPointers:
 	dw .CredSaOota
 	dw .CredYoshikawa
 	dw .CredToOota
+	dw .CredYoshida
+	dw .CredMatsumiya
+	dw .CredSeya
+	dw .CredSekine
+	dw .CredShimamura
+	dw .CredShimoyamada
+	dw .CredSuperMarioClub
+	dw .CredIzushi
+	dw .CredNomura
+	dw .CredHarada
+	dw .CredYamagami
+	dw .CredNishimura
+	dw .CredSaeki
+	dw .CredFuzii
+	dw .CredShogakukan
+	dw .CredOotani
+	dw .CredPikachuVoice
 	assert_table_length NUM_CRED_STRINGS
 
 .CredStaff:
-	db -5, "ブルーバージョン　スタッフ@"
+	db -6, "ピカチュウバージョン　スタッフ@"
 .CredTajiri:
 	db -3, "たじり　さとし@"
 .CredTaOota:
@@ -62,7 +79,7 @@ CreditsTextPointers:
 	db -3, "わたなべ　てつや@"
 .CredMasuda:
 	db -3, "ますだ　じゅんいち@"
-.CredNisino:
+.CredNishino:
 	db -3, "にしの　こうじ@"
 .CredSugimori:
 	db -3, "すぎもり　けん@"
@@ -106,7 +123,7 @@ CreditsTextPointers:
 	db -3, "なかむら　たけお@"
 .CredYuda:
 	db -3, "ゆだ　まさみつ@"
-.CredMon:
+.CredPokemon:
 	db -3, "ポケットモンスター@"
 .CredDirector:
 	db -3, "ディレクター@"
@@ -122,13 +139,13 @@ CreditsTextPointers:
 	db -3, "ゲームデザイン@"
 .CredMonsterDesign:
 	db -4, "モンスター　デザイン@"
-.CredGameScene:
+.CredScenario:
 	db -2, "シナリオ@"
 .CredParam:
 	db -4, "パラメータ　せってい@"
-.CredMap:
+.CredMapDesign:
 	db -3, "マップ　デザイン@"
-.CredTest:
+.CredDebugPlay:
 	db -3, "デバッグ　プレイ@"
 .CredSpecial:
 	db -4, "スペシャル·サンクス@"
@@ -144,3 +161,39 @@ CreditsTextPointers:
 	db -3, "よしかわ　れな@"
 .CredToOota:
 	db -3, "おおた　ともみち@"
+.CredMatsumiya:
+	db -4, "まつみや　としのぶ@"
+.CredSeya:
+	db -3, "せや　のぶひろ@"
+.CredYoshida:
+	db -3, "よしだ　ひろのぶ@"
+.CredSekine:
+	db -3, "せきね　かずひと@"
+.CredShimamura:
+	db -3, "しまむら　かずし@"
+.CredShimoyamada:
+	db -4, "しもやまだ　てるゆき@"
+.CredSuperMarioClub:
+	db -4, "スーパーマリオクラブ@"
+.CredIzushi:
+	db -3, "いずし　たけひろ@"
+.CredNomura:
+	db -3, "のむら　ふじこ@"
+.CredHarada:
+	db -3, "はらだ　たかひろ@"
+.CredYamagami:
+	db -3, "やまがみ　ひとし@"
+.CredNishimura:
+	db -4, "にしむら　けんたろう@"
+.CredSaeki:
+	db -3, "さえき　なおこ@"
+.CredFuzii:
+	db -3, "ふじい　たかや@"
+.CredShogakukan:
+	db -6, "しょうがくかんプロダクション@"
+.CredOotani:
+	db -3, "おおたに　いくえ@"
+.CredPikachuVoice:
+	db -3, "ピカチュウ　ボイス@"
+; unreferenced
+	db -3, "しんきとうろく@" ; "new entry"

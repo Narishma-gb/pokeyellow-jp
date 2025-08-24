@@ -14,6 +14,7 @@ rom_obj := \
 	ram.o \
 	gfx/minigame.o \
 	gfx/pics.o \
+	gfx/pikachu.o \
 	gfx/sprites.o \
 	gfx/tilesets.o
 #	main.o \

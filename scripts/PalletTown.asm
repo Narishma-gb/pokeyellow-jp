@@ -127,7 +127,7 @@ PalletTownOakGreetsPlayerScript:
 	jr z, .asm_18f01
 	ld a, SPRITE_FACING_LEFT
 .asm_18f01
-	ld [wSprite01StateData1FacingDirection], a	
+	ld [wSprite01StateData1FacingDirection], a
 
 	; trigger the next script
 	ld a, SCRIPT_PALLETTOWN_PIKACHU_BATTLE
