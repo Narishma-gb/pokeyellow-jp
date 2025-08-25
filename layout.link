@@ -228,23 +228,31 @@ ROMX $30
 	"Maps 22"
 	"Garbage 48"
 ROMX $31
-	"rom49"
+	"Pikachu Cries 6"
+	"Garbage 49"
 ROMX $32
-	"rom50"
+	"Pikachu Cries 7"
 ROMX $33
-	"rom51"
+	"Pikachu Cries 8"
+	"Garbage 51"
 ROMX $34
-	"rom52"
+	"Pikachu Cries 9"
+	"Garbage 52"
 ROMX $35
-	"rom53"
+	"Pikachu Cries 10"
+	"Garbage 53"
 ROMX $36
-	"rom54"
+	"Pikachu Cries 11"
+	"Garbage 54"
 ROMX $37
-	"rom55"
+	"Pikachu Cries 12"
+	"Garbage 55"
 ROMX $38
-	"rom56"
+	"Pikachu Cries 13"
+	"Garbage 56"
 ROMX $39
-	"rom57"
+	"Pikachu Graphics 2"
+	"Garbage 57"
 ROMX $3a
 	"rom58"
 ROMX $3b
