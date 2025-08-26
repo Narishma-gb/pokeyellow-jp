@@ -338,6 +338,14 @@ SECTION "Credits", ROMX
 INCLUDE "engine/movie/credits.asm"
 
 
+SECTION "Printer", ROMX
+
+INCLUDE "engine/printer/serial.asm"
+INCLUDE "engine/printer/printer.asm"
+INCLUDE "engine/events/diploma2.asm"
+INCLUDE "engine/printer/printer2.asm"
+
+
 SECTION "Pikachu PCM", ROMX
 
 INCLUDE "engine/pikachu/pikachu_pcm.asm"

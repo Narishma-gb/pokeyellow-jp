@@ -36,27 +36,6 @@ INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
 
-SECTION "rom58", ROMX
-; ROM $3a : $E8000 - $EBFFF
-	set_bank_offset 58
-
-	dr PrinterSerial_, 58, $42D1
-	dr PrintPokedexEntry, 58, $43E7
-	dr PrintDiploma, 58, $44B6
-	dr PrintPCBox, 58, $453A
-	dr PrintFanClubPortrait, 58, $4627
-	dr PrinterDebug, 58, $467C
-	dr _DisplayDiploma, 58, $5190
-
-	dr_end 58
-
-SECTION "rom59", ROMX
-; ROM $3b : $EC000 - $EFFFF
-	set_bank_offset 59, $410C
-
-
-	dr_end 59
-
 SECTION "rom60", ROMX
 ; ROM $3c : $F0000 - $F3FFF
 	set_bank_offset 60, $619C

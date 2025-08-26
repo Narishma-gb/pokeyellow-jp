@@ -244,13 +244,9 @@ wPrinterStatusIndicator:: dw
 wcae2:: db
 wPrinterSettingsTempCopy:: db
 	ds 16
-wPrinterQueueLength:: db
 wPrinterDataEnd::
 
-wPrinterPokedexEntryTextPointer:: dw
-	ds 2
-wPrinterPokedexMonIsOwned:: db
-	ds 226
+	ds 232
 UNION
 wcbdc:: ds 1 tiles
 NEXTU

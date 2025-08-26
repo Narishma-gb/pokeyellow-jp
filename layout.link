@@ -254,10 +254,11 @@ ROMX $39
 	"Pikachu Graphics 2"
 	"Garbage 57"
 ROMX $3a
-	"rom58"
+	"Printer"
+	"Garbage 58"
 ROMX $3b
 	"Pikachu PCM"
-	"rom59"
+	"Garbage 59"
 ROMX $3c
 	"Tilesets 4"
 	"bank3C"
