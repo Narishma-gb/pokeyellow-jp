@@ -355,3 +355,9 @@ SECTION "bank3C", ROMX
 
 INCLUDE "engine/overworld/unused_load_missable_object_data.asm"
 INCLUDE "engine/events/pokecenter_chansey.asm"
+
+
+SECTION "Hidden Objects Core", ROMX
+
+INCLUDE "engine/overworld/hidden_objects.asm"
+INCLUDE "engine/events/hidden_objects/vermilion_gym_trash2.asm"

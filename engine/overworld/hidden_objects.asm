@@ -1,19 +1,3 @@
-IsPlayerOnDungeonWarp::
-	xor a
-	ld [wWhichDungeonWarp], a
-	ld a, [wStatusFlags3]
-	bit BIT_ON_DUNGEON_WARP, a
-	ret nz
-	call ArePlayerCoordsInArray
-	ret nc
-	ld a, [wCoordIndex]
-	ld [wWhichDungeonWarp], a
-	ld hl, wStatusFlags3
-	set BIT_ON_DUNGEON_WARP, [hl]
-	ld hl, wStatusFlags6
-	set BIT_DUNGEON_WARP, [hl]
-	ret
-
 ; if a hidden object was found, stores $00 in [hDidntFindAnyHiddenObject], else stores $ff
 CheckForHiddenObject::
 	ld hl, hItemAlreadyFound
@@ -22,22 +6,12 @@ CheckForHiddenObject::
 	ld [hli], a ; [hSavedMapTextPtr]
 	ld [hli], a ; [hSavedMapTextPtr + 1]
 	ld [hl], a  ; [hDidntFindAnyHiddenObject]
-	ld de, $0
 	ld hl, HiddenObjectMaps
-.hiddenMapLoop
-	ld a, [hli]
-	ld b, a
-	cp $ff
-	jr z, .noMatch
+	ld de, 3
 	ld a, [wCurMap]
-	cp b
-	jr z, .foundMatchingMap
-	inc de
-	inc de
-	jr .hiddenMapLoop
-.foundMatchingMap
-	ld hl, HiddenObjectPointers
-	add hl, de
+	call IsInArray
+	jr nc, .noMatch
+	inc hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

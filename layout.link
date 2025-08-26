@@ -263,7 +263,8 @@ ROMX $3c
 	"Tilesets 4"
 	"bank3C"
 	"Maps 23"
-	"rom60"
+	"Hidden Objects Core"
+	"Garbage 60"
 ROMX $3d
 	"rom61"
 ROMX $3e

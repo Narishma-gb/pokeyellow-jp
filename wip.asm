@@ -32,25 +32,8 @@ MACRO set_bank_offset
 ENDM
 
 
-INCLUDE "constants_wip.asm"
 INCLUDE "main.asm"
 
-
-SECTION "rom60", ROMX
-; ROM $3c : $F0000 - $F3FFF
-	set_bank_offset 60, $619C
-
-	dr BillsHousePrintBillPokemonText_cpy, 60, $659A
-INCLUDE "scripts/BillsHouse_2.asm"
-INCLUDE "scripts/ViridianForest_2.asm"
-INCLUDE "scripts/SSAnne2FRooms_2.asm"
-INCLUDE "scripts/SilphCo11F_2.asm"
-	set_bank_offset 60, $6AEA
-CheckForHiddenObject::
-
-	dr Yellow_SampleSecondTrashCan, 60, $71FE
-
-	dr_end 60
 
 SECTION "rom61", ROMX
 ; ROM $3d : $F4000 - $F7FFF
@@ -109,6 +92,7 @@ SECTION "rom62", ROMX
 ; ROM $3e : $F8000 - $FBFFF
 	set_bank_offset 62
 
+	dr SurfingPikachuMinigame, 62, $4000
 	dr PlayIntroScene, 62, $57C7
 
 	dr_end 62
