@@ -98,8 +98,9 @@ TransformEffect_:
 ; 5 PP for all moves
 	ld a, [hli]
 	and a
-	jr z, .copyStats
+	jr z, .lessThanFourMoves
 	ld a, $5
+.lessThanFourMoves
 	ld [de], a
 	inc de
 	dec b

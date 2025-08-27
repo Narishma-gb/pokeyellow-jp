@@ -29,14 +29,14 @@ InitBattleCommon:
 	ld a, [hl]
 	push af
 	res BIT_TEXT_DELAY, [hl] ; no delay
-	callfar InitBattleVariables
+	call InitBattleVariables
 	ld a, [wEnemyMonSpecies2]
 	sub OPP_ID_OFFSET
 	jp c, InitWildBattle
 	ld [wTrainerClass], a
 	call GetTrainerInformation
 	callfar ReadTrainer
-	call DoBattleTransitionAndInitBattleVariables
+	callfar DoBattleTransitionAndInitBattleVariables
 	call _LoadTrainerPic
 	xor a
 	ld [wEnemyMonSpecies2], a
@@ -49,17 +49,23 @@ InitBattleCommon:
 	ld [wEnemyMonPartyPos], a
 	ld a, $2
 	ld [wIsInBattle], a
+
+; Is this a major story battle?
+	ld a, [wLoneAttackNo]
+	and a
+	jp z, _InitBattleCommon
+	callabd_ModifyPikachuHappiness PIKAHAPPY_GYMLEADER ; useless since already in bank3d
 	jp _InitBattleCommon
 
 InitWildBattle:
 	ld a, $1
 	ld [wIsInBattle], a
-	call LoadEnemyMonData
-	call DoBattleTransitionAndInitBattleVariables
+	callfar LoadEnemyMonData
+	callfar DoBattleTransitionAndInitBattleVariables
 	ld a, [wCurOpponent]
 	cp RESTLESS_SOUL
 	jr z, .isGhost
-	call IsGhostBattle
+	callfar IsGhostBattle
 	jr nz, .isNoGhost
 .isGhost
 	ld hl, wMonHSpriteDim
@@ -102,7 +108,7 @@ InitWildBattle:
 _InitBattleCommon:
 	ld b, SET_PAL_BATTLE_BLACK
 	call RunPaletteCommand
-	call SlidePlayerAndEnemySilhouettesOnScreen
+	callfar SlidePlayerAndEnemySilhouettesOnScreen
 	xor a
 	ldh [hAutoBGTransferEnabled], a
 	ld hl, .emptyString
@@ -126,8 +132,10 @@ _InitBattleCommon:
 	call ClearSprites
 	ld a, [wIsInBattle]
 	dec a ; is it a wild battle?
-	call z, DrawEnemyHUDAndHPBar ; draw enemy HUD and HP bar if it's a wild battle
-	call StartBattle
+	ld hl, DrawEnemyHUDAndHPBar
+	ld b, BANK(DrawEnemyHUDAndHPBar)
+	call z, Bankswitch ; draw enemy HUD and HP bar if it's a wild battle
+	callfar StartBattle
 	callfar EndOfBattle
 	pop af
 	ld [wLetterPrintingDelayFlags], a
@@ -157,12 +165,25 @@ _LoadTrainerPic:
 	ld c, a
 	jp LoadUncompressedSpriteData
 
-; unreferenced
-ResetCryModifiers:
-	xor a
-	ld [wFrequencyModifier], a
-	ld [wTempoModifier], a
-	jp PlaySound
+LoadMonBackPic:
+; Assumes the monster's attributes have
+; been loaded with GetMonHeader.
+	ld a, [wBattleMonSpecies2]
+	ld [wCurPartySpecies], a
+	hlcoord 1, 5
+	lb bc, 7, 8
+	call ClearScreenArea
+	ld hl,  wMonHBackSprite - wMonHeader
+	call UncompressMonSprite
+	predef ScaleSpriteByTwo
+	ld de, vBackPic
+	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
+	ld hl, vSprites
+	ld de, vBackPic
+	ld c, (2 * SPRITEBUFFERSIZE) / 16 ; count of 16-byte chunks to be copied
+	ldh a, [hLoadedROMBank]
+	ld b, a
+	jp CopyVideoData
 
 ; animates the mon "growing" out of the pokeball
 AnimateSendingOutMon:
@@ -257,24 +278,3 @@ CopyUncompressedPicToHL::
 	dec b
 	jr nz, .flippedLoop
 	ret
-
-LoadMonBackPic:
-; Assumes the monster's attributes have
-; been loaded with GetMonHeader.
-	ld a, [wBattleMonSpecies2]
-	ld [wCurPartySpecies], a
-	hlcoord 1, 5
-	ld b, 7
-	ld c, 8
-	call ClearScreenArea
-	ld hl,  wMonHBackSprite - wMonHeader
-	call UncompressMonSprite
-	predef ScaleSpriteByTwo
-	ld de, vBackPic
-	call InterlaceMergeSpriteBuffers ; combine the two buffers to a single 2bpp sprite
-	ld hl, vSprites
-	ld de, vBackPic
-	ld c, (2 * SPRITEBUFFERSIZE) / 16 ; count of 16-byte chunks to be copied
-	ldh a, [hLoadedROMBank]
-	ld b, a
-	jp CopyVideoData

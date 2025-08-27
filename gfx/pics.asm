@@ -373,3 +373,10 @@ ChannelerPic::     INCBIN "gfx/trainers/channeler.pic"
 AgathaPic::        INCBIN "gfx/trainers/agatha.pic"
 LancePic::         INCBIN "gfx/trainers/lance.pic"
 JessieJamesPic::   INCBIN "gfx/trainers/jessiejames.pic"
+
+
+SECTION "Pics 7", ROMX
+
+RedPicBack::       INCBIN "gfx/player/redb.pic"
+OldManPicBack::    INCBIN "gfx/battle/oldmanb.pic"
+ProfOakPicBack::   INCBIN "gfx/battle/prof.oakb.pic"

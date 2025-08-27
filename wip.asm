@@ -35,59 +35,6 @@ ENDM
 INCLUDE "main.asm"
 
 
-SECTION "rom61", ROMX
-; ROM $3d : $F4000 - $F7FFF
-	set_bank_offset 61
-
-	dr PrintBeginningBattleText, 61, $4000
-	dr PrintSendOutMonMessage, 61, $4154
-	dr RetreatMon, 61, $41EB
-	dr DisplayLinkBattleVersusTextBox, 61, $426A
-	dr DoubleSelectedStats, 61, $42A1
-	dr HalveSelectedStats, 61, $42C8
-	dr _ScrollTrainerPicAfterBattle, 61, $42F4
-	dr StarterPikachuBattleEntranceAnimation, 61, $433A
-	dr DecrementPP, 61, $4376
-	dr ModifyPikachuHappiness, 61, $43A5
-	dr RedPicBack, 61, $444C
-	dr OldManPicBack, 61, $44DC
-	dr ProfOakPicBack, 61, $456D
-	dr LinkMenu, 61, $4BE6
-	dr PrintStrengthText, 61, $4F0D
-	dr IsSurfingAllowed, 61, $4F5F
-	dr AddItemToInventory_, 61, $4FC6
-	dr RemoveItemFromInventory_, 61, $5036
-	dr TrainerInfoTextBoxTileGraphics, 61, $5079
-	dr TrainerInfoTextBoxTileGraphicsEnd, 61, $5109
-	dr TrainerCardFontGraphics, 61, $5109
-	dr BadgeNumbersTileGraphics, 61, $5279
-	dr InitBattle, 61, $52F9
-	dr InitOpponent, 61, $52FF
-	dr LoadMonBackPic, 61, $547C
-	dr AnimateSendingOutMon, 61, $54AA
-	dr CopyUncompressedPicToTilemap, 61, $54FD
-	dr CopyUncompressedPicToHL, 61, $5507
-	dr FocusEnergyEffect_, 61, $558C
-	dr HealEffect_, 61, $55C6
-	dr TransformEffect_, 61, $56B2
-	dr ReflectLightScreenEffect_, 61, $579E
-	dr MistEffect_, 61, $580E
-	dr OneHitKOEffect_, 61, $5848
-	dr PayDayEffect_, 61, $5881
-	dr ParalyzeEffect_, 61, $58DF
-	dr GetMachinePrice, 61, $5951
-	dr _Multiply, 61, $598B
-	dr _Divide, 61, $59EF
-	dr _GivePokemon, 61, $5A77
-	dr GetTrainerName_, 61, $5B82
-	dr Random_, 61, $5BB9
-
-	dr GetPredefPointer_cpy, 61, $5BCA
-INCLUDE "engine/predefs.asm"
-	set_bank_offset 61, $5D23
-
-	dr_end 61
-
 SECTION "rom62", ROMX
 ; ROM $3e : $F8000 - $FBFFF
 	set_bank_offset 62

@@ -225,7 +225,7 @@ SECTION "Trainer Sight", ROMX
 INCLUDE "engine/overworld/trainer_sight.asm"
 
 
-SECTION "Battle Engine 8", ROMX
+SECTION "bank16", ROMX
 
 INCLUDE "engine/pokemon/experience.asm"
 INCLUDE "engine/pokemon/status_ailments.asm"
@@ -318,7 +318,7 @@ INCLUDE "data/battle_anims/frame_blocks.asm"
 INCLUDE "engine/movie/evolution.asm"
 
 
-SECTION "Battle Engine 9", ROMX
+SECTION "bank29", ROMX
 
 INCLUDE "engine/movie/title_yellow.asm"
 INCLUDE "engine/items/super_rod.asm"
@@ -361,3 +361,39 @@ SECTION "Hidden Objects Core", ROMX
 
 INCLUDE "engine/overworld/hidden_objects.asm"
 INCLUDE "engine/events/hidden_objects/vermilion_gym_trash2.asm"
+
+
+SECTION "Battle Engine 8", ROMX
+
+INCLUDE "engine/battle/common_text.asm"
+INCLUDE "engine/battle/link_battle_versus_text.asm"
+INCLUDE "engine/battle/unused_stats_functions.asm"
+INCLUDE "engine/battle/scroll_draw_trainer_pic.asm"
+INCLUDE "engine/battle/pikachu_entrance_anim.asm"
+INCLUDE "engine/battle/decrement_pp.asm"
+INCLUDE "engine/events/pikachu_happiness.asm"
+
+
+SECTION "Battle Engine 9", ROMX
+
+INCLUDE "engine/menus/link_menu.asm"
+INCLUDE "engine/menus/unused_input.asm"
+INCLUDE "engine/overworld/field_move_messages.asm"
+INCLUDE "engine/items/inventory.asm"
+INCLUDE "gfx/trainer_card.asm"
+INCLUDE "engine/battle/init_battle.asm"
+INCLUDE "engine/battle/init_battle_variables.asm"
+INCLUDE "engine/battle/move_effects/focus_energy.asm"
+INCLUDE "engine/battle/move_effects/heal.asm"
+INCLUDE "engine/battle/move_effects/transform.asm"
+INCLUDE "engine/battle/move_effects/reflect_light_screen.asm"
+INCLUDE "engine/battle/move_effects/mist.asm"
+INCLUDE "engine/battle/move_effects/one_hit_ko.asm"
+INCLUDE "engine/battle/move_effects/pay_day.asm"
+INCLUDE "engine/battle/move_effects/paralyze.asm"
+INCLUDE "engine/items/tm_prices.asm"
+INCLUDE "engine/math/multiply_divide.asm"
+INCLUDE "engine/events/give_pokemon.asm"
+INCLUDE "engine/battle/get_trainer_name.asm"
+INCLUDE "engine/math/random.asm"
+INCLUDE "engine/predefs.asm"

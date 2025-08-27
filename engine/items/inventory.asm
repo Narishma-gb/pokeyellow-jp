@@ -34,6 +34,7 @@ AddItemToInventory_::
 	cp b ; does the current item in the table match the item being added?
 	jp z, .increaseItemQuantity ; if so, increase the item's quantity
 	inc hl
+.addAnotherStackOfItem
 	ld a, [hl]
 	cp $ff ; is it the end of the table?
 	jr nz, .notAtEndOfInventory
@@ -73,7 +74,7 @@ AddItemToInventory_::
 ; if so, store 99 in the current slot and store the rest in a new slot
 	ld a, 99
 	ld [hli], a
-	jp .notAtEndOfInventory
+	jp .addAnotherStackOfItem
 .increaseItemQuantityFailed
 	pop hl
 	and a
@@ -101,7 +102,7 @@ RemoveItemFromInventory_::
 	push hl
 	inc hl
 	ld a, [wWhichPokemon] ; index (within the inventory) of the item being removed
-	sla a
+	add a
 	add l
 	ld l, a
 	jr nc, .noCarry
@@ -134,6 +135,7 @@ RemoveItemFromInventory_::
 	ld [wListScrollOffset], a
 	ld [wCurrentMenuItem], a
 	ld [wBagSavedMenuItem], a
+	ld [wSavedListScrollOffset], a
 	pop hl
 	ld a, [hl] ; a = number of items in inventory
 	dec a ; decrement the number of items
