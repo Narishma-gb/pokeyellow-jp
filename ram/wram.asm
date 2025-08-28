@@ -185,6 +185,83 @@ wSerialPartyMonsPatchList:: ds 200
 
 ; list of indexes to patch with SERIAL_NO_DATA_BYTE after transfer
 wSerialEnemyMonsPatchList:: ds 200
+
+NEXTU
+; this looks similar to the address structure for Gen 2 OAM animations.
+wAnimatedObjectsData::
+
+wAnimatedObjectStartTileOffsets:: ds 10 * 2
+
+wAnimatedObjectDataStructs::
+; wAnimatedObject0 - wAnimatedObject9
+FOR n, 10
+wAnimatedObject{d:n}:: animated_object wAnimatedObject{d:n}
+ENDR
+
+wNumLoadedAnimatedObjects:: db
+wCurrentAnimatedObjectOAMBufferOffset::
+	ds 3
+wAnimatedObjectSpawnStateDataPointer:: dw
+wAnimatedObjectFramesDataPointer:: dw
+wAnimatedObjectJumptablePointer:: dw
+wAnimatedObjectOAMDataPointer:: dw
+
+wCurAnimatedObjectOAMAttributes:: db
+wCurrentAnimatedObjectVTileOffset:: db
+wCurrentAnimatedObjectXCoord:: db
+wCurrentAnimatedObjectYCoord:: db
+wCurrentAnimatedObjectXOffset:: db
+wCurrentAnimatedObjectYOffset:: db
+wAnimatedObjectGlobalYOffset:: db
+wAnimatedObjectGlobalXOffset:: db
+
+wAnimatedObjectsDataEnd::
+
+; Surfing minigame
+wSurfingMinigameData:: db
+wSurfingMinigameRoutineNumber:: db
+wc5d2:: db
+wSurfingMinigameWaveFunctionNumber:: dw
+wc5d5:: db
+wSurfingMinigamePikachuHP:: dw ; little-endian BCD
+wc5d8:: db ; unused?
+; number of consecutive tricks
+wSurfingMinigameRadnessMeter:: db
+wSurfingMinigameRadnessScore:: dw ; little-endian BCD
+wSurfingMinigameTotalScore:: dw ; little-endian BCD
+wc5de:: db
+wc5df:: db
+wc5e0:: db
+wc5e1:: db
+wc5e2:: db
+wSurfingMinigamePikachuSpeed:: dw ; little-endian
+wc5e5:: ds 3 ; big-endian
+wSurfingMinigameWaveHeightBuffer:: dw
+wSurfingMinigamePikachuObjectHeight:: db
+wc5eb:: db
+wc5ec:: db
+wc5ed:: db
+wc5ee:: db
+wSurfingMinigameBGMapReadBuffer:: ds 1 tiles
+	ds 24
+wSurfingMinigameSCX:: db
+wSurfingMinigameSCX2:: db
+wSurfingMinigameSCXHi:: db
+wSurfingMinigameWaveHeight:: ds SCREEN_WIDTH
+wSurfingMinigameXOffset:: db
+wSurfingMinigameTrickFlags:: db
+wc630:: db
+wc631:: db
+wSurfingMinigameRoutineDelay:: db
+wSurfingMinigameIntroAnimationFinished:: db
+
+; Yellow intro
+wYellowIntroCurrentScene::
+wc634:: db
+wYellowIntroSceneTimer::
+wc635:: db
+wYellowIntroAnimatedObjectStructPointer:: db
+wSurfingMinigameDataEnd::
 ENDU
 
 

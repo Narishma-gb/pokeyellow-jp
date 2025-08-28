@@ -12,7 +12,7 @@ rom_obj := \
 	wip.o \
 	maps.o \
 	ram.o \
-	gfx/minigame.o \
+	gfx/graphics.o \
 	gfx/pics.o \
 	gfx/pikachu.o \
 	gfx/sprites.o \

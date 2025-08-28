@@ -271,7 +271,10 @@ ROMX $3d
 	"Battle Engine 9"
 	"Garbage 61"
 ROMX $3e
-	"rom62"
+	"Surfing Minigame"
+	"Intro Graphics"
+	"Animated Objects"
+	"Garbage 62"
 ROMX $3f
 	"rom63"
 WRAM0

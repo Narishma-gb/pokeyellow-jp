@@ -35,15 +35,6 @@ ENDM
 INCLUDE "main.asm"
 
 
-SECTION "rom62", ROMX
-; ROM $3e : $F8000 - $FBFFF
-	set_bank_offset 62
-
-	dr SurfingPikachuMinigame, 62, $4000
-	dr PlayIntroScene, 62, $57C7
-
-	dr_end 62
-
 SECTION "rom63", ROMX
 ; ROM $3f : $FC000 - $FFFFF
 	set_bank_offset 63
@@ -66,6 +57,7 @@ SECTION "rom63", ROMX
 	dr IsThisPartymonStarterPikachu, 63, $4E18
 	dr UpdatePikachuMoodAfterBattle, 63, $4E5A
 	dr CheckPikachuFaintedOrStatused, 63, $4E73
+	dr IsSurfingPikachuInThePlayersParty, 63, $4EAB
 	dr IsPlayerTalkingToPikachu, 63, $4F0C
 	dr InitializePikachuTextID, 63, $4F20
 	dr PlaySpecificPikachuEmotion, 63, $5001

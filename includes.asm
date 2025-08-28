@@ -12,6 +12,7 @@ INCLUDE "macros/scripts/audio.asm"
 INCLUDE "macros/scripts/maps.asm"
 INCLUDE "macros/scripts/events.asm"
 INCLUDE "macros/scripts/text.asm"
+INCLUDE "macros/scripts/gfx_anims.asm"
 
 INCLUDE "constants/charmap.asm"
 INCLUDE "constants/hardware_constants.asm"
@@ -50,6 +51,7 @@ INCLUDE "constants/tileset_constants.asm"
 INCLUDE "constants/event_constants.asm"
 INCLUDE "constants/text_constants.asm"
 INCLUDE "constants/menu_constants.asm"
+INCLUDE "constants/sprite_anim_constants.asm"
 INCLUDE "constants/pikachu_emotion_constants.asm"
 
 IF DEF(_YELLOW_VC)

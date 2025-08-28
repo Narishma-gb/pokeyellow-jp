@@ -267,11 +267,6 @@ INCLUDE "engine/events/hidden_objects/blues_room.asm"
 INCLUDE "engine/events/hidden_objects/pokecenter_pc.asm"
 
 
-SECTION "Version Graphics", ROMX
-
-INCLUDE "gfx/version.asm"
-
-
 SECTION "bank1C", ROMX
 
 INCLUDE "engine/movie/splash.asm"
@@ -397,3 +392,14 @@ INCLUDE "engine/events/give_pokemon.asm"
 INCLUDE "engine/battle/get_trainer_name.asm"
 INCLUDE "engine/math/random.asm"
 INCLUDE "engine/predefs.asm"
+
+
+SECTION "Surfing Minigame", ROMX
+
+INCLUDE "engine/minigame/surfing_pikachu.asm"
+INCLUDE "engine/movie/intro_yellow.asm"
+
+
+SECTION "Animated Objects", ROMX
+
+INCLUDE "engine/gfx/animated_objects.asm"
