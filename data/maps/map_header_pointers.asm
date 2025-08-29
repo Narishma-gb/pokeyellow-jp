@@ -64,7 +64,7 @@ MapHeaderPointers::
 	dw MtMoonB1F_h
 	dw MtMoonB2F_h
 	dw CeruleanTrashedHouse_h
-	dw CeruleanTradeHouse_h
+	dw CeruleanMelaniesHouse_h
 	dw CeruleanPokecenter_h
 	dw CeruleanGym_h
 	dw BikeShop_h
@@ -249,4 +249,5 @@ MapHeaderPointers::
 	dw LoreleisRoom_h
 	dw BrunosRoom_h
 	dw AgathasRoom_h
+	dw SummerBeachHouse_h
 	assert_table_length NUM_MAPS

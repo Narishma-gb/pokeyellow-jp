@@ -9,7 +9,7 @@ rom_obj := \
 	audio.o \
 	garbage.o \
 	home.o \
-	wip.o \
+	main.o \
 	maps.o \
 	ram.o \
 	gfx/graphics.o \
@@ -17,7 +17,6 @@ rom_obj := \
 	gfx/pikachu.o \
 	gfx/sprites.o \
 	gfx/tilesets.o
-#	main.o \
 
 pokeyellow_obj      := $(rom_obj:.o=_yellow.o)
 pokeyellow11_obj    := $(rom_obj:.o=_yellow11.o)

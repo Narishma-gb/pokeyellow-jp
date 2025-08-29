@@ -239,3 +239,6 @@ INCBIN "garbage/garbage_61.bin"
 
 SECTION "Garbage 62", ROMX
 INCBIN "garbage/garbage_62.bin"
+
+SECTION "Garbage 63", ROMX
+INCBIN "garbage/garbage_63.bin"

@@ -657,6 +657,28 @@ ENDU
 
 	ds 8
 wMiscBattleDataEnd::
+NEXTU
+wPikaPicUsedGFXCount:: db
+
+wPikaPicUsedGFX:: ds 8 * 2
+wPikaPicUsedGFXEnd::
+
+	ds 43
+
+wPikaPicAnimObjectDataBufferSize:: db
+
+wPikaPicAnimObjectDataBuffer::
+; 4 structs each of length 8
+;     0: buffer index
+;     1: script index
+;     2: frame index
+;     3: frame timer
+;     4: vtile offset
+;     5: x offset
+;     6: y offset
+;     7: unused
+	ds 4 * 8
+wPikaPicAnimObjectDataBufferEnd::
 ENDU
 
 ; This union spans 39 bytes.

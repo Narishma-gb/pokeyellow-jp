@@ -64,7 +64,7 @@ MapHeaderBanks::
 	db BANK(MtMoonB1F_h)
 	db BANK(MtMoonB2F_h)
 	db BANK(CeruleanTrashedHouse_h)
-	db BANK(CeruleanTradeHouse_h)
+	db BANK(CeruleanMelaniesHouse_h)
 	db BANK(CeruleanPokecenter_h)
 	db BANK(CeruleanGym_h)
 	db BANK(BikeShop_h)
@@ -249,4 +249,5 @@ MapHeaderBanks::
 	db BANK(LoreleisRoom_h)
 	db BANK(BrunosRoom_h)
 	db BANK(AgathasRoom_h)
+	db BANK(SummerBeachHouse_h)
 	assert_table_length NUM_MAPS

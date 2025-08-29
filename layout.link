@@ -276,7 +276,9 @@ ROMX $3e
 	"Animated Objects"
 	"Garbage 62"
 ROMX $3f
-	"rom63"
+	"Overworld Pikachu"
+	"NPC Sprites 3"
+	"Garbage 63"
 WRAM0
 	"Audio RAM"
 	org $c100
