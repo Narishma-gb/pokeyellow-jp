@@ -96,7 +96,7 @@ $(pokeyellow_obj):      RGBASMFLAGS += -D _REV0
 $(pokeyellow11_obj):    RGBASMFLAGS += -D _REV1
 $(pokeyellow12_obj):    RGBASMFLAGS += -D _REV2
 $(pokeyellow13_obj):    RGBASMFLAGS += -D _REV3
-$(pokeyellow13_vc_obj): RGBASMFLAGS += -D _REV3 -D _YELLOW_VC 
+$(pokeyellow13_vc_obj): RGBASMFLAGS += -D _REV3 -D _YELLOW_VC
 
 %.patch: %_vc.gb %.gb vc/%.patch.template
 	tools/make_patch $*_vc.sym $^ $@

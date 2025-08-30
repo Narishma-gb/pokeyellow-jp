@@ -95,7 +95,7 @@ DisplayNamingScreen:
 	call LoadEDTile
 	farcall LoadMonPartySpriteGfx
 	hlcoord 0, 4
-	lb bc, 11, 18 
+	lb bc, 11, 18
 	call TextBoxBorder
 	call PrintNamingText
 	ld a, 3
