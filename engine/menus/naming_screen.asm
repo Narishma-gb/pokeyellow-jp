@@ -319,7 +319,7 @@ LoadEDTile:
 	ld de, ED_Tile
 	ld hl, vFont tile $70
 ; BUG: BANK("Home") should be BANK(ED_Tile), although it coincidentally works as-is,
-; due to MBC behaviour when writing $0 to MBC1RomBank
+; due to MBC behaviour when writing $0 to rROMB
 	lb bc, BANK("Home"), (ED_TileEnd - ED_Tile) / $8
 	jp CopyVideoDataDouble
 

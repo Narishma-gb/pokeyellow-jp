@@ -146,7 +146,7 @@ AnimateShootingStar:
 	ret
 
 SmallStarsOAM:
-	dbsprite  0,  0,  0,  0, $A2, OAM_BEHIND_BG | OAM_OBP1
+	dbsprite  0,  0,  0,  0, $A2, OAM_PRIO | OAM_PAL1
 SmallStarsOAMEnd:
 
 SmallStarsWaveCoordsPointerTable:
@@ -200,7 +200,6 @@ MoveDownSmallStars:
 	ldh a, [rOBP1]
 	xor %10100000
 	ldh [rOBP1], a
-
 	ld c, 3
 	call CheckForUserInterruption
 	ret c
@@ -228,10 +227,10 @@ GameFreakLogoOAMData:
 GameFreakLogoOAMDataEnd:
 
 GameFreakShootingStarOAMData:
-	dbsprite 20,  0,  0,  0, $a0, OAM_OBP1
-	dbsprite 21,  0,  0,  0, $a0, OAM_OBP1 | OAM_HFLIP
-	dbsprite 20,  1,  0,  0, $a1, OAM_OBP1
-	dbsprite 21,  1,  0,  0, $a1, OAM_OBP1 | OAM_HFLIP
+	dbsprite 20,  0,  0,  0, $a0, OAM_PAL1
+	dbsprite 21,  0,  0,  0, $a0, OAM_PAL1 | OAM_XFLIP
+	dbsprite 20,  1,  0,  0, $a1, OAM_PAL1
+	dbsprite 21,  1,  0,  0, $a1, OAM_PAL1 | OAM_XFLIP
 GameFreakShootingStarOAMDataEnd:
 
 FallingStar:

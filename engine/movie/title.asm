@@ -159,9 +159,9 @@ DisplayTitleScreen:
 	call DelayFrame
 	call JoypadLowSensitivity
 	ldh a, [hJoyHeld]
-	cp D_UP | SELECT | B_BUTTON
+	cp PAD_UP | PAD_SELECT | PAD_B
 	jr z, .go_to_main_menu
-	and A_BUTTON | START
+	and PAD_A | PAD_START
 	jr nz, .go_to_main_menu
 	call DoTitleScreenFunction
 	jr .titleScreenLoop
@@ -184,8 +184,8 @@ DisplayTitleScreen:
 	call LoadGBPal
 	ldh a, [hJoyHeld]
 	ld b, a
-	and D_UP | SELECT | B_BUTTON
-	cp D_UP | SELECT | B_BUTTON
+	and PAD_UP | PAD_SELECT | PAD_B
+	cp PAD_UP | PAD_SELECT | PAD_B
 	jp z, .doClearSaveDialogue
 	jp MainMenu
 

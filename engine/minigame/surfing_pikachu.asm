@@ -84,12 +84,12 @@ SurfingPikachu_CheckPressedSelect:
 	bit 1, [hl]
 	ret z
 	ldh a, [hJoyPressed]
-	and SELECT
+	and PAD_SELECT
 	ret
 
 Func_f80b7:
 	ldh a, [hJoyPressed]
-	and START
+	and PAD_START
 	ret z
 	ld hl, wc5e2
 	ld a, [hl]
@@ -591,7 +591,7 @@ SurfingMinigame_WaitLast:
 SurfingMinigame_ExitOnPressA:
 	call SurfingMinigame_UpdateLYOverrides
 	ldh a, [hJoyPressed]
-	and A_BUTTON
+	and PAD_A
 	ret z
 	ld hl, wSurfingMinigameRoutineNumber
 	set 7, [hl]
@@ -612,7 +612,7 @@ SurfingMinigame_GameOver:
 
 .wait_press_a
 	ldh a, [hJoyPressed]
-	and A_BUTTON
+	and PAD_A
 	ret z
 	ld hl, wSurfingMinigameRoutineNumber
 	set 7, [hl]
@@ -837,10 +837,10 @@ Func_f8579:
 SurfingMinigame_DPadAction:
 	ld de, hJoy5
 	ld a, [de]
-	and D_LEFT
+	and PAD_LEFT
 	jr nz, .d_left
 	ld a, [de]
-	and D_RIGHT
+	and PAD_RIGHT
 	jr nz, .d_right
 	ret
 
@@ -1444,7 +1444,7 @@ SurfingMinigame_DrawHP:
 
 SurfingMinigame_DrawResultsScreen:
 	ld hl, wTileMap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	xor a
 	call FillMemory
 	ld hl, .BeachTilemap
@@ -2391,7 +2391,7 @@ SurfingPikachuMinigameIntro:
 
 DrawSurfingPikachuMinigameIntroBackground:
 	ld hl, wTileMap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	ld a, $ff
 	call FillMemory
 	ld hl, Tilemap_f90bc
@@ -2532,7 +2532,7 @@ SurfingPikachuMinigame_NormalPals:
 
 SurfingPikachu_ClearTileMap:
 	ld hl, wTileMap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	ld bc, SCREEN_AREA
 	xor a
 	call FillMemory
 	ret

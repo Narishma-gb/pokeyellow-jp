@@ -34,7 +34,7 @@ FileDataDestroyedText:
 LoadSAV0:
 	call EnableSRAM
 	ld a, BANK("Save Data")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 ; This vc_hook does not have to be in any particular location.
 ; It is defined here because it refers to the same labels as the two lines below.
 	vc_hook Unknown_save_limit
@@ -82,7 +82,7 @@ LoadSAV0:
 LoadSAV1:
 	call EnableSRAM
 	ld a, BANK("Save Data")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call SAVCheckSum
@@ -100,7 +100,7 @@ LoadSAV1:
 LoadSAV2:
 	call EnableSRAM
 	ld a, BANK("Save Data")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
 	call SAVCheckSum
@@ -201,7 +201,7 @@ OlderFileWillBeErasedText:
 SaveSAVtoSRAM0:
 	call EnableSRAM
 	ld a, BANK("Save Data")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	ld hl, wPlayerName
 	ld de, sPlayerName
 	ld bc, NAME_LENGTH
@@ -231,7 +231,7 @@ SaveSAVtoSRAM1:
 ; stored pokémon
 	call EnableSRAM
 	ld a, BANK("Save Data")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	ld hl, wBoxDataStart
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
@@ -246,7 +246,7 @@ SaveSAVtoSRAM1:
 SaveSAVtoSRAM2:
 	call EnableSRAM
 	ld a, BANK("Save Data")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	ld hl, wPartyDataStart
 	ld de, sPartyData
 	ld bc, wPartyDataEnd - wPartyDataStart
@@ -256,7 +256,7 @@ SaveSAVtoSRAM2:
 	ld bc, wPokedexSeenEnd - wPokedexOwned
 	call CopyData
 	ld hl, wPikachuHappiness
-	ld de, sMainData + $174
+	ld de, sMainData + (wPikachuHappiness - wMainDataStart)
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -331,7 +331,7 @@ ChangeBox::
 	call DisplayChangeBoxMenu
 	call UpdateSprites
 	call HandleMenuInput
-	bit BIT_B_BUTTON, a
+	bit B_PAD_B, a
 	ret nz
 	ld a, SFX_SAVE
 	call PlaySoundWaitForCurrent
@@ -372,7 +372,7 @@ CopyBoxToOrFromSRAM:
 	push hl
 	call EnableSRAM
 	ld a, b
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
 	pop hl
@@ -395,7 +395,7 @@ CopyBoxToOrFromSRAM:
 DisplayChangeBoxMenu:
 	xor a
 	ldh [hAutoBGTransferEnabled], a
-	ld a, A_BUTTON | B_BUTTON
+	ld a, PAD_A | PAD_B
 	ld [wMenuWatchedKeys], a
 	ld a, NUM_BOXES - 1
 	ld [wMaxMenuItem], a
@@ -471,10 +471,10 @@ EmptyAllSRAMBoxes:
 ; player changes the box)
 	call EnableSRAM
 	ld a, BANK("Saved Boxes 1")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	call EmptySRAMBoxesInBank
 	ld a, BANK("Saved Boxes 2")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	call EmptySRAMBoxesInBank
 	call DisableSRAM
 	ret
@@ -509,10 +509,10 @@ GetMonCountsForAllBoxes:
 	push hl
 	call EnableSRAM
 	ld a, BANK("Saved Boxes 1")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	call GetMonCountsForBoxesInBank
 	ld a, BANK("Saved Boxes 2")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	call GetMonCountsForBoxesInBank
 	call DisableSRAM
 	pop hl
@@ -545,7 +545,7 @@ SAVCheckRandomID:
 ; (which are stored at wPlayerID)s
 	call EnableSRAM
 	ld a, BANK("Save Data")
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	ld a, [sPlayerName]
 	and a
 	jr z, .next
@@ -566,9 +566,9 @@ SAVCheckRandomID:
 	ld a, [wPlayerID + 1]
 	cp h
 .next
-	ld a, SRAM_DISABLE
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	ld a, $00
+	ld [rBMODE], a
+	ld [rRAMG], a
 	ret
 
 SaveHallOfFameTeams:
@@ -609,7 +609,7 @@ LoadHallOfFameTeams:
 HallOfFame_Copy:
 	call EnableSRAM
 	xor a
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	call CopyData
 	call DisableSRAM
 	ret
@@ -627,21 +627,21 @@ ClearSAV:
 	ret
 
 PadSRAM_FF:
-	ld [MBC1SRamBank], a
+	ld [rRAMB], a
 	ld hl, STARTOF(SRAM)
 	ld bc, SIZEOF(SRAM)
 	ld a, $ff
 	jp FillMemory
 
 EnableSRAM:
-	ld a, SRAM_BANKING_MODE
-	ld [MBC1SRamBankingMode], a
-	ld a, SRAM_ENABLE
-	ld [MBC1SRamEnable], a
+	ld a, BMODE_ADVANCED
+	ld [rBMODE], a
+	ld a, RAMG_SRAM_ENABLE
+	ld [rRAMG], a
 	ret
 
 DisableSRAM:
-	ld a, SRAM_DISABLE
-	ld [MBC1SRamBankingMode], a
-	ld [MBC1SRamEnable], a
+	ld a, 0
+	ld [rBMODE], a
+	ld [rRAMG], a
 	ret

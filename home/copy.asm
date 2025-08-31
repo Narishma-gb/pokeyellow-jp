@@ -148,7 +148,7 @@ CopyVideoDataDouble::
 
 CopyVideoDataAlternate::
 	ldh a, [rLCDC]
-	bit rLCDC_ENABLE, a ; LCD enabled?
+	bit B_LCDC_ENABLE, a ; LCD enabled?
 	jp nz, CopyVideoData ; if yes, then copy video data
 	push hl
 	ld h, d
@@ -168,7 +168,7 @@ CopyVideoDataAlternate::
 
 CopyVideoDataDoubleAlternate::
 	ldh a, [rLCDC]
-	bit rLCDC_ENABLE, a ; LCD enabled?
+	bit B_LCDC_ENABLE, a ; LCD enabled?
 	jp nz, CopyVideoDataDouble ; if yes, then copy video data
 	push de
 	ld d, h
