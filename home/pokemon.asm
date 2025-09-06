@@ -5,7 +5,9 @@ DrawHPBar::
 
 	push hl
 	push de
+IF DEF(_REV0)
 	push bc
+ENDC
 
 	; Left
 	ld a, $71 ; "HP:"
@@ -61,7 +63,9 @@ DrawHPBar::
 	add e
 	ld [hl], a
 .done
+IF DEF(_REV0)
 	pop bc
+ENDC
 	pop de
 	pop hl
 	ret
@@ -136,8 +140,12 @@ LoadFrontSpriteByMonIndex::
 	xor a
 	ld [wSpriteFlipped], a
 	pop af
+IF DEF(_REV0)
 	call BankswitchCommon
 	ret
+ELSE
+	jp BankswitchCommon
+ENDC
 
 PlayCry::
 ; Play monster a's cry.
@@ -360,8 +368,12 @@ PrintStatusCondition::
 	ret
 
 PrintStatusConditionNotFainted::
+IF DEF(_REV0)
 	homecall_sf PrintStatusAilment
 	ret
+ELSE
+	homejp_sf PrintStatusAilment
+ENDC
 
 ; function to print pokemon level, leaving off the ":L" if the level is at least 100
 ; INPUT:

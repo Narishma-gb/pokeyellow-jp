@@ -158,3 +158,8 @@ If you have different projects that require different versions of `rgbds`, it mi
 ```bash
 make RGBDS=rgbds-0.9.3/
 ```
+
+
+## Note
+
+Several functions and data pointers use temporary unnamed symbols, such as `Func_2223` or `Data_f251c`. These are identical to the labels found in pret **pokeyellow**, in order to facilitate update and comparison. However, due to the different ROM layout in pokeyellow-jp, their names usually do not match their physical address on the ROM.

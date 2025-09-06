@@ -1,15 +1,26 @@
-ReadJoypad::
+ReadJoypad_::
 ; Poll joypad input.
 ; Unlike the hardware register, button
 ; presses are indicated by a set bit.
+IF !DEF(_REV0)
+	ldh a, [hDisableJoypadPolling]
+	and a
+	ret nz
+ENDC
 
 	ld a, 1 << 5 ; select direction keys
+IF DEF(_REV0)
 	ld c, 0
+ENDC
 
 	ldh [rJOYP], a
-REPT 6
 	ldh a, [rJOYP]
-ENDR
+	ldh a, [rJOYP]
+IF DEF(_REV0)
+	REPT 4
+		ldh a, [rJOYP]
+	ENDR
+ENDC
 	cpl
 	and %1111
 	swap a
@@ -17,9 +28,13 @@ ENDR
 
 	ld a, 1 << 4 ; select button keys
 	ldh [rJOYP], a
-REPT 10
+REPT 6
 	ldh a, [rJOYP]
 ENDR
+IF DEF(_REV0)
+	REPT 4
+		ldh a, [rJOYP]
+	ENDR
 	cpl
 	and %01001111
 
@@ -29,6 +44,28 @@ ENDR
 .notSoftReset
 	or b
 	ld b, a
+ELSE
+	cpl
+	and %1111
+	or b
+
+	ldh [hJoyInput], a
+
+	ld a, 1 << 4 + 1 << 5 ; deselect keys
+	ldh [rJOYP], a
+	ret
+
+_Joypad::
+; hJoyReleased: (hJoyLast ^ hJoyInput) & hJoyLast
+; hJoyPressed:  (hJoyLast ^ hJoyInput) & hJoyInput
+
+	ldh a, [hJoyInput]
+	ld b, a
+	and PAD_BUTTONS | PAD_UP
+	cp PAD_BUTTONS ; soft reset
+	jp z, TrySoftReset
+ENDC
+
 	ldh a, [hJoyLast]
 	ld e, a
 	xor b
@@ -38,8 +75,10 @@ ENDR
 	ld a, d
 	and b
 	ldh [hJoyPressed], a
+IF DEF(_REV0)
 	ld a, 1 << 4 + 1 << 5 ; deselect keys
 	ldh [rJOYP], a
+ENDC
 	ld a, b
 	ldh [hJoyLast], a
 

@@ -44,6 +44,16 @@ MACRO homecall_alt ; homecall without calls to BankswitchCommon
 	ld [rROMB], a
 ENDM
 
+MACRO homejp
+	ldh a, [hLoadedROMBank]
+	push af
+	ld a, BANK(\1)
+	call BankswitchCommon
+	call \1
+	pop af
+	jp BankswitchCommon
+ENDM
+
 MACRO homecall_sf ; homecall but save flags by popping into bc instead of af
 	ldh a, [hLoadedROMBank]
 	push af
@@ -53,6 +63,17 @@ MACRO homecall_sf ; homecall but save flags by popping into bc instead of af
 	pop bc
 	ld a, b
 	call BankswitchCommon
+ENDM
+
+MACRO homejp_sf ; homejp but save flags by popping into bc instead of af
+	ldh a, [hLoadedROMBank]
+	push af
+	ld a, BANK(\1)
+	call BankswitchCommon
+	call \1
+	pop bc
+	ld a, b
+	jp BankswitchCommon
 ENDM
 
 MACRO calladb_ModifyPikachuHappiness

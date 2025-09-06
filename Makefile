@@ -46,10 +46,11 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all yellow clean tidy compare tools
+.PHONY: all yellow yellow11 clean tidy compare tools
 
 all: $(roms)
 yellow:    pokeyellow.gb
+yellow11:  pokeyellow11.gb
 yellow_vc: pokeyellow.patch
 
 clean: tidy

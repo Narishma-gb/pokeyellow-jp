@@ -260,8 +260,12 @@ DetermineAudioFunction::
 	ldh a, [hLoadedROMBank]
 	push af
 	ld a, [wAudioROMBank]
+IF DEF(_REV0)
 	ldh [hLoadedROMBank], a
 	ld [rROMB], a
+ELSE
+	call BankswitchCommon
+ENDC
 ; determine the audio function, based on the bank
 	cp BANK(Audio1_PlaySound)
 	jr nz, .checkForAudio2
@@ -295,6 +299,10 @@ DetermineAudioFunction::
 
 .done
 	pop af
+IF DEF(_REV0)
 	ldh [hLoadedROMBank], a
 	ld [rROMB], a
+ELSE
+	call BankswitchCommon
+ENDC
 	ret

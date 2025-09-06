@@ -36,6 +36,9 @@ VBlank::
 	call TrackPlayTime ; keep track of time played
 
 	call Random
+IF !DEF(_REV0)
+	call ReadJoypad
+ENDC
 
 	ldh a, [hVBlankOccurred]
 	and a

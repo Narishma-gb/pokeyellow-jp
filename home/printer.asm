@@ -1,5 +1,9 @@
 PrinterSerial::
+IF DEF(_REV0)
 	homecall_alt PrinterSerial_
+ELSE
+	homecall PrinterSerial_
+ENDC
 	ret
 
 SerialFunction::

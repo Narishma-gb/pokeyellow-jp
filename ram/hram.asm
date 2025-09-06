@@ -387,4 +387,12 @@ hWhoseTurn:: db ; 0 on player's turn, 1 on enemy's turn
 
 hLCDCPointer:: db
 
+IF !DEF(_REV0)
+hJoyInput:: db
+
+	ds 2
+
+hDisableJoypadPolling:: db
+ENDC
+
 ENDSECTION

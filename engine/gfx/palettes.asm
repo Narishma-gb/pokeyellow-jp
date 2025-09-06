@@ -432,6 +432,16 @@ UpdatePartyMenuBlkPacket:
 	ret
 
 SendSGBPacket:
+IF !DEF(_REV0)
+	ld a, 1
+	ldh [hDisableJoypadPolling], a ; don't poll joypad while sending packet
+	call _SendSGBPacket
+	xor a
+	ldh [hDisableJoypadPolling], a
+	ret
+
+_SendSGBPacket:
+ENDC
 ;check number of packets
 	ld a, [hl]
 	and $07
