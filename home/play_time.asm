@@ -1,8 +1,13 @@
 TrackPlayTime::
+IF DEF(_REV2) || DEF(_REV3)
+	call CountDownIgnoreInputBitReset
+ENDC
 	ld hl, wd479
 	bit 0, [hl]
 	jr nz, .maxIGT
+IF DEF(_REV0) || DEF(_REV1)
 	call CountDownIgnoreInputBitReset
+ENDC
 	ld a, [wStatusFlags6]
 	bit BIT_GAME_TIMER_COUNTING, a
 	ret z
