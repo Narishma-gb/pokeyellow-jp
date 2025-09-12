@@ -1064,7 +1064,7 @@ RemoveFaintedPlayerMon:
 
 	ld a, [wPlayerMonNumber]
 	ld [wWhichPokemon], a
-	callfar IsThisPartymonStarterPikachu_Party
+	callfar IsThisPartyMonStarterPikachu
 	jr nc, .notPlayerPikachu
 	ldpikacry e, PikachuCry4
 	callfar PlayPikachuSoundClip
@@ -1087,10 +1087,10 @@ RemoveFaintedPlayerMon:
 	cp 30 ; is the enemy 30 levels greater than us?
 	jr nc, .carelessTrainer ; if so, punish the player for being careless, as they shouldn't be fighting a very high leveled trainer with such a level difference
 .regularFaint
-	callabd_ModifyPikachuHappiness PIKAHAPPY_FAINTED
+	farcall_ModifyPikachuHappiness PIKAHAPPY_FAINTED
 	ret
 .carelessTrainer
-	callabd_ModifyPikachuHappiness PIKAHAPPY_CARELESSTRAINER
+	farcall_ModifyPikachuHappiness PIKAHAPPY_CARELESSTRAINER
 	ret
 
 PlayerMonFaintedText:
@@ -1823,7 +1823,7 @@ SendOutMon:
 	call RunPaletteCommand
 	ld hl, wEnemyBattleStatus1
 	res USING_TRAPPING_MOVE, [hl]
-	callfar IsThisPartymonStarterPikachu
+	callfar IsThisPartyMonStarterPikachu
 	jr c, .starterPikachu
 	ld a, $1
 	ldh [hWhoseTurn], a
@@ -1858,7 +1858,7 @@ AnimateRetreatingPlayerMon:
 	push af
 	ld a, [wPlayerMonNumber]
 	ld [wWhichPokemon], a
-	callfar IsThisPartymonStarterPikachu
+	callfar IsThisPartyMonStarterPikachu
 	pop bc
 	ld a, b
 	ld [wWhichPokemon], a
@@ -1898,7 +1898,8 @@ AnimateRetreatingPlayerMon:
 	call ClearScreenArea
 	ret
 
-; reads player's current mon's HP into wBattleMonHP
+; Copies player's current pokemon's current HP and status into the party
+; struct data so it stays after battle or switching
 ReadPlayerMonCurHPAndStatus:
 	ld a, [wPlayerMonNumber]
 	ld hl, wPartyMon1HP
@@ -6551,7 +6552,7 @@ LoadPlayerBackPic:
 	jr nz, .loop
 	ld de, vBackPic
 	call InterlaceMergeSpriteBuffers
-	ld a, $0
+	ld a, BANK("Sprite Buffers")
 	call OpenSRAM
 	ld hl, vSprites
 	ld de, sSpriteBuffer1

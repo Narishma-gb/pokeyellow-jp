@@ -167,11 +167,11 @@ StatusScreen:
 	jr z, .playRegularCry
 	cp BOX_DATA
 	jr z, .checkBoxData
-	callfar IsThisPartymonStarterPikachu_Party
+	callfar IsThisPartyMonStarterPikachu
 	jr nc, .playRegularCry
 	jr .playPikachuSoundClip
 .checkBoxData
-	callfar IsThisPartymonStarterPikachu_Box
+	callfar IsThisBoxMonStarterPikachu
 	jr nc, .playRegularCry
 .playPikachuSoundClip
 	ldpikacry e, PikachuCry17
@@ -427,7 +427,7 @@ StatusScreen2:
 	ld a, $1
 	ldh [hAutoBGTransferEnabled], a
 	call Delay3
-	call WaitForTextScrollButtonPress ; wait for button
+	call WaitForTextScrollButtonPress
 	pop af
 	ldh [hTileAnimations], a
 	ld hl, wStatusFlags2

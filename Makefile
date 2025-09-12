@@ -130,9 +130,6 @@ $(foreach obj, $(pokeyellow13_vc_obj), $(eval $(call DEP,$(obj),$(obj:_yellow13_
 endif
 
 
-%.asm: ;
-
-
 pokeyellow_pad      = 0x00
 pokeyellow11_pad    = 0x00
 pokeyellow12_pad    = 0x00
@@ -157,6 +154,8 @@ gfx/battle/move_anim_1.2bpp: tools/gfx += --trim-whitespace
 
 gfx/credits/the_end.2bpp: tools/gfx += --interleave --png=$<
 
+gfx/diploma/diploma.2bpp: tools/gfx += --trim-whitespace
+
 gfx/slots/slots_1.2bpp: tools/gfx += --trim-whitespace
 
 gfx/tilesets/%.2bpp: tools/gfx += --trim-whitespace
@@ -167,12 +166,9 @@ gfx/trade/game_boy.2bpp: tools/gfx += --remove-duplicates
 gfx/sgb/border.2bpp: tools/gfx += --trim-whitespace
 
 gfx/surfing_pikachu/surfing_pikachu_1c.2bpp: tools/gfx += --trim-whitespace
-gfx/surfing_pikachu/surfing_pikachu_3.2bpp: tools/gfx += --trim-whitespace
 
 
 ### Catch-all graphics rules
-
-%.png: ;
 
 %.2bpp: %.png
 	$(RGBGFX) --colors dmg=e4 $(rgbgfx) -o $@ $<
@@ -190,7 +186,18 @@ gfx/surfing_pikachu/surfing_pikachu_3.2bpp: tools/gfx += --trim-whitespace
 
 ### Catch-all audio rules
 
-%.wav: ;
-
 %.pcm: %.wav
 	tools/pcm $< $@
+
+
+### File extensions that are never generated and should be manually created
+
+%.asm: ;
+%.inc: ;
+%.png: ;
+%.pal: ;
+%.bin: ;
+%.blk: ;
+%.bst: ;
+%.rle: ;
+%.wav: ;

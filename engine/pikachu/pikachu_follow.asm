@@ -6,7 +6,7 @@ ShouldPikachuSpawn::
 	ld a, [wPikachuOverworldStateFlags]
 	bit 7, a
 	jr nz, .hide
-	call IsStarterPikachuInOurParty
+	call IsStarterPikachuAliveInOurParty
 	jr nc, .hide
 	ld a, [wWalkBikeSurfState]
 	and a

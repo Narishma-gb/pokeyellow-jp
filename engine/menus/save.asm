@@ -1,16 +1,15 @@
-LoadSAV:
-; if carry, write "the file data is destroyed"
+TryLoadSaveFile:
 	call ClearScreen
 	call LoadFontTilePatterns
 	call LoadTextBoxTilePatterns
-	call LoadSAV0
+	call LoadMainData
 	jr c, .badsum
-	call LoadSAV1
+	call LoadCurrentBoxData
 	jr c, .badsum
-	call LoadSAV2
+	call LoadPartyAndDexData
 	jr c, .badsum
 	ld a, $2 ; good checksum
-	jr .goodsum
+	jr .done
 .badsum
 	ld hl, wStatusFlags5
 	push hl
@@ -22,7 +21,7 @@ LoadSAV:
 	pop hl
 	res BIT_NO_TEXT_DELAY, [hl]
 	ld a, $1 ; bad checksum
-.goodsum
+.done
 	ld [wSaveFileStatus], a
 	ret
 
@@ -31,7 +30,7 @@ FileDataDestroyedText:
 	line "こわれています！"
 	prompt
 
-LoadSAV0:
+LoadMainData:
 	call EnableSRAM
 	ld a, BANK("Save Data")
 	ld [rRAMB], a
@@ -40,22 +39,22 @@ LoadSAV0:
 	vc_hook Unknown_save_limit
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
-	call SAVCheckSum
+	call CalcCheckSum
 	ld c, a
 	ld a, [sMainDataCheckSum]
 	cp c
-	jp z, .checkSumsMatched
+	jp z, .checkSumMatched
 
 ; If the computed checksum didn't match the saved on, try again.
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
-	call SAVCheckSum
+	call CalcCheckSum
 	ld c, a
 	ld a, [sMainDataCheckSum]
 	cp c
-	jp nz, SAVBadCheckSum
+	jp nz, CheckSumFailed
 
-.checkSumsMatched
+.checkSumMatched
 	ld hl, sPlayerName
 	ld de, wPlayerName
 	ld bc, NAME_LENGTH
@@ -72,42 +71,45 @@ LoadSAV0:
 	call CopyData
 	ld a, [sTileAnimations]
 	ldh [hTileAnimations], a
+
+; this part is redundant, LoadCurrentBoxData is always called next
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
-	and a
-	jp SAVGoodChecksum
 
-LoadSAV1:
+	and a
+	jp GoodCheckSum
+
+LoadCurrentBoxData:
 	call EnableSRAM
 	ld a, BANK("Save Data")
 	ld [rRAMB], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
-	call SAVCheckSum
+	call CalcCheckSum
 	ld c, a
 	ld a, [sMainDataCheckSum]
 	cp c
-	jr nz, SAVBadCheckSum
+	jr nz, CheckSumFailed
 	ld hl, sCurBoxData
 	ld de, wBoxDataStart
 	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
 	and a
-	jp SAVGoodChecksum
+	jp GoodCheckSum
 
-LoadSAV2:
+LoadPartyAndDexData:
 	call EnableSRAM
 	ld a, BANK("Save Data")
 	ld [rRAMB], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
-	call SAVCheckSum
+	call CalcCheckSum
 	ld c, a
 	ld a, [sMainDataCheckSum]
 	cp c
-	jp nz, SAVBadCheckSum
+	jp nz, CheckSumFailed
 	ld hl, sPartyData
 	ld de, wPartyDataStart
 	ld bc, wPartyDataEnd - wPartyDataStart
@@ -117,27 +119,29 @@ LoadSAV2:
 	ld bc, wPokedexSeenEnd - wPokedexOwned
 	call CopyData
 	and a
-	jp SAVGoodChecksum
+	jp GoodCheckSum
 
-SAVBadCheckSum:
+CheckSumFailed:
 	scf
+	; fallthrough
 
-SAVGoodChecksum:
+GoodCheckSum:
 	call DisableSRAM
 	ret
 
-LoadSAVIgnoreBadCheckSum:
-; unused function that loads save data and ignores bad checksums
-	call LoadSAV0
-	call LoadSAV1
-	jp LoadSAV2
+TryLoadSaveFileIgnoreChecksum: ; unreferenced
+; don't update wSaveFileStatus upon success or failure
+; don't display warning in case of failed checksum
+	call LoadMainData
+	call LoadCurrentBoxData
+	jp LoadPartyAndDexData
 
-SaveSAV:
+SaveMenu:
 	farcall PrintSaveScreenText
 	ld c, 10
 	call DelayFrames
 	ld hl, WouldYouLikeToSaveText
-	call SaveSAVConfirm
+	call SaveTheGame_YesOrNo
 	and a   ;|0 = Yes|1 = No|
 	ret nz
 	ld c, 10
@@ -145,14 +149,14 @@ SaveSAV:
 	ld a, [wSaveFileStatus]
 	cp $1
 	jr z, .save
-	call SAVCheckRandomID
+	call CheckPreviousSaveFile
 	jr z, .save
 	ld hl, OlderFileWillBeErasedText
-	call SaveSAVConfirm
+	call SaveTheGame_YesOrNo
 	and a
 	ret nz
 .save
-	call SaveSAVtoSRAM
+	call SaveGameData
 	ld hl, SavingText
 	call PrintText
 	ld c, 128
@@ -168,13 +172,13 @@ SaveSAV:
 	call DelayFrames
 	ret
 
-SaveSAVConfirm:
+SaveTheGame_YesOrNo:
 	call PrintText
 	hlcoord 0, 7
 	lb bc, 8, 1
 	ld a, TWO_OPTION_MENU
 	ld [wTextBoxID], a
-	call DisplayTextBoxID ; yes/no menu
+	call DisplayTextBoxID
 	ld a, [wCurrentMenuItem]
 	ret
 
@@ -198,10 +202,11 @@ OlderFileWillBeErasedText:
 	cont "うえから　かいても　いいですか？"
 	done
 
-SaveSAVtoSRAM0:
+SaveMainData:
 	call EnableSRAM
 	ld a, BANK("Save Data")
 	ld [rRAMB], a
+
 	ld hl, wPlayerName
 	ld de, sPlayerName
 	ld bc, NAME_LENGTH
@@ -215,20 +220,22 @@ SaveSAVtoSRAM0:
 	ld bc, wSpriteDataEnd - wSpriteDataStart
 	call CopyData
 	ld hl, wBoxDataStart
+
+; this part is redundant, SaveCurrentBoxData is always called next
 	ld de, sCurBoxData
 	ld bc, wBoxDataEnd - wBoxDataStart
 	call CopyData
 	ldh a, [hTileAnimations]
 	ld [sTileAnimations], a
+
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
-	call SAVCheckSum
+	call CalcCheckSum
 	ld [sMainDataCheckSum], a
 	call DisableSRAM
 	ret
 
-SaveSAVtoSRAM1:
-; stored pokémon
+SaveCurrentBoxData:
 	call EnableSRAM
 	ld a, BANK("Save Data")
 	ld [rRAMB], a
@@ -238,12 +245,12 @@ SaveSAVtoSRAM1:
 	call CopyData
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
-	call SAVCheckSum
+	call CalcCheckSum
 	ld [sMainDataCheckSum], a
 	call DisableSRAM
 	ret
 
-SaveSAVtoSRAM2:
+SavePartyAndDexData:
 	call EnableSRAM
 	ld a, BANK("Save Data")
 	ld [rRAMB], a
@@ -264,19 +271,19 @@ SaveSAVtoSRAM2:
 	ld [de], a
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
-	call SAVCheckSum
+	call CalcCheckSum
 	ld [sMainDataCheckSum], a
 	call DisableSRAM
 	ret
 
-SaveSAVtoSRAM::
+SaveGameData::
 	ld a, $2
 	ld [wSaveFileStatus], a
-	call SaveSAVtoSRAM0
-	call SaveSAVtoSRAM1
-	jp SaveSAVtoSRAM2
+	call SaveMainData
+	call SaveCurrentBoxData
+	jp SavePartyAndDexData
 
-SAVCheckSum:
+CalcCheckSum:
 ;Check Sum (result[1 byte] is complemented)
 	ld d, 0
 .loop
@@ -296,7 +303,7 @@ GetBoxSRAMLocation:
 ; out: b = box SRAM bank, hl = pointer to start of box
 	ld hl, BoxSRAMPointerTable
 	ld a, [wCurrentBoxNum]
-	and $7f
+	and BOX_NUM_MASK
 	cp NUM_BOXES / 2
 	ld b, 2
 	jr c, .next
@@ -355,7 +362,7 @@ ChangeBox::
 	ld a, [hl]
 	ld [de], a
 	call RestoreMapTextPointer
-	call SaveSAVtoSRAM
+	call SaveGameData
 	ld hl, wChangeBoxSavedMapTextPointer
 	call SetMapTextPointer
 	ret
@@ -377,7 +384,7 @@ CopyBoxToOrFromSRAM:
 	call CopyData
 	pop hl
 
-; mark the memory that the box was copied from as am empty box
+; mark the source box as an empty box
 	xor a
 	ld [hli], a
 	dec a
@@ -385,7 +392,7 @@ CopyBoxToOrFromSRAM:
 
 	ld hl, sBox1 ; sBox5
 	ld bc, sBank2AllBoxesChecksum + 1 - sBox1
-	call SAVCheckSum
+	call CalcCheckSum
 	; BUG: the checked data area contains the Checksum byte at sBank2AllBoxesChecksum.
 	; This will alter the checked data when the Checksum byte is written.
 	ld [sBank2AllBoxesChecksum], a ; sBank3AllBoxesChecksum
@@ -406,7 +413,7 @@ DisplayChangeBoxMenu:
 	xor a
 	ld [wMenuWatchMovingOutOfBounds], a
 	ld a, [wCurrentBoxNum]
-	and $7f
+	and BOX_NUM_MASK
 	ld [wCurrentMenuItem], a
 	ld [wLastMenuItem], a
 	hlcoord 0, 0
@@ -421,7 +428,7 @@ DisplayChangeBoxMenu:
 	ld de, BoxNames
 	call PlaceString
 	ld a, [wCurrentBoxNum]
-	and $7f
+	and BOX_NUM_MASK
 	add "１"
 	ldcoord_a 9, 2
 	hlcoord 1, 2
@@ -493,7 +500,7 @@ EmptySRAMBoxesInBank:
 	ld bc, sBank2AllBoxesChecksum + 1 - sBox1
 	; BUG: the checked data area contains the Checksum byte at sBank2AllBoxesChecksum.
 	; This will alter the checked data when the Checksum byte is written.
-	call SAVCheckSum
+	call CalcCheckSum
 	ld [sBank2AllBoxesChecksum], a ; sBank3AllBoxesChecksum
 	ret
 
@@ -519,7 +526,7 @@ GetMonCountsForAllBoxes:
 
 ; copy the count for the current box from WRAM
 	ld a, [wCurrentBoxNum]
-	and $7f
+	and BOX_NUM_MASK
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -539,10 +546,10 @@ GetMonCountsForBoxesInBank:
 	ld [hli], a
 	ret
 
-SAVCheckRandomID:
-; checks if Sav file is the same by checking player's name 1st letter
-; and the two random numbers generated at game beginning
-; (which are stored at wPlayerID)s
+; check if we're trying to save over a different playthrough
+; return result in zero flag
+; z set: a valid save file was found, and saved PlayerID is different from wPlayerID
+CheckPreviousSaveFile:
 	call EnableSRAM
 	ld a, BANK("Save Data")
 	ld [rRAMB], a
@@ -551,11 +558,11 @@ SAVCheckRandomID:
 	jr z, .next
 	ld hl, sGameData
 	ld bc, sGameDataEnd - sGameData
-	call SAVCheckSum
+	call CalcCheckSum
 	ld c, a
 	ld a, [sMainDataCheckSum]
 	cp c
-	jr nz, .next
+	jr nz, .next ; return z set if save data is corrupted
 	ld hl, sMainData + (wPlayerID - wMainDataStart) ; player ID
 	ld a, [hli]
 	ld h, [hl]
@@ -566,8 +573,9 @@ SAVCheckRandomID:
 	ld a, [wPlayerID + 1]
 	cp h
 .next
-	ld a, $00
+	ld a, BMODE_SIMPLE
 	ld [rBMODE], a
+	ASSERT RAMG_SRAM_DISABLE == BMODE_SIMPLE
 	ld [rRAMG], a
 	ret
 
@@ -614,19 +622,20 @@ HallOfFame_Copy:
 	call DisableSRAM
 	ret
 
-ClearSAV:
+; Fill SRAM with $ff, erasing save data. Used by DoClearSaveDialogue
+ClearAllSRAMBanks:
 	call EnableSRAM
 	ld a, $4
 .loop
 	dec a
 	push af
-	call PadSRAM_FF
+	call .PadSRAM_FF
 	pop af
 	jr nz, .loop
 	call DisableSRAM
 	ret
 
-PadSRAM_FF:
+.PadSRAM_FF
 	ld [rRAMB], a
 	ld hl, STARTOF(SRAM)
 	ld bc, SIZEOF(SRAM)
@@ -641,7 +650,8 @@ EnableSRAM:
 	ret
 
 DisableSRAM:
-	ld a, 0
+	ld a, BMODE_SIMPLE ; preserve flags
 	ld [rBMODE], a
+	ASSERT RAMG_SRAM_DISABLE == BMODE_SIMPLE
 	ld [rRAMG], a
 	ret

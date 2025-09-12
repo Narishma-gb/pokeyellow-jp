@@ -772,7 +772,7 @@ TradeCenter_Trade:
 	add hl, bc
 	ld a, [hl]
 	ld [wTradedPlayerMonSpecies], a
-	callabd_ModifyPikachuHappiness PIKAHAPPY_TRADE
+	farcall_ModifyPikachuHappiness PIKAHAPPY_TRADE
 	xor a
 	ld [wRemoveMonFromBox], a
 	call RemovePokemon
@@ -841,7 +841,7 @@ TradeCenter_Trade:
 	hlcoord 1, 14
 	ld de, TradeCompleted
 	call PlaceString
-	predef SaveSAVtoSRAM2
+	predef SavePartyAndDexData ; this allows reset into Pokecenter
 	vc_hook Trade_save_game_end
 	ld c, 50
 	call DelayFrames
