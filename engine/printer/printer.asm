@@ -1,6 +1,12 @@
 PrintPokedexEntry:
 	xor a
 	ldh [hCanceledPrinting], a
+IF DEF(_REV3)
+	ld a, [wUpdateSpritesEnabled]
+	push af
+	xor a
+	ld [wUpdateSpritesEnabled], a
+ENDC
 	call Printer_PlayPrinterMusic
 	ldh a, [rIE]
 	push af
@@ -47,11 +53,21 @@ PrintPokedexEntry:
 	ldh [rIE], a
 	call ReloadMapAfterPrinter
 	call Printer_PlayMapMusic
+IF DEF(_REV3)
+	pop af
+	ld [wUpdateSpritesEnabled], a
+ENDC
 	ret
 
 PrintSurfingMinigameHighScore::
 	xor a
 	ldh [hCanceledPrinting], a
+IF DEF(_REV3)
+	ld a, [wUpdateSpritesEnabled]
+	push af
+	xor a
+	ld [wUpdateSpritesEnabled], a
+ENDC
 	call Printer_PlayPrinterMusic
 	call Printer_PrepareSurfingMinigameHighScoreTileMap
 	ldh a, [rIE]
@@ -89,11 +105,21 @@ PrintSurfingMinigameHighScore::
 	ldh [rIE], a
 	call ReloadMapAfterPrinter
 	call Printer_PlayMapMusic
+IF DEF(_REV3)
+	pop af
+	ld [wUpdateSpritesEnabled], a
+ENDC
 	ret
 
 PrintDiploma::
 	xor a
 	ldh [hCanceledPrinting], a
+IF DEF(_REV3)
+	ld a, [wUpdateSpritesEnabled]
+	push af
+	xor a
+	ld [wUpdateSpritesEnabled], a
+ENDC
 	call Printer_PlayPrinterMusic
 	call DisplayDiplomaTop
 	ldh a, [rIE]
@@ -134,6 +160,10 @@ PrintDiploma::
 	ldh [rIE], a
 	call ReloadMapAfterPrinter
 	call Printer_PlayMapMusic
+IF DEF(_REV3)
+	pop af
+	ld [wUpdateSpritesEnabled], a
+ENDC
 	ret
 
 PrintDiplomaPage:
@@ -165,6 +195,12 @@ PrintPCBox::
 	jp z, .emptyBox
 	xor a
 	ldh [hCanceledPrinting], a
+IF DEF(_REV3)
+	ld a, [wUpdateSpritesEnabled]
+	push af
+	xor a
+	ld [wUpdateSpritesEnabled], a
+ENDC
 	call Printer_PlayPrinterMusic
 	ldh a, [rIE]
 	push af
@@ -237,6 +273,10 @@ PrintPCBox::
 	ldh [rIE], a
 	call ReloadMapAfterPrinter
 	call Printer_PlayMapMusic
+IF DEF(_REV3)
+	pop af
+	ld [wUpdateSpritesEnabled], a
+ENDC
 	ret
 
 .emptyBox
@@ -274,6 +314,12 @@ NoPokemonText:
 PrintFanClubPortrait::
 	xor a
 	ldh [hCanceledPrinting], a
+IF DEF(_REV3)
+	ld a, [wUpdateSpritesEnabled]
+	push af
+	xor a
+	ld [wUpdateSpritesEnabled], a
+ENDC
 	call Printer_PlayPrinterMusic
 	call Printer_GetMonStats
 	ldh a, [rIE]
@@ -311,6 +357,10 @@ PrintFanClubPortrait::
 	ldh [rIE], a
 	call ReloadMapAfterPrinter
 	call Printer_PlayMapMusic
+IF DEF(_REV3)
+	pop af
+	ld [wUpdateSpritesEnabled], a
+ENDC
 	ret
 
 PrinterDebug:

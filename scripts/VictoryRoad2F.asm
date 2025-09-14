@@ -46,6 +46,11 @@ VictoryRoad2FDefaultScript:
 	ld hl, .SwitchCoords
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
+IF DEF(_REV3)
+	ldh a, [hSpriteIndex]
+	cp PIKACHU_SPRITE_INDEX
+	jp z, CheckFightingMapTrainers
+ENDC
 	EventFlagAddress hl, EVENT_VICTORY_ROAD_2_BOULDER_ON_SWITCH1
 	ld a, [wCoordIndex]
 	cp $2

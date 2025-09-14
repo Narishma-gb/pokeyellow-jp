@@ -43,20 +43,20 @@ ROMX $2
 	"Sound Effects 1"
 	"Audio Engine 1"
 	"Music 1"
-	"Garbage 2"
+	; Rev.0 - Rev.2: "Garbage 2"
 ROMX $3
 	"bank3"
-	"Garbage 3"
+	; Rev.0 - Rev.2: "Garbage 3"
 ROMX $4
  	"bank4"
  	"NPC Sprites 1"
 	"Battle Engine 1"
-	"Garbage 4"
+	; Rev.0 - Rev.2: "Garbage 4"
 ROMX $5
 	"bank5"
 	"NPC Sprites 2"
 	"Battle Engine 2"
-	"Garbage 5"
+	; Rev.0 - Rev.2: "Garbage 5"
 ROMX $6
 	"Maps 1"
 	"Maps 2"
@@ -76,35 +76,35 @@ ROMX $8
 	"Bill's PC"
 	"Audio Engine 2"
 	"Music 2"
-	"Garbage 8"
+	; Rev.0 - Rev.2: "Garbage 8"
 ROMX $9
 	"Pics 1"
 	"Battle Engine 3"
-	"Garbage 9"
+	; Rev.0 - Rev.2: "Garbage 9"
 ROMX $a
 	"Pics 2"
 	"Battle Engine 4"
-	"Garbage 10"
+	; Rev.0 - Rev.2: "Garbage 10"
 ROMX $b
 	"Pics 3"
 	"Battle Engine 5"
-	"Garbage 11"
+	; Rev.0 - Rev.2: "Garbage 11"
 ROMX $c
 	"Pics 4"
-	"Garbage 12"
+	; Rev.0 - Rev.2: "Garbage 12"
 ROMX $d
 	"Pics 5"
 	"Slot Machines"
-	"Garbage 13"
+	; Rev.0 - Rev.2: "Garbage 13"
 ROMX $e
 	"Battle Engine 6"
-	"Garbage 14"
+	; Rev.0 - Rev.2: "Garbage 14"
 ROMX $f
 	"Battle Core"
 	"Garbage 15"
 ROMX $10
 	"bank10"
-	"Garbage 16"
+	; Rev.0 - Rev.2: "Garbage 16"
 ROMX $11
 	"Maps 5"
 	"Pokédex Rating"
@@ -118,24 +118,24 @@ ROMX $12
 ROMX $13
 	"Trainer Pics"
 	"Maps 9"
-	"Garbage 19"
+	; Rev.0 - Rev.2: "Garbage 19"
 ROMX $14
 	"Maps 10"
 	"Hidden Objects 2"
-	"Garbage 20"
+	; Rev.0 - Rev.2: "Garbage 20"
 ROMX $15
 	"Maps 11"
 	"Battle Engine 7"
 	"Maps 12"
 	"Diploma"
 	"Trainer Sight"
-	"Garbage 21"
+	; Rev.0 - Rev.2: "Garbage 21"
 ROMX $16
 	"Maps 13"
 	"bank16"
 	"Maps 14"
 	"Saffron Guards"
-	"Garbage 22"
+	; Rev.0 - Rev.2: "Garbage 22"
 ROMX $17
 	"Maps 15"
 	"Starter Dex"
@@ -153,12 +153,12 @@ ROMX $19
 ROMX $1a
 	"Version Graphics"
 	"Tilesets 2"
-	"Garbage 26"
+	; Rev.0 - Rev.2: "Garbage 26"
 ROMX $1b
 	"Tilesets 3"
 ROMX $1c
 	"bank1C"
-	"Garbage 28"
+	; Rev.0 - Rev.2: "Garbage 28"
 ROMX $1d
 	"Maps 19"
 	"Itemfinder 1"
@@ -166,115 +166,115 @@ ROMX $1d
 	"Vending Machine"
 	"Maps 21"
 	"Itemfinder 2"
-	"Garbage 29"
+	; Rev.0 - Rev.2: "Garbage 29"
 ROMX $1e
 	"bank1E"
-	"Garbage 30"
+	; Rev.0 - Rev.2: "Garbage 30"
 ROMX $1f
 	"Sound Effect Headers 3"
 	"Music Headers 3"
 	"Sound Effects 3"
 	"Audio Engine 3"
 	"Music 3"
-	"Garbage 31"
+	; Rev.0 - Rev.2: "Garbage 31"
 ROMX $20
 	"Surfing Minigame Graphics"
-	"Garbage 32"
+	; Rev.0 - Rev.2: "Garbage 32"
 ROMX $21
 	"Pikachu Cries 1"
-	"Garbage 33"
+	; Rev.0 - Rev.2: "Garbage 33"
 ROMX $22
 	"Pikachu Cries 2"
-	"Garbage 34"
+	; Rev.0 - Rev.2: "Garbage 34"
 ROMX $23
 	"Pikachu Cries 3"
-	"Garbage 35"
+	; Rev.0 - Rev.2: "Garbage 35"
 ROMX $24
 	"Pikachu Cries 4"
-	"Garbage 36"
+	; Rev.0 - Rev.2: "Garbage 36"
 ROMX $25
 	"Pikachu Cries 5"
-	"Garbage 37"
+	; Rev.0 - Rev.2: "Garbage 37"
 ROMX $26
-	"Garbage 38"
+	; Rev.0 - Rev.2: "Garbage 38"
 ROMX $27
-	"Garbage 39"
+	; Rev.0 - Rev.2: "Garbage 39"
 ROMX $28
 	"Sound Effect Headers 4"
 	"Music Headers 4"
 	"Sound Effects 4"
 	"Audio Engine 4"
 	"Music 4"
-	"Garbage 40"
+	; Rev.0 - Rev.2: "Garbage 40"
 ROMX $29
 	"bank29"
-	"Garbage 41"
+	; Rev.0 - Rev.2: "Garbage 41"
 ROMX $2a
-	"Garbage 42"
+	; Rev.0 - Rev.2: "Garbage 42"
 ROMX $2b
-	"Garbage 43"
+	; Rev.0 - Rev.2: "Garbage 43"
 ROMX $2c
-	"Garbage 44"
+	; Rev.0 - Rev.2: "Garbage 44"
 ROMX $2d
-	"Garbage 45"
+	; Rev.0 - Rev.2: "Garbage 45"
 ROMX $2e
-	"Garbage 46"
+	; Rev.0 - Rev.2: "Garbage 46"
 ROMX $2f
-	"Garbage 47"
+	; Rev.0 - Rev.2: "Garbage 47"
 ROMX $30
 	"bank30"
 	"Pikachu Graphics 1"
 	"Credits"
 	"Maps 22"
-	"Garbage 48"
+	; Rev.0 - Rev.2: "Garbage 48"
 ROMX $31
 	"Pikachu Cries 6"
-	"Garbage 49"
+	; Rev.0 - Rev.2: "Garbage 49"
 ROMX $32
 	"Pikachu Cries 7"
 ROMX $33
 	"Pikachu Cries 8"
-	"Garbage 51"
+	; Rev.0 - Rev.2: "Garbage 51"
 ROMX $34
 	"Pikachu Cries 9"
-	"Garbage 52"
+	; Rev.0 - Rev.2: "Garbage 52"
 ROMX $35
 	"Pikachu Cries 10"
-	"Garbage 53"
+	; Rev.0 - Rev.2: "Garbage 53"
 ROMX $36
 	"Pikachu Cries 11"
-	"Garbage 54"
+	; Rev.0 - Rev.2: "Garbage 54"
 ROMX $37
 	"Pikachu Cries 12"
-	"Garbage 55"
+	; Rev.0 - Rev.2: "Garbage 55"
 ROMX $38
 	"Pikachu Cries 13"
-	"Garbage 56"
+	; Rev.0 - Rev.2: "Garbage 56"
 ROMX $39
 	"Pikachu Graphics 2"
-	"Garbage 57"
+	; Rev.0 - Rev.2: "Garbage 57"
 ROMX $3a
 	"Printer"
-	"Garbage 58"
+	; Rev.0 - Rev.2: "Garbage 58"
 ROMX $3b
 	"Pikachu PCM"
-	"Garbage 59"
+	; Rev.0 - Rev.2: "Garbage 59"
 ROMX $3c
 	"Tilesets 4"
 	"bank3C"
 	"Maps 23"
 	"Hidden Objects Core"
-	"Garbage 60"
+	; Rev.0 - Rev.2: "Garbage 60"
 ROMX $3d
 	"Battle Engine 8"
 	"Pics 7"
 	"Battle Engine 9"
-	"Garbage 61"
+	; Rev.0 - Rev.2: "Garbage 61"
 ROMX $3e
 	"Surfing Minigame"
 	"Intro Graphics"
 	"Animated Objects"
-	"Garbage 62"
+	; Rev.0 - Rev.2: "Garbage 62"
 ROMX $3f
 	"Overworld Pikachu"
 	"NPC Sprites 3"

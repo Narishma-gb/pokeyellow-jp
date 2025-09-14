@@ -30,6 +30,11 @@ VictoryRoad1FDefaultScript:
 	ld hl, .SwitchCoords
 	call CheckBoulderCoords
 	jp nc, CheckFightingMapTrainers
+IF DEF(_REV3)
+	ldh a, [hSpriteIndex]
+	cp PIKACHU_SPRITE_INDEX
+	jp z, CheckFightingMapTrainers
+ENDC
 	ld hl, wCurrentMapScriptFlags
 	set BIT_CUR_MAP_LOADED_1, [hl]
 	SetEvent EVENT_VICTORY_ROAD_1_BOULDER_ON_SWITCH
