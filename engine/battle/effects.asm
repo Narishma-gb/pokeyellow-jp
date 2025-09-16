@@ -1547,6 +1547,7 @@ PlayCurrentMoveAnimation2:
 PlayBattleAnimation2:
 ; play animation ID at a and animation type 6 or 3
 	ld [wAnimationID], a
+	vc_hook Reduce_move_anim_flashing_Hypnosis
 	ldh a, [hWhoseTurn]
 	and a
 	ld a, ANIMATIONTYPE_SHAKE_SCREEN_HORIZONTALLY_SLOW_2

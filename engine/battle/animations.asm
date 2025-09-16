@@ -23,7 +23,6 @@ MoveAnimation:
 	jr nz, .animationsDisabled
 	call ShareMoveAnimations
 	call PlayAnimation
-;	vc_hook Stop_reducing_move_anim_flashing_Blizzard_Bubblebeam_Rock_Slide
 	jr .next
 .animationsDisabled
 	ld c, 30
@@ -238,6 +237,7 @@ PlaySubanimation:
 	call DoSpecialEffectByAnimationId ; run animation-specific function (if there is one)
 	ld a, [wSubAnimCounter]
 	dec a
+	vc_hook Stop_reducing_move_anim_flashing_Dream_Eater
 	ld [wSubAnimCounter], a
 	ret z
 	ld a, [wSubAnimSubEntryAddr + 1]

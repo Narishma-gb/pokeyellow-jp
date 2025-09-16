@@ -584,7 +584,13 @@ YellowIntro_MaskCurrentAnimatedObjectStruct:
 	ret
 
 YellowIntro_SetTimerFor128Frames:
+	vc_patch Intro_Timer_141_Frames
+IF DEF (_YELLOW_VC)
+	ld a, 141
+ELSE
 	ld a, 128
+ENDC
+	vc_patch_end
 	ld [wYellowIntroSceneTimer], a
 	ret
 
@@ -603,14 +609,13 @@ YellowIntro_CheckFrameTimerDecrement:
 	ret
 
 .asm_f9e4b
-	vc_hook Stop_reducing_intro_scene_flashing_0F
+	vc_hook Stop_reducing_intro_scene_flashing_0E_0F
 	scf
 	ret
 
 YellowIntro_LoadDMGPalAndIncrementCounter:
 	ld hl, wYellowIntroSceneTimer
 	ld a, [hl]
-	vc_hook Stop_reducing_intro_scene_flashing_0E
 	inc [hl]
 	ld l, a
 	ld h, $0

@@ -46,12 +46,14 @@ RGBLINK ?= $(RGBDS)rgblink
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all yellow yellow11 clean tidy compare tools
+.PHONY: all yellow yellow11 yellow12 yellow13 yellow13_vc clean tidy compare tools
 
 all: $(roms)
-yellow:    pokeyellow.gb
-yellow11:  pokeyellow11.gb
-yellow_vc: pokeyellow.patch
+yellow:      pokeyellow.gb
+yellow11:    pokeyellow11.gb
+yellow12:    pokeyellow12.gb
+yellow13:    pokeyellow13.gb
+yellow13_vc: pokeyellow13.patch
 
 clean: tidy
 	find gfx \
@@ -80,7 +82,7 @@ tidy:
 	      rgbdscheck.o
 	$(MAKE) clean -C tools/
 
-compare: $(roms)
+compare: $(roms) $(patches)
 	@$(SHA1) -c roms.sha1
 
 tools:

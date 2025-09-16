@@ -1,0 +1,470 @@
+;Format Sample
+;[xxxx]			;User-defined Name (Max:31 chars)
+;Mode = 1		;1:Fixcode; 2:Fixvalue; 3:Mask; 4:Palette; 5:Double Frame Buffer
+;Type = 0		;0:Begin 1:End
+;Index = 0		;Index
+;Address = x1F8000	;ROM Address
+;MemAddress = x2000	;RAM Address
+;Fixcode = 0		;Mode1: Fixed Rom Code; Mode2: Fixed Value
+;DelayFrame = 0		;Delay Frame
+;FadeFrame = 0		;Fade Frame 0:Off
+;DarkEnable0 = 0	;0:Off, 1:On (for Normal Mode)
+;ReduceEnable0 = 0	;0:Off, 1:On (for Normal Mode)
+;MotionBEnable0 = 0	;0:Off, 1:Black Fade, 2:, 3:Frame Blend (for Normal Mode)
+;Dark0 = 10		;0~10 (for Normal Mode)
+;ReduceColorR0 = 0	;0~31 (for Normal Mode)
+;ReduceColorG0 = 0	;0~31 (for Normal Mode)
+;ReduceColorB0 = 0	;0~31 (for Normal Mode)
+;MotionBlur0 = 31	;0~31 (for Normal Mode)
+;DarkEnable1 = 0	;0:Off, 1:On (for Green Mode)
+;ReduceEnable1 = 0	;0:Off, 1:On (for Green Mode)
+;MotionBEnable1 = 0	;0:Off, 1:Black Fade, 2:, 3:Frame Blend (for Green Mode)
+;Dark1 = 10		;0~10 (for Green Mode)
+;ReduceColorR1 = 0	;0~31 (for Green Mode)
+;ReduceColorG1 = 0	;0~31 (for Green Mode)
+;ReduceColorB1 = 0	;0~31 (for Green Mode)
+;MotionBlur1 = 31	;0~31 (for Green Mode)
+;PaletteX = c31,31,31	;X:0~15, cR,G,B (0~31)
+[SaveLimit@Unknown_save_limit]
+Mode = 12
+Type = 1
+Index = {hex sGameData}
+Address = {hex sGameDataEnd}
+
+;[Fix_print]
+;Mode = 1
+;Address = 0x40120
+;Fixcode = a3: 00 00 00
+
+[disable_print@Forbid_printing_Pokedex]
+Mode = 1
+Address = {hex @+1}
+Fixcode = {PATCH +1}
+
+;[disable_print_check]
+;Mode = 1
+;Address = 0xE84A5
+;Fixcode = a9: 00 00 00 00 00 00 00 00 00
+
+[BTS 20 A@Intro_Timer_141_Frames]
+Mode = 1
+;Address = 0xF9881
+;Fixcode = 0xFF
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+;[FPA BG Flash Begin]
+;Mode = 3
+;Type = 0
+;Address = 0x78D39
+;MotionBEnable0 = 3
+;MotionBlur0 = 7
+
+;[FPA BG Flash End]
+;Mode = 3
+;Type = 1
+;Address = 0x78D3C
+
+[MiniGame@Bypass_need_Pikachu_with_Surf_for_minigame]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+[MiniGame-HighScorePC@Bypass_need_Pikachu_with_Surf_for_high_score]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+[send_send_buf2@Wireless_WaitLinkTransfer]
+Mode = 2
+Address = {HEX @}
+Type = 29
+
+[send_send_buf2_ret@Wireless_WaitLinkTransfer_ret]
+Mode = 2
+Address = {HEX @}
+Type = 30
+
+[send_byt2@Wireless_start_exchange]
+Mode = 2
+Address = {HEX @+5}
+Type = 31
+
+[send_byt2_ret@Wireless_end_exchange]
+Mode = 2
+Address = {HEX @}
+Type = 32
+
+[send_dummy@Wireless_start_send_zero_bytes]
+Mode = 2
+Address = {HEX @}
+Type = 33
+
+[send_dummy_end@Wireless_end_send_zero_bytes]
+Mode = 2
+Address = {HEX @}
+Type = 34
+
+[FIGHT@Wireless_net_delay_1]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+[FIGHT2@Wireless_net_delay_2]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+[Network10@Wireless_net_delay_3]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+[Network11@Wireless_net_delay_4]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+[Network359@Wireless_ExchangeBytes_party_structs]
+Mode = 2
+Address = {HEX @}
+Type = 4
+
+[Network200@Wireless_ExchangeBytes_patch_lists]
+Mode = 2
+Address = {HEX @}
+Type = 4
+
+[Network_RECHECK@Wireless_net_recheck]
+Mode = 2
+Address = {HEX @}
+Type = 7
+
+[Network_STOP@Wireless_net_stop]
+Mode = 2
+Address = {HEX @}
+Type = 8
+
+[Network_END@Wireless_net_end]
+Mode = 2
+Address = {HEX @}
+Type = 9
+
+[Network_RESET@Unknown_network_reset]
+Mode = 2
+Address = {HEX @}
+Type = 10
+
+[linkCable fake begin@Link_fake_connection_status]
+Mode = 2
+Address = {HEX @}
+Type = 16
+
+[linkCable fake end@Wireless_prompt]
+Mode = 2
+Address = {HEX @}
+Type = 17  
+
+[linkCable block input@Wireless_TryQuickSave_block_input]
+Mode = 2
+Address = {HEX @+5}
+Type = 18
+
+;[save game start]
+;Mode = 2
+;Address = 0x59A5
+;Type = 19
+
+[save game end@Trade_save_game_end]
+Mode = 2
+Address = {HEX @}
+Type = 20
+
+[Change_MSG@Change_link_closed_inactivity_message]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH_ +1 17}
+
+[fight_ret@BattleRandom_ret]
+Mode = 1
+Address = {hex @}
+Fixcode = {PATCH}
+
+[fight_ret_c@Unknown_BattleRandom_ret_c]
+Mode = 2
+Address = {hex @}
+Type = 98
+
+;[PLAY_MUTE]
+;Mode = 1
+;Address = 0x151
+;Fixcode = 0xC9
+
+[PLAY_MUTE@Unknown_PlayPikachuSoundClip_end]
+Mode = 1
+Address = {HEX @+1}
+Fixcode = {PATCH +1}
+
+
+[PLAY_HACK@Unknown_PlayPikachuPCM]
+Mode = 2
+Address = {HEX @}
+Type = 6
+
+[PLAY_NEW@Unknown_PlayPikachuSoundClip_start]
+Mode = 2
+Address = {hex @}
+Type = 21
+
+;ROM:F9C60                 call    unk_585D      
+;ROM:F9C63                 ld      a, $28 ; '('  
+;ROM:F9C65                 ld      [byte_C635], a
+;ROM:F9C68                 ret                   
+;
+;
+
+
+;rsm104744                                                                           
+[FPA 031801 Begin2@Reduce_intro_scene_flashing_0F]                                                                         
+Mode = 3                                                                                
+Type = 0                                                                                
+Address = {HEX @}                                                                    
+MotionBEnable0 = 3                                                                      
+MotionBlur0 = 4 
+MotionBEnable1 = 3  
+MotionBlur1 = 4                                                                         
+ConditionType = 0                                                                    
+ConditionValueA = {dws_ wYellowIntroCurrentScene}                                                          
+ConditionValueB = {dws_ ==                      }                                                          
+ConditionValueC = {dws_ 0x0f                    }                            
+                                                         
+  
+;Mem Write: pc32 = 0xf9860 addr = 0xc634 value = 0xe 
+;part1 
+[FPA 031801 Begin1@Reduce_intro_scene_flashing_0E]       
+Mode = 3                   
+Type = 0                   
+Address = {hex @}          
+MotionBEnable0 = 3         
+MotionBlur0 = 30     
+ConditionType = 0                    
+ConditionValueA = {dws_ wYellowIntroCurrentScene}    
+ConditionValueB = {dws_ ==                      }      
+ConditionValueC = {dws_ 0x0e                    }      
+
+
+                              
+[FPA 031801 End2@Stop_reducing_intro_scene_flashing_0E_0F]             
+Mode = 3                      
+Type = 1                      
+Address = {HEX @}  
+ConditionType = 0                             
+ConditionValueA = {dws_ wYellowIntroCurrentScene wYellowIntroCurrentScene}         
+ConditionValueB = {dws_ >=                       <=                      }         
+ConditionValueC = {dws_ 0x0e                     0x0f                    }  
+
+;222222aaaaaaaaaaaaaaaa: pc32 = 0xf9847 addr = 0xffb3 value = 0x0         
+;F97E5                 ld      a, [byte_FFB3]                      
+;ROM:F97E7                 and     $B                              
+;ROM:F97E9                 jr      nz, unk_97FB                    
+; 000f97e5h: F0 B3 E6 0B                                     ; ð³?                                            
+[FPA 031801 End3@Stop_Reducing_intro_scene_flashing]                                                         
+Mode = 3                                                                  
+Type = 1                                                                  
+Address = {hex @}                                                         
+ConditionType = 11                                                        
+ConditionValueA = {dws_ wYellowIntroCurrentScene  00  wYellowIntroCurrentScene}                                     
+ConditionValueB = {dws_ ==                        ||  ==                      }                                   
+ConditionValueC = {dws_ 0x0e                      00  0x0f                    }                                   
+                                                                          
+;rsm012707  rock slider  30
+;no151
+[FPA 001 Begin@Reduce_move_anim_flashing_Mega_Punch]               
+Mode = 3                      
+Type = 0                      
+Address = {hex @}           
+MotionBEnable0 = 3            
+MotionBlur0 = 27              
+ConditionType = 0             
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID}   
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }  
+ConditionValueC = {dws_ K_ME_CHAR     K_GA_CHAR       K_TO_CHAR       K_N_CHAR        K_N_CHAR        MEGA_PUNCH  }  
+
+[FPA 001 End@Stop_reducing_move_anim_flashing_Mega_Punch]                 
+Mode = 3                      
+Type = 1                      
+Address = {hex @}      
+ConditionType = 0             
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID}   
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }  
+ConditionValueC = {dws_ K_ME_CHAR     K_GA_CHAR       K_TO_CHAR       K_N_CHAR        K_N_CHAR        MEGA_PUNCH  }                               
+
+
+;rsm13390    
+;no117                  
+[FPA 002 Begin@Reduce_move_anim_flashing_Guillotine]               
+Mode = 3                      
+Type = 0                      
+Address = {HEX @}            
+MotionBEnable0 = 3            
+MotionBlur0 = 9  
+MotionBEnable1 = 3            
+MotionBlur1 = 8              
+ConditionType = 0             
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }  
+ConditionValueC = {dws_ K_HA_CHAR     K_SE_CHAR       K_MI_CHAR       K_GI_CHAR       GUILLOTINE  }   
+
+[FPA 002 End@Stop_reducing_move_anim_flashing_Guillotine]                                               
+Mode = 3                                                    
+Type = 1                                                    
+Address = {hex @}                                           
+ConditionType = 0                                           
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}   
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }   
+ConditionValueC = {dws_ K_HA_CHAR     K_SE_CHAR       K_MI_CHAR       K_GI_CHAR       GUILLOTINE  }   
+
+
+;rsm141749   
+;no150
+[FPA 003 Begin@Reduce_move_anim_flashing_Mega_Kick]               
+Mode = 3                      
+Type = 0                      
+Address = {hex @}            
+MotionBEnable0 = 3            
+MotionBlur0 = 26              
+ConditionType = 0             
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID}   
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }   
+ConditionValueC = {dws_ K_ME_CHAR     K_GA_CHAR       K_TO_CHAR       K_N_CHAR        K_XTU_CHAR      MEGA_KICK   }   
+
+[FPA 003 End@Stop_reducing_move_anim_flashing_Mega_Kick]                 
+Mode = 3                      
+Type = 1                      
+Address = {hex @}            
+ConditionType = 0             
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+5 wAnimationID}   
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }   
+ConditionValueC = {dws_ K_ME_CHAR     K_GA_CHAR       K_TO_CHAR       K_N_CHAR        K_XTU_CHAR      MEGA_KICK   }   
+
+
+;rsm153754 
+;no116                                    
+[FPA 004 Begin@Reduce_move_anim_flashing_Hyper_Beam]                                 
+Mode = 3                                        
+Type = 0                                        
+Address = {hex @}                           
+MotionBEnable0 = 1                              
+MotionBlur0 = 6   
+MotionBEnable1 = 1                              
+MotionBlur1 = 5                              
+ConditionType = 0                               
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}                  
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }                  
+ConditionValueC = {dws_ H_HA_CHAR     H_KA_CHAR       H_I_CHAR        H_KO_CHAR       HYPER_BEAM  }                  
+                                                
+[FPA 004 End@Stop_reducing_move_anim_flashing_Hyper_Beam]                                   
+Mode = 3                                        
+Type = 1                                        
+Address = {hex @}                             
+ConditionType = 0                               
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wSubAnimSubEntryAddr+1  wAnimationID}         
+ConditionValueB = {dws_ ==            ==              ==              ==              ==                      ==          }        
+ConditionValueC = {dws_ H_HA_CHAR     H_KA_CHAR       H_I_CHAR        H_KO_CHAR       >Subanim_1StarBigMoving HYPER_BEAM  }  
+
+;rsm015142
+;no159
+[FPA 005 Begin@Reduce_move_anim_flashing_Reflect]                                  
+Mode = 3                                   
+Type = 0                                   
+Address = {HEX @}                         
+MotionBEnable0 = 1                         
+MotionBlur0 = 6 
+MotionBEnable1 = 1                         
+MotionBlur1 = 5                           
+ConditionType = 0                          
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}                   
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }                   
+ConditionValueC = {dws_ K_RI_CHAR     K_HU_CHAR       K_RE_CHAR       K_KU_CHAR       REFLECT     }                   
+                                           
+[FPA 005 End@Stop_reducing_move_anim_flashing_Reflect]                              
+Mode = 3                                   
+Type = 1                                   
+Address = {hex @}                          
+ConditionType = 0                          
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}             
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }             
+ConditionValueC = {dws_ K_RI_CHAR     K_HU_CHAR       K_RE_CHAR       K_KU_CHAR       REFLECT     }    
+
+
+
+;Mem Write: pc32 = 0x780f4 addr = 0xd068 value = 0x0
+;rsm152103  06
+;no156
+[FPA 006 Begin@Reduce_move_anim_flashing_Dream_Eater]                                  
+Mode = 3                                   
+Type = 0                                   
+Address = {hex @}                         
+MotionBEnable0 = 3                         
+MotionBlur0 = 10     
+MotionBEnable1 = 3                         
+MotionBlur1 = 7                        
+ConditionType = 0                          
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}                 
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }                 
+ConditionValueC = {dws_ HA_YU_CHAR    HA_ME_CHAR      H_KU_CHAR       H_I_CHAR        DREAM_EATER }                 
+                                           
+[FPA 006 End@Stop_reducing_move_anim_flashing_Dream_Eater]                              
+Mode = 3                                   
+Type = 1                                   
+Address = {hex @}                       
+ConditionType = 0                          
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wSubAnimSubEntryAddr   wAnimationID}                 
+ConditionValueB = {dws_ ==            ==              ==              ==              >=                     ==          }                 
+ConditionValueC = {dws_ HA_YU_CHAR    HA_ME_CHAR      H_KU_CHAR       H_I_CHAR        <Subanim_0StarThrice+7 DREAM_EATER } 
+
+
+;rsm030939    
+;no12                                                             
+[FPA 007 Begin@Reduce_move_anim_flashing_Rock_Slide]                                                                                             
+Mode = 3                                                         
+Type = 0                                                         
+Address = {hex @}                                             
+MotionBEnable0 = 3                                               
+MotionBlur0 = 30                                                 
+ConditionType = 0                                                
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}                                   
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }                                   
+ConditionValueC = {dws_ H_I_CHAR      H_WA_CHAR       H_NA_CHAR       H_DA_CHAR       ROCK_SLIDE  }                                   
+                                                                 
+            
+            
+[FPA 007 End@Stop_reducing_move_anim_flashing_Rock_Slide]                                                    
+Mode = 3                                                         
+Type = 1                                                         
+Address = {hex @}                                                
+ConditionType = 0                                                
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wAnimationID}                                    
+ConditionValueB = {dws_ ==            ==              ==              ==              ==          }                                    
+ConditionValueC = {dws_ H_I_CHAR      H_WA_CHAR       H_NA_CHAR       H_DA_CHAR       ROCK_SLIDE  }     
+
+                                                        
+[FPA 5f Begin@Reduce_move_anim_flashing_Hypnosis]                                                 
+Mode = 3                                                        
+Type = 0                                                                  
+Address = {hex @}                                                  
+MotionBEnable1 = 3                                                                          
+MotionBlur1 = 21                                                    
+ConditionType = 0                                                   
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID}            
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }          
+ConditionValueC = {dws_ H_SA_CHAR     H_I_CHAR        HA_MI_CHAR      H_N_CHAR        H_JI_CHAR       HYPNOSIS    }       
+
+[FPA 5f End@Stop_reducing_move_anim_flashing_Hypnosis]                                                 
+Mode = 3                                                   
+Type = 1                                                   
+Address = {hex @}                                        
+ConditionType = 0                                          
+ConditionValueA = {dws_ wStringBuffer wStringBuffer+1 wStringBuffer+2 wStringBuffer+3 wStringBuffer+4 wAnimationID}       
+ConditionValueB = {dws_ ==            ==              ==              ==              ==              ==          }       
+ConditionValueC = {dws_ H_SA_CHAR     H_I_CHAR        HA_MI_CHAR      H_N_CHAR        H_JI_CHAR       HYPNOSIS    }       
