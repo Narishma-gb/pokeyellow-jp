@@ -1,6 +1,6 @@
 # Japanese Pokémon Yellow
 
-This is a disassembly of ポケットモンスターピカチュウ, based on pret [**pokeyellow**](https://github.com/pret/pokeyellow) full decompilation.
+This is a disassembly of ポケットモンスター　ピカチュウ, based on pret [**pokeyellow**](https://github.com/pret/pokeyellow) full decompilation.
 
 It builds the following ROMs:
 

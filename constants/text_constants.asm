@@ -11,6 +11,10 @@ DEF NAME_BUFFER_LENGTH EQU 20
 DEF LEFT_ALIGN EQU     (1 << BIT_LEFT_ALIGN)     ; $40
 DEF LEADING_ZEROES EQU (1 << BIT_LEADING_ZEROES) ; $80
 
+; character sets (see charmap.asm)
+DEF FIRST_REGULAR_TEXT_CHAR     EQU $60
+DEF FIRST_HIRAGANA_DAKUTEN_CHAR EQU $20
+
 ; special text IDs (see home/text_script.asm)
 	const_def $d0
 	const TEXT_MON_FAINTED      ; $d0

@@ -1389,10 +1389,10 @@ wMissableObjectCounter:: db
 
 	ds 1
 
-; 13 bytes for the letters of the opposing trainer
+; 11 bytes for the letters of the opposing trainer
 ; the name is terminated with $50 with possible
 ; unused trailing letters
-wTrainerName:: ds 11
+wTrainerName:: ds TRAINER_NAME_LENGTH
 
 ; lost battle, this is -1
 ; no battle, this is 0
@@ -1971,7 +1971,7 @@ wWestConnectionHeader::  map_connection_struct wWest
 wEastConnectionHeader::  map_connection_struct wEast
 
 ; sprite set for the current map (11 sprite picture ID's)
-wSpriteSet:: ds 11
+wSpriteSet:: ds SPRITE_SET_LENGTH
 ; sprite set ID for the current map
 wSpriteSetID:: db
 
@@ -2465,19 +2465,19 @@ wBoxCount:: db
 wBoxSpecies:: ds MONS_PER_BOX + 1
 
 wBoxMons::
-; wBoxMon1 - wBoxMon20
+; wBoxMon1 - wBoxMon30
 FOR n, 1, MONS_PER_BOX + 1
 wBoxMon{d:n}:: box_struct wBoxMon{d:n}
 ENDR
 
 wBoxMonOT::
-; wBoxMon1OT - wBoxMon20OT
+; wBoxMon1OT - wBoxMon30OT
 FOR n, 1, MONS_PER_BOX + 1
 wBoxMon{d:n}OT:: ds NAME_LENGTH
 ENDR
 
 wBoxMonNicks::
-; wBoxMon1Nick - wBoxMon20Nick
+; wBoxMon1Nick - wBoxMon30Nick
 FOR n, 1, MONS_PER_BOX + 1
 wBoxMon{d:n}Nick:: ds NAME_LENGTH
 ENDR
