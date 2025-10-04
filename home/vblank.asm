@@ -36,7 +36,7 @@ VBlank::
 	call TrackPlayTime ; keep track of time played
 
 	call Random
-IF !DEF(_REV0)
+IF DEF(_REV1) || DEF(_REV2) || DEF(_REV3)
 	call ReadJoypad
 ENDC
 

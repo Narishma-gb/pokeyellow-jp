@@ -283,6 +283,7 @@ WRAM0
 	"Audio RAM"
 	org $c100
 	"Sprite State Data"
+	org $c300
 	"OAM Buffer"
 	"Tilemap"
 	"Overworld Map"
@@ -304,5 +305,4 @@ SRAM $3
 	"Saved Boxes 2"
 HRAM
 	"OAM DMA"
-	org $ff8a
 	"HRAM"

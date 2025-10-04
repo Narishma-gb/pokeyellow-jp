@@ -37,7 +37,7 @@ SECTION "rst30", ROM0[$0030]
 
 SECTION "rst38", ROM0[$0038]
 IF DEF(_REV0)
-	db $C3, $80, $F0 ; unused invalid jp to $F080 (Echo RAM)
+	jp $F080 ; invalid jump to echo RAM (unused)
 ELSE
 	rst $38
 ENDC

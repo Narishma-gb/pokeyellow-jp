@@ -34,7 +34,8 @@ ELIF DEF(_REV3)
 ENDC
 
 
-IF !DEF(_REV3)
+IF DEF(_REV0) || DEF(_REV1) || DEF(_REV2)
+
 	SECTION "Garbage 2", ROMX, BANK[2]
 	IF DEF(_REV0)
 		INCBIN "garbage/rev_0/garbage_2.bin"
@@ -73,6 +74,7 @@ IF !DEF(_REV3)
 	ELIF DEF(_REV2)
 		INCBIN "garbage/rev_2/garbage_5.bin"
 	ENDC
+
 ENDC
 
 
@@ -100,7 +102,8 @@ ELIF DEF(_REV3)
 ENDC
 
 
-IF !DEF(_REV3)
+IF DEF(_REV0) || DEF(_REV1) || DEF(_REV2)
+
 	SECTION "Garbage 8", ROMX, BANK[8]
 	IF DEF(_REV0)
 		INCBIN "garbage/rev_0/garbage_8.bin"
@@ -169,6 +172,7 @@ IF !DEF(_REV3)
 	ELIF DEF(_REV2)
 		INCBIN "garbage/rev_2/garbage_14.bin"
 	ENDC
+
 ENDC
 
 
@@ -184,7 +188,8 @@ ELIF DEF(_REV3)
 ENDC
 
 
-IF !DEF(_REV3)
+IF DEF(_REV0) || DEF(_REV1) || DEF(_REV2)
+
 	SECTION "Garbage 16", ROMX, BANK[16]
 	IF DEF(_REV0)
 		INCBIN "garbage/rev_0/garbage_16.bin"
@@ -193,6 +198,7 @@ IF !DEF(_REV3)
 	ELIF DEF(_REV2)
 		INCBIN "garbage/rev_2/garbage_16.bin"
 	ENDC
+
 ENDC
 
 
@@ -220,7 +226,8 @@ ELIF DEF(_REV3)
 ENDC
 
 
-IF !DEF(_REV3)
+IF DEF(_REV0) || DEF(_REV1) || DEF(_REV2)
+
 	SECTION "Garbage 19", ROMX, BANK[19]
 	IF DEF(_REV0)
 		INCBIN "garbage/rev_0/garbage_19.bin"
@@ -259,6 +266,7 @@ IF !DEF(_REV3)
 	ELIF DEF(_REV2)
 		INCBIN "garbage/rev_2/garbage_22.bin"
 	ENDC
+
 ENDC
 
 
@@ -286,7 +294,8 @@ ELIF DEF(_REV3)
 ENDC
 
 
-IF !DEF(_REV3)
+IF DEF(_REV0) || DEF(_REV1) || DEF(_REV2)
+
 	SECTION "Garbage 26", ROMX, BANK[26]
 	IF DEF(_REV0)
 		INCBIN "garbage/rev_0/garbage_26.bin"
@@ -633,6 +642,7 @@ IF !DEF(_REV3)
 	ELIF DEF(_REV2)
 		INCBIN "garbage/rev_2/garbage_62.bin"
 	ENDC
+
 ENDC
 
 

@@ -2,7 +2,7 @@ ReadJoypad_::
 ; Poll joypad input.
 ; Unlike the hardware register, button
 ; presses are indicated by a set bit.
-IF !DEF(_REV0)
+IF DEF(_REV1) || DEF(_REV2) || DEF(_REV3)
 	ldh a, [hDisableJoypadPolling]
 	and a
 	ret nz

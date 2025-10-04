@@ -432,7 +432,7 @@ UpdatePartyMenuBlkPacket:
 	ret
 
 SendSGBPacket:
-IF !DEF(_REV0)
+IF DEF(_REV1) || DEF(_REV2) || DEF(_REV3)
 	ld a, 1
 	ldh [hDisableJoypadPolling], a ; don't poll joypad while sending packet
 	call _SendSGBPacket
