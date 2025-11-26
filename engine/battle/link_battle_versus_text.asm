@@ -12,9 +12,9 @@ DisplayLinkBattleVersusTextBox:
 	call PlaceString
 ; place bold "VS" tiles between the names
 	hlcoord 9, 8
-	ld a, "V"
+	ld a, "Ｖ"
 	ld [hli], a
-	ld [hl], "S"
+	ld [hl], "Ｓ"
 	xor a
 	ld [wUpdateSpritesEnabled], a
 	callfar SetupPlayerAndEnemyPokeballs
