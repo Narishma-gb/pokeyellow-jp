@@ -429,7 +429,7 @@ DisplayChangeBoxMenu:
 	call PlaceString
 	ld a, [wCurrentBoxNum]
 	and BOX_NUM_MASK
-	add "１"
+	add '１'
 	ldcoord_a 9, 2
 	hlcoord 1, 2
 	ld de, BoxNoText

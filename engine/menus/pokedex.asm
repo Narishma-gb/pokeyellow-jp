@@ -136,7 +136,7 @@ ENDC
 	push bc
 	hlcoord 0, 3
 	ld de, 20
-	lb bc, "　", 13
+	lb bc, '　', 13
 	call DrawTileLine ; cover up the menu cursor in the pokemon list
 	pop bc
 	ret
@@ -369,7 +369,7 @@ Pokedex_PlacePokemonList:
 	ld hl, wPokedexOwned
 	call IsPokemonBitSet
 	pop hl
-	ld a, "　"
+	ld a, '　'
 	jr z, .writeTile
 	ld a, $72 ; pokeball tile
 .writeTile
@@ -546,9 +546,9 @@ DrawDexEntryOnScreen:
 	call IndexToPokedex
 
 	hlcoord 2, 8
-	ld a, "№"
+	ld a, '№'
 	ld [hli], a
-	ld a, "．"
+	ld a, '．'
 	ld [hli], a
 	ld de, wPokedexNum
 	lb bc, LEADING_ZEROES | 1, 3
@@ -575,12 +575,12 @@ DrawDexEntryOnScreen:
 	pop af
 	cp 10
 	jr nc, .skipZero
-	ld [hl], "０" ; if the height is less than 1 m, put a 0 before the decimal point
+	ld [hl], '０' ; if the height is less than 1 m, put a 0 before the decimal point
 .skipZero
 	inc hl
 	ld a, [hli]
 	ld [hld], a ; make space for the decimal point by moving the last digit forward one tile
-	ld [hl], "．"
+	ld [hl], '．'
 
 ; now print the weight (weight is stored in tenths of kg internally, 2-byte long)
 	inc de
@@ -608,12 +608,12 @@ DrawDexEntryOnScreen:
 	ldh a, [hDexWeight]
 	sbc 0
 	jr nc, .next
-	ld [hl], "０" ; if the weight is less than 1 kg, put a 0 before the decimal point
+	ld [hl], '０' ; if the weight is less than 1 kg, put a 0 before the decimal point
 .next
 	inc hl
 	ld a, [hli]
 	ld [hld], a ; make space for the decimal point by moving the last digit forward one tile
-	ld [hl], "．" ; decimal point tile
+	ld [hl], '．' ; decimal point tile
 	pop af
 	ldh [hDexWeight + 1], a ; restore original value of [hDexWeight + 1]
 	pop af

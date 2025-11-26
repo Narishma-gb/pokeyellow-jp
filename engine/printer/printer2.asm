@@ -46,7 +46,7 @@ Printer_GetMonStats:
 	call PlaceString
 
 	hlcoord 13, 2
-	ld [hl], "／"
+	ld [hl], '／'
 
 	call GetMonName
 	hlcoord 14, 2
@@ -54,9 +54,9 @@ Printer_GetMonStats:
 
 	predef IndexToPokedex
 	hlcoord 2, 8
-	ld [hl], "№"
+	ld [hl], '№'
 	inc hl
-	ld [hl], "．"
+	ld [hl], '．'
 	inc hl
 	ld de, wPokedexNum
 	lb bc, LEADING_ZEROES | 1, 3

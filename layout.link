@@ -178,7 +178,7 @@ ROMX $1f
 	"Music 3"
 	; Rev.0 - Rev.2: "Garbage 31"
 ROMX $20
-	"Surfing Minigame Graphics"
+	"Surfing Pikachu Graphics"
 	; Rev.0 - Rev.2: "Garbage 32"
 ROMX $21
 	"Pikachu Cries 1"

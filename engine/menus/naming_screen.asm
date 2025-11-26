@@ -39,7 +39,7 @@ AskName:
 	pop af
 	ld [wUpdateSpritesEnabled], a
 	ld a, [wStringBuffer]
-	cp "@"
+	cp '@'
 	ret nz
 .declinedNickname
 	ld d, h
@@ -65,7 +65,7 @@ DisplayNameRaterScreen::
 	call RestoreScreenTilesAndReloadTilePatterns
 	call LoadGBPal
 	ld a, [wStringBuffer]
-	cp "@"
+	cp '@'
 	jr z, .playerCancelled
 	ld hl, wPartyMonNicks
 	ld bc, NAME_LENGTH
@@ -108,7 +108,7 @@ DisplayNamingScreen:
 	ld [wMenuWatchedKeys], a
 	ld a, 8
 	ld [wMaxMenuItem], a
-	ld a, "@"
+	ld a, '@'
 	ld [wStringBuffer], a
 	xor a
 	ld hl, wNamingScreenSubmitName
@@ -231,10 +231,10 @@ DisplayNamingScreen:
 	ld [wNamingScreenLetter], a
 	call CalcStringLength
 	ld a, [wNamingScreenLetter]
-	cp "゛"
+	cp '゛'
 	ld de, Dakutens
 	jr z, .dakutensAndHandakutens
-	cp "゜"
+	cp '゜'
 	ld de, Handakutens
 	jr z, .dakutensAndHandakutens
 	ld a, [wNamingScreenNameLength]
@@ -251,7 +251,7 @@ DisplayNamingScreen:
 .addLetter
 	ld a, [wNamingScreenLetter]
 	ld [hli], a
-	ld [hl], "@"
+	ld [hl], '@'
 	ld a, SFX_PRESS_AB
 	call PlaySound
 	ret
@@ -261,7 +261,7 @@ DisplayNamingScreen:
 	ret z
 	call CalcStringLength
 	dec hl
-	ld [hl], "@"
+	ld [hl], '@'
 	ret
 .pressedRight
 	ld a, [wCurrentMenuItem]
@@ -418,7 +418,7 @@ CalcStringLength:
 	ld c, $0
 .loop
 	ld a, [hl]
-	cp "@"
+	cp '@'
 	ret z
 	inc hl
 	inc c
@@ -444,7 +444,7 @@ PrintNamingText:
 	call PlaceString
 	ld hl, $1
 	add hl, bc
-	ld [hl], "の"
+	ld [hl], 'の'
 	hlcoord 4, 3
 	ld de, NicknameTextString
 	jr .placeString

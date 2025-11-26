@@ -39,6 +39,11 @@ RGBFIX  ?= $(RGBDS)rgbfix
 RGBGFX  ?= $(RGBDS)rgbgfx
 RGBLINK ?= $(RGBDS)rgblink
 
+RGBASMFLAGS  ?= -Weverything -Wtruncation=1
+RGBLINKFLAGS ?= -Weverything -Wtruncation=1
+RGBFIXFLAGS  ?= -Weverything
+RGBGFXFLAGS  ?= -Weverything
+
 
 ### Build targets
 
@@ -89,7 +94,7 @@ tools:
 	$(MAKE) -C tools/
 
 
-RGBASMFLAGS = -Q8 -P includes.asm -Weverything -Wtruncation=1
+RGBASMFLAGS += -Q8 -P includes.asm
 # Create a sym/map for debug purposes if `make` run with `DEBUG=1`
 ifeq ($(DEBUG),1)
 RGBASMFLAGS += -E
@@ -132,21 +137,18 @@ $(foreach obj, $(pokeyellow13_vc_obj), $(eval $(call DEP,$(obj),$(obj:_yellow13_
 endif
 
 
-pokeyellow_pad      = 0x00
-pokeyellow11_pad    = 0x00
-pokeyellow12_pad    = 0x00
-pokeyellow13_pad    = 0x00
-pokeyellow13_vc_pad = 0x00
+RGBLINKFLAGS += -d -p 0
 
-pokeyellow_opt      = -sv -n 0 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON YELLOW"
-pokeyellow11_opt    = -sv -n 1 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON YELLOW"
-pokeyellow12_opt    = -sv -n 2 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON YELLOW"
-pokeyellow13_opt    = -sv -n 3 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON YELLOW"
-pokeyellow13_vc_opt = -sv -n 3 -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -t "POKEMON YELLOW"
+RGBFIXFLAGS += -sv -k 01 -l 0x33 -m MBC3+RAM+BATTERY -r 03 -p 0 -t "POKEMON YELLOW"
+pokeyellow.gb:      RGBFIXFLAGS += -n 0
+pokeyellow11.gb:    RGBFIXFLAGS += -n 1
+pokeyellow12.gb:    RGBFIXFLAGS += -n 2
+pokeyellow13.gb:    RGBFIXFLAGS += -n 3
+pokeyellow13_vc.gb: RGBFIXFLAGS += -n 3
 
 %.gb: $$(%_obj) layout.link
-	$(RGBLINK) -p $($*_pad) -d -m $*.map -n $*.sym -l layout.link -o $@ $(filter %.o,$^)
-	$(RGBFIX) -p $($*_pad) $($*_opt) $@
+	$(RGBLINK) $(RGBLINKFLAGS) -l layout.link -m $*.map -n $*.sym -o $@ $(filter %.o,$^)
+	$(RGBFIX) $(RGBFIXFLAGS) $@
 
 
 ### Misc file-specific graphics rules
@@ -173,12 +175,12 @@ gfx/surfing_pikachu/surfing_pikachu_1c.2bpp: tools/gfx += --trim-whitespace
 ### Catch-all graphics rules
 
 %.2bpp: %.png
-	$(RGBGFX) --colors dmg=e4 $(rgbgfx) -o $@ $<
+	$(RGBGFX) --colors dmg $(RGBGFXFLAGS) -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) -o $@ $@ || $$($(RM) $@ && false))
 
 %.1bpp: %.png
-	$(RGBGFX) --colors dmg=e4 $(rgbgfx) --depth 1 -o $@ $<
+	$(RGBGFX) --colors dmg $(RGBGFXFLAGS) --depth 1 -o $@ $<
 	$(if $(tools/gfx),\
 		tools/gfx $(tools/gfx) --depth 1 -o $@ $@ || $$($(RM) $@ && false))
 

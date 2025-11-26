@@ -1218,7 +1218,7 @@ _AnimationSquishMonPic:
 	call AnimCopyRowRight
 	inc hl
 .next
-	ld [hl], "　"
+	ld [hl], '　'
 	pop hl
 	ld de, SCREEN_WIDTH
 	add hl, de
@@ -1451,7 +1451,7 @@ _AnimationSlideMonOff:
 ; bugfix: compares against the max tile + 1 as opposed to the max tile
 	cp $62
 	ret c
-	ld a, "　"
+	ld a, '　'
 	ret
 
 .EnemyNextTile
@@ -1461,7 +1461,7 @@ _AnimationSlideMonOff:
 ; the lower right tile is in the first column to slide off the screen.
 	cp $30
 	ret c
-	ld a, "　"
+	ld a, '　'
 	ret
 
 AnimationSlideMonHalfOff:

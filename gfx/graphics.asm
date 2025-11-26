@@ -5,7 +5,7 @@ INCBIN "gfx/title/blue_version.1bpp" ; unused
 Version_GFXEnd:
 
 
-SECTION "Surfing Minigame Graphics", ROMX
+SECTION "Surfing Pikachu Graphics", ROMX
 
 	ret ; unused
 

@@ -772,7 +772,7 @@ PrintPCBox_DrawPage1:
 	call PrintPCBox_PlaceHorizontalLines
 	hlcoord 0, 0
 	ld bc, 11 * SCREEN_WIDTH
-	ld a, "　"
+	ld a, '　'
 	call FillMemory
 	call PrintPCBox_DrawLeftAndRightBorders
 	call PrintPCBox_DrawTopBorder
@@ -785,7 +785,7 @@ PrintPCBox_DrawPage1:
 	hlcoord 13, 6
 	ld a, [wCurrentBoxNum]
 	and $7f
-	add "１"
+	add '１'
 	ld [hl], a
 	hlcoord 4, 11
 	ld de, wBoxSpecies
@@ -853,7 +853,7 @@ PrintPCBox_PlaceBoxMonInfo:
 	push de
 	push hl
 	ld bc, 12
-	ld a, "　"
+	ld a, '　'
 	call FillMemory
 	pop hl
 	push hl
@@ -870,7 +870,7 @@ PrintPCBox_PlaceBoxMonInfo:
 	pop hl
 	ld bc, NAME_LENGTH
 	add hl, bc
-	ld [hl], "／"
+	ld [hl], '／'
 	inc hl
 	call PlaceString
 	ld hl, wBoxNumString

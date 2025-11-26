@@ -1,6 +1,6 @@
 # Instructions
 
-These instructions explain how to set up the tools required to build **pokeyellow**, including [**rgbds**](https://github.com/gbdev/rgbds), which assembles the source files into a ROM.
+These instructions explain how to set up the tools required to build **pokeyellow-jp**, including [**rgbds**](https://github.com/gbdev/rgbds), which assembles the source files into a ROM.
 
 If you run into trouble, ask for help on IRC or Discord (see [README.md](README.md)).
 
@@ -15,9 +15,9 @@ Update WSL's software before continuing. If you chose Debian, Ubuntu, or another
 apt-get update && apt-get upgrade
 ```
 
-WSL has its own file system that's not accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to install pokeyellow within Windows. You'll have to change the **current working directory** every time you open WSL.
+WSL has its own file system that's not accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to install pokeyellow-jp within Windows. You'll have to change the **current working directory** every time you open WSL.
 
-For example, if you want to store pokeyellow in **C:\Users\\*\<user>*\Desktop**, enter this command:
+For example, if you want to store pokeyellow-jp in **C:\Users\\*\<user>*\Desktop**, enter this command:
 
 ```bash
 cd /mnt/c/Users/<user>/Desktop
@@ -42,15 +42,15 @@ Run setup and leave the default settings. At the "**Select Packages**" step, cho
 
 Double click on the text that says "**Skip**" next to each package to select the most recent version to install.
 
-Then follow the [**rgbds** install instructions](https://rgbds.gbdev.io/install#pre-built) for Windows with Cygwin to install **rgbds 0.9.3**.
+Then follow the [**rgbds** install instructions](https://rgbds.gbdev.io/install#pre-built) for Windows with Cygwin to install **rgbds 1.0.0**.
 
-**Note:** If you already have an installed rgbds older than 0.9.3, you will need to update to 0.9.3. Ignore this if you have never installed rgbds before. If a version newer than 0.9.3 does not work, try downloading 0.9.3.
+**Note:** If you already have an installed rgbds older than 1.0.0, you will need to update to 1.0.0. Ignore this if you have never installed rgbds before. If a version newer than 1.0.0 does not work, try downloading 1.0.0.
 
 Now open the **Cygwin terminal** and enter the following commands.
 
-Cygwin has its own file system that's within Windows, at **C:\cygwin64\home\\*\<user>***. If you don't want to store pokeyellow there, you'll have to change the **current working directory** every time you open Cygwin.
+Cygwin has its own file system that's within Windows, at **C:\cygwin64\home\\*\<user>***. If you don't want to store pokeyellow-jp there, you'll have to change the **current working directory** every time you open Cygwin.
 
-For example, if you want to store pokeyellow in **C:\Users\\*\<user>*\Desktop**:
+For example, if you want to store pokeyellow-jp in **C:\Users\\*\<user>*\Desktop**:
 
 ```bash
 cd /cygdrive/c/Users/<user>/Desktop
@@ -58,7 +58,7 @@ cd /cygdrive/c/Users/<user>/Desktop
 
 (The Windows `C:\` drive is called `/cygdrive/c/` in Cygwin. Replace *\<user>* in the example path with your username.)
 
-Now you're ready to [build **pokeyellow**](#build-pokeyellow).
+Now you're ready to [build **pokeyellow-jp**](#build-pokeyellow-jp).
 
 
 ## macOS
@@ -67,9 +67,9 @@ Install [**Homebrew**](https://brew.sh/). Follow the official instructions.
 
 Open **Terminal** and prepare to enter commands.
 
-Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for macOS to install **rgbds 0.9.3**.
+Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#pre-built) for macOS to install **rgbds 1.0.0**.
 
-Now you're ready to [build **pokeyellow**](#build-pokeyellow).
+Now you're ready to [build **pokeyellow-jp**](#build-pokeyellow-jp).
 
 
 ## Linux
@@ -78,37 +78,37 @@ Open **Terminal** and enter the following commands, depending on which distro yo
 
 ### Debian or Ubuntu
 
-To install the software required for **pokeyellow**:
+To install the software required for **pokeyellow-jp**:
 
 ```bash
 sudo apt-get install make gcc git
 ```
 
-Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.9.3** from source.
+Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 1.0.0** from source.
 
 ### OpenSUSE
 
-To install the software required for **pokeyellow**:
+To install the software required for **pokeyellow-jp**:
 
 ```bash
 sudo zypper install make gcc git
 ```
 
-Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.9.3** from source.
+Then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 1.0.0** from source.
 
 ### Arch Linux
 
-To install the software required for **pokeyellow**:
+To install the software required for **pokeyellow-jp**:
 
 ```bash
 sudo pacman -S make gcc git rgbds
 ```
 
-If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.9.3** from source.
+If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 1.0.0** from source.
 
 ### Termux
 
-To install the software required for **pokeyellow**:
+To install the software required for **pokeyellow-jp**:
 
 ```bash
 pkg install make clang git sed
@@ -120,7 +120,7 @@ To install **rgbds**:
 pkg install rgbds
 ```
 
-If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.9.3** from source.
+If you want to compile and install **rgbds** yourself instead, then follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 1.0.0** from source.
 
 ### Other distros
 
@@ -131,14 +131,14 @@ If your distro is not listed here, try to find the required software in its repo
 - `git`
 - `rgbds`
 
-If `rgbds` is not available, you'll need to follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 0.9.3** from source.
+If `rgbds` is not available, you'll need to follow the [**rgbds** instructions](https://rgbds.gbdev.io/install#building-from-source) to build **rgbds 1.0.0** from source.
 
-Now you're ready to [build **pokeyellow**](#build-pokeyellow).
+Now you're ready to [build **pokeyellow-jp**](#build-pokeyellow-jp).
 
 
-## Build pokeyellow
+## Build pokeyellow-jp
 
-To download the **pokeyellow** source files:
+To download the **pokeyellow-jp** source files:
 
 ```bash
 git clone https://github.com/Narishma-gb/pokeyellow-jp
@@ -153,13 +153,13 @@ make
 
 ### Build with a local rgbds version
 
-If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds 0.9.3 globally. Instead, you can put its files in a directory within pokeyellow-jp, such as `pokeyellow-jp/rgbds-0.9.3/`. Then specify it when you run `make`:
+If you have different projects that require different versions of `rgbds`, it might not be convenient to install rgbds 1.0.0 globally. Instead, you can put its files in a directory within pokeyellow-jp, such as `pokeyellow-jp/rgbds-1.0.0/`. Then specify it when you run `make`:
 
 ```bash
-make RGBDS=rgbds-0.9.3/
+make RGBDS=rgbds-1.0.0/
 ```
 
 
 ## Note
 
-Several functions and data pointers use temporary unnamed symbols, such as `Func_2223` or `Data_f251c`. These are identical to the labels found in pret **pokeyellow**, in order to facilitate update and comparison. However, due to the different ROM layout in pokeyellow-jp, their names usually do not match their physical address on the ROM.
+Several functions and data pointers use temporary unnamed symbols, such as `Func_2223` or `Data_f251c`. These are identical to the labels found in pret [**pokeyellow**](https://github.com/pret/pokeyellow), in order to facilitate update and comparison. However, due to the different ROM layout in pokeyellow-jp, their names usually do not match their physical address on the ROM.

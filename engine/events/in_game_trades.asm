@@ -23,7 +23,7 @@ DoInGameTradeDialogue:
 	ld de, wInGameTradeMonNick
 	ld bc, NAME_LENGTH - 2
 	call CopyData
-	ld a, "@"
+	ld a, '@'
 	ld [de], a
 	pop af
 	ld l, a

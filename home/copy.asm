@@ -247,7 +247,7 @@ GetFarByte::
 
 ClearScreenArea::
 ; Clear tilemap area cxb at hl.
-	ld a, "　" ; blank tile
+	ld a, '　' ; blank tile
 	ld de, SCREEN_WIDTH
 .y
 	push hl
@@ -304,7 +304,7 @@ ClearScreen::
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	inc b
 	hlcoord 0, 0
-	ld a, "　"
+	ld a, '　'
 .loop
 	ld [hli], a
 	dec c
