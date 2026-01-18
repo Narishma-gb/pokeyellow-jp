@@ -66,7 +66,7 @@ ROMX $7
 	"Maps 3"
 	"Clear Save"
 	"Maps 4"
-	"Hidden Objects 1"
+	"Hidden Events 1"
 	"Garbage 7"
 ROMX $8
 	"Sound Effect Headers 2"
@@ -121,7 +121,7 @@ ROMX $13
 	; Rev.0 - Rev.2: "Garbage 19"
 ROMX $14
 	"Maps 10"
-	"Hidden Objects 2"
+	"Hidden Events 2"
 	; Rev.0 - Rev.2: "Garbage 20"
 ROMX $15
 	"Maps 11"
@@ -140,13 +140,13 @@ ROMX $17
 	"Maps 15"
 	"Starter Dex"
 	"Maps 16"
-	"Hidden Objects 3"
+	"Hidden Events 3"
 	"Garbage 23"
 ROMX $18
 	"Maps 17"
 	"Cinnabar Lab Fossils"
 	"Maps 18"
-	"Hidden Objects 4"
+	"Hidden Events 4"
 	"Garbage 24"
 ROMX $19
 	"Tilesets 1"
@@ -263,7 +263,7 @@ ROMX $3c
 	"Tilesets 4"
 	"bank3C"
 	"Maps 23"
-	"Hidden Objects Core"
+	"Hidden Events Core"
 	; Rev.0 - Rev.2: "Garbage 60"
 ROMX $3d
 	"Battle Engine 8"

@@ -88,10 +88,10 @@ OverworldLoopLessDelay::
 	jp nz, .noDirectionButtonsPressed
 	call IsPlayerCharacterBeingControlledByGame
 	jr nz, .checkForOpponent
-	call CheckForHiddenObjectOrBookshelfOrCardKeyDoor
+	call CheckForHiddenEventOrBookshelfOrCardKeyDoor
 	ldh a, [hItemAlreadyFound]
 	and a
-	jp z, OverworldLoop ; jump if a hidden object or bookshelf was found, but not if a card key door was found
+	jp z, OverworldLoop ; jump if a hidden event or bookshelf was found, but not if a card key door was found
 	xor a
 	ld [wd435], a ; new yellow address
 	call IsSpriteOrSignInFrontOfPlayer
@@ -114,7 +114,7 @@ OverworldLoopLessDelay::
 	and a
 	jr z, .checkForOpponent
 	xor a
-	ld [wLinkTimeoutCounter], a
+	ld [wEnteringCableClub], a
 	jp EnterMap
 .checkForOpponent
 	ld a, [wCurOpponent]
@@ -479,7 +479,7 @@ WarpFound2::
 ; for maps that can have the 0xFF destination map, which means to return to the outside map
 ; not all these maps are necessarily indoors, though
 .indoorMaps
-	ldh a, [hWarpDestinationMap] ; destination map
+	ldh a, [hWarpDestinationMap]
 	cp LAST_MAP
 	jr z, .goBackOutside
 ; if not going back to the previous map
@@ -517,7 +517,7 @@ WarpFound2::
 
 ; if no matching warp was found
 CheckMapConnections::
-; checkWestMap
+; check west map
 	ld a, [wXCoord]
 	cp $ff
 	jr nz, .checkEastMap
@@ -538,7 +538,7 @@ CheckMapConnections::
 	srl c
 	jr z, .savePointer1
 .pointerAdjustmentLoop1
-	ld a, [wWestConnectedMapWidth] ; width of connected map
+	ld a, [wWestConnectedMapWidth]
 	add MAP_BORDER * 2
 	ld e, a
 	ld d, 0
@@ -555,7 +555,7 @@ CheckMapConnections::
 
 .checkEastMap
 	ld b, a
-	ld a, [wCurrentMapWidth2] ; map width
+	ld a, [wCurrentMapWidth2]
 	cp b
 	jr nz, .checkNorthMap
 	ld a, [wEastConnectedMap]
@@ -1124,7 +1124,7 @@ IsSpriteInFrontOfPlayer2::
 .doneCheckingDirection
 	ld [wPlayerDirection], a
 	ld hl, wSprite01StateData1
-; yellow does not have the "if sprites are existant" check
+; yellow does not have the "if sprites are existent" check
 	ld e, $01
 	ld d, $f
 .spriteLoop
@@ -1147,7 +1147,7 @@ IsSpriteInFrontOfPlayer2::
 .nextSprite
 	pop hl
 	ld a, l
-	add $10
+	add SPRITESTATEDATA1_LENGTH
 	ld l, a
 	inc e
 	dec d
@@ -1175,10 +1175,10 @@ IsSpriteInFrontOfPlayer2::
 
 SignLoop::
 ; search if a player is facing a sign
-	ld hl, wSignCoords ; start of sign coordinates
-	ld a, [wNumSigns] ; number of signs in the map
+	ld hl, wSignCoords
+	ld a, [wNumSigns]
 	ld b, a
-	ld c, $00
+	ld c, 0
 .signLoop
 	inc c
 	ld a, [hli] ; sign Y
@@ -1186,17 +1186,15 @@ SignLoop::
 	jr z, .yCoordMatched
 	inc hl
 	jr .retry
-
 .yCoordMatched
 	ld a, [hli] ; sign X
 	cp e
 	jr nz, .retry
-; .xCoordMatched
-; found sign
+; X coord matched: found sign
 	push hl
 	push bc
-	ld hl, wSignTextIDs ; start of sign text ID's
-	ld b, $00
+	ld hl, wSignTextIDs
+	ld b, 0
 	dec c
 	add hl, bc
 	ld a, [hl]
@@ -1205,7 +1203,6 @@ SignLoop::
 	pop hl
 	scf
 	ret
-
 .retry
 	dec b
 	jr nz, .signLoop
@@ -1271,8 +1268,8 @@ CollisionCheckOnLand::
 ; function that checks if the tile in front of the player is passable
 ; clears carry if it is, sets carry if not
 CheckTilePassable::
-	predef GetTileAndCoordsInFrontOfPlayer ; get tile in front of player
-	ld a, [wTileInFrontOfPlayer] ; tile in front of player
+	predef GetTileAndCoordsInFrontOfPlayer
+	ld a, [wTileInFrontOfPlayer]
 	ld c, a
 	call IsTilePassable
 	ret
@@ -1283,7 +1280,7 @@ CheckTilePassable::
 ; sets carry if there is a collision and unsets carry if not
 CheckForJumpingAndTilePairCollisions::
 	push hl
-	predef GetTileAndCoordsInFrontOfPlayer ; get the tile in front of the player
+	predef GetTileAndCoordsInFrontOfPlayer
 	push de
 	push bc
 	farcall HandleLedges ; check if the player is trying to jump a ledge
@@ -1351,8 +1348,8 @@ INCLUDE "data/tilesets/pair_collision_tile_ids.asm"
 LoadCurrentMapView::
 	ldh a, [hLoadedROMBank]
 	push af
-	ld a, [wTilesetBank] ; tile data ROM bank
-	call BankswitchCommon ; switch to ROM bank that contains tile data
+	ld a, [wTilesetBank]
+	call BankswitchCommon
 	ld a, [wCurrentTileBlockMapViewPointer] ; address of upper left corner of current map view
 	ld e, a
 	ld a, [wCurrentTileBlockMapViewPointer + 1]
@@ -1433,7 +1430,7 @@ LoadCurrentMapView::
 	dec b
 	jr nz, .rowLoop2
 	pop af
-	call BankswitchCommon ; restore previous ROM bank
+	call BankswitchCommon
 	ret
 
 AdvancePlayerSprite::
@@ -1792,11 +1789,11 @@ LoadPlayerSpriteGraphicsCommon::
 
 ; function to load data from the map header
 LoadMapHeader::
-	farcall MarkTownVisitedAndLoadMissableObjects
+	farcall MarkTownVisitedAndLoadToggleableObjects
 	jr asm_0dbd
 
-Func_0db5:: ; XXX
-	farcall LoadMissableObjectData
+Func_0db5:: ; unreferenced
+	farcall LoadToggleableObjectData
 asm_0dbd:
 	ld a, [wCurMapTileset]
 	ld [wUnusedCurMapTilesetCopy], a
@@ -1827,7 +1824,7 @@ asm_0dbd:
 ; copy connection data (if any) to WRAM
 	ld a, [wCurMapConnections]
 	ld b, a
-; checkNorth
+; check north
 	bit NORTH_F, b
 	jr z, .checkSouth
 	ld de, wNorthConnectionHeader
@@ -1860,7 +1857,7 @@ asm_0dbd:
 	ld de, wMapBackgroundTile
 	ld a, [hli]
 	ld [de], a
-; loadWarpData
+; load warp data
 	ld a, [hli]
 	ld [wNumberOfWarps], a
 	and a
@@ -2019,7 +2016,7 @@ FinishReloadingMap:
 	ret ; useless
 
 ResetMapVariables::
-	ld a, $98
+	ld a, HIGH(vBGMap0)
 	ld [wMapViewVRAMPointer + 1], a
 	xor a
 	ld [wMapViewVRAMPointer], a
@@ -2148,7 +2145,7 @@ InitSprites::
 	pop de
 	pop hl
 	ld a, [wNumSprites]
-	and a ; are sprites existant?
+	and a ; are there any sprites?
 	ret z ; don't copy sprite data if not
 	ld b, a
 	ld c, $0

@@ -36,7 +36,7 @@ HallOfFamePC:
 	ld [wNumCreditsMonsDisplayed], a
 	jp Credits
 
-FadeInCreditsText:
+FadeInCredits:
 	ld a, 1
 	ldh [hAutoBGTransferEnabled], a
 	ld hl, HoFGBPalettes
@@ -134,28 +134,31 @@ CreditsLoadFont:
 	call LoadFontTilePatterns
 	ld hl, vFont
 	ld bc,  ($80 tiles) / 2
-	call ZeroMemory
+	call ShiftFontColorIndex
 
 	call LoadTextBoxTilePatterns
 	ld hl, vChars2 tile $60
 	ld bc, ($20 tiles) / 2
-	call ZeroMemory
+	call ShiftFontColorIndex
 
 	ld hl, vChars2 tile $7e
-	ld bc, 1 tiles
+	ld bc, TILE_SIZE
 	ld a, $ff ; solid black
 	call FillMemory
 	ret
 
-ZeroMemory:
-; zero bc bytes at hl
+ShiftFontColorIndex:
+; Zero every second byte at hl, writing a total of bc bytes.
+; When used on VRAM font characters that contain only black and white shades,
+; it shifts the color index: black -> light gray, allowing palette-controlled
+; text fade-in during the Credits roll, while the black bars remain solid.
 	ld [hl], 0
 	inc hl
 	inc hl
 	dec bc
 	ld a, b
 	or c
-	jr nz, ZeroMemory
+	jr nz, ShiftFontColorIndex
 	ret
 
 FillFourRowsWithBlack:
@@ -241,14 +244,14 @@ Credits:
 	jr .nextCreditsCommand
 
 .fadeInTextAndShowMon
-	call FadeInCreditsText
+	call FadeInCredits
 .showTextAndShowMon
 	call CreditsDelay
 	call DisplayCreditsMon
 	jr .nextCreditsScreen
 
 .fadeInText
-	call FadeInCreditsText
+	call FadeInCredits
 .showText
 	call CreditsDelay
 	jr .nextCreditsScreen
@@ -264,7 +267,7 @@ ShowTheEndGFX:
 	call FillMiddleOfScreenWithWhite
 	ld de, TheEndGfx
 	ld hl, vChars2 tile $60
-	lb bc, BANK(TheEndGfx), (TheEndGfxEnd - TheEndGfx) / $10
+	lb bc, BANK(TheEndGfx), (TheEndGfxEnd - TheEndGfx) / TILE_SIZE
 	call CopyVideoData
 	hlcoord 4, 8
 	ld de, TheEndTextString
@@ -272,7 +275,7 @@ ShowTheEndGFX:
 	hlcoord 4, 9
 	inc de
 	call PlaceString
-	jp FadeInCreditsText
+	jp FadeInCredits
 
 TheEndTextString:
 ; "T H E  E N D"

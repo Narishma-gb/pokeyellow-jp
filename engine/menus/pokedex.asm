@@ -118,7 +118,7 @@ ELSE
 	jr z, .chosePrint
 ENDC
 	vc_patch_end
-; choseQuit
+; chose Quit
 	ld b, 1
 .exitSideMenu
 	pop af

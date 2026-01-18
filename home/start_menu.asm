@@ -13,7 +13,7 @@ RedisplayStartMenu::
 .loop
 	call HandleMenuInput
 	ld b, a
-;checkIfUpPressed
+; check if Up pressed
 	bit B_PAD_UP, a
 	jr z, .checkIfDownPressed
 	ld a, [wCurrentMenuItem] ; menu selection

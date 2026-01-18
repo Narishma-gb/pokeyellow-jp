@@ -354,7 +354,7 @@ UpdateSpriteMovementDelay:
 	inc a
 	ld l, a
 	ld [hl], $1             ; [x#SPRITESTATEDATA1_MOVEMENTSTATUS] = 1 (mark as ready to move)
-	; fall through
+	; fallthrough
 NotYetMoving:
 	ld h, HIGH(wSpriteStateData1)
 	ldh a, [hCurrentSpriteOffset]
@@ -436,7 +436,7 @@ InitializeSpriteScreenPosition:
 ; tests if sprite is off screen or otherwise unable to do anything
 CheckSpriteAvailability:
 	predef IsObjectHidden
-	ldh a, [hIsHiddenMissableObject]
+	ldh a, [hIsToggleableObjectOff]
 	and a
 	jp nz, .spriteInvisible
 	ld h, HIGH(wSpriteStateData2)

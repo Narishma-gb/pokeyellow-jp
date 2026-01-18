@@ -258,7 +258,7 @@ UnknownPrizeData:
 ; XXX what's this?
 	db $00,$01,$00,$01,$00,$01,$00,$00,$01
 
-HereYouGoText: ; Unused
+HereYouGoText: ; unreferenced
 	text "はい　どうぞ@"
 	text_waitbutton
 	text_end

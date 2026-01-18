@@ -51,7 +51,17 @@ RGBGFXFLAGS  ?= -Weverything
 .SECONDEXPANSION:
 .PRECIOUS:
 .SECONDARY:
-.PHONY: all yellow yellow11 yellow12 yellow13 yellow13_vc clean tidy compare tools
+.PHONY: \
+	all \
+	yellow \
+	yellow11 \
+	yellow12 \
+	yellow13 \
+	yellow13_vc \
+	clean \
+	tidy \
+	compare \
+	tools
 
 all: $(roms)
 yellow:      pokeyellow.gb
