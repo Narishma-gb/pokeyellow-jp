@@ -167,9 +167,6 @@ INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/names.asm"
 INCLUDE "data/pokemon/cries.asm"
 INCLUDE "engine/battle/trainer_ai.asm"
-INCLUDE "engine/battle/misc.asm"
-INCLUDE "engine/battle/read_trainer_party.asm"
-INCLUDE "engine/battle/trainer_ai2.asm"
 INCLUDE "engine/battle/draw_hud_pokeball_gfx.asm"
 INCLUDE "gfx/trade.asm"
 INCLUDE "engine/pokemon/evos_moves.asm"
@@ -301,8 +298,6 @@ INCLUDE "engine/events/hidden_items.asm"
 
 SECTION "bank1E", ROMX
 
-INCLUDE "engine/battle/play_animation.asm"
-INCLUDE "engine/battle/load_animation_tiles.asm"
 INCLUDE "engine/battle/animations.asm"
 INCLUDE "engine/overworld/cut2.asm"
 INCLUDE "engine/overworld/dust_smoke.asm"

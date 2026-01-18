@@ -26,7 +26,7 @@ CanLearnTM:
 	ld c, 0
 	ret
 
-; converts TM/HM number in wTempTMHM into move number
+; converts TM/HM number in [wTempTMHM] into move number
 ; HMs start at 51
 TMToMove:
 	ld a, [wTempTMHM]
