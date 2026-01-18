@@ -17980,8 +17980,8 @@ WRAM0 bank #0:
 	SECTION: $c100-$c2ff ($0200 bytes) ["Sprite State Data"]
 	         $c100 = wSpriteStateData1
 	         $c100 = wSpritePlayerStateData1PictureID
-	         $c100 = wSpriteDataStart
 	         $c100 = wSpritePlayerStateData1
+	         $c100 = wSpriteDataStart
 	         $c101 = wSpritePlayerStateData1MovementStatus
 	         $c102 = wSpritePlayerStateData1ImageIndex
 	         $c103 = wSpritePlayerStateData1YStepVector
@@ -18040,8 +18040,8 @@ WRAM0 bank #0:
 	         $c13b = wSprite03StateData1XAdjusted
 	         $c13c = wSprite03StateData1CollisionData
 	         $c140 = wSprite04StateData1
-	         $c140 = wSprite03StateData1End
 	         $c140 = wSprite04StateData1PictureID
+	         $c140 = wSprite03StateData1End
 	         $c141 = wSprite04StateData1MovementStatus
 	         $c142 = wSprite04StateData1ImageIndex
 	         $c143 = wSprite04StateData1YStepVector
@@ -18961,9 +18961,9 @@ WRAM0 bank #0:
 	         $c596 = wAnimatedObject7FrameIndex
 	         $c597 = wShadowOAMBackupSprite35Attributes
 	         $c597 = wAnimatedObject7FieldB
+	         $c598 = wShadowOAMBackupSprite36
 	         $c598 = wAnimatedObject7FieldC
 	         $c598 = wShadowOAMBackupSprite36YCoord
-	         $c598 = wShadowOAMBackupSprite36
 	         $c599 = wAnimatedObject7FieldD
 	         $c599 = wShadowOAMBackupSprite36XCoord
 	         $c59a = wShadowOAMBackupSprite36TileID
@@ -19223,8 +19223,8 @@ WRAM0 bank #0:
 	         $cd05 = wEnemyNumHits
 	         $cd05 = wEnemyBideAccumulatedDamage
 	         $cd0f = wVermilionDockTileMapBufferEnd
-	         $cd0f = wInGameTradeGiveMonSpecies
 	         $cd0f = wPlayerMonUnmodifiedLevel
+	         $cd0f = wInGameTradeGiveMonSpecies
 	         $cd0f = wMiscBattleDataEnd
 	         $cd10 = wPlayerMonUnmodifiedMaxHP
 	         $cd10 = wInGameTradeTextPointerTablePointer
@@ -20567,8 +20567,8 @@ WRAM0 bank #0:
 	         $da4e = wBoxMon4SpecialExp
 	         $da50 = wBoxMon4DVs
 	         $da52 = wBoxMon4PP
-	         $da56 = wBoxMon5Species
 	         $da56 = wBoxMon5
+	         $da56 = wBoxMon5Species
 	         $da57 = wBoxMon5HP
 	         $da59 = wBoxMon5BoxLevel
 	         $da5a = wBoxMon5Status

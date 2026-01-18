@@ -17928,8 +17928,8 @@ WRAM0 bank #0:
 	         $c10a = wSpritePlayerStateData1YAdjusted
 	         $c10b = wSpritePlayerStateData1XAdjusted
 	         $c10c = wSpritePlayerStateData1CollisionData
-	         $c110 = wSpritePlayerStateData1End
 	         $c110 = wSprite01StateData1PictureID
+	         $c110 = wSpritePlayerStateData1End
 	         $c110 = wSprite01StateData1
 	         $c111 = wSprite01StateData1MovementStatus
 	         $c112 = wSprite01StateData1ImageIndex
@@ -17974,8 +17974,8 @@ WRAM0 bank #0:
 	         $c13b = wSprite03StateData1XAdjusted
 	         $c13c = wSprite03StateData1CollisionData
 	         $c140 = wSprite04StateData1
-	         $c140 = wSprite03StateData1End
 	         $c140 = wSprite04StateData1PictureID
+	         $c140 = wSprite03StateData1End
 	         $c141 = wSprite04StateData1MovementStatus
 	         $c142 = wSprite04StateData1ImageIndex
 	         $c143 = wSprite04StateData1YStepVector
@@ -19157,8 +19157,8 @@ WRAM0 bank #0:
 	         $cd05 = wEnemyNumHits
 	         $cd05 = wEnemyBideAccumulatedDamage
 	         $cd0f = wVermilionDockTileMapBufferEnd
-	         $cd0f = wInGameTradeGiveMonSpecies
 	         $cd0f = wPlayerMonUnmodifiedLevel
+	         $cd0f = wInGameTradeGiveMonSpecies
 	         $cd0f = wMiscBattleDataEnd
 	         $cd10 = wPlayerMonUnmodifiedMaxHP
 	         $cd10 = wInGameTradeTextPointerTablePointer
@@ -20466,8 +20466,8 @@ WRAM0 bank #0:
 	         $da15 = wBoxMon3HP
 	         $da17 = wBoxMon3BoxLevel
 	         $da18 = wBoxMon3Status
-	         $da19 = wBoxMon3Type1
 	         $da19 = wBoxMon3Type
+	         $da19 = wBoxMon3Type1
 	         $da1a = wBoxMon3Type2
 	         $da1b = wBoxMon3CatchRate
 	         $da1c = wBoxMon3Moves
@@ -20501,8 +20501,8 @@ WRAM0 bank #0:
 	         $da4e = wBoxMon4SpecialExp
 	         $da50 = wBoxMon4DVs
 	         $da52 = wBoxMon4PP
-	         $da56 = wBoxMon5Species
 	         $da56 = wBoxMon5
+	         $da56 = wBoxMon5Species
 	         $da57 = wBoxMon5HP
 	         $da59 = wBoxMon5BoxLevel
 	         $da5a = wBoxMon5Status
